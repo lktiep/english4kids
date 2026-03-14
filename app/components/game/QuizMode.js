@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useGame } from "@/app/context/GameContext";
 import { useSpeech, useSound } from "@/app/hooks/useSpeech";
 import { shuffle } from "@/app/utils/topics";
@@ -20,6 +20,7 @@ function generateQuestions(topic) {
     };
   });
 }
+
 export default function QuizMode({
   topic,
   onBack,
@@ -40,26 +41,36 @@ export default function QuizMode({
   const [streak, setStreak] = useState(0);
   const [finished, setFinished] = useState(false);
 
+  // Gesture preview: highlighted but not submitted yet
+  const [gesturePreview, setGesturePreview] = useState(null);
+
+  // Try-again state: allow retry on wrong answer (max 2 attempts per question)
+  const [attempts, setAttempts] = useState(0);
+  const [wrongFeedback, setWrongFeedback] = useState(false);
+  const maxAttempts = 2;
+
   const q = questions[currentQ];
 
   // Auto-speak question
   useEffect(() => {
-    if (q && !showResult) {
+    if (q && !showResult && !wrongFeedback) {
       const timer = setTimeout(() => speak(q.correctWord.word), 500);
       return () => clearTimeout(timer);
     }
-  }, [currentQ, q, showResult, speak]);
+  }, [currentQ, q, showResult, wrongFeedback, speak]);
 
-  const handleSelect = useCallback(
+  // Submit answer (used by both click and gesture-confirm)
+  const submitAnswer = useCallback(
     (option) => {
       if (showResult) return;
 
       const correct = option.id === q.correctWord.id;
       setSelected(option.id);
-      setIsCorrect(correct);
-      setShowResult(true);
+      setGesturePreview(null);
 
       if (correct) {
+        setIsCorrect(true);
+        setShowResult(true);
         play("correct");
         const newStreak = streak + 1;
         setStreak(newStreak);
@@ -78,16 +89,51 @@ export default function QuizMode({
           }, 500);
         }
       } else {
+        const newAttempts = attempts + 1;
+        setAttempts(newAttempts);
         play("wrong");
-        setStreak(0);
-        setScore((prev) => ({ ...prev, total: prev.total + 1 }));
-        game.recordQuiz(topic.topic, false);
-        // Speak correct answer
-        setTimeout(() => speak(q.correctWord.word), 800);
+
+        if (newAttempts >= maxAttempts) {
+          // Out of attempts — show correct answer
+          setIsCorrect(false);
+          setShowResult(true);
+          setStreak(0);
+          setScore((prev) => ({ ...prev, total: prev.total + 1 }));
+          game.recordQuiz(topic.topic, false);
+          setTimeout(() => speak(q.correctWord.word), 800);
+        } else {
+          // Allow try again
+          setWrongFeedback(true);
+          setSelected(null);
+          setTimeout(() => setWrongFeedback(false), 1500);
+        }
       }
     },
-    [showResult, q, streak, play, game, topic, speak],
+    [showResult, q, streak, play, game, topic, speak, attempts],
   );
+
+  // Click handler: direct submit (non-gesture mode)
+  const handleClickSelect = useCallback(
+    (option) => {
+      if (showResult || wrongFeedback) return;
+
+      if (cameraEnabled) {
+        // In camera mode, click also previews (same as gesture)
+        setGesturePreview(option.id);
+      } else {
+        // Normal mode: click = submit
+        submitAnswer(option);
+      }
+    },
+    [showResult, wrongFeedback, cameraEnabled, submitAnswer],
+  );
+
+  // Confirm gesture preview (fist or click confirm button)
+  const confirmGestureSelection = useCallback(() => {
+    if (!gesturePreview || showResult || wrongFeedback) return;
+    const option = q.options.find((o) => o.id === gesturePreview);
+    if (option) submitAnswer(option);
+  }, [gesturePreview, showResult, wrongFeedback, q, submitAnswer]);
 
   const handleNext = useCallback(() => {
     if (currentQ < totalQuestions - 1) {
@@ -95,6 +141,9 @@ export default function QuizMode({
       setSelected(null);
       setShowResult(false);
       setIsCorrect(false);
+      setGesturePreview(null);
+      setAttempts(0);
+      setWrongFeedback(false);
     } else {
       play("complete");
       setFinished(true);
@@ -108,30 +157,90 @@ export default function QuizMode({
         if (e.key === " " || e.key === "Enter") handleNext();
         return;
       }
+      if (wrongFeedback) return;
       if (q) {
         const keyMap = { 1: 0, 2: 1, 3: 2, 4: 3 };
         const idx = keyMap[e.key];
         if (idx !== undefined && q.options[idx]) {
-          handleSelect(q.options[idx]);
+          if (cameraEnabled) {
+            setGesturePreview(q.options[idx].id);
+          } else {
+            submitAnswer(q.options[idx]);
+          }
+        }
+        // Enter to confirm in camera mode
+        if (e.key === "Enter" && cameraEnabled && gesturePreview) {
+          confirmGestureSelection();
         }
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [showResult, q, handleNext, handleSelect]);
+  }, [
+    showResult,
+    wrongFeedback,
+    q,
+    handleNext,
+    submitAnswer,
+    cameraEnabled,
+    gesturePreview,
+    confirmGestureSelection,
+  ]);
 
-  // Listen for hand gesture events
+  // Listen for hand gesture events from CameraOverlay
+  const fistFramesRef = useRef(0);
+
   useEffect(() => {
     if (!cameraEnabled) return;
+
     const handleGesture = (e) => {
-      const idx = e.detail.answer - 1; // 1-4 → 0-3
-      if (q && !showResult && q.options[idx]) {
-        handleSelect(q.options[idx]);
+      const fingerCount = e.detail.answer; // 1-4
+      if (wrongFeedback || showResult) return;
+
+      // Fingers 1-4: preview selection (don't submit)
+      if (fingerCount >= 1 && fingerCount <= 4) {
+        const idx = fingerCount - 1;
+        if (q && q.options[idx]) {
+          setGesturePreview(q.options[idx].id);
+          fistFramesRef.current = 0; // Reset fist counter when fingers shown
+        }
       }
     };
+
+    // Listen for fist gesture (0 fingers) to confirm
+    const handleFist = (e) => {
+      const fingerCount = e.detail.answer;
+      if (
+        fingerCount === 0 &&
+        gesturePreview &&
+        !showResult &&
+        !wrongFeedback
+      ) {
+        fistFramesRef.current++;
+        // Require a few frames of fist to confirm
+        if (fistFramesRef.current >= 5) {
+          confirmGestureSelection();
+          fistFramesRef.current = 0;
+        }
+      } else if (fingerCount !== 0) {
+        fistFramesRef.current = 0;
+      }
+    };
+
     window.addEventListener("gesture-select", handleGesture);
-    return () => window.removeEventListener("gesture-select", handleGesture);
-  }, [cameraEnabled, q, showResult, handleSelect]);
+    window.addEventListener("gesture-select", handleFist);
+    return () => {
+      window.removeEventListener("gesture-select", handleGesture);
+      window.removeEventListener("gesture-select", handleFist);
+    };
+  }, [
+    cameraEnabled,
+    q,
+    showResult,
+    wrongFeedback,
+    gesturePreview,
+    confirmGestureSelection,
+  ]);
 
   if (!q && !finished) return null;
 
@@ -222,11 +331,23 @@ export default function QuizMode({
         </button>
       </div>
 
+      {/* Wrong feedback hint */}
+      {wrongFeedback && (
+        <div className={styles.feedbackArea}>
+          <div className={`${styles.feedback} ${styles.feedbackWrong}`}>
+            <span>
+              ❌ Sai rồi! Thử lại nhé ({maxAttempts - attempts} lần còn lại)
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Options Grid */}
       <div className={styles.optionsGrid}>
         {q.options.map((option, i) => {
           const letter = ["A", "B", "C", "D"][i];
           const isSelected = selected === option.id;
+          const isPreviewed = gesturePreview === option.id;
           const isAnswer = option.id === q.correctWord.id;
 
           let optionClass = styles.option;
@@ -234,6 +355,8 @@ export default function QuizMode({
             if (isAnswer) optionClass += ` ${styles.correct}`;
             else if (isSelected && !isCorrect)
               optionClass += ` ${styles.wrong}`;
+          } else if (isPreviewed) {
+            optionClass += ` ${styles.previewed}`;
           } else if (isSelected) {
             optionClass += ` ${styles.selected}`;
           }
@@ -242,19 +365,37 @@ export default function QuizMode({
             <button
               key={option.id}
               className={optionClass}
-              onClick={() => handleSelect(option)}
-              disabled={showResult}
+              onClick={() => handleClickSelect(option)}
+              disabled={showResult || wrongFeedback}
             >
               <span className={styles.optionLetter}>{letter}</span>
               <span className={styles.optionEmoji}>{option.emoji}</span>
               <span className={styles.optionWord}>{option.vietnamese}</span>
-              <span className={styles.optionKey}>Phím {i + 1}</span>
+              {cameraEnabled ? (
+                <span className={styles.optionKey}>
+                  {isPreviewed ? "✊ Nắm tay = xác nhận" : `☝️ ${i + 1} ngón`}
+                </span>
+              ) : (
+                <span className={styles.optionKey}>Phím {i + 1}</span>
+              )}
             </button>
           );
         })}
       </div>
 
-      {/* Next Button (shown after answer) */}
+      {/* Gesture confirm button (visible when previewing with camera) */}
+      {cameraEnabled && gesturePreview && !showResult && !wrongFeedback && (
+        <div className={styles.feedbackArea}>
+          <div className={`${styles.feedback} ${styles.feedbackPreview}`}>
+            <span>✊ Nắm tay để xác nhận — hoặc bấm nút bên dưới</span>
+          </div>
+          <button className="btn btn-primary" onClick={confirmGestureSelection}>
+            ✅ Xác nhận
+          </button>
+        </div>
+      )}
+
+      {/* Result feedback (shown after answer) */}
       {showResult && (
         <div className={styles.feedbackArea}>
           <div

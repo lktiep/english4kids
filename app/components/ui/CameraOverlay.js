@@ -3,7 +3,13 @@
 import { useHandGesture } from "@/app/hooks/useHandGesture";
 import styles from "./CameraOverlay.module.css";
 
-const GESTURE_LABELS = ["", "A (1☝️)", "B (2✌️)", "C (3🤟)", "D (4🖐️)"];
+const GESTURE_LABELS = [
+  "✊ Nắm tay = Xác nhận",
+  "A (1☝️)",
+  "B (2✌️)",
+  "C (3🤟)",
+  "D (4🖐️)",
+];
 
 export default function CameraOverlay({
   enabled,
@@ -52,10 +58,10 @@ export default function CameraOverlay({
         {isActive && showFingerCount && (
           <div className={styles.fingerDisplay}>
             <span className={styles.fingerCount}>
-              {fingerCount > 0 ? fingerCount : "✋"}
+              {fingerCount > 0 ? fingerCount : "✊"}
             </span>
             <span className={styles.fingerLabel}>
-              {fingerCount >= 1 && fingerCount <= 4
+              {fingerCount >= 0 && fingerCount <= 4
                 ? GESTURE_LABELS[fingerCount]
                 : "Giơ tay chọn đáp án"}
             </span>
@@ -68,6 +74,7 @@ export default function CameraOverlay({
             <span>2✌️=B</span>
             <span>3🤟=C</span>
             <span>4🖐️=D</span>
+            <span>✊=OK</span>
           </div>
         )}
       </div>

@@ -162,6 +162,22 @@
   background: rgba(78, 205, 196, 0.1);
 }
 
+.previewed {
+  border-color: var(--secondary);
+  background: rgba(255, 179, 71, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.3);
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(255, 179, 71, 0.15);
+  }
+}
 .correct {
   border-color: var(--success) !important;
   background: var(--success-light) !important;
@@ -232,6 +248,12 @@
 .feedbackWrong {
   background: var(--error-light);
   color: #c92a2a;
+}
+
+.feedbackPreview {
+  background: rgba(255, 179, 71, 0.15);
+  color: #e67700;
+  border: 1px solid rgba(255, 179, 71, 0.3);
 }
 
 /* Results Screen */

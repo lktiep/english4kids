@@ -114,10 +114,11 @@ export function useHandGesture({ enabled = false, onGesture = () => {} }) {
           }
 
           // Trigger gesture if stable and different from last
+          // 0 = fist (confirm), 1-4 = finger select
           if (
             gestureStableRef.current.frames >= 10 &&
             count !== lastGestureRef.current &&
-            count >= 1 &&
+            count >= 0 &&
             count <= 4
           ) {
             lastGestureRef.current = count;
