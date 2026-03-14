@@ -192,7 +192,14 @@ export default function QuizMode({
     if (!cameraEnabled) return;
 
     const handleGesture = (e) => {
-      const fingerCount = e.detail.answer; // 0-4
+      const fingerCount = e.detail.answer; // 0-5
+
+      // Thumbs-up (5): advance to next question when showing result
+      if (fingerCount === 5 && (showResult || wrongFeedback)) {
+        handleNext();
+        return;
+      }
+
       if (wrongFeedback || showResult) return;
 
       // Fingers 1-4: preview selection (don't submit)
@@ -204,7 +211,6 @@ export default function QuizMode({
       }
 
       // Fist (0 fingers): confirm selection immediately
-      // (gesture hook already requires 10 frames of stability)
       if (fingerCount === 0 && gesturePreview && !showResult && !wrongFeedback) {
         confirmGestureSelection();
       }
@@ -219,6 +225,7 @@ export default function QuizMode({
     wrongFeedback,
     gesturePreview,
     confirmGestureSelection,
+    handleNext,
   ]);
 
   if (!q && !finished) return null;

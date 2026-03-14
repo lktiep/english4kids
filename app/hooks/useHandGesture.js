@@ -4,11 +4,30 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 // Finger counting logic for hand gesture recognition
 // 1 finger = A, 2 fingers = B, 3 fingers = C, 4 fingers = D
+// 0 = fist (confirm), 5 = thumbs-up (next)
 // Only counts index, middle, ring, pinky (NOT thumb — too unreliable at angles)
+
+function isThumbUp(hand) {
+  // Thumb extended: tip (4) is above IP joint (3)
+  const thumbExtended = hand[4].y < hand[3].y;
+
+  // All other fingers curled: tips below PIPs
+  const othersCurled =
+    hand[8].y > hand[6].y && // index
+    hand[12].y > hand[10].y && // middle
+    hand[16].y > hand[14].y && // ring
+    hand[20].y > hand[18].y; // pinky
+
+  return thumbExtended && othersCurled;
+}
+
 function countFingers(landmarks) {
   if (!landmarks || landmarks.length === 0) return 0;
 
   const hand = landmarks[0]; // First hand
+
+  // Check thumbs-up first (special gesture = 5)
+  if (isThumbUp(hand)) return 5;
 
   // Finger tip and pip landmark indices (index, middle, ring, pinky)
   const fingerTips = [8, 12, 16, 20];
@@ -114,12 +133,12 @@ export function useHandGesture({ enabled = false, onGesture = () => {} }) {
           }
 
           // Trigger gesture if stable and different from last
-          // 0 = fist (confirm), 1-4 = finger select
+          // 0 = fist (confirm), 1-4 = finger select, 5 = thumbs-up (next)
           if (
             gestureStableRef.current.frames >= 10 &&
             count !== lastGestureRef.current &&
             count >= 0 &&
-            count <= 4
+            count <= 5
           ) {
             lastGestureRef.current = count;
             onGestureRef.current(count);

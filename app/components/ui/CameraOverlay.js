@@ -9,6 +9,7 @@ const GESTURE_LABELS = [
   "B (2✌️)",
   "C (3🤟)",
   "D (4🖐️)",
+  "👍 Tiếp theo!",
 ];
 
 export default function CameraOverlay({
@@ -58,10 +59,10 @@ export default function CameraOverlay({
         {isActive && showFingerCount && (
           <div className={styles.fingerDisplay}>
             <span className={styles.fingerCount}>
-              {fingerCount > 0 ? fingerCount : "✊"}
+              {fingerCount === 5 ? "👍" : fingerCount > 0 ? fingerCount : "✊"}
             </span>
             <span className={styles.fingerLabel}>
-              {fingerCount >= 0 && fingerCount <= 4
+              {fingerCount >= 0 && fingerCount <= 5
                 ? GESTURE_LABELS[fingerCount]
                 : "Giơ tay chọn đáp án"}
             </span>
@@ -75,6 +76,7 @@ export default function CameraOverlay({
             <span>3🤟=C</span>
             <span>4🖐️=D</span>
             <span>✊=OK</span>
+            <span>👍=Next</span>
           </div>
         )}
       </div>
