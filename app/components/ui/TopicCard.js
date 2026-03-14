@@ -9,6 +9,7 @@ export default function TopicCard({
   quizResult,
   onLearn,
   onQuiz,
+  onSpeak,
 }) {
   const progress =
     topic.wordCount > 0
@@ -63,10 +64,13 @@ export default function TopicCard({
         {/* Action Buttons */}
         <div className={styles.actions}>
           <button className={styles.learnBtn} onClick={onLearn}>
-            📖 Học từ
+            📖 Học
           </button>
           <button className={styles.quizBtn} onClick={onQuiz}>
             🎯 Quiz
+          </button>
+          <button className={styles.speakBtn} onClick={onSpeak}>
+            🎙️ Nói
           </button>
         </div>
       </div>

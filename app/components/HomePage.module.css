@@ -50,6 +50,34 @@
   letter-spacing: -0.5px;
 }
 
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.badgeBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-family);
+  font-weight: 800;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.badgeBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
 .streakBadge {
   display: flex;
   align-items: center;

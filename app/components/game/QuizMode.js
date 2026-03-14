@@ -20,8 +20,12 @@ function generateQuestions(topic) {
     };
   });
 }
-
-export default function QuizMode({ topic, onBack }) {
+export default function QuizMode({
+  topic,
+  onBack,
+  cameraEnabled = false,
+  onToggleCamera,
+}) {
   const game = useGame();
   const { speak } = useSpeech();
   const { play } = useSound();
@@ -116,6 +120,19 @@ export default function QuizMode({ topic, onBack }) {
     return () => window.removeEventListener("keydown", handleKey);
   }, [showResult, q, handleNext, handleSelect]);
 
+  // Listen for hand gesture events
+  useEffect(() => {
+    if (!cameraEnabled) return;
+    const handleGesture = (e) => {
+      const idx = e.detail.answer - 1; // 1-4 → 0-3
+      if (q && !showResult && q.options[idx]) {
+        handleSelect(q.options[idx]);
+      }
+    };
+    window.addEventListener("gesture-select", handleGesture);
+    return () => window.removeEventListener("gesture-select", handleGesture);
+  }, [cameraEnabled, q, showResult, handleSelect]);
+
   if (!q && !finished) return null;
 
   // Results screen
@@ -176,6 +193,15 @@ export default function QuizMode({ topic, onBack }) {
           <span>{topic.icon} Quiz</span>
         </div>
         <div className={styles.scoreInfo}>
+          {onToggleCamera && (
+            <button
+              className={`${styles.cameraBtn} ${cameraEnabled ? styles.cameraBtnActive : ""}`}
+              onClick={onToggleCamera}
+              title="Bật/tắt webcam gesture"
+            >
+              📷
+            </button>
+          )}
           <span className={styles.streakBadge}>
             {streak > 0 && `🔥${streak}`}
           </span>
