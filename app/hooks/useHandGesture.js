@@ -4,32 +4,19 @@ import { useState, useEffect, useRef, useCallback } from "react";
 
 // Finger counting logic for hand gesture recognition
 // 1 finger = A, 2 fingers = B, 3 fingers = C, 4 fingers = D
+// Only counts index, middle, ring, pinky (NOT thumb — too unreliable at angles)
 function countFingers(landmarks) {
   if (!landmarks || landmarks.length === 0) return 0;
 
   const hand = landmarks[0]; // First hand
 
-  // Finger tip and pip landmark indices
-  const fingerTips = [8, 12, 16, 20]; // Index, Middle, Ring, Pinky
+  // Finger tip and pip landmark indices (index, middle, ring, pinky)
+  const fingerTips = [8, 12, 16, 20];
   const fingerPips = [6, 10, 14, 18];
 
   let count = 0;
 
-  // Thumb: compare x position (different logic for left/right hand)
-  const thumbTip = hand[4];
-  const thumbIP = hand[3];
-  const wrist = hand[0];
-
-  // Determine if right or left hand based on wrist and middle finger base
-  const isRightHand = hand[17].x < wrist.x;
-
-  if (isRightHand) {
-    if (thumbTip.x < thumbIP.x) count++;
-  } else {
-    if (thumbTip.x > thumbIP.x) count++;
-  }
-
-  // Other fingers: compare y position (tip above pip = extended)
+  // Fingers: compare y position (tip above pip = extended)
   for (let i = 0; i < fingerTips.length; i++) {
     if (hand[fingerTips[i]].y < hand[fingerPips[i]].y) {
       count++;
