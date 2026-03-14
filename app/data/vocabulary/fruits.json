@@ -15,7 +15,8 @@
       "vietnamese": "Quả táo",
       "emoji": "🍎",
       "sentence": "I eat an apple.",
-      "sentenceVi": "Tôi ăn quả táo."
+      "sentenceVi": "Tôi ăn quả táo.",
+      "image": "/images/fruits/apple.png"
     },
     {
       "id": "banana",
@@ -24,7 +25,8 @@
       "vietnamese": "Quả chuối",
       "emoji": "🍌",
       "sentence": "The banana is yellow.",
-      "sentenceVi": "Quả chuối màu vàng."
+      "sentenceVi": "Quả chuối màu vàng.",
+      "image": "/images/fruits/banana.png"
     },
     {
       "id": "orange",
@@ -33,7 +35,8 @@
       "vietnamese": "Quả cam",
       "emoji": "🍊",
       "sentence": "I like orange juice.",
-      "sentenceVi": "Tôi thích nước cam."
+      "sentenceVi": "Tôi thích nước cam.",
+      "image": "/images/fruits/orange.png"
     },
     {
       "id": "grape",
@@ -42,7 +45,8 @@
       "vietnamese": "Quả nho",
       "emoji": "🍇",
       "sentence": "Grapes are sweet.",
-      "sentenceVi": "Nho rất ngọt."
+      "sentenceVi": "Nho rất ngọt.",
+      "image": "/images/fruits/grape.png"
     },
     {
       "id": "mango",
@@ -51,7 +55,8 @@
       "vietnamese": "Quả xoài",
       "emoji": "🥭",
       "sentence": "The mango is yummy.",
-      "sentenceVi": "Quả xoài rất ngon."
+      "sentenceVi": "Quả xoài rất ngon.",
+      "image": "/images/fruits/mango.png"
     },
     {
       "id": "watermelon",
@@ -60,7 +65,8 @@
       "vietnamese": "Dưa hấu",
       "emoji": "🍉",
       "sentence": "Watermelon is juicy.",
-      "sentenceVi": "Dưa hấu nhiều nước."
+      "sentenceVi": "Dưa hấu nhiều nước.",
+      "image": "/images/fruits/watermelon.png"
     },
     {
       "id": "strawberry",
@@ -69,7 +75,8 @@
       "vietnamese": "Dâu tây",
       "emoji": "🍓",
       "sentence": "Strawberries are red.",
-      "sentenceVi": "Dâu tây màu đỏ."
+      "sentenceVi": "Dâu tây màu đỏ.",
+      "image": "/images/fruits/strawberry.png"
     },
     {
       "id": "pineapple",
@@ -78,7 +85,8 @@
       "vietnamese": "Dứa",
       "emoji": "🍍",
       "sentence": "Pineapple is sour.",
-      "sentenceVi": "Dứa hơi chua."
+      "sentenceVi": "Dứa hơi chua.",
+      "image": "/images/fruits/pineapple.png"
     },
     {
       "id": "coconut",

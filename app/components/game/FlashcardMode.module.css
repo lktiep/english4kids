@@ -128,6 +128,24 @@
   filter: none;
 }
 
+.imageWrapper {
+  margin-bottom: var(--space-lg);
+  animation: bounce 2s infinite;
+}
+
+.wordImage {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+}
+
+.wordImage:hover {
+  transform: scale(1.05);
+}
+
 .word {
   font-size: var(--font-size-2xl);
   font-weight: 900;

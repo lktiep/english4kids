@@ -5,6 +5,17 @@ import { useGame } from "@/app/context/GameContext";
 import { useSpeech, useSound } from "@/app/hooks/useSpeech";
 import styles from "./FlashcardMode.module.css";
 
+function WordVisual({ word }) {
+  if (word.image) {
+    return (
+      <div className={styles.imageWrapper}>
+        <img src={word.image} alt={word.word} className={styles.wordImage} />
+      </div>
+    );
+  }
+  return <div className={styles.emoji}>{word.emoji}</div>;
+}
+
 export default function FlashcardMode({ topic, onBack }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -130,14 +141,14 @@ export default function FlashcardMode({ topic, onBack }) {
         >
           {/* Front */}
           <div className={styles.cardFront}>
-            <div className={styles.emoji}>{word.emoji}</div>
+            <WordVisual word={word} />
             <h1 className={styles.word}>{word.word}</h1>
             <p className={styles.pronunciation}>{word.pronunciation}</p>
             <p className={styles.tapHint}>👆 Chạm để xem nghĩa</p>
           </div>
           {/* Back */}
           <div className={styles.cardBack}>
-            <div className={styles.emoji}>{word.emoji}</div>
+            <WordVisual word={word} />
             <h1 className={styles.word}>{word.word}</h1>
             <p className={styles.vietnamese}>{word.vietnamese}</p>
             <div className={styles.sentence}>

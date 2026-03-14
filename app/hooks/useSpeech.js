@@ -59,13 +59,30 @@ export function useSound() {
       if (!settings.soundEnabled || typeof window === "undefined") return;
 
       const sounds = {
-        correct: { freq: 800, duration: 200, type: "sine" },
-        wrong: { freq: 300, duration: 300, type: "triangle" },
-        click: { freq: 600, duration: 100, type: "sine" },
-        flip: { freq: 500, duration: 150, type: "sine" },
-        levelup: { freq: [523, 659, 784], duration: 500, type: "sine" },
-        streak: { freq: [600, 700, 800, 900], duration: 400, type: "sine" },
-        complete: { freq: [523, 587, 659, 784], duration: 600, type: "sine" },
+        correct: { freq: [523, 659, 784], duration: 300, type: "sine" },
+        wrong: { freq: [330, 262], duration: 250, type: "triangle" },
+        click: { freq: [880], duration: 80, type: "sine" },
+        flip: { freq: [440, 554], duration: 120, type: "sine" },
+        levelup: {
+          freq: [523, 659, 784, 1047],
+          duration: 450,
+          type: "sine",
+        },
+        streak: {
+          freq: [523, 587, 659, 784, 880],
+          duration: 350,
+          type: "sine",
+        },
+        complete: {
+          freq: [523, 659, 784, 1047, 1319],
+          duration: 500,
+          type: "sine",
+        },
+        celebrate: {
+          freq: [523, 659, 784, 1047, 784, 1047, 1319],
+          duration: 400,
+          type: "sine",
+        },
       };
 
       const config = sounds[soundName];
@@ -84,22 +101,20 @@ export function useSound() {
           const gain = audioCtx.createGain();
 
           osc.type = config.type;
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.1);
+          const startTime = audioCtx.currentTime + i * 0.12;
+          osc.frequency.setValueAtTime(freq, startTime);
 
-          gain.gain.setValueAtTime(
-            volume * 0.3,
-            audioCtx.currentTime + i * 0.1,
-          );
+          gain.gain.setValueAtTime(volume * 0.4, startTime);
           gain.gain.exponentialRampToValueAtTime(
             0.01,
-            audioCtx.currentTime + i * 0.1 + config.duration / 1000,
+            startTime + config.duration / 1000,
           );
 
           osc.connect(gain);
           gain.connect(audioCtx.destination);
 
-          osc.start(audioCtx.currentTime + i * 0.1);
-          osc.stop(audioCtx.currentTime + i * 0.1 + config.duration / 1000);
+          osc.start(startTime);
+          osc.stop(startTime + config.duration / 1000);
         });
       } catch (e) {
         // Audio context not available
