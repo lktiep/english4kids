@@ -1,21 +1,22 @@
 import "./globals.css";
+import { AuthProviderWrapper } from "./components/AuthProviderWrapper";
 
 export const metadata = {
-  title: "EnglishKids — Vừa học vừa chơi tiếng Anh",
+  title: "EduKids — Nền tảng học tập thông minh cho trẻ em",
   description:
-    "Ứng dụng học tiếng Anh cho bé với flashcard, quiz, phát âm, và webcam nhận diện cử chỉ tay",
+    "Học tiếng Anh và nhiều môn học khác qua flashcard, quiz tương tác, nhận diện cử chỉ tay. Bảng xếp hạng toàn cầu hàng tuần.",
   keywords:
-    "english, kids, learning, flashcard, quiz, pronunciation, gesture, vietnamese",
+    "edukids, education, kids, learning, english, flashcard, quiz, pronunciation, gesture, leaderboard",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "EnglishKids",
+    title: "EduKids",
   },
   openGraph: {
-    title: "EnglishKids — Vừa học vừa chơi tiếng Anh",
+    title: "EduKids — Nền tảng học tập thông minh cho trẻ em",
     description:
-      "Flashcard, quiz, phát âm, cử chỉ tay — học tiếng Anh siêu vui cho bé",
+      "Flashcard, quiz, phát âm, cử chỉ tay — học thông minh, chơi vui vẻ",
     type: "website",
     locale: "vi_VN",
     url: "https://english4kids.jackle.dev",
@@ -31,7 +32,7 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#667eea",
+  themeColor: "#0a0a1a",
 };
 
 export default function RootLayout({ children }) {
@@ -41,9 +42,14 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
       <body>
-        {children}
+        <AuthProviderWrapper>
+          {children}
+        </AuthProviderWrapper>
         <script
           dangerouslySetInnerHTML={{
             __html: `
