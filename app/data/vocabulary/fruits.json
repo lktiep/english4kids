@@ -1,0 +1,102 @@
+{
+  "topic": "fruits",
+  "title": "Fruits",
+  "titleVi": "Trái cây",
+  "icon": "🍎",
+  "color": "#EF4444",
+  "gradient": "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+  "grade": "prek",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "apple",
+      "word": "Apple",
+      "pronunciation": "/ˈæpl/",
+      "vietnamese": "Quả táo",
+      "emoji": "🍎",
+      "sentence": "I eat an apple.",
+      "sentenceVi": "Tôi ăn quả táo."
+    },
+    {
+      "id": "banana",
+      "word": "Banana",
+      "pronunciation": "/bəˈnænə/",
+      "vietnamese": "Quả chuối",
+      "emoji": "🍌",
+      "sentence": "The banana is yellow.",
+      "sentenceVi": "Quả chuối màu vàng."
+    },
+    {
+      "id": "orange",
+      "word": "Orange",
+      "pronunciation": "/ˈɔːrɪndʒ/",
+      "vietnamese": "Quả cam",
+      "emoji": "🍊",
+      "sentence": "I like orange juice.",
+      "sentenceVi": "Tôi thích nước cam."
+    },
+    {
+      "id": "grape",
+      "word": "Grape",
+      "pronunciation": "/ɡreɪp/",
+      "vietnamese": "Quả nho",
+      "emoji": "🍇",
+      "sentence": "Grapes are sweet.",
+      "sentenceVi": "Nho rất ngọt."
+    },
+    {
+      "id": "mango",
+      "word": "Mango",
+      "pronunciation": "/ˈmæŋɡoʊ/",
+      "vietnamese": "Quả xoài",
+      "emoji": "🥭",
+      "sentence": "The mango is yummy.",
+      "sentenceVi": "Quả xoài rất ngon."
+    },
+    {
+      "id": "watermelon",
+      "word": "Watermelon",
+      "pronunciation": "/ˈwɔːtərˌmelən/",
+      "vietnamese": "Dưa hấu",
+      "emoji": "🍉",
+      "sentence": "Watermelon is juicy.",
+      "sentenceVi": "Dưa hấu nhiều nước."
+    },
+    {
+      "id": "strawberry",
+      "word": "Strawberry",
+      "pronunciation": "/ˈstrɔːberi/",
+      "vietnamese": "Dâu tây",
+      "emoji": "🍓",
+      "sentence": "Strawberries are red.",
+      "sentenceVi": "Dâu tây màu đỏ."
+    },
+    {
+      "id": "pineapple",
+      "word": "Pineapple",
+      "pronunciation": "/ˈpaɪnæpl/",
+      "vietnamese": "Dứa",
+      "emoji": "🍍",
+      "sentence": "Pineapple is sour.",
+      "sentenceVi": "Dứa hơi chua."
+    },
+    {
+      "id": "coconut",
+      "word": "Coconut",
+      "pronunciation": "/ˈkoʊkənʌt/",
+      "vietnamese": "Dừa",
+      "emoji": "🥥",
+      "sentence": "Coconut water is cool.",
+      "sentenceVi": "Nước dừa mát."
+    },
+    {
+      "id": "peach",
+      "word": "Peach",
+      "pronunciation": "/piːtʃ/",
+      "vietnamese": "Quả đào",
+      "emoji": "🍑",
+      "sentence": "The peach is soft.",
+      "sentenceVi": "Quả đào rất mềm."
+    }
+  ]
+}

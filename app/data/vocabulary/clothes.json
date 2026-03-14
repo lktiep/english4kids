@@ -1,0 +1,84 @@
+{
+  "topic": "clothes",
+  "title": "Clothes",
+  "titleVi": "Quần áo",
+  "icon": "👕",
+  "color": "#8B5CF6",
+  "gradient": "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "words": [
+    {
+      "id": "shirt",
+      "word": "Shirt",
+      "pronunciation": "/ʃɜːrt/",
+      "vietnamese": "Áo sơ mi",
+      "emoji": "👔",
+      "sentence": "I wear a shirt.",
+      "sentenceVi": "Tôi mặc áo sơ mi."
+    },
+    {
+      "id": "pants",
+      "word": "Pants",
+      "pronunciation": "/pænts/",
+      "vietnamese": "Quần dài",
+      "emoji": "👖",
+      "sentence": "My pants are blue.",
+      "sentenceVi": "Quần tôi màu xanh."
+    },
+    {
+      "id": "dress",
+      "word": "Dress",
+      "pronunciation": "/dres/",
+      "vietnamese": "Váy đầm",
+      "emoji": "👗",
+      "sentence": "The dress is pretty.",
+      "sentenceVi": "Váy đầm rất đẹp."
+    },
+    {
+      "id": "shoes",
+      "word": "Shoes",
+      "pronunciation": "/ʃuːz/",
+      "vietnamese": "Giày",
+      "emoji": "👟",
+      "sentence": "I put on my shoes.",
+      "sentenceVi": "Tôi mang giày."
+    },
+    {
+      "id": "hat",
+      "word": "Hat",
+      "pronunciation": "/hæt/",
+      "vietnamese": "Mũ",
+      "emoji": "🧢",
+      "sentence": "I wear a hat.",
+      "sentenceVi": "Tôi đội mũ."
+    },
+    {
+      "id": "socks",
+      "word": "Socks",
+      "pronunciation": "/sɒks/",
+      "vietnamese": "Tất",
+      "emoji": "🧦",
+      "sentence": "My socks are white.",
+      "sentenceVi": "Tất tôi màu trắng."
+    },
+    {
+      "id": "jacket",
+      "word": "Jacket",
+      "pronunciation": "/ˈdʒækɪt/",
+      "vietnamese": "Áo khoác",
+      "emoji": "🧥",
+      "sentence": "I wear a jacket when it is cold.",
+      "sentenceVi": "Tôi mặc áo khoác khi trời lạnh."
+    },
+    {
+      "id": "skirt",
+      "word": "Skirt",
+      "pronunciation": "/skɜːrt/",
+      "vietnamese": "Chân váy",
+      "emoji": "👗",
+      "sentence": "She wears a skirt.",
+      "sentenceVi": "Cô ấy mặc chân váy."
+    }
+  ]
+}

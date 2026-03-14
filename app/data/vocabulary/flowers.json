@@ -1,0 +1,84 @@
+{
+  "topic": "flowers",
+  "title": "Flowers",
+  "titleVi": "Hoa",
+  "icon": "🌸",
+  "color": "#FF6B9D",
+  "gradient": "linear-gradient(135deg, #FF6B9D 0%, #FF4778 100%)",
+  "grade": "prek",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "rose",
+      "word": "Rose",
+      "pronunciation": "/roʊz/",
+      "vietnamese": "Hoa hồng",
+      "emoji": "🌹",
+      "sentence": "The rose is red.",
+      "sentenceVi": "Hoa hồng màu đỏ."
+    },
+    {
+      "id": "sunflower",
+      "word": "Sunflower",
+      "pronunciation": "/ˈsʌnˌflaʊər/",
+      "vietnamese": "Hoa hướng dương",
+      "emoji": "🌻",
+      "sentence": "The sunflower is big.",
+      "sentenceVi": "Hoa hướng dương rất to."
+    },
+    {
+      "id": "daisy",
+      "word": "Daisy",
+      "pronunciation": "/ˈdeɪzi/",
+      "vietnamese": "Hoa cúc",
+      "emoji": "🌼",
+      "sentence": "The daisy is white.",
+      "sentenceVi": "Hoa cúc màu trắng."
+    },
+    {
+      "id": "tulip",
+      "word": "Tulip",
+      "pronunciation": "/ˈtuːlɪp/",
+      "vietnamese": "Hoa tulip",
+      "emoji": "🌷",
+      "sentence": "The tulip is pretty.",
+      "sentenceVi": "Hoa tulip rất đẹp."
+    },
+    {
+      "id": "lily",
+      "word": "Lily",
+      "pronunciation": "/ˈlɪli/",
+      "vietnamese": "Hoa lily",
+      "emoji": "🪷",
+      "sentence": "The lily smells nice.",
+      "sentenceVi": "Hoa lily thơm."
+    },
+    {
+      "id": "lotus",
+      "word": "Lotus",
+      "pronunciation": "/ˈloʊtəs/",
+      "vietnamese": "Hoa sen",
+      "emoji": "🪷",
+      "sentence": "The lotus is in the pond.",
+      "sentenceVi": "Hoa sen ở trong ao."
+    },
+    {
+      "id": "orchid",
+      "word": "Orchid",
+      "pronunciation": "/ˈɔːrkɪd/",
+      "vietnamese": "Hoa lan",
+      "emoji": "🌺",
+      "sentence": "The orchid is beautiful.",
+      "sentenceVi": "Hoa lan rất đẹp."
+    },
+    {
+      "id": "cherry_blossom",
+      "word": "Cherry Blossom",
+      "pronunciation": "/ˈtʃeri ˈblɑːsəm/",
+      "vietnamese": "Hoa anh đào",
+      "emoji": "🌸",
+      "sentence": "Cherry blossoms are pink.",
+      "sentenceVi": "Hoa anh đào màu hồng."
+    }
+  ]
+}

@@ -2,7 +2,8 @@
 
 import { useState, useCallback } from "react";
 import { useGame } from "@/app/context/GameContext";
-import { getAllTopics } from "@/app/utils/topics";
+import { getAllTopics, getGradeInfo } from "@/app/utils/topics";
+import topicsRegistry from "@/app/data/topics.json";
 import { useSound } from "@/app/hooks/useSpeech";
 import TopicCard from "./ui/TopicCard";
 import XPBar from "./ui/XPBar";
@@ -131,24 +132,34 @@ export default function HomePage() {
         <p>Hôm nay mình học gì nào?</p>
       </section>
 
-      {/* Topic Grid */}
-      <section className={styles.topicsSection}>
-        <h3 className={styles.sectionTitle}>📚 Chủ đề Lớp 1</h3>
-        <div className={styles.topicGrid}>
-          {topics.map((topic, i) => (
-            <TopicCard
-              key={topic.slug}
-              topic={topic}
-              index={i}
-              wordsLearned={game.wordsLearned[topic.slug]?.length || 0}
-              quizResult={game.quizResults[topic.slug]}
-              onLearn={() => handleTopicClick(topic, "learn")}
-              onQuiz={() => handleTopicClick(topic, "quiz")}
-              onSpeak={() => handleTopicClick(topic, "speak")}
-            />
-          ))}
-        </div>
-      </section>
+      {/* Topic Grids — grouped by grade */}
+      {Object.keys(topicsRegistry.grades).map((gradeId) => {
+        const grade = getGradeInfo(gradeId);
+        const gradeTopics = topics.filter((t) => t.grade === gradeId);
+        if (gradeTopics.length === 0) return null;
+
+        return (
+          <section key={gradeId} className={styles.topicsSection}>
+            <h3 className={styles.sectionTitle}>
+              {grade.icon} {grade.name} ({grade.nameEn}, {grade.ageRange} tuổi)
+            </h3>
+            <div className={styles.topicGrid}>
+              {gradeTopics.map((topic, i) => (
+                <TopicCard
+                  key={topic.slug}
+                  topic={topic}
+                  index={i}
+                  wordsLearned={game.wordsLearned[topic.slug]?.length || 0}
+                  quizResult={game.quizResults[topic.slug]}
+                  onLearn={() => handleTopicClick(topic, "learn")}
+                  onQuiz={() => handleTopicClick(topic, "quiz")}
+                  onSpeak={() => handleTopicClick(topic, "speak")}
+                />
+              ))}
+            </div>
+          </section>
+        );
+      })}
 
       {/* XP Popup */}
       {game.xpPopup && <XPPopup {...game.xpPopup} />}

@@ -1,0 +1,102 @@
+{
+  "topic": "weather",
+  "title": "Weather & Seasons",
+  "titleVi": "Thời tiết",
+  "icon": "🌤️",
+  "color": "#06B6D4",
+  "gradient": "linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "words": [
+    {
+      "id": "sunny",
+      "word": "Sunny",
+      "pronunciation": "/ˈsʌni/",
+      "vietnamese": "Nắng",
+      "emoji": "☀️",
+      "sentence": "Today is sunny.",
+      "sentenceVi": "Hôm nay trời nắng."
+    },
+    {
+      "id": "rainy",
+      "word": "Rainy",
+      "pronunciation": "/ˈreɪni/",
+      "vietnamese": "Mưa",
+      "emoji": "🌧️",
+      "sentence": "It is rainy today.",
+      "sentenceVi": "Hôm nay trời mưa."
+    },
+    {
+      "id": "cloudy",
+      "word": "Cloudy",
+      "pronunciation": "/ˈklaʊdi/",
+      "vietnamese": "Nhiều mây",
+      "emoji": "☁️",
+      "sentence": "The sky is cloudy.",
+      "sentenceVi": "Bầu trời nhiều mây."
+    },
+    {
+      "id": "windy",
+      "word": "Windy",
+      "pronunciation": "/ˈwɪndi/",
+      "vietnamese": "Gió",
+      "emoji": "💨",
+      "sentence": "It is very windy.",
+      "sentenceVi": "Trời rất nhiều gió."
+    },
+    {
+      "id": "snowy",
+      "word": "Snowy",
+      "pronunciation": "/ˈsnoʊi/",
+      "vietnamese": "Tuyết",
+      "emoji": "❄️",
+      "sentence": "It is snowy in winter.",
+      "sentenceVi": "Trời có tuyết vào mùa đông."
+    },
+    {
+      "id": "hot",
+      "word": "Hot",
+      "pronunciation": "/hɒt/",
+      "vietnamese": "Nóng",
+      "emoji": "🥵",
+      "sentence": "Summer is very hot.",
+      "sentenceVi": "Mùa hè rất nóng."
+    },
+    {
+      "id": "cold",
+      "word": "Cold",
+      "pronunciation": "/koʊld/",
+      "vietnamese": "Lạnh",
+      "emoji": "🥶",
+      "sentence": "Winter is cold.",
+      "sentenceVi": "Mùa đông rất lạnh."
+    },
+    {
+      "id": "spring",
+      "word": "Spring",
+      "pronunciation": "/sprɪŋ/",
+      "vietnamese": "Mùa xuân",
+      "emoji": "🌸",
+      "sentence": "I love spring.",
+      "sentenceVi": "Tôi yêu mùa xuân."
+    },
+    {
+      "id": "summer",
+      "word": "Summer",
+      "pronunciation": "/ˈsʌmər/",
+      "vietnamese": "Mùa hè",
+      "emoji": "🏖️",
+      "sentence": "I play in summer.",
+      "sentenceVi": "Tôi chơi vào mùa hè."
+    },
+    {
+      "id": "rainbow",
+      "word": "Rainbow",
+      "pronunciation": "/ˈreɪnboʊ/",
+      "vietnamese": "Cầu vồng",
+      "emoji": "🌈",
+      "sentence": "I see a rainbow!",
+      "sentenceVi": "Tôi thấy cầu vồng!"
+    }
+  ]
+}

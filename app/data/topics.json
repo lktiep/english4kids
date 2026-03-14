@@ -1,5 +1,13 @@
 {
   "grades": {
+    "prek": {
+      "id": "prek",
+      "name": "Mẫu giáo",
+      "nameEn": "Pre-K",
+      "ageRange": "3-5",
+      "icon": "👶",
+      "color": "#FF6B9D"
+    },
     "grade1": {
       "id": "grade1",
       "name": "Lớp 1",
@@ -7,9 +15,21 @@
       "ageRange": "6-7",
       "icon": "📗",
       "color": "#4ECDC4"
+    },
+    "grade2": {
+      "id": "grade2",
+      "name": "Lớp 2",
+      "nameEn": "Grade 2",
+      "ageRange": "7-8",
+      "icon": "📘",
+      "color": "#3B82F6"
     }
   },
   "topics": [
+    { "slug": "flowers", "grade": "prek", "order": 1 },
+    { "slug": "vehicles", "grade": "prek", "order": 2 },
+    { "slug": "shapes", "grade": "prek", "order": 3 },
+    { "slug": "fruits", "grade": "prek", "order": 4 },
     { "slug": "greetings", "grade": "grade1", "order": 1 },
     { "slug": "numbers", "grade": "grade1", "order": 2 },
     { "slug": "colors", "grade": "grade1", "order": 3 },
@@ -19,6 +39,8 @@
     { "slug": "body", "grade": "grade1", "order": 7 },
     { "slug": "food", "grade": "grade1", "order": 8 },
     { "slug": "toys", "grade": "grade1", "order": 9 },
-    { "slug": "feelings", "grade": "grade1", "order": 10 }
+    { "slug": "feelings", "grade": "grade1", "order": 10 },
+    { "slug": "weather", "grade": "grade2", "order": 1 },
+    { "slug": "clothes", "grade": "grade2", "order": 2 }
   ]
 }

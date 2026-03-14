@@ -1,0 +1,84 @@
+{
+  "topic": "shapes",
+  "title": "Shapes",
+  "titleVi": "Hình dạng",
+  "icon": "⭐",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+  "grade": "prek",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "circle",
+      "word": "Circle",
+      "pronunciation": "/ˈsɜːrkl/",
+      "vietnamese": "Hình tròn",
+      "emoji": "⭕",
+      "sentence": "The ball is a circle.",
+      "sentenceVi": "Quả bóng hình tròn."
+    },
+    {
+      "id": "square",
+      "word": "Square",
+      "pronunciation": "/skwɛr/",
+      "vietnamese": "Hình vuông",
+      "emoji": "🟥",
+      "sentence": "The box is a square.",
+      "sentenceVi": "Cái hộp hình vuông."
+    },
+    {
+      "id": "triangle",
+      "word": "Triangle",
+      "pronunciation": "/ˈtraɪæŋɡl/",
+      "vietnamese": "Hình tam giác",
+      "emoji": "🔺",
+      "sentence": "The roof is a triangle.",
+      "sentenceVi": "Mái nhà hình tam giác."
+    },
+    {
+      "id": "star",
+      "word": "Star",
+      "pronunciation": "/stɑːr/",
+      "vietnamese": "Ngôi sao",
+      "emoji": "⭐",
+      "sentence": "I see a star.",
+      "sentenceVi": "Tôi thấy ngôi sao."
+    },
+    {
+      "id": "heart",
+      "word": "Heart",
+      "pronunciation": "/hɑːrt/",
+      "vietnamese": "Hình trái tim",
+      "emoji": "❤️",
+      "sentence": "I love the heart shape.",
+      "sentenceVi": "Tôi thích hình trái tim."
+    },
+    {
+      "id": "rectangle",
+      "word": "Rectangle",
+      "pronunciation": "/ˈrektæŋɡl/",
+      "vietnamese": "Hình chữ nhật",
+      "emoji": "🟦",
+      "sentence": "The door is a rectangle.",
+      "sentenceVi": "Cái cửa hình chữ nhật."
+    },
+    {
+      "id": "diamond",
+      "word": "Diamond",
+      "pronunciation": "/ˈdaɪəmənd/",
+      "vietnamese": "Hình thoi",
+      "emoji": "💎",
+      "sentence": "The diamond shines.",
+      "sentenceVi": "Viên kim cương lấp lánh."
+    },
+    {
+      "id": "oval",
+      "word": "Oval",
+      "pronunciation": "/ˈoʊvl/",
+      "vietnamese": "Hình bầu dục",
+      "emoji": "🥚",
+      "sentence": "The egg is oval.",
+      "sentenceVi": "Quả trứng hình bầu dục."
+    }
+  ]
+}

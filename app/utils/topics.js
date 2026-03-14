@@ -12,6 +12,14 @@ import body from "@/app/data/vocabulary/body.json";
 import food from "@/app/data/vocabulary/food.json";
 import toys from "@/app/data/vocabulary/toys.json";
 import feelings from "@/app/data/vocabulary/feelings.json";
+// Pre-K
+import flowers from "@/app/data/vocabulary/flowers.json";
+import vehicles from "@/app/data/vocabulary/vehicles.json";
+import shapes from "@/app/data/vocabulary/shapes.json";
+import fruits from "@/app/data/vocabulary/fruits.json";
+// Grade 2
+import weather from "@/app/data/vocabulary/weather.json";
+import clothes from "@/app/data/vocabulary/clothes.json";
 
 const vocabularyMap = {
   greetings,
@@ -24,6 +32,12 @@ const vocabularyMap = {
   food,
   toys,
   feelings,
+  flowers,
+  vehicles,
+  shapes,
+  fruits,
+  weather,
+  clothes,
 };
 
 export function getAllTopics() {
