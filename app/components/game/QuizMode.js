@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useGame } from "@/app/context/GameContext";
 import { useSpeech, useSound } from "@/app/hooks/useSpeech";
 import { shuffle } from "@/app/utils/topics";
@@ -188,13 +188,11 @@ export default function QuizMode({
   ]);
 
   // Listen for hand gesture events from CameraOverlay
-  const fistFramesRef = useRef(0);
-
   useEffect(() => {
     if (!cameraEnabled) return;
 
     const handleGesture = (e) => {
-      const fingerCount = e.detail.answer; // 1-4
+      const fingerCount = e.detail.answer; // 0-4
       if (wrongFeedback || showResult) return;
 
       // Fingers 1-4: preview selection (don't submit)
@@ -202,37 +200,18 @@ export default function QuizMode({
         const idx = fingerCount - 1;
         if (q && q.options[idx]) {
           setGesturePreview(q.options[idx].id);
-          fistFramesRef.current = 0; // Reset fist counter when fingers shown
         }
       }
-    };
 
-    // Listen for fist gesture (0 fingers) to confirm
-    const handleFist = (e) => {
-      const fingerCount = e.detail.answer;
-      if (
-        fingerCount === 0 &&
-        gesturePreview &&
-        !showResult &&
-        !wrongFeedback
-      ) {
-        fistFramesRef.current++;
-        // Require a few frames of fist to confirm
-        if (fistFramesRef.current >= 5) {
-          confirmGestureSelection();
-          fistFramesRef.current = 0;
-        }
-      } else if (fingerCount !== 0) {
-        fistFramesRef.current = 0;
+      // Fist (0 fingers): confirm selection immediately
+      // (gesture hook already requires 10 frames of stability)
+      if (fingerCount === 0 && gesturePreview && !showResult && !wrongFeedback) {
+        confirmGestureSelection();
       }
     };
 
     window.addEventListener("gesture-select", handleGesture);
-    window.addEventListener("gesture-select", handleFist);
-    return () => {
-      window.removeEventListener("gesture-select", handleGesture);
-      window.removeEventListener("gesture-select", handleFist);
-    };
+    return () => window.removeEventListener("gesture-select", handleGesture);
   }, [
     cameraEnabled,
     q,
