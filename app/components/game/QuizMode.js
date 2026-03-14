@@ -355,24 +355,25 @@ export default function QuizMode({
           return (
             <button
               key={option.id}
-              className={optionClass}
+              className={`${optionClass} ${option.image ? styles.hasImage : ""}`}
               onClick={() => handleClickSelect(option)}
               disabled={showResult || wrongFeedback}
+              style={option.image ? { backgroundImage: `url(${option.image})` } : undefined}
             >
               <span className={styles.optionLetter}>{letter}</span>
-              {option.image ? (
-                <img src={option.image} alt={option.word} className={styles.optionImage} />
-              ) : (
+              {!option.image && (
                 <span className={styles.optionEmoji}>{option.emoji}</span>
               )}
-              <span className={styles.optionWord}>{option.vietnamese}</span>
-              {cameraEnabled ? (
-                <span className={styles.optionKey}>
-                  {isPreviewed ? "✊ Nắm tay = xác nhận" : `☝️ ${i + 1} ngón`}
-                </span>
-              ) : (
-                <span className={styles.optionKey}>Phím {i + 1}</span>
-              )}
+              <span className={styles.optionLabel}>
+                <span className={styles.optionWord}>{option.vietnamese}</span>
+                {cameraEnabled ? (
+                  <span className={styles.optionKey}>
+                    {isPreviewed ? "✊ Xác nhận" : `☝️ ${i + 1}`}
+                  </span>
+                ) : (
+                  <span className={styles.optionKey}>{i + 1}</span>
+                )}
+              </span>
             </button>
           );
         })}
