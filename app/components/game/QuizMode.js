@@ -308,6 +308,11 @@ export default function QuizMode({
 
       {/* Question */}
       <div className={styles.questionArea}>
+        {q.correctWord.image && (
+          <div className={styles.questionImage}>
+            <img src={q.correctWord.image} alt="" className={styles.questionImg} />
+          </div>
+        )}
         <h2 className={styles.question}>{q.questionVi}</h2>
         <button
           className={styles.listenBtn}
@@ -355,7 +360,11 @@ export default function QuizMode({
               disabled={showResult || wrongFeedback}
             >
               <span className={styles.optionLetter}>{letter}</span>
-              <span className={styles.optionEmoji}>{option.emoji}</span>
+              {option.image ? (
+                <img src={option.image} alt={option.word} className={styles.optionImage} />
+              ) : (
+                <span className={styles.optionEmoji}>{option.emoji}</span>
+              )}
               <span className={styles.optionWord}>{option.vietnamese}</span>
               {cameraEnabled ? (
                 <span className={styles.optionKey}>
