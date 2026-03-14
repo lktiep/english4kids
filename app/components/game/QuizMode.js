@@ -308,11 +308,6 @@ export default function QuizMode({
 
       {/* Question */}
       <div className={styles.questionArea}>
-        {q.correctWord.image && (
-          <div className={styles.questionImage}>
-            <img src={q.correctWord.image} alt="" className={styles.questionImg} />
-          </div>
-        )}
         <h2 className={styles.question}>{q.questionVi}</h2>
         <button
           className={styles.listenBtn}
@@ -336,7 +331,7 @@ export default function QuizMode({
       {/* Options Grid */}
       <div className={styles.optionsGrid}>
         {q.options.map((option, i) => {
-          const letter = ["A", "B", "C", "D"][i];
+          const num = i + 1;
           const isSelected = selected === option.id;
           const isPreviewed = gesturePreview === option.id;
           const isAnswer = option.id === q.correctWord.id;
@@ -360,7 +355,7 @@ export default function QuizMode({
               disabled={showResult || wrongFeedback}
               style={option.image ? { backgroundImage: `url(${option.image})` } : undefined}
             >
-              <span className={styles.optionLetter}>{letter}</span>
+              <span className={styles.optionLetter}>{num}</span>
               {!option.image && (
                 <span className={styles.optionEmoji}>{option.emoji}</span>
               )}
