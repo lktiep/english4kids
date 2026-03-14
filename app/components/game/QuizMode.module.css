@@ -209,64 +209,87 @@
 
 .selected {
   border-color: var(--primary) !important;
+  box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.5), 0 8px 32px rgba(78, 205, 196, 0.3) !important;
+  transform: scale(1.03);
 }
 
 .selected.hasImage::after {
   background: linear-gradient(
     to top,
-    rgba(78, 205, 196, 0.7) 0%,
-    rgba(78, 205, 196, 0.15) 50%,
+    rgba(78, 205, 196, 0.6) 0%,
+    rgba(78, 205, 196, 0.1) 40%,
     rgba(0, 0, 0, 0) 100%
   );
 }
 
 .previewed {
   border-color: var(--secondary) !important;
-  box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.3) !important;
-  animation: pulse 1s ease infinite !important;
+  box-shadow: 0 0 0 4px rgba(255, 179, 71, 0.5), 0 0 24px rgba(255, 179, 71, 0.3) !important;
+  animation: previewPulse 1.2s ease infinite !important;
+  transform: scale(1.03);
 }
 
-@keyframes pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.3);
+@keyframes previewPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px rgba(255, 179, 71, 0.5), 0 0 24px rgba(255, 179, 71, 0.3);
   }
   50% {
-    box-shadow: 0 0 0 6px rgba(255, 179, 71, 0.15);
+    box-shadow: 0 0 0 8px rgba(255, 179, 71, 0.3), 0 0 40px rgba(255, 179, 71, 0.2);
   }
 }
+
 .correct {
-  border-color: var(--success) !important;
+  border: 4px solid #00e676 !important;
+  box-shadow: 0 0 0 6px rgba(0, 230, 118, 0.4), 0 0 40px rgba(0, 230, 118, 0.3) !important;
+  transform: scale(1.05) !important;
+  animation: correctGlow 0.8s ease !important;
 }
 
 .correct:not(.hasImage) {
-  background: var(--success-light) !important;
+  background: rgba(0, 230, 118, 0.15) !important;
 }
 
 .correct.hasImage::after {
   background: linear-gradient(
     to top,
-    rgba(0, 200, 83, 0.7) 0%,
-    rgba(0, 200, 83, 0.15) 50%,
+    rgba(0, 230, 118, 0.65) 0%,
+    rgba(0, 230, 118, 0.15) 45%,
     rgba(0, 0, 0, 0) 100%
   ) !important;
 }
 
+@keyframes correctGlow {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+  50% { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(0, 230, 118, 0.4), 0 0 60px rgba(0, 230, 118, 0.3); }
+  100% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(0, 230, 118, 0.4), 0 0 40px rgba(0, 230, 118, 0.3); }
+}
+
 .wrong {
-  border-color: var(--error) !important;
+  border: 4px solid #ff5252 !important;
+  box-shadow: 0 0 0 4px rgba(255, 82, 82, 0.4), 0 0 24px rgba(255, 82, 82, 0.2) !important;
+  animation: wrongShake 0.5s ease !important;
+  opacity: 0.7;
 }
 
 .wrong:not(.hasImage) {
-  background: var(--error-light) !important;
+  background: rgba(255, 82, 82, 0.12) !important;
 }
 
 .wrong.hasImage::after {
   background: linear-gradient(
     to top,
-    rgba(255, 82, 82, 0.7) 0%,
-    rgba(255, 82, 82, 0.15) 50%,
+    rgba(255, 82, 82, 0.6) 0%,
+    rgba(255, 82, 82, 0.15) 45%,
     rgba(0, 0, 0, 0) 100%
   ) !important;
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
 }
 
 .optionLetter {
