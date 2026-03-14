@@ -1,0 +1,111 @@
+{
+  "topic": "feelings",
+  "title": "Feelings & Daily Life",
+  "titleVi": "Cảm xúc & Sinh hoạt",
+  "icon": "😊",
+  "color": "#FCC419",
+  "gradient": "linear-gradient(135deg, #FCC419 0%, #FF6B6B 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "happy",
+      "word": "Happy",
+      "pronunciation": "/ˈhæpi/",
+      "vietnamese": "Vui vẻ",
+      "emoji": "😊",
+      "sentence": "I am happy!",
+      "sentenceVi": "Tôi vui lắm!"
+    },
+    {
+      "id": "sad",
+      "word": "Sad",
+      "pronunciation": "/sæd/",
+      "vietnamese": "Buồn",
+      "emoji": "😢",
+      "sentence": "Don't be sad.",
+      "sentenceVi": "Đừng buồn nhé."
+    },
+    {
+      "id": "hungry",
+      "word": "Hungry",
+      "pronunciation": "/ˈhʌŋɡri/",
+      "vietnamese": "Đói",
+      "emoji": "😋",
+      "sentence": "I am hungry.",
+      "sentenceVi": "Tôi đói."
+    },
+    {
+      "id": "tired",
+      "word": "Tired",
+      "pronunciation": "/taɪərd/",
+      "vietnamese": "Mệt",
+      "emoji": "😴",
+      "sentence": "I am tired.",
+      "sentenceVi": "Tôi mệt."
+    },
+    {
+      "id": "scared",
+      "word": "Scared",
+      "pronunciation": "/skerd/",
+      "vietnamese": "Sợ",
+      "emoji": "😨",
+      "sentence": "I am scared.",
+      "sentenceVi": "Tôi sợ."
+    },
+    {
+      "id": "angry",
+      "word": "Angry",
+      "pronunciation": "/ˈæŋɡri/",
+      "vietnamese": "Tức giận",
+      "emoji": "😠",
+      "sentence": "Don't be angry.",
+      "sentenceVi": "Đừng giận nhé."
+    },
+    {
+      "id": "wake_up",
+      "word": "Wake up",
+      "pronunciation": "/weɪk ʌp/",
+      "vietnamese": "Thức dậy",
+      "emoji": "⏰",
+      "sentence": "Wake up! It's morning.",
+      "sentenceVi": "Dậy đi! Sáng rồi."
+    },
+    {
+      "id": "go_to_school",
+      "word": "Go to school",
+      "pronunciation": "/ɡoʊ tə skuːl/",
+      "vietnamese": "Đi học",
+      "emoji": "🚶",
+      "sentence": "It's time to go to school.",
+      "sentenceVi": "Đến giờ đi học rồi."
+    },
+    {
+      "id": "sleep",
+      "word": "Sleep",
+      "pronunciation": "/sliːp/",
+      "vietnamese": "Ngủ",
+      "emoji": "😴",
+      "sentence": "Time to sleep.",
+      "sentenceVi": "Đến giờ ngủ rồi."
+    },
+    {
+      "id": "eat",
+      "word": "Eat",
+      "pronunciation": "/iːt/",
+      "vietnamese": "Ăn",
+      "emoji": "🍽️",
+      "sentence": "Let's eat!",
+      "sentenceVi": "Ăn thôi!"
+    },
+    {
+      "id": "love",
+      "word": "Love",
+      "pronunciation": "/lʌv/",
+      "vietnamese": "Yêu thương",
+      "emoji": "❤️",
+      "sentence": "I love you!",
+      "sentenceVi": "Con yêu bạn!"
+    }
+  ]
+}

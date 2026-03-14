@@ -1,0 +1,111 @@
+{
+  "topic": "school",
+  "title": "School",
+  "titleVi": "Trường học",
+  "icon": "🏫",
+  "color": "#51CF66",
+  "gradient": "linear-gradient(135deg, #51CF66 0%, #40C057 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "book",
+      "word": "Book",
+      "pronunciation": "/bʊk/",
+      "vietnamese": "Sách",
+      "emoji": "📚",
+      "sentence": "Open your book.",
+      "sentenceVi": "Mở sách ra."
+    },
+    {
+      "id": "pen",
+      "word": "Pen",
+      "pronunciation": "/pen/",
+      "vietnamese": "Bút",
+      "emoji": "🖊️",
+      "sentence": "This is my pen.",
+      "sentenceVi": "Đây là bút của tôi."
+    },
+    {
+      "id": "pencil",
+      "word": "Pencil",
+      "pronunciation": "/ˈpensəl/",
+      "vietnamese": "Bút chì",
+      "emoji": "✏️",
+      "sentence": "I write with a pencil.",
+      "sentenceVi": "Tôi viết bằng bút chì."
+    },
+    {
+      "id": "ruler",
+      "word": "Ruler",
+      "pronunciation": "/ˈruːlər/",
+      "vietnamese": "Thước kẻ",
+      "emoji": "📏",
+      "sentence": "The ruler is long.",
+      "sentenceVi": "Cây thước dài."
+    },
+    {
+      "id": "bag",
+      "word": "Bag",
+      "pronunciation": "/bæɡ/",
+      "vietnamese": "Cặp sách",
+      "emoji": "🎒",
+      "sentence": "My bag is blue.",
+      "sentenceVi": "Cặp sách của tôi màu xanh."
+    },
+    {
+      "id": "desk",
+      "word": "Desk",
+      "pronunciation": "/desk/",
+      "vietnamese": "Bàn học",
+      "emoji": "🪑",
+      "sentence": "Sit at your desk.",
+      "sentenceVi": "Ngồi vào bàn."
+    },
+    {
+      "id": "teacher",
+      "word": "Teacher",
+      "pronunciation": "/ˈtiːtʃər/",
+      "vietnamese": "Cô giáo / Thầy giáo",
+      "emoji": "👩‍🏫",
+      "sentence": "The teacher is kind.",
+      "sentenceVi": "Cô giáo tốt bụng."
+    },
+    {
+      "id": "board",
+      "word": "Board",
+      "pronunciation": "/bɔːrd/",
+      "vietnamese": "Bảng",
+      "emoji": "📋",
+      "sentence": "Look at the board.",
+      "sentenceVi": "Nhìn lên bảng."
+    },
+    {
+      "id": "eraser",
+      "word": "Eraser",
+      "pronunciation": "/ɪˈreɪsər/",
+      "vietnamese": "Cục tẩy",
+      "emoji": "🧹",
+      "sentence": "I need an eraser.",
+      "sentenceVi": "Tôi cần cục tẩy."
+    },
+    {
+      "id": "school",
+      "word": "School",
+      "pronunciation": "/skuːl/",
+      "vietnamese": "Trường học",
+      "emoji": "🏫",
+      "sentence": "I go to school.",
+      "sentenceVi": "Tôi đi học."
+    },
+    {
+      "id": "classroom",
+      "word": "Classroom",
+      "pronunciation": "/ˈklæsruːm/",
+      "vietnamese": "Lớp học",
+      "emoji": "🪑",
+      "sentence": "This is my classroom.",
+      "sentenceVi": "Đây là lớp học của tôi."
+    }
+  ]
+}

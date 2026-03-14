@@ -1,0 +1,102 @@
+{
+  "topic": "family",
+  "title": "Family",
+  "titleVi": "Gia đình",
+  "icon": "👨‍👩‍👧‍👦",
+  "color": "#FFB347",
+  "gradient": "linear-gradient(135deg, #FFB347 0%, #FFCC80 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "mother",
+      "word": "Mother",
+      "pronunciation": "/ˈmʌðər/",
+      "vietnamese": "Mẹ",
+      "emoji": "👩",
+      "sentence": "I love my mother.",
+      "sentenceVi": "Con yêu mẹ."
+    },
+    {
+      "id": "father",
+      "word": "Father",
+      "pronunciation": "/ˈfɑːðər/",
+      "vietnamese": "Bố",
+      "emoji": "👨",
+      "sentence": "My father is tall.",
+      "sentenceVi": "Bố con cao."
+    },
+    {
+      "id": "sister",
+      "word": "Sister",
+      "pronunciation": "/ˈsɪstər/",
+      "vietnamese": "Chị/Em gái",
+      "emoji": "👧",
+      "sentence": "My sister is kind.",
+      "sentenceVi": "Chị gái con tốt bụng."
+    },
+    {
+      "id": "brother",
+      "word": "Brother",
+      "pronunciation": "/ˈbrʌðər/",
+      "vietnamese": "Anh/Em trai",
+      "emoji": "👦",
+      "sentence": "My brother plays football.",
+      "sentenceVi": "Anh trai con chơi bóng đá."
+    },
+    {
+      "id": "grandma",
+      "word": "Grandma",
+      "pronunciation": "/ˈɡrænmɑː/",
+      "vietnamese": "Bà",
+      "emoji": "👵",
+      "sentence": "Grandma tells stories.",
+      "sentenceVi": "Bà kể chuyện."
+    },
+    {
+      "id": "grandpa",
+      "word": "Grandpa",
+      "pronunciation": "/ˈɡrænpɑː/",
+      "vietnamese": "Ông",
+      "emoji": "👴",
+      "sentence": "Grandpa is reading.",
+      "sentenceVi": "Ông đang đọc sách."
+    },
+    {
+      "id": "baby",
+      "word": "Baby",
+      "pronunciation": "/ˈbeɪbi/",
+      "vietnamese": "Em bé",
+      "emoji": "👶",
+      "sentence": "The baby is sleeping.",
+      "sentenceVi": "Em bé đang ngủ."
+    },
+    {
+      "id": "family",
+      "word": "Family",
+      "pronunciation": "/ˈfæməli/",
+      "vietnamese": "Gia đình",
+      "emoji": "👨‍👩‍👧‍👦",
+      "sentence": "I love my family.",
+      "sentenceVi": "Con yêu gia đình."
+    },
+    {
+      "id": "mom",
+      "word": "Mom",
+      "pronunciation": "/mɑːm/",
+      "vietnamese": "Má",
+      "emoji": "🤱",
+      "sentence": "Mom, I'm home!",
+      "sentenceVi": "Mẹ ơi, con về rồi!"
+    },
+    {
+      "id": "dad",
+      "word": "Dad",
+      "pronunciation": "/dæd/",
+      "vietnamese": "Ba",
+      "emoji": "👨‍👦",
+      "sentence": "Dad, play with me!",
+      "sentenceVi": "Ba ơi, chơi với con!"
+    }
+  ]
+}

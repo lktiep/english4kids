@@ -1,0 +1,102 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.levelBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  min-width: 56px;
+}
+
+.levelIcon {
+  font-size: 24px;
+}
+
+.levelNum {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.barWrapper {
+  flex: 1;
+}
+
+.barTrack {
+  height: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.barFill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffb347, #fcc419);
+  border-radius: var(--radius-full);
+  transition: width 800ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  min-width: 4px;
+}
+
+.barFill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.barInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.levelName {
+  font-size: 12px;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.xpText {
+  font-size: 12px;
+  opacity: 0.8;
+  font-weight: 600;
+}
+
+.totalXP {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 14px;
+  white-space: nowrap;
+}

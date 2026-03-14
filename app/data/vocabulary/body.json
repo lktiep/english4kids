@@ -1,0 +1,102 @@
+{
+  "topic": "body",
+  "title": "Body Parts",
+  "titleVi": "Bộ phận cơ thể",
+  "icon": "🧍",
+  "color": "#FF8E72",
+  "gradient": "linear-gradient(135deg, #FF8E72 0%, #F59E0B 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "head",
+      "word": "Head",
+      "pronunciation": "/hed/",
+      "vietnamese": "Đầu",
+      "emoji": "🗣️",
+      "sentence": "Touch your head.",
+      "sentenceVi": "Sờ đầu nào."
+    },
+    {
+      "id": "eyes",
+      "word": "Eyes",
+      "pronunciation": "/aɪz/",
+      "vietnamese": "Mắt",
+      "emoji": "👀",
+      "sentence": "I have two eyes.",
+      "sentenceVi": "Tôi có hai mắt."
+    },
+    {
+      "id": "ears",
+      "word": "Ears",
+      "pronunciation": "/ɪrz/",
+      "vietnamese": "Tai",
+      "emoji": "👂",
+      "sentence": "I hear with my ears.",
+      "sentenceVi": "Tôi nghe bằng tai."
+    },
+    {
+      "id": "nose",
+      "word": "Nose",
+      "pronunciation": "/noʊz/",
+      "vietnamese": "Mũi",
+      "emoji": "👃",
+      "sentence": "Touch your nose.",
+      "sentenceVi": "Sờ mũi nào."
+    },
+    {
+      "id": "mouth",
+      "word": "Mouth",
+      "pronunciation": "/maʊθ/",
+      "vietnamese": "Miệng",
+      "emoji": "👄",
+      "sentence": "Open your mouth.",
+      "sentenceVi": "Há miệng ra."
+    },
+    {
+      "id": "hands",
+      "word": "Hands",
+      "pronunciation": "/hændz/",
+      "vietnamese": "Tay",
+      "emoji": "🤲",
+      "sentence": "Clap your hands!",
+      "sentenceVi": "Vỗ tay nào!"
+    },
+    {
+      "id": "feet",
+      "word": "Feet",
+      "pronunciation": "/fiːt/",
+      "vietnamese": "Bàn chân",
+      "emoji": "🦶",
+      "sentence": "I walk with my feet.",
+      "sentenceVi": "Tôi đi bằng chân."
+    },
+    {
+      "id": "fingers",
+      "word": "Fingers",
+      "pronunciation": "/ˈfɪŋɡərz/",
+      "vietnamese": "Ngón tay",
+      "emoji": "🖐️",
+      "sentence": "I have ten fingers.",
+      "sentenceVi": "Tôi có mười ngón tay."
+    },
+    {
+      "id": "hair",
+      "word": "Hair",
+      "pronunciation": "/her/",
+      "vietnamese": "Tóc",
+      "emoji": "💇",
+      "sentence": "My hair is black.",
+      "sentenceVi": "Tóc tôi màu đen."
+    },
+    {
+      "id": "teeth",
+      "word": "Teeth",
+      "pronunciation": "/tiːθ/",
+      "vietnamese": "Răng",
+      "emoji": "🦷",
+      "sentence": "Brush your teeth!",
+      "sentenceVi": "Đánh răng nào!"
+    }
+  ]
+}

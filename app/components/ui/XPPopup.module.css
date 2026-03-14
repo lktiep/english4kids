@@ -1,0 +1,45 @@
+.popup {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  background: var(--gradient-sunset);
+  color: white;
+  padding: 12px 24px;
+  border-radius: var(--radius-lg);
+  font-weight: 800;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  animation:
+    popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    fadeOut 0.4s ease 1.5s forwards;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.amount {
+  font-size: 20px;
+}
+
+.reason {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+@keyframes popIn {
+  from {
+    transform: translateX(100px) scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "topic": "animals",
+  "title": "Animals",
+  "titleVi": "Động vật",
+  "icon": "🐾",
+  "color": "#4ECDC4",
+  "gradient": "linear-gradient(135deg, #4ECDC4 0%, #44B5AD 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "cat",
+      "word": "Cat",
+      "pronunciation": "/kæt/",
+      "vietnamese": "Con mèo",
+      "emoji": "🐱",
+      "sentence": "I have a cat.",
+      "sentenceVi": "Tôi có một con mèo."
+    },
+    {
+      "id": "dog",
+      "word": "Dog",
+      "pronunciation": "/dɒɡ/",
+      "vietnamese": "Con chó",
+      "emoji": "🐶",
+      "sentence": "The dog is big.",
+      "sentenceVi": "Con chó to."
+    },
+    {
+      "id": "bird",
+      "word": "Bird",
+      "pronunciation": "/bɜːrd/",
+      "vietnamese": "Con chim",
+      "emoji": "🐦",
+      "sentence": "The bird can fly.",
+      "sentenceVi": "Con chim biết bay."
+    },
+    {
+      "id": "fish",
+      "word": "Fish",
+      "pronunciation": "/fɪʃ/",
+      "vietnamese": "Con cá",
+      "emoji": "🐟",
+      "sentence": "The fish is in water.",
+      "sentenceVi": "Con cá ở trong nước."
+    },
+    {
+      "id": "rabbit",
+      "word": "Rabbit",
+      "pronunciation": "/ˈræbɪt/",
+      "vietnamese": "Con thỏ",
+      "emoji": "🐰",
+      "sentence": "The rabbit is cute.",
+      "sentenceVi": "Con thỏ dễ thương."
+    },
+    {
+      "id": "elephant",
+      "word": "Elephant",
+      "pronunciation": "/ˈelɪfənt/",
+      "vietnamese": "Con voi",
+      "emoji": "🐘",
+      "sentence": "The elephant is very big.",
+      "sentenceVi": "Con voi rất to."
+    },
+    {
+      "id": "monkey",
+      "word": "Monkey",
+      "pronunciation": "/ˈmʌŋki/",
+      "vietnamese": "Con khỉ",
+      "emoji": "🐒",
+      "sentence": "The monkey likes bananas.",
+      "sentenceVi": "Con khỉ thích chuối."
+    },
+    {
+      "id": "tiger",
+      "word": "Tiger",
+      "pronunciation": "/ˈtaɪɡər/",
+      "vietnamese": "Con hổ",
+      "emoji": "🐯",
+      "sentence": "The tiger is strong.",
+      "sentenceVi": "Con hổ rất mạnh."
+    },
+    {
+      "id": "duck",
+      "word": "Duck",
+      "pronunciation": "/dʌk/",
+      "vietnamese": "Con vịt",
+      "emoji": "🦆",
+      "sentence": "The duck can swim.",
+      "sentenceVi": "Con vịt biết bơi."
+    },
+    {
+      "id": "pig",
+      "word": "Pig",
+      "pronunciation": "/pɪɡ/",
+      "vietnamese": "Con heo",
+      "emoji": "🐷",
+      "sentence": "The pig is pink.",
+      "sentenceVi": "Con heo màu hồng."
+    },
+    {
+      "id": "cow",
+      "word": "Cow",
+      "pronunciation": "/kaʊ/",
+      "vietnamese": "Con bò",
+      "emoji": "🐮",
+      "sentence": "The cow gives milk.",
+      "sentenceVi": "Con bò cho sữa."
+    },
+    {
+      "id": "chicken",
+      "word": "Chicken",
+      "pronunciation": "/ˈtʃɪkɪn/",
+      "vietnamese": "Con gà",
+      "emoji": "🐔",
+      "sentence": "The chicken has eggs.",
+      "sentenceVi": "Con gà có trứng."
+    }
+  ]
+}

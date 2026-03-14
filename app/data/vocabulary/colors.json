@@ -1,0 +1,102 @@
+{
+  "topic": "colors",
+  "title": "Colors",
+  "titleVi": "Màu sắc",
+  "icon": "🎨",
+  "color": "#F093FB",
+  "gradient": "linear-gradient(135deg, #F093FB 0%, #F5576C 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "red",
+      "word": "Red",
+      "pronunciation": "/red/",
+      "vietnamese": "Màu đỏ",
+      "emoji": "🔴",
+      "sentence": "The apple is red.",
+      "sentenceVi": "Quả táo màu đỏ."
+    },
+    {
+      "id": "blue",
+      "word": "Blue",
+      "pronunciation": "/bluː/",
+      "vietnamese": "Màu xanh dương",
+      "emoji": "🔵",
+      "sentence": "The sky is blue.",
+      "sentenceVi": "Bầu trời màu xanh."
+    },
+    {
+      "id": "green",
+      "word": "Green",
+      "pronunciation": "/ɡriːn/",
+      "vietnamese": "Màu xanh lá",
+      "emoji": "🟢",
+      "sentence": "The tree is green.",
+      "sentenceVi": "Cái cây màu xanh lá."
+    },
+    {
+      "id": "yellow",
+      "word": "Yellow",
+      "pronunciation": "/ˈjeloʊ/",
+      "vietnamese": "Màu vàng",
+      "emoji": "🟡",
+      "sentence": "The sun is yellow.",
+      "sentenceVi": "Mặt trời màu vàng."
+    },
+    {
+      "id": "orange",
+      "word": "Orange",
+      "pronunciation": "/ˈɔːrɪndʒ/",
+      "vietnamese": "Màu cam",
+      "emoji": "🟠",
+      "sentence": "The orange is orange.",
+      "sentenceVi": "Quả cam màu cam."
+    },
+    {
+      "id": "pink",
+      "word": "Pink",
+      "pronunciation": "/pɪŋk/",
+      "vietnamese": "Màu hồng",
+      "emoji": "🩷",
+      "sentence": "The flower is pink.",
+      "sentenceVi": "Bông hoa màu hồng."
+    },
+    {
+      "id": "purple",
+      "word": "Purple",
+      "pronunciation": "/ˈpɜːrpəl/",
+      "vietnamese": "Màu tím",
+      "emoji": "🟣",
+      "sentence": "The grape is purple.",
+      "sentenceVi": "Quả nho màu tím."
+    },
+    {
+      "id": "white",
+      "word": "White",
+      "pronunciation": "/waɪt/",
+      "vietnamese": "Màu trắng",
+      "emoji": "⚪",
+      "sentence": "The cloud is white.",
+      "sentenceVi": "Đám mây màu trắng."
+    },
+    {
+      "id": "black",
+      "word": "Black",
+      "pronunciation": "/blæk/",
+      "vietnamese": "Màu đen",
+      "emoji": "⚫",
+      "sentence": "The cat is black.",
+      "sentenceVi": "Con mèo màu đen."
+    },
+    {
+      "id": "brown",
+      "word": "Brown",
+      "pronunciation": "/braʊn/",
+      "vietnamese": "Màu nâu",
+      "emoji": "🟤",
+      "sentence": "The dog is brown.",
+      "sentenceVi": "Con chó màu nâu."
+    }
+  ]
+}

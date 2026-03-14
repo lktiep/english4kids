@@ -1,0 +1,111 @@
+{
+  "topic": "toys",
+  "title": "Toys & Activities",
+  "titleVi": "Đồ chơi & Hoạt động",
+  "icon": "🎮",
+  "color": "#A18CD1",
+  "gradient": "linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "ball",
+      "word": "Ball",
+      "pronunciation": "/bɔːl/",
+      "vietnamese": "Quả bóng",
+      "emoji": "⚽",
+      "sentence": "Kick the ball!",
+      "sentenceVi": "Đá bóng nào!"
+    },
+    {
+      "id": "doll",
+      "word": "Doll",
+      "pronunciation": "/dɑːl/",
+      "vietnamese": "Búp bê",
+      "emoji": "🪆",
+      "sentence": "The doll is pretty.",
+      "sentenceVi": "Búp bê đẹp."
+    },
+    {
+      "id": "bike",
+      "word": "Bike",
+      "pronunciation": "/baɪk/",
+      "vietnamese": "Xe đạp",
+      "emoji": "🚲",
+      "sentence": "I ride my bike.",
+      "sentenceVi": "Tôi đi xe đạp."
+    },
+    {
+      "id": "teddy_bear",
+      "word": "Teddy bear",
+      "pronunciation": "/ˈtedi ber/",
+      "vietnamese": "Gấu bông",
+      "emoji": "🧸",
+      "sentence": "I love my teddy bear.",
+      "sentenceVi": "Tôi yêu gấu bông."
+    },
+    {
+      "id": "run",
+      "word": "Run",
+      "pronunciation": "/rʌn/",
+      "vietnamese": "Chạy",
+      "emoji": "🏃",
+      "sentence": "I can run fast!",
+      "sentenceVi": "Tôi chạy nhanh!"
+    },
+    {
+      "id": "jump",
+      "word": "Jump",
+      "pronunciation": "/dʒʌmp/",
+      "vietnamese": "Nhảy",
+      "emoji": "🤸",
+      "sentence": "Jump high!",
+      "sentenceVi": "Nhảy cao nào!"
+    },
+    {
+      "id": "sing",
+      "word": "Sing",
+      "pronunciation": "/sɪŋ/",
+      "vietnamese": "Hát",
+      "emoji": "🎤",
+      "sentence": "I like to sing.",
+      "sentenceVi": "Tôi thích hát."
+    },
+    {
+      "id": "draw",
+      "word": "Draw",
+      "pronunciation": "/drɔː/",
+      "vietnamese": "Vẽ",
+      "emoji": "🎨",
+      "sentence": "I draw a flower.",
+      "sentenceVi": "Tôi vẽ bông hoa."
+    },
+    {
+      "id": "play",
+      "word": "Play",
+      "pronunciation": "/pleɪ/",
+      "vietnamese": "Chơi",
+      "emoji": "🎮",
+      "sentence": "Let's play together!",
+      "sentenceVi": "Cùng chơi nào!"
+    },
+    {
+      "id": "dance",
+      "word": "Dance",
+      "pronunciation": "/dæns/",
+      "vietnamese": "Nhảy múa",
+      "emoji": "💃",
+      "sentence": "I love to dance!",
+      "sentenceVi": "Tôi thích nhảy múa!"
+    },
+    {
+      "id": "swim",
+      "word": "Swim",
+      "pronunciation": "/swɪm/",
+      "vietnamese": "Bơi",
+      "emoji": "🏊",
+      "sentence": "I can swim.",
+      "sentenceVi": "Tôi biết bơi."
+    }
+  ]
+}

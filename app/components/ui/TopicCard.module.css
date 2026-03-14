@@ -1,0 +1,158 @@
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  animation: slideUp 0.5s ease both;
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardHeader::after {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+}
+
+.icon {
+  font-size: 40px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.headerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  opacity: 0.85;
+}
+
+.wordCount {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cardBody {
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.progressLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 600ms ease;
+  min-width: 0;
+}
+
+.progressText {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.accuracyRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.learnBtn,
+.quizBtn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.learnBtn {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.learnBtn:hover {
+  background: var(--primary-light);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.quizBtn {
+  background: var(--card-gradient, var(--gradient-ocean));
+  color: white;
+}
+
+.quizBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.learnBtn:active,
+.quizBtn:active {
+  transform: scale(0.96);
+}

@@ -1,0 +1,111 @@
+{
+  "topic": "food",
+  "title": "Food & Drinks",
+  "titleVi": "Đồ ăn & Thức uống",
+  "icon": "🍕",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "rice",
+      "word": "Rice",
+      "pronunciation": "/raɪs/",
+      "vietnamese": "Cơm",
+      "emoji": "🍚",
+      "sentence": "I eat rice.",
+      "sentenceVi": "Tôi ăn cơm."
+    },
+    {
+      "id": "bread",
+      "word": "Bread",
+      "pronunciation": "/bred/",
+      "vietnamese": "Bánh mì",
+      "emoji": "🍞",
+      "sentence": "I like bread.",
+      "sentenceVi": "Tôi thích bánh mì."
+    },
+    {
+      "id": "milk",
+      "word": "Milk",
+      "pronunciation": "/mɪlk/",
+      "vietnamese": "Sữa",
+      "emoji": "🥛",
+      "sentence": "Drink your milk.",
+      "sentenceVi": "Uống sữa nào."
+    },
+    {
+      "id": "juice",
+      "word": "Juice",
+      "pronunciation": "/dʒuːs/",
+      "vietnamese": "Nước ép",
+      "emoji": "🧃",
+      "sentence": "Orange juice is good.",
+      "sentenceVi": "Nước cam ngon."
+    },
+    {
+      "id": "apple",
+      "word": "Apple",
+      "pronunciation": "/ˈæpəl/",
+      "vietnamese": "Quả táo",
+      "emoji": "🍎",
+      "sentence": "The apple is red.",
+      "sentenceVi": "Quả táo màu đỏ."
+    },
+    {
+      "id": "banana",
+      "word": "Banana",
+      "pronunciation": "/bəˈnænə/",
+      "vietnamese": "Quả chuối",
+      "emoji": "🍌",
+      "sentence": "The banana is yellow.",
+      "sentenceVi": "Quả chuối màu vàng."
+    },
+    {
+      "id": "water",
+      "word": "Water",
+      "pronunciation": "/ˈwɔːtər/",
+      "vietnamese": "Nước",
+      "emoji": "💧",
+      "sentence": "I drink water.",
+      "sentenceVi": "Tôi uống nước."
+    },
+    {
+      "id": "cake",
+      "word": "Cake",
+      "pronunciation": "/keɪk/",
+      "vietnamese": "Bánh ngọt",
+      "emoji": "🎂",
+      "sentence": "I like cake!",
+      "sentenceVi": "Tôi thích bánh ngọt!"
+    },
+    {
+      "id": "egg",
+      "word": "Egg",
+      "pronunciation": "/eɡ/",
+      "vietnamese": "Trứng",
+      "emoji": "🥚",
+      "sentence": "I eat an egg.",
+      "sentenceVi": "Tôi ăn trứng."
+    },
+    {
+      "id": "candy",
+      "word": "Candy",
+      "pronunciation": "/ˈkændi/",
+      "vietnamese": "Kẹo",
+      "emoji": "🍬",
+      "sentence": "Candy is sweet.",
+      "sentenceVi": "Kẹo ngọt."
+    },
+    {
+      "id": "chicken_food",
+      "word": "Chicken",
+      "pronunciation": "/ˈtʃɪkɪn/",
+      "vietnamese": "Thịt gà",
+      "emoji": "🍗",
+      "sentence": "I eat chicken.",
+      "sentenceVi": "Tôi ăn thịt gà."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "grades": {
+    "grade1": {
+      "id": "grade1",
+      "name": "Lớp 1",
+      "nameEn": "Grade 1",
+      "ageRange": "6-7",
+      "icon": "📗",
+      "color": "#4ECDC4"
+    }
+  },
+  "topics": [
+    { "slug": "greetings", "grade": "grade1", "order": 1 },
+    { "slug": "numbers", "grade": "grade1", "order": 2 },
+    { "slug": "colors", "grade": "grade1", "order": 3 },
+    { "slug": "animals", "grade": "grade1", "order": 4 },
+    { "slug": "family", "grade": "grade1", "order": 5 },
+    { "slug": "school", "grade": "grade1", "order": 6 },
+    { "slug": "body", "grade": "grade1", "order": 7 },
+    { "slug": "food", "grade": "grade1", "order": 8 },
+    { "slug": "toys", "grade": "grade1", "order": 9 },
+    { "slug": "feelings", "grade": "grade1", "order": 10 }
+  ]
+}

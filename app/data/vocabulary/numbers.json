@@ -1,0 +1,129 @@
+{
+  "topic": "numbers",
+  "title": "Numbers",
+  "titleVi": "Số đếm",
+  "icon": "🔢",
+  "color": "#667EEA",
+  "gradient": "linear-gradient(135deg, #667EEA 0%, #764BA2 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "words": [
+    {
+      "id": "one",
+      "word": "One",
+      "pronunciation": "/wʌn/",
+      "vietnamese": "Một",
+      "emoji": "1️⃣",
+      "sentence": "I have one cat.",
+      "sentenceVi": "Tôi có một con mèo."
+    },
+    {
+      "id": "two",
+      "word": "Two",
+      "pronunciation": "/tuː/",
+      "vietnamese": "Hai",
+      "emoji": "2️⃣",
+      "sentence": "Two eyes.",
+      "sentenceVi": "Hai con mắt."
+    },
+    {
+      "id": "three",
+      "word": "Three",
+      "pronunciation": "/θriː/",
+      "vietnamese": "Ba",
+      "emoji": "3️⃣",
+      "sentence": "Three books.",
+      "sentenceVi": "Ba quyển sách."
+    },
+    {
+      "id": "four",
+      "word": "Four",
+      "pronunciation": "/fɔːr/",
+      "vietnamese": "Bốn",
+      "emoji": "4️⃣",
+      "sentence": "Four chairs.",
+      "sentenceVi": "Bốn cái ghế."
+    },
+    {
+      "id": "five",
+      "word": "Five",
+      "pronunciation": "/faɪv/",
+      "vietnamese": "Năm",
+      "emoji": "5️⃣",
+      "sentence": "Five fingers.",
+      "sentenceVi": "Năm ngón tay."
+    },
+    {
+      "id": "six",
+      "word": "Six",
+      "pronunciation": "/sɪks/",
+      "vietnamese": "Sáu",
+      "emoji": "6️⃣",
+      "sentence": "Six apples.",
+      "sentenceVi": "Sáu quả táo."
+    },
+    {
+      "id": "seven",
+      "word": "Seven",
+      "pronunciation": "/ˈsevən/",
+      "vietnamese": "Bảy",
+      "emoji": "7️⃣",
+      "sentence": "Seven days.",
+      "sentenceVi": "Bảy ngày."
+    },
+    {
+      "id": "eight",
+      "word": "Eight",
+      "pronunciation": "/eɪt/",
+      "vietnamese": "Tám",
+      "emoji": "8️⃣",
+      "sentence": "Eight stars.",
+      "sentenceVi": "Tám ngôi sao."
+    },
+    {
+      "id": "nine",
+      "word": "Nine",
+      "pronunciation": "/naɪn/",
+      "vietnamese": "Chín",
+      "emoji": "9️⃣",
+      "sentence": "Nine fish.",
+      "sentenceVi": "Chín con cá."
+    },
+    {
+      "id": "ten",
+      "word": "Ten",
+      "pronunciation": "/ten/",
+      "vietnamese": "Mười",
+      "emoji": "🔟",
+      "sentence": "Ten toes.",
+      "sentenceVi": "Mười ngón chân."
+    },
+    {
+      "id": "eleven",
+      "word": "Eleven",
+      "pronunciation": "/ɪˈlevən/",
+      "vietnamese": "Mười một",
+      "emoji": "1️⃣1️⃣",
+      "sentence": "Eleven birds.",
+      "sentenceVi": "Mười một con chim."
+    },
+    {
+      "id": "twelve",
+      "word": "Twelve",
+      "pronunciation": "/twelv/",
+      "vietnamese": "Mười hai",
+      "emoji": "1️⃣2️⃣",
+      "sentence": "Twelve months.",
+      "sentenceVi": "Mười hai tháng."
+    },
+    {
+      "id": "how_many",
+      "word": "How many?",
+      "pronunciation": "/haʊ ˈmeni/",
+      "vietnamese": "Bao nhiêu?",
+      "emoji": "❓",
+      "sentence": "How many dogs?",
+      "sentenceVi": "Bao nhiêu con chó?"
+    }
+  ]
+}
