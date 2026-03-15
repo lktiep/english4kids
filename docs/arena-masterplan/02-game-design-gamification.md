@@ -1,606 +1,378 @@
-# 02 — Game Design & Gamification Masterplan
+# 02 — Game Design & Gamification (Non‑Realtime First)
 
-## 0) Design North Star
+## 0) Product Goal (v1)
 
-Build a **high-retention competitive learning arena** where kids repeatedly return because matches feel:
-- **Kịch tính** (tense, dramatic, meaningful)
-- **Cay cú** (motivating “I want a rematch” energy)
-- **Safe and constructive** (no humiliation, no toxic pressure)
+Build a **non-realtime competitive arena** for kids that creates:
+- **Short sessions** (2–6 minutes)
+- **Emotional competition** ("I almost won, rematch now!")
+- **Safe motivation** (no shame, no toxic pressure)
+- **Simple implementation** (low ops complexity, no live-sync dependency)
 
-Core product promise:
-> “Every session is a short, exciting duel that improves English ability, rewards effort + growth, and makes players want one more game.”
-
----
-
-## 1) Product Pillars (Non-Negotiables)
-
-1. **Skill First, Spectacle Second**
-   - Competition exists to improve learning outcomes, not distract from them.
-   - Accuracy + reasoning quality always outweigh pure speed spam.
-
-2. **Short Sessions, Fast Emotion Curve**
-   - 3–8 minute core sessions for kids’ attention span and routine habit loops.
-   - Every match has clear opening, tension, climax, closure.
-
-3. **Fairness = Retention**
-   - Matchmaking quality, anti-smurfing, anti-grind exploitation are foundational.
-   - Players should feel “I lost because I can improve,” not “the system is rigged.”
-
-4. **Protective Competition**
-   - No direct harassment channels.
-   - Positive social mechanics by default; emotional safety guardrails always on.
-
-5. **Measurable Gamification**
-   - Every mechanic maps to measurable KPIs and experiment hooks.
+Core promise:
+> “In a few minutes, I can challenge a friend, feel the thrill, learn English, and want one more round.”
 
 ---
 
-## 2) Core Player Segments
+## 1) v1 Design Principles (Hard Rules)
 
-- **Challengers**: motivated by rank, rivalry, status.
-- **Collectors**: motivated by progression, cosmetics, completion.
-- **Social Learners**: motivated by friends/class/team identity.
-- **Routine Builders**: motivated by streaks, daily goals, consistency.
+1. **Async by default**
+   - No live websocket battle required for core loop.
+   - Every mode must work with delayed turns/results.
 
-Design objective: each session should satisfy at least 2 segment motives simultaneously.
+2. **Session length guardrail**
+   - One full play unit must finish in 2–6 minutes.
+   - If a mode risks >6 minutes, split into checkpoints.
 
----
+3. **Rematch in 1 tap**
+   - Post-result screen always has one dominant CTA: **Rematch**.
+   - Rematch setup must reuse same rules/content band when possible.
 
-## 3) Core Game Loops
+4. **Learning + emotion together**
+   - Speed matters, but correctness and improvement matter more.
+   - Every loss screen shows one positive metric + one next-step tip.
 
-## 3.1 Moment-to-Moment Loop (30–90s cycles inside a match)
-1. Receive question (adaptive difficulty target band)
-2. Decide quickly (confidence + speed pressure)
-3. Get immediate feedback (correctness, explanation bite, points impact)
-4. See relative state (lead/trail delta, momentum cue)
-5. Re-engage next question
-
-**KPI hooks**
-- Question answer rate
-- Time-to-answer median
-- Hint usage rate
-- Accuracy by difficulty band
-- Rage-quit incidence mid-round
-
-## 3.2 Session Loop (3–8 min)
-1. Queue / join lobby
-2. Play match
-3. Resolve rewards (MMR, XP, quest progress, currency)
-4. Post-match reflection (1 learning insight + rematch CTA)
-5. Requeue / claim / social share
-
-**KPI hooks**
-- Sessions per DAU
-- Requeue rate within 60s
-- Match completion rate
-- Post-match “one more game” conversion
-
-## 3.3 Daily Loop
-1. Login + streak check
-2. Daily mission stack
-3. Core competitive play (2–6 matches)
-4. Claim chest / pass progress
-5. Optional social/team contribution
-
-**KPI hooks**
-- D1/D7/D30 retention
-- Daily mission completion rate
-- Streak save purchase/usage rate
-
-## 3.4 Seasonal Loop (4–8 weeks)
-1. Placement / recalibration
-2. Rank climb + event ladders
-3. Tournament windows
-4. Seasonal rewards + prestige reset
-5. Narrative kickoff for next season
-
-**KPI hooks**
-- Season participation rate
-- Mid-season churn
-- End-of-season return spike
-- % active players completing at least 1 ranked tier climb
+5. **Kid-safe frustration control**
+   - No humiliating text, no public shaming, no hard punishments.
+   - Comeback and retry opportunities are built-in.
 
 ---
 
-## 4) Session Design Blueprint (Excitement Without Harm)
+## 2) v1 Mode Portfolio (Only 3 Modes)
 
-## 4.1 Match Arc Template
-- **Opening (10–20s):** matchup intro, mode objective, confidence warm-up
-- **Build (60–180s):** alternating pressure + comeback opportunities
-- **Climax (last 20–40s):** amplified stakes (final-round multiplier or objective lock)
-- **Closure (20–30s):** result + growth feedback + rematch option
+We intentionally ship only these:
+1. **Async Duels** (friend or matched rival)
+2. **Survival Run** (solo score run with async leaderboard slices)
+3. **Room Challenge** (private code room, asynchronous participation)
 
-## 4.2 Emotional Safety Rules
-- Never show humiliating text (e.g., “you are bad”).
-- Loss screen always includes:
-  - one concrete improvement tip
-  - one positive metric (“Accuracy improved +8% vs last week”).
-- Rematch prompts capped to avoid compulsive loops for minors.
-- Session break nudges after prolonged play (“Great effort—time for a short break”).
-
-**KPI hooks**
-- Loss-to-next-match recovery rate
-- Negative sentiment signal rate
-- Average consecutive matches before fatigue exit
+No live PvP, no team battle, no tournaments in v1.
 
 ---
 
-## 5) Game Modes Portfolio
+## 3) Core Scoring System (Shared Across Modes)
 
-## 5.1 1v1 Live Duel (Primary Skill Mode)
-**Structure**
-- 8–12 questions, synchronized rounds.
-- Scoring: correctness base + speed bonus (capped) + streak multiplier.
+For each question:
+- Correct answer: **+100 base points**
+- Speed bonus: **+0 to +40** (linear by response time window)
+- Streak bonus: **+10 × streak**, cap at +50
+- Hint used: **-20** (but never negative total per question)
+- Wrong answer: **0** (no negative points in v1)
 
-**Design intent**
-- Highest clarity of skill expression.
-- Strongest source of “cay cú” rematch tension.
+Round summary metrics:
+- Total Score
+- Accuracy %
+- Avg response time
+- Strongest skill tag (e.g., Vocabulary)
 
-**KPIs**
-- Queue time p50/p95
-- Win-rate fairness by MMR delta
-- Rematch acceptance rate
-- Skill gain velocity after 10 matches
-
-## 5.2 Team Battle (2v2 / 3v3)
-**Structure**
-- Individual answer phases + team objective rounds.
-- Shared team meter rewards consistency over one carry player.
-
-**Design intent**
-- Social stickiness, classroom/friend engagement.
-
-**KPIs**
-- Team mode weekly participation
-- Invite-to-match conversion
-- Team churn vs solo churn differential
-
-## 5.3 Async Challenge (Ghost / Time-shifted)
-**Structure**
-- Play against friend’s recorded performance profile.
-- Turn windows (e.g., 24h) with gentle reminders.
-
-**Design intent**
-- Works across schedule mismatch, reduces queue dependency.
-
-**KPIs**
-- Challenge send/accept ratio
-- Completion within window
-- Async users converting to live matches
-
-## 5.4 Tournaments (Bracket + Swiss Light)
-**Structure**
-- Age/skill-gated weekend windows.
-- Short brackets for completion confidence.
-- Consolation path so one loss ≠ event over.
-
-**Design intent**
-- Peak excitement moments + prestige rewards.
-
-**KPIs**
-- Registration to participation rate
-- Tournament completion rate
-- Return rate next tournament cycle
-
-## 5.5 Classroom Leagues
-**Structure**
-- Teacher-created or system-generated leagues.
-- Team points combine participation + learning improvement.
-- Weekly “fair play” awards, not just top score.
-
-**Design intent**
-- Institutional retention, social accountability, educational alignment.
-
-**KPIs**
-- Class activation rate
-- Weekly class participation breadth (% students active)
-- Teacher NPS / satisfaction
+Why this works for kids:
+- Wrong answers are not punished harshly.
+- Fast and correct still feels exciting.
+- Streak creates emotional tension without severe penalty.
 
 ---
 
-## 6) Matchmaking, MMR, and League Systems
+## 4) Mode 1 — Async Duels
 
-## 6.1 Rating Model
-Use hidden rating tuple per player:
-- **Mu (skill estimate)**
-- **Sigma (uncertainty/confidence)**
-- **Behavior score modifier (sportsmanship/reliability)**
-- **Domain skill vectors** (vocab, grammar, reading speed, listening)
+## 4.1 Match Format
+- 1 duel = **8 questions** from same difficulty band.
+- Player A plays first; Player B receives same question set (order shuffled minimally only if anti-cheat needed).
+- Turn window: **24 hours** default.
+- Result finalizes when both complete, or when timer expires.
 
-Suggested base: Glicko/TrueSkill-inspired update with per-question signal weighting.
+## 4.2 Matchmaking (Simple v1)
+- Inputs: grade band + hidden skill rating bucket.
+- Target expected win chance band: **40–60%**.
+- If no match in threshold, widen bucket gradually every 30s of queue simulation.
+- Avoid same-opponent repetition >2 times/day unless both tap rematch.
 
-## 6.2 Matchmaking Rules
-- Primary constraint: expected win probability band (40–60% ideal).
-- Secondary constraints: latency, queue time ceiling, age safety band.
-- Dynamic expansion after threshold wait to protect queue health.
-- Avoid repeat-opponent loops unless explicit rematch accepted.
+## 4.3 Rematch Loop
+Post-result options:
+1. **Rematch Same Rules** (1 tap, best converting)
+2. **Revenge with Easier Pack** (if lost by >20%)
+3. **New Rival**
 
-## 6.3 League Structure (Visible Status Layer)
-- Leagues: Bronze → Silver → Gold → Platinum → Diamond → Master.
-- Sub-divisions with stars/points.
-- Promotion series lightweight; demotion protection buffer for kids.
+Rematch message to opponent is preset-safe only:
+- “GG! Rematch?”
+- “So close—again?”
 
-## 6.4 Placement & Recalibration
-- New players: 5–10 placement matches with high sigma decay.
-- Seasonal soft reset (not hard reset) to preserve identity.
+## 4.4 UX Flow
+1. Home → Tap **Async Duel**
+2. Choose Friend or Auto Match
+3. Play 8-question run (2–4 min)
+4. End screen: “Waiting for opponent” + optional share card
+5. Final result card when opponent finishes
+6. One-tap rematch CTA
 
-**MMR/League KPIs**
-- Match quality index (predicted vs actual closeness)
-- Smurf detection precision/recall
-- Rating inflation stability
-- Queue abandonment rate due to long waits
-- Per-league retention
+## 4.5 Anti-Frustration Rules
+- If opponent times out: active player gets **Win by Completion** reward (reduced glory, full learning credit).
+- If child loses 3 duels in a row:
+  - show softer rival suggestions,
+  - offer “Confidence Pack” (slightly easier content),
+  - suppress aggressive rivalry copy.
+- No rank-point loss in first 5 duels (onboarding protection).
 
----
-
-## 7) Progression Systems
-
-## 7.1 Meta Progression
-- Player level (XP)
-- Mastery tracks per English domain
-- Badge milestones (accuracy, consistency, comeback, teamwork)
-
-## 7.2 Seasonal Progression
-- Battle pass style track (free + premium optional)
-- Non-pay-to-win rewards only (cosmetics, profile flair, emotes, themes)
-
-## 7.3 Prestige & Legacy
-- Seasonal legacy cards (highest rank, signature achievement)
-- Archive history for identity continuity
-
-**Progression KPIs**
-- XP earned per session
-- Level-up frequency health band
-- Pass completion distribution
-- Reward claim rate
+## 4.6 KPI Targets (90-day targets)
+- Duel completion rate: **≥75%**
+- Opponent timeout rate: **≤20%**
+- Rematch rate after completed duel: **≥35%**
+- Post-loss next-match rate (within 10 min): **≥45%**
 
 ---
 
-## 8) Quests, Streaks, and Habit Mechanics
+## 5) Mode 2 — Survival Run
 
-## 8.1 Quest Stack
-- **Daily quests:** quick, mode-diverse, achievable in 10–20 min.
-- **Weekly quests:** encourage breadth (solo + team + async).
-- **Skill quests:** target weak domains with adaptive tasks.
+## 5.1 Format
+- Solo endless-style run with **3 hearts**.
+- Wrong answer costs 1 heart.
+- Correct streaks every 5 grant **+1 shield charge** (auto-block one heart loss), cap 2.
+- Session hard stop at **5 minutes** in v1 (even if hearts remain).
 
-## 8.2 Streak Design
-- Streak counted on meaningful activity (completed match or lesson objective).
-- Grace mechanics:
-  - 1 free weekly miss buffer
-  - earnable streak shields
-- Avoid harsh streak loss trauma for children.
+## 5.2 Difficulty Curve
+- Start in player comfort band.
+- Every 3 correct answers: slight difficulty increase.
+- After wrong answer: temporary ease-down for next 2 questions.
 
-## 8.3 FOMO Boundaries
-- No predatory expiry pressure timers for minors.
-- Missed rewards can partially roll into “recovery missions.”
+## 5.3 Emotional Competition Layer
+- Compare score against:
+  - Personal Best
+  - Friend Ghost (async snapshot)
+  - Daily Mini Leaderboard (small cohort, e.g., 20 players similar level)
+- Result labels focus on progress:
+  - “New personal best!”
+  - “You passed Minh by 120 points!”
 
-**Quest/Streak KPIs**
-- Daily quest completion rate
-- Streak length median / p90
-- Streak break recovery rate
-- Burnout indicators after long streaks
+## 5.4 UX Flow
+1. Home → Tap **Survival Run**
+2. Instant start (no queue)
+3. Live progress UI: hearts, streak, score, “next target”
+4. Run ends by hearts=0 or 5-min cap
+5. Result: PB delta + beat/close gap + retry button
 
----
+## 5.5 Anti-Frustration Rules
+- First mistake in first 30 seconds triggers one-time “Warm-up Mercy” (no heart loss).
+- Near-miss feedback: “You were 2 questions from beating your best.”
+- Retry always starts within 1 tap, no extra dialogs.
 
-## 9) Social Mechanics (Healthy Rivalry)
-
-## 9.1 Positive Social Layer
-- Friend list + safe preset interactions (GG, Nice comeback, Let’s rematch).
-- Clubs/teams with shared goals.
-- “Study buddy” bonuses for co-play consistency.
-
-## 9.2 Rivalry System
-- Opt-in rivals (max capped count).
-- Rival boards emphasize recent head-to-head and improvement, not insults.
-
-## 9.3 Spectator/Share Moments
-- Auto-highlight clips/cards: clutch win, perfect round, comeback.
-- Shareable in closed classroom/community channels.
-
-**Social KPIs**
-- Friend invite acceptance
-- Social session ratio
-- Rival rematch frequency
-- Toxic interaction report rate
+## 5.6 KPI Targets
+- Survival starts per DAU: **≥1.8**
+- 5-minute completion (or natural end) rate: **≥85%**
+- Immediate retry rate: **≥30%**
+- PB improvement rate weekly active users: **≥40%**
 
 ---
 
-## 10) Toxicity Controls & Child Safety
+## 6) Mode 3 — Room Challenge (Async Private Group)
 
-## 10.1 Communication Controls
-- No free-text chat by default for minors.
-- Safe phrase wheel + moderated sticker/emote set.
-- Contextual chat gating for age/compliance zones.
+## 6.1 Format
+- A user creates a room with code (e.g., 6 chars).
+- Host sets:
+  - Question count: 8 or 12
+  - Topic focus (vocab/grammar/mixed)
+  - Deadline: 2h / 24h / 48h
+- Participants join and play asynchronously.
+- Final standings revealed at deadline or when all finish.
 
-## 10.2 Behavior Moderation
-- Auto-detect grief patterns: stalling, intentional throw, quit abuse.
-- Behavior score impacts matchmaking priority and rewards multipliers.
-- Escalation ladder: warning → temporary restrictions → supervised queue.
+## 6.2 Why This Mode Matters
+- High social virality without realtime coordination.
+- Works for classmates/friends/family in different schedules.
+- Simple backend: one challenge config + many submissions.
 
-## 10.3 Emotional Safety UX
-- Ban public shaming leaderboards at micro-cohort scale.
-- Use “personal best” framing and fair-play honors.
-- Cooldown suggestions after repeated losses.
+## 6.3 UX Flow
+1. Home → **Room Challenge**
+2. Create Room or Join by Code
+3. Share code/link (Telegram/Zalo/Copy)
+4. Participants complete run
+5. Final board + celebration badges + “Run It Back”
 
-**Safety KPIs**
-- Reports per 1,000 matches
-- Verified toxicity incidence
-- Repeat offender rate
-- Parent/teacher trust score
+## 6.4 Ranking Rules (Simple)
+- Primary: total score
+- Tiebreak 1: higher accuracy
+- Tiebreak 2: faster avg time
 
----
+## 6.5 Anti-Frustration + Safety
+- Default room visibility: private only.
+- No text chat in room in v1 (preset reactions only).
+- Show “Most Improved” badge, not only winner badge.
+- For younger users, hide exact bottom rank; show “Keep going” tier grouping.
 
-## 11) Balancing Framework
-
-## 11.1 Balance Axes
-- Accuracy vs speed weighting
-- Comeback potential vs deserved lead protection
-- Difficulty variance vs fairness
-- Reward intensity vs economy inflation
-
-## 11.2 Patch Cadence
-- Weekly micro-tuning (scoring weights, item values, pool distribution)
-- Seasonal macro-balance (mode rules, rank thresholds)
-
-## 11.3 Experimentation
-- A/B test framework per mechanic with guardrail metrics:
-  - learning outcome
-  - retention
-  - toxicity
-  - monetization neutrality for fairness
-
-**Balancing KPIs**
-- Mode pick-rate parity
-- Win-rate skew by archetype/segment
-- Comeback win % (target band)
-- Volatility of match outcomes
+## 6.6 KPI Targets
+- Room creation rate (DAU): **≥8%**
+- Avg participants per room: **≥3.0**
+- Room completion rate: **≥65%**
+- % rooms generating at least one rematch room: **≥25%**
 
 ---
 
-## 12) Question Content Pipeline (Quality + Velocity)
+## 7) Viral Mechanics (Built for Kids + Parents + Friends)
 
-## 12.1 Content Sources
-- Curriculum-aligned base banks
-- Teacher-authored submissions
-- AI-assisted draft generation (human-reviewed)
+## 7.1 Shareable Moments (Auto-generated cards)
+Generate after each mode:
+- “Narrow win by 50 points”
+- “New personal best”
+- “Beat your rival 3-2 this week”
 
-## 12.2 Lifecycle Stages
-1. Draft
-2. Pedagogical review
-3. Bias/cultural safety review
-4. Difficulty calibration pilot
-5. Live deployment (limited)
-6. Performance monitoring
-7. Refresh/retire
+Card structure:
+- friendly avatar + score headline + CTA: “Can you beat me?”
+- deep-link to duel/room
 
-## 12.3 Metadata Schema (Mandatory)
-- Skill domain
-- CEFR/grade alignment
-- Difficulty estimate + confidence
-- Language context tags
-- Typical error patterns
-- Content safety flags
+## 7.2 Invite Loops
+- Duel result → “Invite for rematch”
+- Survival PB → “Challenge 3 friends”
+- Room finished → “Run same room again”
 
-## 12.4 Live Quality Monitoring
-- Item discrimination index
-- Time-to-answer distribution
-- Guessability signals
-- Miskey report rate
+## 7.3 Safety Constraints for Virality
+- No public global ranking in v1.
+- No language that shames lower performers.
+- Parent/teacher share mode available (progress-focused template).
 
-**Content KPIs**
-- % catalog with full metadata coverage
-- Question defect escape rate
-- Calibration drift over time
-- Authoring throughput per week
+KPI Targets:
+- Share click-through rate: **≥12%**
+- Invite-to-start conversion: **≥20%**
+- K-factor from challenge flows: **0.15–0.25** early target
 
 ---
 
-## 13) Adaptive Difficulty Engine
+## 8) Retention & Habit Loops
 
-## 13.1 Real-Time Targeting
-For each player/session, maintain target success band (e.g., 60–75%).
-- If too easy: escalate complexity type, not only speed.
-- If too hard: scaffold with hints/near-level backoff.
+## 8.1 Daily Structure (10–15 mins typical)
+- 1 Async Duel
+- 1 Survival Run
+- 1 Room/Invite action (optional)
 
-## 13.2 Multi-Dimensional Adaptation
-Adapt by:
-- linguistic difficulty
-- distractor quality
-- time pressure
-- concept novelty
+## 8.2 Daily Missions (simple and short)
+Examples:
+- Complete 1 duel
+- Reach streak 5 in survival
+- Join or create 1 room
 
-## 13.3 Competitive Fairness Constraint
-In direct PvP, adaptation must preserve fairness:
-- symmetric expected challenge
-- transparent scoring normalization if difficulty differs
+## 8.3 Streak Policy (Kid-safe)
+- Streak counts on any meaningful completion.
+- 1 weekly grace day auto-applied.
+- No dramatic reset animation on streak break.
 
-**Adaptive KPIs**
-- Target-band adherence rate
-- Frustration proxy (rapid errors + exits)
-- Learning gain delta vs non-adaptive baseline
-
----
-
-## 14) Anti-Grind & Anti-Abuse Controls
-
-## 14.1 Abuse Patterns to Prevent
-- Win-trading
-- Smurf boosting
-- Bot/automation answering
-- Intentional low-performance farming easier lobbies
-- Reward farming via collusive rematches
-
-## 14.2 Control Mechanisms
-- Diminishing rewards on repetitive opponent loops
-- Suspicious pattern detection (timing entropy, answer signature anomalies)
-- Ranked eligibility gates (minimum verified activity quality)
-- Reward caps with skill-based unlock paths (not pure volume)
-
-## 14.3 Child-Friendly Enforcement
-- First response is educational warning and explainability.
-- Avoid overly punitive systems that create fear.
-
-**Anti-abuse KPIs**
-- Fraud/abuse detection precision
-- False positive rate
-- Economy leakage from abuse
-- Post-warning behavior correction rate
+KPI Targets:
+- D1: **≥45%**
+- D7: **≥20%**
+- D30: **≥8%**
+- Avg sessions/DAU: **≥2.5**
 
 ---
 
-## 15) Economy Touchpoints (Non-P2W, Learning-Aligned)
+## 9) UX Standards (Exact Screen Requirements)
 
-## 15.1 Currencies
-- **Soft currency:** earned via play/quests; spend on cosmetics, profile customizations.
-- **Event tokens:** seasonal, mode-specific rewards.
-- **Premium currency (optional):** cosmetic acceleration only.
+## 9.1 Home Screen
+Must show only 3 primary buttons:
+- Async Duel
+- Survival Run
+- Room Challenge
 
-## 15.2 Sinks
-- Cosmetic shop (avatars, trails, arena themes)
-- Limited-time thematic collections
-- Clan/classroom banner upgrades
+Plus:
+- mission progress strip
+- streak indicator
+- inbox for results
 
-## 15.3 Faucets
-- Match completion
-- Quest milestones
-- Seasonal placements
-- Fair-play bonuses
+## 9.2 In-Game HUD
+Must always show:
+- score
+- question index/progress
+- timer cue (soft, non-threatening)
+- hint button (if allowed)
 
-## 15.4 Guardrails
-- No purchasable power affecting ranked outcomes.
-- Transparent odds for any random reward.
-- Spend controls and parental governance options.
-
-**Economy KPIs**
-- Currency inflation/deflation index
-- Sink participation rate
-- Cosmetic attach rate
-- ARPDAU (if monetized) with fairness guardrail checks
-
----
-
-## 16) UX Principles for “Kịch Tính / Cay Cú” (Without Harm)
-
-1. **Readable stakes**
-   - Always show what matters now: score gap, remaining rounds, comeback paths.
-
-2. **Controlled intensity**
-   - Audio/visual tension ramps near climax, but never overwhelming for children.
-
-3. **Near-miss motivation, not shame**
-   - Highlight “you were close” with specific next-step guidance.
-
-4. **Fast recovery loops**
-   - Instant queue + optional low-stress mode after tough loss.
-
-5. **Celebrate improvement moments**
-   - Personal best overlays, mastery breakthroughs, consistency wins.
-
-6. **Clarity beats complexity**
-   - One primary CTA on result screen: rematch / continue progression.
-
-**UX KPIs**
-- Post-loss next action rate
-- Time-to-requeue
-- UI confusion signals (misclick, backtrack, abandonment)
-- Subjective excitement vs stress score (survey pulse)
+## 9.3 Result Screen
+Order of elements:
+1. Emotional headline (positive/neutral)
+2. Score + accuracy + one growth insight
+3. Rival/friend comparison
+4. **Primary CTA: Rematch / Retry**
+5. Secondary CTA: Share
 
 ---
 
-## 17) KPI Framework by Lifecycle Layer
+## 10) Anti-Frustration Framework for Children
 
-## 17.1 Acquisition-to-Activation
-- Tutorial completion rate
-- First ranked/first duel start rate
-- First-day match completion
+1. **No hard negative scoring** in v1.
+2. **Beginner protection** for first 5 competitive matches.
+3. **Adaptive easing** after repeated mistakes.
+4. **Positive language templates only**.
+5. **Session break nudges** after 4 consecutive matches.
+6. **Comeback framing** (“You improved speed by 12%”).
 
-## 17.2 Engagement
-- DAU/WAU
-- Sessions per DAU
-- Avg matches per session
-- Mode diversity index
+Monitor risk signals:
+- rapid exits after loss
+- repeated 0-heart early failures
+- long inactivity after defeat
 
-## 17.3 Retention
-- D1, D7, D14, D30
-- Comeback rate after 3-loss streak
-- Streak continuity (healthy band)
-
-## 17.4 Learning Outcomes
-- Accuracy improvement per domain
-- Error type reduction over time
-- Transfer performance on new question sets
-
-## 17.5 Social Health & Safety
-- Toxicity report rate
-- Fair-play commendation rate
-- Parent/teacher trust and satisfaction
-
-## 17.6 Economy Health
-- Faucet/sink balance
-- Cosmetic conversion
-- Non-P2W compliance incidents (target: 0)
+If risk detected: auto-offer easier pack + low-pressure mode suggestion.
 
 ---
 
-## 18) Implementation Roadmap (Suggested)
+## 11) Telemetry & KPI Dashboard (v1 Minimum)
 
-## Phase 1 — Competitive Core (6–8 weeks)
-- 1v1 live duel
-- Baseline MMR + matchmaking
-- Daily quests + simple streaks
-- Basic toxicity controls
+Track events:
+- mode_start, mode_complete
+- question_answered (correct/time/hint)
+- result_viewed
+- rematch_tap
+- share_tap, invite_sent, invite_accepted
+- timeout_win/loss
 
-Success gate:
-- Match completion > 85%
-- Requeue rate > 35%
-- Report rate below safety threshold
-
-## Phase 2 — Social Retention Layer (6–10 weeks)
-- Team battles
-- Async challenges
-- Clubs/friends + preset interactions
-- Expanded progression and pass
-
-Success gate:
-- Social session share > 25%
-- D7 retention uplift vs Phase 1 cohort
-
-## Phase 3 — Prestige & Institutional Scale (8–12 weeks)
-- Tournaments
-- Classroom leagues + teacher tooling
-- Anti-abuse advanced detection
-- Seasonal prestige systems
-
-Success gate:
-- Tournament repeat participation > 40%
-- Classroom weekly active breadth target met
+Core dashboard sections:
+1. Engagement: sessions/DAU, mode mix
+2. Competition health: close-match rate, rematch loops
+3. Learning: accuracy trend by skill tag
+4. Frustration: post-loss exits, failure streaks
+5. Virality: invite funnel conversion
 
 ---
 
-## 19) Governance & Operating Rhythm
+## 12) v1 Scope Control — Explicitly Avoid
 
-- Weekly: balance + safety + economy review
-- Bi-weekly: content quality council
-- Monthly: retention deep-dive and segmentation
-- Seasonal: full reset/reward/postmortem cycle
+Do **NOT** build these in v1:
+1. Realtime synchronous PvP (live lockstep gameplay)
+2. Team modes (2v2/3v3)
+3. Large global leaderboards
+4. Open text chat / voice chat
+5. Complex economy (multiple currencies, gacha-like systems)
+6. Tournament brackets with live rounds
+7. Heavy cosmetic inventory systems
+8. Advanced anti-cheat ML stack (start with rule-based checks)
 
-Dashboards must be segmented by:
-- Age band
-- Skill tier
-- Mode
-- Region/language
-- New vs returning cohorts
+Reason: these add ops/load/moderation complexity and slow learning loop validation.
 
 ---
 
-## 20) Final Design Doctrine
+## 13) Simple Implementation Plan (8–10 weeks)
 
-A great competitive learning arena for kids is not “maximum pressure.”
-It is **maximum meaningful excitement with psychological safety**.
+## Phase A (Weeks 1–3): Foundations
+- shared scoring service
+- question pack service
+- async match object + result inbox
+- basic telemetry
 
-If players feel:
-- “I can improve,”
-- “I want one more match,”
-- “I feel proud, not scared,”
+## Phase B (Weeks 4–6): Three Modes Playable
+- Async Duel complete loop
+- Survival Run complete loop
+- Room Challenge with code + deadline
 
-…then retention, learning, and long-term trust will compound together.
+## Phase C (Weeks 7–10): Polish + Growth Hooks
+- rematch optimization
+- share cards + deep links
+- anti-frustration interventions
+- KPI tuning experiments
+
+Launch gate:
+- Match/Run completion **≥80%** overall
+- Rematch or retry action rate **≥30%**
+- Post-loss abandonment reduced week-over-week
+
+---
+
+## 14) Final Doctrine
+
+For this product stage, winning means:
+- kids can play quickly,
+- feel competitive emotion safely,
+- re-enter instantly for “one more game,”
+- and invite friends naturally.
+
+**Keep v1 small, fast, and sticky.**
+Complexity can come later; habit and emotional loop must come first.

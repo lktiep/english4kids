@@ -1,534 +1,451 @@
-# 04) Growth & Marketing Masterplan (Product-Coupled)
+# 04) Growth & Marketing Masterplan — Async Turn-Based v1
 
-## 0. North Star
+## 0) Scope Lock (Must Match Built Product)
 
-Build the **#1 kids English speaking arena game** by making growth mechanics part of gameplay, not an external ad layer.
+This growth plan is constrained to **async turn-based v1** and only uses in-app features already defined in the current masterplan docs.
 
-**North Star Metric:**
-- **Weekly Active Learners with 3+ completed speaking battles (WAL-3)**
+### In-scope product surfaces (used by marketing)
+- **Async Challenge (Ghost / Time-shifted)** with ~24h turn window
+- **1v1 duel results + rematch CTA**
+- **Friend list + safe preset interactions** (e.g., “GG”, “Let’s rematch”)
+- **Social share from session/result flow**
+- **Daily quests + streak system** (with streak protection)
+- **Teams / clubs / classroom identity mechanics**
+- **Seasonal and class/friends leaderboards**
+- **Profile progression** (XP, levels, badges/mastery signals)
 
-Why: this captures retention + learning behavior + social/game loop quality.
+### Out-of-scope for v1 growth (do not depend on)
+- UGC video clip generator
+- Public creator portals/affiliate dashboards
+- Ambassador payout automation
+- Advanced deep-link campaign infrastructure not already shipped
+- New teacher admin products not already in v1
 
----
-
-## 1. Growth Model Overview
-
-We use a 4-loop growth system:
-
-1. **Content Loop (Discovery):** Short-form videos/social content → install/visit → first battle.
-2. **Social Loop (Invites):** Existing users invite peers/classmates/family → co-play rewards.
-3. **Institutional Loop (Schools/Communities):** teachers/centers run classroom leagues → recurring cohorts.
-4. **Performance Loop (Paid + SEO/ASO):** predictable acquisition optimized by LTV/CAC and conversion quality.
-
-Each loop has embedded product surfaces (codes, missions, share cards, league modes, creator events).
-
----
-
-## 2. Audience Segments & Positioning
-
-## 2.1 Core Segments
-- **S1: Parent-led (ages 5–10)**
-  - Buyer: parent
-  - Need: confidence speaking English, safe gamified learning
-- **S2: Self-driven kids (ages 9–14)**
-  - User: child
-  - Need: fun competition, social recognition
-- **S3: Teachers/tutors/centers**
-  - Buyer + operator
-  - Need: measurable speaking practice at class scale
-
-## 2.2 Value Propositions by Segment
-- **Parent:** “15 minutes/day to stronger English confidence, measurable every week.”
-- **Kid:** “Battle friends, level up your voice avatar, become top speaker.”
-- **Teacher:** “Run speaking leagues with auto scoring, assignments, and class leaderboard.”
-
-## 2.3 Messaging Pillars (global)
-1. **Speak with confidence** (outcome)
-2. **Play with friends** (motivation)
-3. **Track real progress** (credibility)
-4. **Safe kid-first environment** (trust)
+If a tactic requires anything above, it is excluded from this plan.
 
 ---
 
-## 3. Channel Strategy (with Product + Engineering Mapping)
+## 1) North Star and Metric Tree
 
-## 3.1 TikTok / Reels / YouTube Shorts
+### North Star
+- **WAL-3A** = Weekly Active Learners with **3+ completed async challenges**
 
-### Strategy
-- Daily short-form program: challenge clips, before/after pronunciation, “battle moments”, creator duets.
-- Use serialized formats (Episode #) and weekly themes (“Animal Week”, “Travel Week”).
-- Every video maps to a playable in-app challenge.
+Why: directly measures repeat learning behavior in async mode.
 
-### Product Features Needed
-- **Challenge Deep Link System** (`/challenge/:id`)
-- **Campaign Landing Screen** with one-tap “Play this challenge now”
-- **Shareable battle highlights** (auto-generated 9:16 snippets)
-- **UGC template cards** (caption + hashtag + challenge ID)
+### Primary growth stack
+1. **Acquisition:** qualified new learners entering first async challenge
+2. **Activation:** first challenge sent + first challenge completed
+3. **Retention:** return to complete 3+ async challenges/week
+4. **Social growth:** challenge-send loops, friend acceptance, class participation
 
-### Engineering Tasks
-- Build universal links + deferred deep linking (install → open to challenge)
-- Clip-generation service (auto trim top moments + subtitles)
-- Campaign attribution parameter support (`utm_source`, `utm_campaign`, `creative_id`)
-- In-app event `challenge_started_from_content`
-
-### KPI
-- View → click-through rate (CTR)
-- Click → install rate
-- Install → first battle completion
-- Cost per WAL-3 by creative series
-
----
-
-## 3.2 Referral Loops
-
-### Strategy
-- Two-sided rewards: inviter + invitee both gain premium currency / cosmetic unlocks.
-- Multi-tier social quests: “Invite 1 friend”, “Play 3 duo battles”, “Create team of 5”.
-- Family mode and class mode referral tracks.
-
-### Product Features Needed
-- **Referral Hub** with code/link, progress tracker, reward ladder
-- **Friend join missions** (co-op milestone rewards)
-- **Team creation and team XP boosts**
-- Anti-abuse checks and transparent referral status
-
-### Engineering Tasks
-- Referral service with unique codes + fraud detection (device/account graph)
-- Reward issuance engine with idempotency
-- Cohort tagging by inviter and referral wave
-- Event schema: `invite_sent`, `invite_accepted`, `referral_reward_claimed`
-
-### KPI
-- Viral coefficient (K-factor)
+### Core KPIs
+- Install/visit → signup
+- Signup → first async challenge created
+- Challenge created → challenge accepted
+- Challenge accepted → challenge completed within 24h
+- D1 / D7 retention (async cohort)
+- Invites sent per active user
 - Invite acceptance rate
-- Referred user Day-7 retention vs non-referred
-- % of new users from referral channel
+- % new users from friend/class invites
+- WAL-3A growth WoW
 
 ---
 
-## 3.3 School / Community Ambassadors
+## 2) Positioning for Async Turn-Based v1
 
-### Strategy
-- Recruit teacher ambassadors and parent-community champions.
-- Provide “League-in-a-box”: class tournament templates, printable materials, monthly ranking packs.
-- Incentivize with certification, spotlight pages, and revenue share for paid cohorts.
+### Parent-led (5–10)
+“10–15 phút/ngày, con luyện nói tiếng Anh đều đặn qua thử thách ngắn và an toàn.”
 
-### Product Features Needed
-- **Classroom League Mode** (private code join, class leaderboard)
-- **Teacher dashboard** (assignments, participation, speaking score trends)
-- **Ambassador portal** (referral tracking, assets, payouts)
-- **Bulk student onboarding** (CSV/class code)
+### Self-driven kids (9–14)
+“Thử thách bạn bè mọi lúc, không cần online cùng lúc, vẫn leo bảng xếp hạng.”
 
-### Engineering Tasks
-- Role-based accounts (teacher vs parent vs learner)
-- Class roster + privacy-compliant child account workflow
-- League scheduler + automated weekly reports
-- Ambassador payout ledger + webhook integration
+### Teacher/community organizer
+“Chạy mini speaking challenge theo lớp/nhóm, theo dõi mức độ tham gia hàng tuần.”
 
-### KPI
-- # active ambassador cohorts
-- Students activated per ambassador/month
-- Class retention (week-over-week active ratio)
-- Revenue per institutional account
+### Messaging pillars
+1. **No schedule friction:** play anytime, reply within 24h
+2. **Safe social competition:** friend-first, preset interactions
+3. **Visible progress:** streak, badges, leaderboard movement
+4. **Short daily habit:** easy to repeat, easy to share
 
 ---
 
-## 3.4 Creator Collaborations
+## 3) Growth Loops (Feature-Coupled)
 
-### Strategy
-- Partner with family-safe education creators and kid performers.
-- Co-branded challenge packs (voice lines, custom avatars, creator cup tournaments).
-- Affiliate payouts tied to retained learners, not only installs.
+## 3.1 Core Referral Loop (Friend Challenge Loop)
+**Trigger:** learner finishes async challenge.
 
-### Product Features Needed
-- **Creator Event Pages** (countdown, rewards)
-- **Creator skins/badges** (limited-time)
-- **Affiliate tracking links + dashboards**
-- Live leaderboard for creator campaigns
+**In-app path:** Result screen → Rematch / Send new challenge → Friend accepts → completes → sends back.
 
-### Engineering Tasks
-- Creator ID in attribution pipeline
-- Feature flag system for creator-themed content drops
-- Real-time leaderboard service
-- Conversion API hooks for partner reporting
+**Loop KPI:**
+- challenge_send_rate
+- challenge_accept_rate
+- completion_within_24h_rate
+- avg_challenges_per_active_user
 
-### KPI
-- Creator campaign D1/D7 retention
-- Cost per retained learner by creator
-- Engagement minutes during creator events
+**Owner:** Product Growth + CRM/Community
 
 ---
 
-## 3.5 SEO + ASO
+## 3.2 Streak Loop (Daily Habit Loop)
+**Trigger:** daily quest reset + streak visibility.
 
-### Strategy
-- SEO content clusters around “kids speaking games”, “English speaking practice for kids”, curriculum-aligned topic pages.
-- ASO: localized screenshots/videos, keyword A/B tests, review-generation flow.
+**In-app path:** Open app → see streak/day quest → complete 1 async challenge → maintain streak → return next day.
 
-### Product Features Needed
-- **Web challenge previews** indexable by search engines
-- **In-app review prompt logic** after positive moments (win streak/progress milestone)
-- Localization-ready store asset pipeline
+**Loop KPI:**
+- daily_quest_completion_rate
+- streak_day_2_to_day_7 conversion
+- streak_break_rate
 
-### Engineering Tasks
-- SSR/SSG indexable pages for challenge/topic hubs
-- Structured data markup + performance optimization (Core Web Vitals)
-- Store experiment metadata management
-- Event `review_prompt_shown`, `review_submitted`
-
-### KPI
-- Organic installs per geo
-- App store conversion rate
-- Ranking for priority keywords
-- Review volume and average rating
+**Owner:** Product Growth
 
 ---
 
-## 3.6 Paid UA (Meta, Google UAC, TikTok Ads, YouTube)
+## 3.3 Class/Community Loop (Closed Group Competition)
+**Trigger:** weekly class/community leaderboard check-in.
 
-### Strategy
-- Start with broad + lookalike audiences, then shift budget by marginal CAC and retained cohort quality.
-- Creative system: hooks by age/parent pain point + gameplay proof + social proof.
-- Optimize to in-app quality events (not install-only).
+**In-app path:** Learner joins class/team context → completes async challenges during week → appears on class/friends board → peers respond.
 
-### Product Features Needed
-- **Event quality tiers** (first battle, 3 battles/week, subscription intent)
-- **Paywall variants** tied to user progression stage
-- **Onboarding branch tests** by acquisition source
+**Loop KPI:**
+- class_activation_count
+- % active learners in class each week
+- weekly challenges per learner in class cohorts
 
-### Engineering Tasks
-- MMP/attribution SDK integration with SKAN + privacy-safe postbacks
-- Server-side event forwarding to ad platforms (CAPI)
-- LTV prediction model (early signal scoring)
-- Budget automation rules consuming cohort metrics
-
-### KPI
-- CAC, CPI, CPR (cost per retained learner)
-- D7/D30 ROAS
-- Payback period
-- LTV/CAC by geo and channel
+**Owner:** School Partnerships + Community Ops
 
 ---
 
-## 4. Viral Mechanics Design (Built Into Product)
+## 3.4 Content-to-Play Loop (No New Tech Dependency)
+**Trigger:** short-form post with clear “copy challenge code / search challenge name in app” CTA.
 
-## 4.1 Core Viral Objects
-1. **Challenge Cards** – “Can you beat my pronunciation score?” shareable in 1 tap.
-2. **Streak Duels** – maintaining streak unlocks co-op rewards with friends.
-3. **Team Seasons** – class/friend teams compete for seasonal badges.
-4. **Remix Battles** – users respond to a shared prompt with own attempt (social chain).
+**In-app path:** User sees content → opens app manually → starts named challenge flow → sends to friend.
 
-## 4.2 Trigger Points
-- After “Personal Best” score
-- After battle win streak milestones (3/5/10)
-- After avatar unlock
-- Before seasonal deadline (“Invite 2 teammates to secure rank”)
+**Loop KPI:**
+- content-coded installs/signups (campaign code)
+- first_challenge_from_campaign_code
 
-## 4.3 Anti-Spam & Safety
-- Invite frequency cap
-- Child-safe sharing defaults (parent gate for external posting in younger cohorts)
-- Abuse detection on repeated device/account invites
-
-## 4.4 Engineering Requirements
-- Share intent framework with contextual payload
-- Reward throttling/rules engine
-- Parent consent and age-based permission matrix
-- Moderation workflow for UGC clips
+**Owner:** Content Lead + Growth Analyst
 
 ---
 
-## 5. Content Strategy Engine
+## 4) 30-Day Launch Plan (Execution-Ready)
 
-## 5.1 Content Pillars
-1. **Gameplay Proof:** real battle snippets + score improvements
-2. **Learning Proof:** before/after pronunciation and fluency gains
-3. **Social Fun:** friend/team rivalry clips
-4. **Parent Trust:** safety, progress dashboard, teacher endorsements
-5. **Cultural Relevance:** local holidays/trends/slang-safe prompts
+## Week 1 (Day 1–7): Instrument + Message Fit
 
-## 5.2 Content Operating Model
-- **Weekly cycle**
-  - Mon: trend scouting + script generation
-  - Tue-Wed: production
-  - Thu-Fri: publishing + paid boost on winners
-  - Sat-Sun: UGC remix contests
+### Actions
+1. Finalize async growth event tracking in dashboards:
+   - `async_challenge_created`
+   - `async_challenge_sent`
+   - `async_challenge_accepted`
+   - `async_challenge_completed`
+   - `friend_invite_sent`
+   - `friend_invite_accepted`
+   - `daily_quest_completed`
+   - `streak_continued`
+2. Ship/verify 3 in-app growth prompts only where already available:
+   - Post-result rematch/send challenge prompt
+   - Daily quest reminder surface
+   - Streak continuity nudge
+3. Run messaging test set A/B (parent vs kid framing) in owned channels.
 
-## 5.3 In-App ↔ Content Sync
-- Every public content theme has matching in-app mission tag.
-- Mission completion unlocks “share-ready” media assets.
-- Top community posts are featured in-app (consent-gated).
+### Owners
+- Product Growth (tracking + in-app prompt QA)
+- Data (dashboard + baseline cohorts)
+- Content (message variants)
 
-## 5.4 Engineering Tasks
-- CMS for campaign themes and mission tags
-- Creator asset pack generator (captions, hooks, thumbnails)
-- UGC ingestion pipeline + moderation queue
-- In-app featured content widget
+### Cadence
+- Daily standup (15 min)
+- KPI check Mon/Wed/Fri
+- Weekly decision review (Friday)
 
----
-
-## 6. 90-Day Launch Calendar
-
-## Phase 1 (Day 1–30): Foundation + Signal Capture
-**Goals:** instrument funnel, validate message-market fit, launch first loops.
-
-- Launch onboarding v1 with source-specific branches
-- Ship referral hub v1
-- Ship short-form challenge deep links
-- Start always-on content (1–2 posts/day/channel)
-- Run first 10 paid creatives across 3 hooks
-- Recruit first 20 ambassadors (pilot schools/communities)
-
-**Exit Criteria:**
-- D1 retention >= 35%
-- Invite acceptance >= 18%
-- First battle completion >= 65% of installers
-
-## Phase 2 (Day 31–60): Scale What Works
-**Goals:** increase K-factor and lower CPR.
-
-- Introduce team seasons + creator cup #1
-- Expand paid budget to winning geos/creatives
-- Launch ASO experiments in top 3 locales
-- Roll out teacher dashboard beta
-- Weekly creator collabs (micro creators)
-
-**Exit Criteria:**
-- K-factor >= 0.25
-- D7 retention >= 18%
-- CPR down 20% vs Phase 1 baseline
-
-## Phase 3 (Day 61–90): Operationalize Growth Engine
-**Goals:** predictable growth and repeatable playbook.
-
-- Launch ambassador portal + payout automation
-- Deploy LTV prediction for bid optimization
-- Launch geo expansion pack (2 new markets)
-- Creator cup #2 + seasonal mega event
-- Publish SEO topic cluster (30+ pages)
-
-**Exit Criteria:**
-- WAL-3 growth >= 15% WoW sustained
-- D30 retention >= 10%
-- Payback <= 120 days in primary geo
+### Week 1 success thresholds
+- Tracking completeness >= 95%
+- Signup → first async challenge >= 45%
+- Async completion within 24h >= 55%
 
 ---
 
-## 7. Weekly Experiment System
+## Week 2 (Day 8–14): Launch Referral and Friend Loops
 
-## 7.1 Cadence
-- Run 6–10 experiments/week across:
-  - Acquisition creative
-  - Onboarding flow
-  - Referral incentives
-  - Re-engagement messaging
-  - Monetization offer timing
+### Actions
+1. Push “Challenge a friend today” campaign in-app/community channels.
+2. Run 2 referral scripts per segment (parent-led / kid-led).
+3. Launch “3 challenges in 3 days” streak push.
+4. Activate safe preset social prompts in community instructions (GG/rematch etiquette).
 
-## 7.2 Experiment Template
-- **Hypothesis**
-- **Primary metric**
-- **Guardrail metrics** (retention, child safety incidents, complaint rate)
-- **Variant design**
-- **Sample size / stop rule**
-- **Decision owner / rollout plan**
+### Owners
+- CRM/Community (execution)
+- Product Growth (in-app placement timing)
+- Data (invite funnel reporting)
 
-## 7.3 Engineering Support
-- Remote config / feature flag platform
-- Experiment assignment service (stable bucketing)
-- Metrics dashboard with p-value / Bayesian confidence
-- Experiment registry to prevent overlap conflicts
+### Cadence
+- Daily reporting in shared growth channel
+- Mid-week creative refresh
+
+### Week 2 success thresholds
+- Invites per WAU >= 0.8
+- Invite acceptance >= 20%
+- Day-7 retention lift +3 pts vs Week 1 cohort
 
 ---
 
-## 8. Metric Tree (from North Star to Levers)
+## Week 3 (Day 15–21): School/Community Activation Sprint
 
-**North Star:** WAL-3
+### Actions
+1. Onboard first partner cohorts (teachers, clubs, parent groups) using existing class/team + leaderboard mechanics.
+2. Run “Weekly Class Async Ladder” pilot (no new tooling):
+   - Monday kickoff
+   - Wednesday reminder
+   - Friday leaderboard snapshot + recognition
+3. Distribute facilitator playbook and posting templates.
 
-- **A. Acquisition volume**
-  - Reach (impressions)
-  - CTR
-  - Install rate
-- **B. Activation quality**
-  - Onboarding completion
-  - First battle completion
-  - Time-to-first-win
-- **C. Retention**
-  - D1, D7, D30 retention
-  - Weekly battle frequency
-  - Streak continuation rate
-- **D. Virality**
-  - Invites/user
-  - Invite acceptance
-  - K-factor
-- **E. Monetization**
-  - Trial start / subscription conversion
-  - ARPPU / ARPDAU
-  - LTV
+### Owners
+- School Partnerships (teacher/community ops)
+- Community Manager (facilitator support)
+- Data (class cohort health)
 
-Guardrails:
+### Cadence
+- 2 check-ins/week per active cohort
+- Friday cohort summary
+
+### Week 3 success thresholds
+- >= 5 active cohorts
+- >= 60% learner participation within active cohorts
+- cohort D7 >= non-cohort D7 +5 pts
+
+---
+
+## Week 4 (Day 22–30): Optimize + Standardize
+
+### Actions
+1. Identify top-performing loop by cohort (friend vs streak vs class).
+2. Standardize winner playbook for next 60 days:
+   - Best CTA copy
+   - Best reminder timing
+   - Best class cadence
+3. Cut low-performing content and focus on 2 highest-converting templates.
+4. Publish v1 growth ops SOP.
+
+### Owners
+- Growth Lead (prioritization)
+- Data Analyst (cohort diagnosis)
+- Content Lead (template consolidation)
+
+### Cadence
+- Daily KPI pulse
+- End-of-month growth retro
+
+### Day-30 target outcomes
+- WAL-3A baseline established and rising
+- Invite acceptance >= 25%
+- Async completion within 24h >= 65%
+- D7 retention >= 18% (async cohorts)
+
+---
+
+## 5) 60-Day Growth Plan (Day 31–90)
+
+## Phase A (Day 31–60): Scale Repeatable Loops
+
+### Strategic goal
+Scale proven loops without adding new product dependencies.
+
+### Actions
+1. **Referral scale:**
+   - Weekly friend challenge themes (e.g., Travel Week, Animal Week)
+   - Segment-specific invite copy by age/persona
+2. **Streak scale:**
+   - Habit campaigns around 3-day and 7-day streak milestones
+   - Recovery messaging for near-break cohorts
+3. **Class/community scale:**
+   - Expand to 15–20 active cohorts
+   - Fixed weekly cadence kit for facilitators
+4. **Leaderboard moments:**
+   - Weekly “rank jump” recognition posts using existing board outcomes
+5. **Content scale:**
+   - 3 short posts/week per core segment driving manual app challenge entry
+
+### Owners
+- Growth Lead: channel mix + weekly priorities
+- Partnerships Lead: cohort expansion
+- Content Lead: creative pipeline
+- Data Lead: weekly model + scorecards
+
+### Cadence
+- Weekly growth pod meeting (Mon)
+- Mid-week metric checkpoint (Wed)
+- Friday performance + next-week lock
+
+### Day-60 target outcomes
+- WAL-3A +30–40% from Day-30 baseline
+- % new users from invites/classes >= 35%
+- D7 retention >= 20%
+- 24h challenge completion >= 70%
+
+---
+
+## Phase B (Day 61–90): Efficiency + Defensibility
+
+### Strategic goal
+Improve conversion efficiency and lock in community-led growth behavior.
+
+### Actions
+1. Double down on highest LTV cohorts (class + high-streak households).
+2. Run win-back campaigns for inactive async challengers (7-day inactivity cohort).
+3. Create monthly inter-class/community async cup using existing leaderboard surfaces.
+4. Formalize facilitator certification-light program (content + cadence + reporting), no new portal required.
+5. Build geo/language message packs from top-performing templates.
+
+### Owners
+- Growth + Partnerships joint ownership
+- Data for cohort prioritization
+- Community Ops for facilitator enablement
+
+### Cadence
+- Bi-weekly cohort business review
+- Weekly campaign launch rhythm
+
+### Day-90 target outcomes
+- WAL-3A sustained growth >= 12% WoW
+- Invite acceptance >= 28%
+- Class cohort retention 1.3x non-class cohorts
+- CAC blended reduction via higher organic/invite share
+
+---
+
+## 6) Content Templates (Ready to Use)
+
+## 6.1 Parent Community Post Template
+**Hook:** “Con ngại nói tiếng Anh? Thử format 10 phút/ngày này.”
+
+**Body:**
+- Mỗi ngày 1 async challenge (không cần online cùng lúc)
+- Có streak + nhiệm vụ ngày để giữ nhịp
+- Cuối tuần xem thứ hạng lớp/nhóm để tạo động lực
+
+**CTA:** “Mở app → vào thử thách [Tên Challenge] → gửi cho 1 bạn học.”
+
+---
+
+## 6.2 Kid-Facing Post Template
+**Hook:** “Dám đấu 1 kèo speaking trong 24h không?”
+
+**Body:**
+- Mình vừa xong challenge [Tên]
+- Bạn reply trong 24h để giữ chuỗi thắng
+- Thắng là leo bảng bạn bè luôn
+
+**CTA:** “Vào app, tìm [Tên Challenge], chơi và rematch mình.”
+
+---
+
+## 6.3 Teacher/Facilitator Weekly Script
+- **Monday:** “Tuần này lớp mình chơi challenge [Tên], hạn 24h mỗi lượt.”
+- **Wednesday:** “Nhắc nhẹ: ai chưa làm lượt thì hoàn thành để giữ điểm lớp.”
+- **Friday:** “Cập nhật bảng xếp hạng lớp + khen nỗ lực/tiến bộ.”
+
+---
+
+## 7) Referral Mechanics (Within Existing Features)
+
+## 7.1 Loop design
+- End of challenge → prompt send/rematch to friend
+- Friend accepts within 24h → both continue chain
+- Chain depth target: 2–3 turns minimum/user/week
+
+## 7.2 Anti-spam guardrails
+- Cap outbound prompts/day per user
+- Prioritize accepted contacts over broadcast behavior
+- Keep all social prompts within preset safe interactions
+
+## 7.3 Metrics
+- invites_sent_per_user_per_week
+- unique_invited_friends
+- accepted_invites_ratio
+- referral_cohort_D7_vs_nonref_D7
+
+---
+
+## 8) School & Community Activation Playbook
+
+## 8.1 Target partners (v1-friendly)
+- English after-school clubs
+- Small tutoring centers
+- Parent Zalo/Telegram groups
+- School class homeroom communities
+
+## 8.2 Activation model
+1. Recruit facilitator (teacher/admin/parent lead)
+2. Run 1-week async challenge cycle
+3. Publish Friday recognition using class leaderboard
+4. Repeat with new weekly challenge theme
+
+## 8.3 Cohort operating cadence
+- Kickoff pack Monday
+- Midweek reminder
+- Friday leaderboard + recognition
+- Monthly recap to facilitator
+
+## 8.4 Success metrics
+- active_cohorts
+- learners_per_cohort
+- weekly_participation_rate
+- cohort_retention_4w
+
+---
+
+## 9) Tracking Framework (What Must Be Visible Weekly)
+
+## 9.1 Funnel dashboard (async-specific)
+- New users
+- First async challenge creation rate
+- First accepted challenge rate
+- 24h completion rate
+- WAL-3A
+
+## 9.2 Cohort dashboard
+- Referred vs non-referred D1/D7
+- Class/community vs solo D1/D7
+- Streak users vs non-streak users retention delta
+
+## 9.3 Channel dashboard
+- Owned content campaigns (coded)
+- Community-led cohorts
+- Invite-led acquisition share
+
+## 9.4 Guardrails
 - Safety reports per 1k users
-- Parent NPS
-- Crash-free sessions
-- Moderation SLA
+- Complaint rate from school/community channels
+- Session crash/error trends during growth pushes
 
 ---
 
-## 9. Attribution & Instrumentation Blueprint
+## 10) Operating Rhythm & Ownership
 
-## 9.1 Event Taxonomy (minimum)
-- `app_install_attributed`
-- `onboarding_started`, `onboarding_completed`
-- `battle_started`, `battle_completed`
-- `challenge_opened`, `challenge_completed`
-- `invite_sent`, `invite_accepted`
-- `team_joined`, `season_reward_claimed`
-- `subscription_started`, `subscription_renewed`
-- `share_card_generated`, `share_outbound`
+### Weekly Growth Pod
+- **Participants:** Growth, Product, Data, Content, Partnerships, Community
+- **Agenda:**
+  1) KPI delta vs targets
+  2) Loop-by-loop diagnosis
+  3) Next 3 actions (owner + due date)
 
-## 9.2 Required Properties
-- `user_id`, `device_id` (privacy-safe)
-- `acq_channel`, `campaign_id`, `adset_id`, `creative_id`
-- `geo`, `language`, `age_band`
-- `experiment_id`, `variant_id`
-- `referrer_user_id` / `ambassador_id` / `creator_id`
-
-## 9.3 Data Stack Recommendations
-- Client SDK + server events
-- Warehouse-first model (daily cohort tables)
-- Real-time dashboard for launch windows
-- Privacy compliance layer (COPPA/GDPR-K safe event gating)
-
-## 9.4 Engineering Tasks
-- Data contract spec + schema versioning
-- Event QA harness in CI
-- Attribution reconciliation jobs (MMP vs internal)
-- Alerting for tracking breaks
+### Ownership matrix
+- **Growth Lead:** overall KPI, prioritization, execution quality
+- **Product Growth:** in-app prompt placement and loop optimization
+- **Data Lead:** dashboard reliability, cohort insights
+- **Content Lead:** templates and publishing cadence
+- **Partnerships Lead:** school/community expansion
+- **Community Ops:** facilitator support and weekly delivery
 
 ---
 
-## 10. Creative Testing Framework
+## 11) Definition of Success for Async Turn-Based v1
 
-## 10.1 Creative Matrix
-Test dimensions:
-- Hook: (funny / challenge / parent outcome / social proof)
-- Format: (UGC selfie / gameplay montage / testimonial / creator duet)
-- CTA: (Play challenge now / Join team season / Beat my score)
-- Persona: (parent / kid / teacher)
-- Language/localization variant
+By Day 90, growth is considered healthy if:
+- WAL-3A is growing consistently (target >= 12% WoW sustained)
+- Invite/class channels contribute >= 35% of new activated users
+- Async 24h completion rate >= 70%
+- D7 retention >= 20% in priority cohorts
+- School/community cohorts are repeatable without new feature dependencies
 
-## 10.2 Test Design Rules
-- 3–5 variants per hypothesis
-- Minimum spend threshold before kill
-- Winners promoted in 3 steps: organic → low-budget paid → scale
-- Re-test top concepts every 2–3 weeks for fatigue
-
-## 10.3 Product Coupling
-- Winning hooks become in-app home banners
-- Winning CTA maps to onboarding first mission
-- Winning creator persona gets in-app event slot
-
-## 10.4 Engineering Tasks
-- Creative metadata registry
-- Auto-tagging creatives to experiments
-- Fatigue detection model (declining CTR/CVR)
-- “Creative to cohort” reporting view
-
----
-
-## 11. Geo Expansion Strategy
-
-## 11.1 Market Prioritization Framework
-Score each geo by:
-- English learning demand
-- Mobile CPM/CPI economics
-- Payment readiness
-- Local creator ecosystem
-- Regulatory complexity for minors
-
-Priority wave suggestion:
-1. **Wave 1:** Vietnam, Indonesia, Philippines
-2. **Wave 2:** Thailand, Brazil, Mexico
-3. **Wave 3:** MENA + selected EU markets
-
-## 11.2 Localization Stack
-- Language localization (UI + prompts + voice examples)
-- Cultural localization (topics, holidays, characters)
-- Educational alignment (CEFR/local curriculum mappings)
-- Parent trust localization (safety and progress messaging)
-
-## 11.3 Engineering Tasks
-- i18n content pipeline with fallback logic
-- Locale-specific prompt packs
-- Geo-configurable mission calendars
-- Regional compliance flags and consent flows
-
----
-
-## 12. Localized Messaging Framework
-
-## 12.1 Message Architecture
-For each locale, map:
-- **Problem statement** (what parent/kid struggles with)
-- **Promise** (specific outcome)
-- **Proof** (scores, testimonials, teacher endorsements)
-- **Action** (join challenge/team)
-
-## 12.2 Example Messaging Variants
-- **Vietnam (parent):** “Mỗi ngày 15 phút, con tự tin nói tiếng Anh hơn qua đấu trường vui nhộn.”
-- **Indonesia (parent):** “Latihan speaking 15 menit/hari, seru dan terukur hasilnya.”
-- **Brazil (kid):** “Desafie seus amigos, suba no ranking e fale inglês com confiança.”
-
-## 12.3 In-App Mapping
-- Onboarding headline localized by persona + geo
-- Push notification templates localized by event type
-- Seasonal events tied to local calendars
-
----
-
-## 13. Cross-Functional Operating Rhythm
-
-**Weekly Growth Pod Meeting** (Product, Engineering, Content, UA, Data, Community):
-- Review metric tree deltas
-- Review experiment outcomes
-- Decide top 3 bets for next sprint
-- Confirm engineering dependencies and launch blockers
-
-**Monthly Growth Review:**
-- Channel mix rebalance
-- Cohort LTV/CAC review
-- Geo expansion readiness check
-- Ambassador and creator program health
-
----
-
-## 14. Execution Backlog (Prioritized Engineering Work)
-
-## P0 (Immediate)
-1. Attribution SDK + event taxonomy v1
-2. Deep link + deferred deep link pipeline
-3. Referral hub v1 + reward engine
-4. Onboarding experiments framework
-5. Basic growth dashboards
-
-## P1 (30–60 days)
-1. Team season + class league mode
-2. Creator campaign infrastructure
-3. UGC clip generation + moderation
-4. ASO/SEO instrumentation and indexed web challenge pages
-
-## P2 (60–90 days)
-1. Ambassador portal + payout automation
-2. LTV prediction and bid optimization integration
-3. Geo localization pipeline + locale ops tools
-4. Creative fatigue and budget reallocation automation
-
----
-
-## 15. Definition of Success (First 90 Days)
-
-- WAL-3 grows consistently (>=15% WoW by end of period)
-- Organic + referral share reaches >=40% of new users
-- D7 retention >=18%, D30 >=10%
-- Paid channels achieve path to payback <=120 days in core market
-- At least 2 institutional cohorts and 10+ creator partnerships producing retained learners
-
-This plan ensures every growth bet is directly tied to product surfaces and engineering implementation, making marketing performance durable, compounding, and defensible.
+This plan intentionally avoids speculative features and ties every major tactic to already-defined in-app v1 surfaces.

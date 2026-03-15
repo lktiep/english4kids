@@ -1,838 +1,268 @@
-# Global Realtime Educational Battle Arena — Architecture Masterplan
+# Arena Masterplan — Lean Async-First Architecture (Month-1 Break-even)
 
-**Version:** 1.0  
-**Status:** Draft for architecture review  
-**Scope:** English learning + multi-subject live quiz duels (1v1, squad, class tournaments)  
-**Audience:** Product, Backend, Mobile/Web, Data, SRE, Security, Compliance
-
----
-
-## 1) Vision and Product Constraints
-
-### 1.1 Product vision
-Build a **global, realtime, mobile-first learning battle arena** where learners compete in short quiz duels while improving language and general knowledge. Core value:
-- Learning retention through spaced repetition + competition.
-- Fun, short sessions (2–5 minutes) with social progression.
-- Fair, safe, child-friendly global environment.
-
-### 1.2 Non-negotiable constraints
-1. **Low latency gameplay**: answer acknowledgment < 150ms regional p95; state updates < 300ms p95 in-region.
-2. **Global operation**: multi-region routing, timezone-aware events, localized content.
-3. **Child safety**: strict privacy defaults, moderation, parental controls, no open DMs by default.
-4. **Fairness/anti-cheat**: deterministic question order per match seed, secure scoring, abuse detection.
-5. **Resilience**: match continuity despite flaky mobile networks.
-6. **Education first**: explain mistakes; XP should reward learning, not just speed.
-7. **Cost discipline**: efficient at 0->1M MAU with staged complexity.
-
-### 1.3 Target personas
-- **Kids/Teens learners**: game-centric, quick sessions.
-- **Parents**: safety + progress visibility.
-- **Teachers/Schools**: cohort competitions, assignment-linked duels.
-- **Casual adults**: ranked ladders + broad trivia.
-
-### 1.4 Success metrics
-- D1/D7 retention, avg sessions/day, match completion rate.
-- Learning metrics: concept mastery uplift, wrong->right conversion.
-- Fairness metrics: suspicious match ratio, smurf detection precision.
-- Reliability: session crash-free rate, p95 latency, reconnect success.
-- Safety: moderation SLA, report resolution time, underage policy adherence.
+**Version:** 2.0 (rewrite)
+**Status:** Critique-ready draft
+**Principle:** Build a profitable game loop first with **asynchronous turn-based matches**. Realtime is optional later, not a launch dependency.
 
 ---
 
-## 2) High-Level System Architecture
+## 1) Scope and Business Constraint
+
+### 1.1 Product scope (Phase 1)
+Launch a mobile/web learning battle mode where players:
+1. Get matched (or challenge a friend)
+2. Take the same question set in turn-based format
+3. Receive score/result/rank updates
+4. Return for daily progression (streak, rank, rewards)
+
+### 1.2 Hard constraint: month-1 break-even
+Architecture must minimize:
+- always-on compute
+- operational overhead
+- complex anti-cheat/realtime infra
+
+Success target (month 1):
+- Positive contribution margin at low scale (first paying cohorts)
+- Stable gameplay with low support burden
+
+### 1.3 Explicit non-goals at launch
+- No realtime socket combat
+- No global sub-150ms gameplay SLA
+- No team voice/chat
+- No advanced ML fraud pipeline
+
+---
+
+## 2) Minimal System Components (Only What We Need)
 
 ```mermaid
 flowchart LR
-    C[Clients: iOS/Android/Web] --> G[Global Edge + API Gateway]
-    G --> A[Auth & Identity]
-    G --> P[Profile/Progress]
-    G --> MM[Matchmaking]
-    G --> RT[Realtime Session Gateway]
-    G --> CT[Content Catalog]
-    G --> RK[Ranking/ELO]
-    G --> SF[Safety & Moderation]
+    C[Mobile/Web Client] --> API[API + Auth]
+    API --> GAME[Game Service]
+    API --> CONTENT[Content Service]
+    API --> PROGRESS[Progress + Leaderboard Service]
 
-    MM --> Q[(Queue Store: Redis)]
-    RT --> RS[Session Orchestrator]
-    RS --> EV[(Event Log: Kafka/Pulsar)]
-    RS --> ST[(Hot Session State: Redis)]
-    RS --> SC[Scoring Engine]
-    SC --> RK
+    GAME --> DB[(Postgres)]
+    CONTENT --> DB
+    PROGRESS --> DB
 
-    CT --> QB[(Question Bank DB)]
-    P --> PR[(Profile DB)]
-    RK --> LB[(Leaderboard DB)]
+    GAME --> CACHE[(Redis - optional hot cache)]
+    API --> OBJ[(Object Storage + CDN for static assets)]
 
-    EV --> OLAP[(Analytics Lake/Warehouse)]
-    EV --> FR[Fraud/Cheat Detection]
-    EV --> OBS[Observability Stack]
-
-    SF --> MOD[(Moderation Case DB)]
+    GAME --> Q[Job Queue]
+    Q --> W[Background Worker]
+    W --> DB
 ```
 
-### 2.1 Architectural style
-- **Domain-driven microservices** (modular monolith acceptable at phase 0; split by bounded context).
-- **Event-driven backbone** for gameplay/audit/analytics.
-- **Authoritative server** for match state and score.
-- **CQRS-like read models** for leaderboards and progression dashboards.
+### 2.1 Components
+1. **Client (iOS/Android/Web):** polling-based state sync (no websocket requirement).
+2. **API + Auth:** JWT sessions, rate limits, request signing for answer submissions.
+3. **Game Service:** match creation, turn processing, scoring, result finalization.
+4. **Content Service:** question retrieval/versioning.
+5. **Progress/Leaderboard Service:** XP, streak, rank snapshots.
+6. **Postgres (single primary):** source of truth.
+7. **Redis (small):** cache + short-lived locks + idempotency keys (can be removed early if needed).
+8. **Queue + Worker:** async jobs (result settlement, notifications, anti-cheat checks).
+9. **Object Storage + CDN:** images/audio/static content.
+
+### 2.2 Deployment stance
+- Start **single region** (closest to core paying audience)
+- Prefer **modular monolith** codebase with clear modules over microservices
+- One DB cluster, one worker deployment, one API deployment
 
 ---
 
-## 3) Domain Model
+## 3) Turn-Based Game Flow (Async by Design)
 
-### 3.1 Core aggregates
-- **User**: age bracket, locale, region, safety flags, consent state.
-- **LearnerProfile**: level, mastery map, streak, XP, inventory/cosmetics.
-- **Question**: subject, difficulty, language, tags, version, validation status.
-- **Match**: mode, seed, participants, round states, final result.
-- **SessionEvent**: immutable event stream (join, answer, timeout, score_update, reconnect).
-- **Rating**: per queue/mode ELO/Glicko snapshot.
-- **Season**: leaderboard window and reward policy.
-- **SafetyCase**: reports, automated flags, moderation action history.
-
-### 3.2 Ubiquitous language
-- **Arena Session** = one realtime match instance.
-- **Queue** = matchmaking pool by mode/region/rating.
-- **Round** = fixed question set slice (e.g., 10 questions / 90s).
-- **Authority Tick** = server-validated progression step.
-
-```mermaid
-classDiagram
-    class User {
-      uuid id
-      string region
-      string locale
-      string ageBracket
-      bool childAccount
-      ConsentState consent
-    }
-    class LearnerProfile {
-      int xp
-      int level
-      json masteryBySkill
-      int streakDays
-    }
-    class Match {
-      uuid id
-      string mode
-      string status
-      long seed
-      datetime startedAt
-      datetime endedAt
-    }
-    class MatchParticipant {
-      uuid matchId
-      uuid userId
-      int finalScore
-      int rank
-      bool disconnected
-    }
-    class Question {
-      uuid id
-      string subject
-      string difficulty
-      string language
-      int version
-    }
-    class Rating {
-      uuid userId
-      string queueKey
-      float rating
-      float rd
-      float volatility
-    }
-
-    User "1" --> "1" LearnerProfile
-    Match "1" --> "2..N" MatchParticipant
-    Match "1" --> "N" Question
-    User "1" --> "N" Rating
-```
-
----
-
-## 4) Service Boundaries (Bounded Contexts)
-
-### 4.1 Identity & Access Service
-- OAuth/email/phone/device auth.
-- Child account flow, parental consent, COPPA/GDPR-K handling.
-- JWT access token + rotating refresh token.
-- Device fingerprint + risk score input.
-
-### 4.2 Player Profile Service
-- XP, levels, streaks, badges, mastery vectors.
-- Inventory/cosmetics and progression economy.
-- Idempotent reward application.
-
-### 4.3 Content Service
-- Question lifecycle: authoring -> review -> publish -> retire.
-- Subject taxonomy, difficulty calibration, localization.
-- Content versioning and A/B packs.
-
-### 4.4 Matchmaking Service
-- Queue ingest, ticket lifecycle, region-aware pairing.
-- Backfill bots for wait-time SLA.
-- Party/team matchmaking and skill spread constraints.
-
-### 4.5 Realtime Session Service (Authoritative)
-- Owns match simulation state machine.
-- Validates answers/time windows.
-- Emits canonical session events.
-
-### 4.6 Scoring & Ranking Service
-- Score aggregation with anti-cheat signals.
-- Rating updates (Glicko-2 recommended for uncertainty).
-- Leaderboard materialization (global/regional/friends/class).
-
-### 4.7 Safety & Moderation Service
-- Report ingestion, abuse scoring, auto-actions.
-- Chat filters (if enabled), nickname screening, sanctions.
-
-### 4.8 Analytics & Learning Intelligence
-- Event ingestion -> warehouse -> feature computation.
-- Learning diagnostics and recommendation feeds.
-
-### 4.9 Notification Service
-- Push/inbox reminders, season events, parental summaries.
-- Quiet hours + legal communication constraints for minors.
-
----
-
-## 5) Realtime Game Session Architecture
-
-### 5.1 Match lifecycle
+### 3.1 Core loop
 ```mermaid
 stateDiagram-v2
-    [*] --> QUEUED
-    QUEUED --> MATCHED: tickets paired
-    MATCHED --> PREPARE: question set locked by seed
-    PREPARE --> LIVE_ROUND
-    LIVE_ROUND --> LIVE_ROUND: next question/tick
-    LIVE_ROUND --> FINISHING: time over or all answered
-    FINISHING --> RESULTS: score/rating computed
-    RESULTS --> ARCHIVED: persisted + emitted
-    ARCHIVED --> [*]
+    [*] --> OpenMatch
+    OpenMatch --> PlayerA_Turn
+    PlayerA_Turn --> PlayerB_Turn
+    PlayerB_Turn --> PlayerA_Turn: next round/question set
+    PlayerB_Turn --> Finalize: last turn submitted or timeout
+    Finalize --> ResultPublished
+    ResultPublished --> [*]
 ```
 
-### 5.2 Session internals
-- **Session Orchestrator**: one authoritative worker per match (sticky).
-- **Hot state** in Redis (TTL + snapshot every N events).
-- **Event append** to Kafka/Pulsar with monotonic sequence.
-- **Recovery**: on worker failover, replay event log + latest snapshot.
+### 3.2 Operational flow
+1. Player enters queue (or invites friend).
+2. System creates match with fixed seed + fixed question set version.
+3. Player A submits answers within time window (e.g., 2–12h per turn).
+4. Player B gets notified and plays same set.
+5. After both turns (or timeout), server finalizes score and winner.
+6. Progress/rank/rewards applied asynchronously.
 
-### 5.3 Latency handling
-- Client sends answer with local timestamp + question nonce.
-- Server decides authoritative acceptance by server clock window.
-- Optional **client-side optimistic animation**; reconcile on authoritative event.
-- Clock sync hints distributed at session start.
-
-### 5.4 Disconnection strategy
-- Grace period (e.g., 12s) for reconnect without hard forfeit.
-- Missed events catch-up via sequence replay.
-- Persistent disconnect -> AI autopilot or abandonment policy by mode.
+### 3.3 Why this works for month-1
+- No persistent socket infrastructure
+- Tolerates flaky mobile networks
+- Easier cheat review (deterministic replay)
+- Better timezone compatibility for early global users
 
 ---
 
-## 6) Matchmaking Design
+## 4) Data Model (Trimmed to Essentials)
 
-### 6.1 Queue keys
-`queueKey = mode + subject_pool + region + platform_bucket + rating_bucket + age_bracket`
+Keep only entities needed for billing, fairness, and gameplay.
 
-### 6.2 Ticket model
-- userId, partyId, queueKey, ratingMu, ratingSigma, preferredLang, ping profile, constraints.
+### 4.1 Tables / entities
+1. **users**
+   - id, created_at, region, locale, age_band, status
+2. **player_stats**
+   - user_id, xp, level, streak_days, rating, updated_at
+3. **question_sets**
+   - id, subject, difficulty_band, version, seed, payload_ref
+4. **matches**
+   - id, mode, status(open/active/finalized/void), question_set_id, created_at, finalized_at
+5. **match_players**
+   - match_id, user_id, turn_order, submitted_at, total_score, time_spent_ms, outcome
+6. **answers**
+   - id, match_id, user_id, question_id, selected_option, correct, latency_ms, submitted_at
+7. **economy_ledger**
+   - id, user_id, type(xp/reward/penalty), delta, reason, ref_id, created_at
+8. **anti_cheat_flags**
+   - id, match_id, user_id, rule_code, severity, metadata_json, created_at, reviewed_at
 
-### 6.3 Pairing algorithm (hybrid)
-1. Strict window at enqueue (rating ±50, ping < 80ms).
-2. Expand windows over wait time.
-3. Cross-region if queue starved (cap max RTT).
-4. Bot insertion after SLA threshold.
-
-### 6.4 Fairness constraints
-- Avoid repeat opponents within recent N matches.
-- Smurf-protected pools for new accounts.
-- Child account protected queues (no open adult pools if policy requires).
-
-### 6.5 Team modes
-- Party MMR = weighted mean + uncertainty penalty.
-- Roleless balancing for quiz mode; class/team balancing by aggregate mastery.
-
----
-
-## 7) Anti-Cheat & Fair Play
-
-### 7.1 Threat model
-- Answer automation/bots.
-- Rooted device tampering.
-- Collusion / win-trading.
-- Multi-account smurfing.
-- Network manipulation (lag switch/replay).
-
-### 7.2 Controls
-- Server-authoritative timing/scoring.
-- Per-question signed nonce; reject replays.
-- Rate limits and behavior anomaly scoring.
-- Device integrity attestations (Play Integrity / DeviceCheck).
-- Challenge-response checks for suspicious sessions.
-- Delayed leaderboard finalization for high-risk matches.
-
-### 7.3 Detection features
-- Reaction-time distribution impossible patterns.
-- Accuracy jump vs historical mastery.
-- Graph-based collusion (repeated pair outcomes).
-- IP/device/account graph risk scoring.
-
-### 7.4 Enforcement ladder
-- Soft shadow pool -> warning -> temporary rank lock -> suspension -> ban.
-- Appeals workflow via moderation portal.
+### 4.2 Deliberately excluded in phase 1
+- event-sourcing stream store
+- per-question realtime telemetry firehose
+- social graph service
+- advanced inventory/cosmetics economy
 
 ---
 
-## 8) Rank / ELO System
+## 5) Anti-Cheat (Basic but Practical)
 
-### 8.1 Recommended model
-Use **Glicko-2** per queue/mode due to uncertainty handling and sparse games.
-- `rating (mu)`, `deviation (phi)`, `volatility (sigma)`.
-- New users start high uncertainty; settle quickly.
+Goal: block obvious abuse cheaply; escalate suspicious cases manually.
 
-### 8.2 Update timing
-- Rating updates at match finalization event.
-- Provisional period (first 20 games) with accelerated movement.
+### 5.1 Server-authoritative rules
+- Answer correctness scored only server-side
+- Fixed question set + seed per match
+- Turn deadline enforced server-side
+- Idempotency key per submit request (prevents replay/double-submit)
 
-### 8.3 Seasonal design
-- 4–8 week seasons.
-- Soft reset formula (toward mean with cap).
-- Reward tiers by percentile + anti-abuse guardrails.
+### 5.2 Cheap heuristic checks
+Flag (don’t auto-ban immediately) when:
+- impossible completion speed (below human threshold)
+- repeated near-perfect results with ultra-low latency pattern
+- many accounts on same device fingerprint/IP burst
+- abnormal win streak vs rating distribution
 
-### 8.4 Smurf mitigation
-- Hidden MMR converges fast; visible rank lags slightly.
-- Suspicious dominance triggers accelerated calibration.
+### 5.3 Actions
+- Low severity: shadow-rank dampening / reduced rewards
+- Medium: queue into high-risk pool + additional verification
+- High: temporary hold on rewards + manual review
 
----
-
-## 9) Event Sourcing & Data Flow
-
-### 9.1 Why event sourcing here
-- Auditability for disputes/cheat investigations.
-- Replay for bug fixes and simulation testing.
-- Clean analytics feed with immutable facts.
-
-### 9.2 Event taxonomy (examples)
-- `match.created`, `match.started`, `player.joined`, `question.presented`, `answer.submitted`, `answer.accepted`, `score.updated`, `player.disconnected`, `match.finished`, `rating.updated`, `reward.granted`, `report.filed`.
-
-### 9.3 Envelope contract
-```json
-{
-  "event_id": "uuid",
-  "event_type": "answer.submitted",
-  "occurred_at": "2026-03-15T10:00:00Z",
-  "producer": "realtime-session-service",
-  "aggregate_type": "match",
-  "aggregate_id": "match_uuid",
-  "seq": 142,
-  "schema_version": 3,
-  "payload": {},
-  "trace_id": "otel-trace-id"
-}
-```
-
-### 9.4 Stream partitioning
-- Partition by `match_id` for order guarantee within match.
-- Secondary topics for user-centric projections.
-
-### 9.5 Idempotency
-- Consumers use `event_id` dedupe table/cache.
-- Upserts with version checks on projections.
+This is enough for launch without ML infrastructure.
 
 ---
 
-## 10) Data Model (Relational + Redis + Lake)
+## 6) Cost-Control Architecture (Month-1)
 
-> Suggested primary OLTP: **PostgreSQL** (regional primary + read replicas), **Redis** for hot state/cache, **Object storage + warehouse** for analytics.
+### 6.1 Infra assumptions (example: 8k MAU, 1.2k DAU, 6 matches/user/week)
+Approx monthly baseline:
+- API + worker compute (2 small instances + autoscale floor): **$90**
+- Postgres managed small tier + backups: **$120**
+- Redis small tier: **$35**
+- Object storage + CDN egress (content-heavy but optimized): **$60**
+- Monitoring/logging/error tracking: **$40**
+- Email/push/SMS misc: **$30**
 
-### 10.1 Core SQL tables (simplified)
+**Estimated total:** **$375/month** (target keep under **$500**)
 
-#### `users`
-- `id (uuid, pk)`
-- `created_at, updated_at`
-- `region_code, locale`
-- `age_bracket`
-- `child_account (bool)`
-- `status (active/suspended/deleted)`
+### 6.2 Unit economics guardrail
+- Infra cost target: **< $0.06 per MAU/month** at phase-1 scale
+- If above threshold for 2 consecutive weeks: freeze feature work, optimize hotspots
 
-#### `consents`
-- `id (uuid)`
-- `user_id (fk users)`
-- `consent_type (tos/privacy/parental)`
-- `version`
-- `granted_at, revoked_at`
-
-#### `profiles`
-- `user_id (pk)`
-- `display_name`
-- `xp, level, streak_days`
-- `avatar_id`
-- `mastery_jsonb`
-
-#### `questions`
-- `id (uuid)`
-- `subject`
-- `skill_tag`
-- `difficulty`
-- `language`
-- `content_jsonb`
-- `correct_answer_hash`
-- `version`
-- `status (draft/review/published/retired)`
-
-#### `matches`
-- `id (uuid)`
-- `mode`
-- `queue_key`
-- `region`
-- `seed bigint`
-- `status`
-- `started_at, ended_at`
-
-#### `match_participants`
-- `match_id, user_id (composite pk)`
-- `team_id`
-- `final_score`
-- `accuracy`
-- `avg_response_ms`
-- `result (win/loss/draw)`
-- `disconnect_count`
-
-#### `match_rounds`
-- `id (uuid)`
-- `match_id (fk)`
-- `round_index`
-- `question_ids jsonb`
-- `started_at, ended_at`
-
-#### `ratings`
-- `user_id, queue_key (pk)`
-- `mu, phi, sigma`
-- `matches_played`
-- `updated_at`
-
-#### `leaderboard_entries`
-- `season_id`
-- `board_key`
-- `user_id`
-- `score`
-- `rank`
-- `updated_at`
-
-#### `reports`
-- `id`
-- `reporter_user_id`
-- `target_user_id`
-- `match_id`
-- `reason_code`
-- `evidence_jsonb`
-- `status`
-
-### 10.2 Redis structures
-- `queue:{queueKey}` sorted set (ticket score by enqueue time + mmr proximity).
-- `match:{id}:state` hash/json.
-- `match:{id}:events` capped list for fast replay.
-- `presence:{userId}` for online/session binding.
-
-### 10.3 Analytics tables (warehouse)
-- `fact_match_events`, `fact_answers`, `fact_sessions`, `dim_user`, `dim_question`, `fact_moderation`.
+### 6.3 Cost levers
+1. Polling interval adaptive (active vs background)
+2. Aggressive caching of question/media assets
+3. Batch writes for non-critical analytics
+4. Log sampling (full logs only for suspicious matches)
+5. Daily cold data compaction
 
 ---
 
-## 11) API Contracts (HTTP/gRPC)
+## 7) Rollout Gates (Ship in Controlled Steps)
 
-### 11.1 Auth/Profile
-- `POST /v1/auth/login`
-- `POST /v1/auth/refresh`
-- `GET /v1/profile/me`
-- `PATCH /v1/profile/me`
+### Gate 0 — Internal alpha
+- 100–300 users
+- Manual moderation only
+- Success criteria: crash-free > 99%, match finalization success > 98%
 
-### 11.2 Matchmaking
-- `POST /v1/matchmaking/tickets` create queue ticket
-- `DELETE /v1/matchmaking/tickets/{ticketId}` cancel
-- `GET /v1/matchmaking/tickets/{ticketId}` status
+### Gate 1 — Small paid cohort
+- 1k–3k MAU
+- Starter monetization active
+- Success criteria: D7 retention target met, infra < $500/mo
 
-**Create ticket request**
-```json
-{
-  "mode": "duel_ranked",
-  "subjectPool": ["english_vocab", "science_basic"],
-  "regionPreference": "sg",
-  "partyId": null,
-  "clientPingMs": {"sg": 45, "jp": 89}
-}
-```
+### Gate 2 — Regional scale
+- 5k–20k MAU
+- Add queue segmentation + anti-cheat review workflow
+- Success criteria: support tickets/match < target, fraud loss < 2% rewards
 
-**Response**
-```json
-{
-  "ticketId": "uuid",
-  "queueKey": "duel_ranked:mix:sg:mobile:bronze:teen",
-  "estimatedWaitSec": 12
-}
-```
-
-### 11.3 Match session bootstrap
-- `POST /v1/matches/{matchId}/join-token` -> short-lived WS token.
-- `GET /v1/matches/{matchId}` -> summary/result.
-
-### 11.4 Ranking/Leaderboards
-- `GET /v1/rank/me?queueKey=...`
-- `GET /v1/leaderboards/{boardKey}?seasonId=...&cursor=...`
-
-### 11.5 Content delivery (read-optimized)
-- `GET /v1/content/subjects`
-- `GET /v1/content/recommendations`
-
-### 11.6 Moderation
-- `POST /v1/reports`
-- `GET /v1/safety/actions/me`
+### Gate 3 — Realtime feasibility check
+Only evaluate realtime after:
+- Positive margin for 2+ consecutive months
+- >= 25k MAU or >= 200 concurrent active matches at peak
+- Async mode shows engagement ceiling
 
 ---
 
-## 12) WebSocket Protocol (Realtime)
+## 8) When to Introduce Realtime Later (Clear Triggers)
 
-### 12.1 Connection
-- Endpoint: `wss://rt.example.com/v1/session?matchId=...`
-- Auth: signed short-lived session JWT (<= 2 min issuance window).
+Introduce realtime incrementally, not as rewrite.
 
-### 12.2 Message envelope
-```json
-{
-  "t": "answer.submit",
-  "id": "client-msg-uuid",
-  "seq": 17,
-  "ts": 1710000000123,
-  "body": {}
-}
-```
+### 8.1 Trigger thresholds
+Start realtime prototype when **all** are true:
+1. Peak concurrent live sessions needs exceed polling UX tolerance (e.g., > 300 concurrent)
+2. Match abandonment caused by async delay > target threshold
+3. Budget can absorb +$800 to +$2,000/month infra increase
+4. Engineering capacity available without risking core monetization roadmap
 
-### 12.3 Client -> Server events
-- `ready`
-- `answer.submit {questionId, answer, nonce}`
-- `emoji {type}` (safe preset only)
-- `ping`
-- `reconnect.resume {lastServerSeq}`
-
-### 12.4 Server -> Client events
-- `session.snapshot`
-- `question.start`
-- `answer.ack`
-- `score.update`
-- `player.state`
-- `round.end`
-- `match.result`
-- `moderation.notice`
-- `error`
-
-### 12.5 Reliability semantics
-- At-least-once delivery from server, client dedupe by `serverSeq`.
-- Client commands idempotent by `id`.
-- Heartbeat every 10s, timeout at 30s.
-
-### 12.6 Example `question.start`
-```json
-{
-  "t": "question.start",
-  "serverSeq": 81,
-  "body": {
-    "questionId": "q_123",
-    "prompt": "Choose the correct synonym for 'rapid'",
-    "options": ["slow", "fast", "quiet", "late"],
-    "timeLimitMs": 8000,
-    "nonce": "signed_nonce"
-  }
-}
-```
+### 8.2 Technical path
+1. Add optional realtime gateway for selected modes only
+2. Keep async mode as fallback for low-bandwidth regions
+3. Reuse same scoring and anti-cheat core logic
+4. Gradually migrate high-value cohorts to realtime queues
 
 ---
 
-## 13) Mobile/Web Shared Architecture
+## 9) Explicitly Deferred (Do Not Build Yet)
 
-### 13.1 Client strategy
-- Shared domain layer in **TypeScript**:
-  - protocol models
-  - state reducers
-  - validation & event codecs
-- Web: Next.js + React.
-- Mobile: React Native (or Flutter alt path), reuse protocol/state libs.
+- Multi-region active-active gameplay
+- Full microservice decomposition
+- Kafka/Pulsar event backbone
+- ML-based cheat detection
+- UGC/social chat at scale
+- Complex cosmetics marketplace
+- Advanced school admin portal
 
-### 13.2 Client architecture pattern
-- Feature modules: auth, queue, match, profile, leaderboard.
-- State: finite-state machine for match lifecycle.
-- Offline support: queued non-realtime actions (profile/customization), not ranked matches.
-
-### 13.3 Rendering/UX constraints
-- 60fps target on mid-tier devices.
-- Minimal payload question objects.
-- Accessibility: dyslexia-friendly font option, audio prompts, color-safe palette.
-
-### 13.4 App release controls
-- Remote config + feature flags.
-- Kill-switch for risky features and problematic question packs.
+Reason: none are required for month-1 break-even proof.
 
 ---
 
-## 14) CI/CD & Release Engineering
+## 10) Risks and Mitigations (Critique-Ready)
 
-### 14.1 Branching and environments
-- `main` -> staging -> production promotion.
-- Ephemeral preview env per PR.
-- Infra as code (Terraform/Pulumi).
+1. **Risk:** Async gameplay feels less exciting than realtime.
+   - **Mitigation:** short turn timers, instant result reveal, streak/rival systems.
 
-### 14.2 Pipeline stages
-1. Lint/type/unit tests.
-2. Contract tests (API + WS schemas).
-3. Integration tests (match simulation deterministic tests).
-4. Security scans (SAST, dependency, secrets).
-5. Load tests for matchmaking/session hotspots.
-6. Deploy canary 5% -> 25% -> 100% (automated guardrails).
+2. **Risk:** Polling increases API load.
+   - **Mitigation:** adaptive intervals, ETag/If-None-Match, lightweight payloads.
 
-### 14.3 Schema and event evolution
-- Backward-compatible event schema policy.
-- DB migration with expand/contract pattern.
-- Consumer-driven contracts mandatory for critical streams.
+3. **Risk:** Basic anti-cheat misses sophisticated abuse.
+   - **Mitigation:** reward holds + manual review + progressive rule updates.
+
+4. **Risk:** Single region hurts far users.
+   - **Mitigation:** async tolerance + CDN + defer realtime until justified.
 
 ---
 
-## 15) Observability & SRE
+## 11) Bottom Line
 
-### 15.1 Telemetry stack
-- OpenTelemetry instrumentation everywhere.
-- Metrics: Prometheus + long-term TSDB.
-- Logs: structured JSON with trace IDs.
-- Traces: Jaeger/Tempo.
+This architecture intentionally sacrifices realtime complexity to maximize:
+- speed to launch
+- operational simplicity
+- month-1 break-even probability
 
-### 15.2 Golden signals
-- Latency: matchmaking, WS round-trip, scoring finalize.
-- Traffic: active sessions, enqueue rate, event throughput.
-- Errors: dropped WS messages, failed joins, invalid answer rejects.
-- Saturation: Redis memory, broker lag, CPU per session worker.
-
-### 15.3 SLOs (initial)
-- Match join success: **99.5%**
-- Match completion without fatal error: **99.0%**
-- Reconnect recovery (<15s): **97%**
-- API availability (non-realtime): **99.9%**
-
-### 15.4 On-call and incident response
-- Service ownership map + runbooks.
-- Paging thresholds tied to SLO burn rates.
-- Game-impact severity matrix (SEV1/SEV2).
-
----
-
-## 16) Reliability, DR, and Multi-Region
-
-### 16.1 Regional topology
-- Active-active across primary regions (e.g., Singapore, Frankfurt, Virginia).
-- Players routed by latency + policy.
-- Match pinned to one region for duration.
-
-### 16.2 Stateful components strategy
-- Redis: regional clusters with persistence + failover.
-- PostgreSQL: regional writer + read replicas; asynchronous cross-region replication.
-- Event bus: multi-AZ per region; mirror critical topics cross-region.
-
-### 16.3 Disaster recovery
-- RPO targets:
-  - Match events: near-zero (event log durable replication)
-  - Profile/rating: < 1 minute
-- RTO targets:
-  - Realtime service region failover: < 15 minutes (new matches)
-  - Full control plane recovery: < 60 minutes
-
-### 16.4 Chaos testing
-- Inject broker delays, Redis failovers, packet loss on WS.
-- Validate reconnect/replay correctness and rating consistency.
-
----
-
-## 17) Security, Privacy, Child Safety, Compliance
-
-### 17.1 Security baseline
-- Zero-trust service auth (mTLS + workload identity).
-- Secrets in vault, short-lived creds.
-- Encryption at rest (KMS) + TLS 1.2+ in transit.
-- WAF + bot protection at edge.
-
-### 17.2 Privacy by design
-- Data minimization (no unnecessary PII in gameplay path).
-- Pseudonymous IDs in analytics.
-- Region-aware data residency controls.
-- Right-to-access/delete workflows.
-
-### 17.3 Child safety controls
-- Age gates and parent consent workflows.
-- Safe preset communications only (or no chat for minors).
-- Profanity/toxicity filtering for names/content.
-- Report/Block/Appeal with quick moderation SLA.
-
-### 17.4 Compliance targets
-- COPPA (US children), GDPR/GDPR-K (EU), UK AADC, local PDPA variants.
-- Audit logs immutable and retained per policy.
-- DPIA and threat modeling as release gates for new features.
-
----
-
-## 18) Scaling Plan: 0 -> 1M MAU
-
-### Phase 0 (0–20k MAU)
-- Modular monolith for non-realtime + dedicated realtime service.
-- Single region + CDN edge.
-- Managed Postgres/Redis/Kafka.
-- Focus: product-market fit, instrumentation correctness.
-
-### Phase 1 (20k–150k MAU)
-- Split matchmaking/ranking/content services.
-- Add second region for latency and resilience.
-- Introduce warehouse + feature store basics.
-- Mature anti-cheat heuristics.
-
-### Phase 2 (150k–500k MAU)
-- Active-active regions for realtime.
-- Dedicated event platform team, schema governance.
-- Advanced moderation tooling and trust/risk models.
-- ML-assisted personalization for question selection.
-
-### Phase 3 (500k–1M+ MAU)
-- Full global routing optimization and regional shards.
-- Stateful session autoscaling with predictive pre-warm.
-- Cost/perf tuning: spot mix, tiered storage, stream compaction.
-- Enterprise/school tenancy controls and SLAs.
-
-### Capacity planning heuristics
-- Peak CCU ~ 8–12% of DAU during event windows.
-- 1 match worker handles N concurrent matches by mode complexity.
-- Size Redis for 2x hot match state + failover headroom.
-
----
-
-## 19) Technical Risks and Mitigations
-
-| Risk | Impact | Likelihood | Mitigation |
-|---|---|---:|---|
-| Cross-region latency variance harms fairness | High | Medium | Region-pinned matches, RTT caps, dynamic queue expansion with fairness scoring |
-| Event schema drift breaks consumers | High | Medium | Schema registry, compatibility checks in CI, canary consumers |
-| Cheaters evade static rules | High | High | Layered detection + adaptive models + delayed rewards for risky sessions |
-| Ranking instability for new users | Medium | High | High-uncertainty model, provisional queues, smurf acceleration |
-| Child safety incident | Critical | Medium | Strict defaults, proactive moderation, auditable enforcement, rapid escalation playbook |
-| Reconnect edge cases desync match state | High | Medium | Sequence-based replay, deterministic state machine tests, chaos network tests |
-| Cost explosion from always-on realtime infra | High | Medium | Autoscaling + queue-aware prewarm + right-sized regions and bot fallback controls |
-| Content quality inconsistency across languages | Medium | Medium | Editorial workflow, calibration metrics, localized QA, retire-on-complaint policy |
-
----
-
-## 20) Sequence Diagrams
-
-### 20.1 Queue to match start
-```mermaid
-sequenceDiagram
-    participant U1 as Player A
-    participant U2 as Player B
-    participant API as API Gateway
-    participant MM as Matchmaking
-    participant RT as Realtime Orchestrator
-
-    U1->>API: POST /tickets
-    API->>MM: createTicket(A)
-    U2->>API: POST /tickets
-    API->>MM: createTicket(B)
-    MM->>MM: pair tickets by constraints
-    MM->>RT: createMatch(seed, roster, questionPack)
-    RT-->>API: matchId + join tokens
-    API-->>U1: match found
-    API-->>U2: match found
-    U1->>RT: WS connect + ready
-    U2->>RT: WS connect + ready
-    RT-->>U1: session.snapshot
-    RT-->>U2: session.snapshot
-    RT-->>U1: question.start
-    RT-->>U2: question.start
-```
-
-### 20.2 Answer and scoring
-```mermaid
-sequenceDiagram
-    participant C as Client
-    participant RT as Realtime
-    participant SC as Scoring
-    participant EV as Event Bus
-    participant RK as Ranking
-
-    C->>RT: answer.submit(questionId, answer, nonce)
-    RT->>RT: validate nonce + time window
-    RT->>EV: answer.submitted
-    RT->>SC: score(answer)
-    SC-->>RT: delta points
-    RT->>EV: score.updated
-    RT-->>C: answer.ack + score.update
-    RT->>EV: match.finished
-    RK->>EV: consume match.finished
-    RK->>RK: update Glicko-2
-    RK->>EV: rating.updated
-```
-
----
-
-## 21) Implementation Blueprint (First 2 Quarters)
-
-### Quarter 1
-- Build identity/profile/content foundations.
-- Ship 1v1 ranked duel MVP with English + one extra subject.
-- Implement authoritative realtime + basic matchmaking.
-- Add baseline telemetry, dashboards, and incident runbooks.
-
-### Quarter 2
-- Add seasonal leaderboard and party queue.
-- Introduce anti-cheat v1 + moderation workflows.
-- Launch second region and reconnect hardening.
-- Deploy warehouse models for learning effectiveness and churn risk.
-
----
-
-## 22) Open Decisions (for architecture review)
-
-1. **Protocol choice**: pure WS JSON vs binary protobuf over WS for bandwidth.
-2. **Rating model**: Glicko-2 default vs TrueSkill for team-heavy roadmap.
-3. **Mobile stack**: React Native shared code vs native clients with shared schema libs.
-4. **Event platform**: Kafka vs Pulsar tradeoff by ops maturity.
-5. **Data residency**: per-tenant strict residency vs global logical shards.
-6. **Bot policy**: disclosed vs undisclosed fallback bots by age cohort.
-
----
-
-## 23) Definition of Done for this Architecture
-- [ ] Latency/SLO targets ratified by Product + SRE.
-- [ ] Security/privacy/legal review completed.
-- [ ] API + WS schemas versioned and contract-tested.
-- [ ] Event schema registry and governance live.
-- [ ] Capacity model validated with synthetic load.
-- [ ] Incident game-day simulation passed.
-
----
-
-## Appendix A — Suggested Tech Stack (Pragmatic)
-- **Backend:** TypeScript (NestJS/Fastify) + Go for hot-path realtime if needed.
-- **Realtime:** WS gateway + authoritative session workers.
-- **Data:** Postgres, Redis, Kafka/Pulsar, S3/GCS + BigQuery/Snowflake.
-- **Infra:** Kubernetes + Istio/Linkerd, Terraform, ArgoCD/GitHub Actions.
-- **Observability:** OpenTelemetry, Prometheus, Grafana, Tempo/Jaeger, Loki.
-- **Security:** OPA policy checks, Vault, WAF/CDN, SIEM integration.
-
-## Appendix B — Example Queue Expansion Rules
-- 0–10s: rating ±50, ping <=80ms, same region.
-- 10–20s: rating ±100, ping <=120ms, adjacent region.
-- 20–35s: rating ±150, ping <=150ms.
-- 35s+: allow bot fill (except protected educational cohorts if policy forbids).
-
----
-
-This document is intentionally concrete and critique-ready. It should be paired with:
-1) API specification repository (OpenAPI + AsyncAPI),
-2) threat model document,
-3) load/perf test plan,
-4) rollout playbook per phase.
+It is not “less serious”; it is a staged strategy: **prove retention + monetization first, then buy complexity with revenue.**
