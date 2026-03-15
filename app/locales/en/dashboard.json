@@ -5,6 +5,9 @@
   "section_progress": "📊 {{name}}'s Progress",
   "section_subjects": "📚 Curriculum",
   "section_quick": "⚡ Quick Actions",
+  "btn_sign_out": "Sign Out",
+  "btn_add_child": "+ Add Child",
+  "btn_cancel": "Cancel",
   "child_placeholder": "Child's name",
   "child_year": "Birth year: {{year}} ({{age}} yrs old)",
   "child_selected": "Selected",
@@ -16,6 +19,7 @@
   "stat_streak": "Day Streak",
   "stat_week_quizzes": "Quizzes this week",
   "stat_current_tier": "Current Tier",
+  "stat_topics": "topics",
   "chart_7days": "📈 Activity (last 7 days)",
   "chart_topic_mastery": "🏆 Topic Mastery",
   "chart_recent": "🕐 Recent Activity",
@@ -23,5 +27,12 @@
   "no_quiz_data": "No quiz data yet",
   "do_quiz_now": "🎯 Do a Quiz now",
   "topic_accuracy": "{{pct}}% accurate",
-  "quiz_count": "{{n}} quizzes"
+  "quiz_count": "{{n}} quizzes",
+  "subject_english": "English",
+  "subject_english_desc": "Vocabulary, pronunciation, communication",
+  "subject_math": "Mathematics",
+  "subject_science": "Science",
+  "coming_soon": "Coming Soon",
+  "btn_do_quiz": "🎯 Do Quiz",
+  "btn_leaderboard": "🏆 Leaderboard"
 }

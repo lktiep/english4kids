@@ -5,6 +5,9 @@
   "section_progress": "📊 Tiến độ của {{name}}",
   "section_subjects": "📚 Giáo trình",
   "section_quick": "⚡ Hành động nhanh",
+  "btn_sign_out": "Đăng xuất",
+  "btn_add_child": "+ Thêm con",
+  "btn_cancel": "Hủy",
   "child_placeholder": "Tên con",
   "child_year": "Năm sinh: {{year}} ({{age}} tuổi)",
   "child_selected": "Đang chọn",
@@ -16,6 +19,7 @@
   "stat_streak": "Streak ngày",
   "stat_week_quizzes": "Quiz tuần này",
   "stat_current_tier": "Hạng hiện tại",
+  "stat_topics": "chủ đề",
   "chart_7days": "📈 Hoạt động 7 ngày qua",
   "chart_topic_mastery": "🏆 Thành thạo chủ đề",
   "chart_recent": "🕐 Hoạt động gần đây",
@@ -23,5 +27,12 @@
   "no_quiz_data": "Chưa có dữ liệu quiz nào",
   "do_quiz_now": "🎯 Làm Quiz ngay",
   "topic_accuracy": "{{pct}}% chính xác",
-  "quiz_count": "{{n}} quiz"
+  "quiz_count": "{{n}} quiz",
+  "subject_english": "Tiếng Anh",
+  "subject_english_desc": "Từ vựng, phát âm, giao tiếp",
+  "subject_math": "Toán học",
+  "subject_science": "Khoa học",
+  "coming_soon": "Sắp ra mắt",
+  "btn_do_quiz": "🎯 Làm Quiz",
+  "btn_leaderboard": "🏆 Bảng xếp hạng"
 }
