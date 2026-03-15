@@ -43,6 +43,7 @@ export default function DashboardPage() {
   const [weeklyData, setWeeklyData] = useState([]);
   const [topicStats, setTopicStats] = useState([]);
   const [statsLoading, setStatsLoading] = useState(false);
+  const [childrenStats, setChildrenStats] = useState({});
 
   const fetchStats = useCallback(async (childId) => {
     setStatsLoading(true);
@@ -151,6 +152,52 @@ export default function DashboardPage() {
     }
     setStatsLoading(false);
   }, []);
+
+  // Fetch mini stats for ALL children (for profile cards)
+  useEffect(() => {
+    if (!children || children.length === 0) return;
+    const fetchAllChildStats = async () => {
+      const statsMap = {};
+      await Promise.all(
+        children.map(async (child) => {
+          try {
+            const { data: attempts } = await supabase
+              .from("quiz_attempts")
+              .select("score, total_questions, created_at")
+              .eq("child_id", child.id);
+            if (attempts && attempts.length > 0) {
+              const totalQ = attempts.reduce(
+                (s, a) => s + a.total_questions,
+                0,
+              );
+              const totalC = attempts.reduce((s, a) => s + a.score, 0);
+              const topicsSet = new Set(attempts.map((a) => a.topic_name));
+              // Streak
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              let streak = 0;
+              let checkDate = new Date(today);
+              const dateSet = new Set(
+                attempts.map((a) => new Date(a.created_at).toDateString()),
+              );
+              while (dateSet.has(checkDate.toDateString())) {
+                streak++;
+                checkDate.setDate(checkDate.getDate() - 1);
+              }
+              statsMap[child.id] = {
+                quizzes: attempts.length,
+                accuracy: totalQ > 0 ? Math.round((totalC / totalQ) * 100) : 0,
+                streak,
+                topics: topicsSet.size,
+              };
+            }
+          } catch {}
+        }),
+      );
+      setChildrenStats(statsMap);
+    };
+    fetchAllChildStats();
+  }, [children]);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -262,35 +309,78 @@ export default function DashboardPage() {
           )}
 
           <div className={styles.childrenGrid}>
-            {children.map((child) => (
-              <div
-                key={child.id}
-                className={`${styles.childCard} ${activeChild?.id === child.id ? styles.activeChild : ""}`}
-                onClick={() => setActiveChild(child)}
-              >
-                <div className={styles.childAvatar}>{child.avatar || "🧒"}</div>
-                <div className={styles.childInfo}>
-                  <span className={styles.childName}>{child.name}</span>
-                  <span className={styles.childAge}>
-                    {currentYear - child.birth_year} tuổi
-                  </span>
-                </div>
-                {activeChild?.id === child.id && (
-                  <span className={styles.activeBadge}>
-                    {t("child_selected")}
-                  </span>
-                )}
-                <button
-                  className={styles.removeBtn}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    removeChild(child.id);
-                  }}
+            {children.map((child) => {
+              const cs = childrenStats[child.id];
+              return (
+                <div
+                  key={child.id}
+                  className={`${styles.childCard} ${activeChild?.id === child.id ? styles.activeChild : ""}`}
+                  onClick={() => setActiveChild(child)}
                 >
-                  ✕
-                </button>
-              </div>
-            ))}
+                  <div className={styles.childTopRow}>
+                    <div className={styles.childAvatar}>
+                      {child.avatar || "🧒"}
+                    </div>
+                    <div className={styles.childInfo}>
+                      <span className={styles.childName}>{child.name}</span>
+                      <span className={styles.childAge}>
+                        {currentYear - child.birth_year}{" "}
+                        {locale === "vi" ? "tuổi" : "yrs"}
+                      </span>
+                    </div>
+                    {activeChild?.id === child.id && (
+                      <span className={styles.activeBadge}>
+                        {t("child_selected")}
+                      </span>
+                    )}
+                    <button
+                      className={styles.removeBtn}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeChild(child.id);
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  {cs && (
+                    <div className={styles.childMetrics}>
+                      <div className={styles.metricItem}>
+                        <div
+                          className={styles.metricRing}
+                          style={{ "--pct": `${cs.accuracy}%` }}
+                        >
+                          <span className={styles.metricValue}>
+                            {cs.accuracy}%
+                          </span>
+                        </div>
+                        <span className={styles.metricLabel}>
+                          {locale === "vi" ? "Chính xác" : "Accuracy"}
+                        </span>
+                      </div>
+                      <div className={styles.metricItem}>
+                        <span className={styles.metricBig}>{cs.quizzes}</span>
+                        <span className={styles.metricLabel}>
+                          {locale === "vi" ? "Bài quiz" : "Quizzes"}
+                        </span>
+                      </div>
+                      <div className={styles.metricItem}>
+                        <span className={styles.metricBig}>{cs.topics}/16</span>
+                        <span className={styles.metricLabel}>
+                          {locale === "vi" ? "Chủ đề" : "Topics"}
+                        </span>
+                      </div>
+                      <div className={styles.metricItem}>
+                        <span className={styles.metricBig}>🔥{cs.streak}</span>
+                        <span className={styles.metricLabel}>
+                          {locale === "vi" ? "Chuỗi ngày" : "Streak"}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             {children.length === 0 && !showAddChild && (
               <div className={styles.emptyState}>
                 <span className={styles.emptyIcon}>👶</span>
@@ -515,15 +605,35 @@ export default function DashboardPage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{t("section_subjects")}</h2>
           <div className={styles.subjectsGrid}>
-            <div
+            <a
+              href="/learn/english"
               className={styles.subjectCard}
-              onClick={() => router.push("/learn/english")}
+              style={{ textDecoration: "none", color: "inherit" }}
             >
               <span className={styles.subjectIcon}>🇬🇧</span>
               <h3>{t("subject_english")}</h3>
               <p>{t("subject_english_desc")}</p>
-              <span className={styles.subjectBadge}>16 {t("stat_topics")}</span>
-            </div>
+              {topicStats.length > 0 ? (
+                <div className={styles.subjectProgress}>
+                  <div className={styles.progressBarWrap}>
+                    <div
+                      className={styles.progressBarFill}
+                      style={{
+                        width: `${Math.round((topicStats.length / 16) * 100)}%`,
+                      }}
+                    />
+                  </div>
+                  <span className={styles.progressText}>
+                    {topicStats.length}/16{" "}
+                    {locale === "vi" ? "chủ đề đã học" : "topics completed"}
+                  </span>
+                </div>
+              ) : (
+                <span className={styles.subjectBadge}>
+                  16 {t("stat_topics")}
+                </span>
+              )}
+            </a>
             <div className={`${styles.subjectCard} ${styles.comingSoon}`}>
               <span className={styles.subjectIcon}>🔢</span>
               <h3>{t("subject_math")}</h3>
