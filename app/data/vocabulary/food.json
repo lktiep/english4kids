@@ -14,6 +14,7 @@
       "pronunciation": "/raɪs/",
       "vietnamese": "Cơm",
       "emoji": "🍚",
+      "image": "/images/food/rice.png",
       "sentence": "I eat rice.",
       "sentenceVi": "Tôi ăn cơm."
     },
@@ -23,6 +24,7 @@
       "pronunciation": "/bred/",
       "vietnamese": "Bánh mì",
       "emoji": "🍞",
+      "image": "/images/food/bread.png",
       "sentence": "I like bread.",
       "sentenceVi": "Tôi thích bánh mì."
     },
@@ -32,6 +34,7 @@
       "pronunciation": "/mɪlk/",
       "vietnamese": "Sữa",
       "emoji": "🥛",
+      "image": "/images/food/milk.png",
       "sentence": "Drink your milk.",
       "sentenceVi": "Uống sữa nào."
     },
@@ -77,6 +80,7 @@
       "pronunciation": "/keɪk/",
       "vietnamese": "Bánh ngọt",
       "emoji": "🎂",
+      "image": "/images/food/cake.png",
       "sentence": "I like cake!",
       "sentenceVi": "Tôi thích bánh ngọt!"
     },

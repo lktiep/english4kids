@@ -1,0 +1,102 @@
+{
+  "topic": "space",
+  "title": "Space & Universe",
+  "titleVi": "Vũ trụ",
+  "icon": "🚀",
+  "color": "#8B5CF6",
+  "gradient": "linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "words": [
+    {
+      "id": "moon",
+      "word": "Moon",
+      "pronunciation": "/muːn/",
+      "vietnamese": "Mặt trăng",
+      "emoji": "🌙",
+      "sentence": "The moon is bright.",
+      "sentenceVi": "Mặt trăng rất sáng."
+    },
+    {
+      "id": "star",
+      "word": "Star",
+      "pronunciation": "/stɑːr/",
+      "vietnamese": "Ngôi sao",
+      "emoji": "⭐",
+      "sentence": "I see many stars.",
+      "sentenceVi": "Tôi thấy nhiều ngôi sao."
+    },
+    {
+      "id": "sun_space",
+      "word": "Sun",
+      "pronunciation": "/sʌn/",
+      "vietnamese": "Mặt trời",
+      "emoji": "☀️",
+      "sentence": "The sun is very big.",
+      "sentenceVi": "Mặt trời rất to."
+    },
+    {
+      "id": "rocket",
+      "word": "Rocket",
+      "pronunciation": "/ˈrɒkɪt/",
+      "vietnamese": "Tên lửa",
+      "emoji": "🚀",
+      "sentence": "The rocket goes up!",
+      "sentenceVi": "Tên lửa bay lên!"
+    },
+    {
+      "id": "planet",
+      "word": "Planet",
+      "pronunciation": "/ˈplænɪt/",
+      "vietnamese": "Hành tinh",
+      "emoji": "🪐",
+      "sentence": "Earth is our planet.",
+      "sentenceVi": "Trái đất là hành tinh của chúng ta."
+    },
+    {
+      "id": "astronaut",
+      "word": "Astronaut",
+      "pronunciation": "/ˈæstrənɔːt/",
+      "vietnamese": "Phi hành gia",
+      "emoji": "👨‍🚀",
+      "sentence": "I want to be an astronaut.",
+      "sentenceVi": "Tôi muốn trở thành phi hành gia."
+    },
+    {
+      "id": "earth",
+      "word": "Earth",
+      "pronunciation": "/ɜːrθ/",
+      "vietnamese": "Trái đất",
+      "emoji": "🌍",
+      "sentence": "We live on Earth.",
+      "sentenceVi": "Chúng ta sống trên Trái đất."
+    },
+    {
+      "id": "alien",
+      "word": "Alien",
+      "pronunciation": "/ˈeɪliən/",
+      "vietnamese": "Người ngoài hành tinh",
+      "emoji": "👽",
+      "sentence": "Is there an alien?",
+      "sentenceVi": "Có người ngoài hành tinh không?"
+    },
+    {
+      "id": "comet",
+      "word": "Comet",
+      "pronunciation": "/ˈkɒmɪt/",
+      "vietnamese": "Sao chổi",
+      "emoji": "☄️",
+      "sentence": "The comet is fast.",
+      "sentenceVi": "Sao chổi rất nhanh."
+    },
+    {
+      "id": "telescope",
+      "word": "Telescope",
+      "pronunciation": "/ˈtelɪskoʊp/",
+      "vietnamese": "Kính viễn vọng",
+      "emoji": "🔭",
+      "sentence": "I look through the telescope.",
+      "sentenceVi": "Tôi nhìn qua kính viễn vọng."
+    }
+  ]
+}

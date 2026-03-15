@@ -2,7 +2,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
   color: white;
-  font-family: 'Inter', var(--font-family);
+  font-family: "Inter", var(--font-family);
 }
 
 .header {
@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 32px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
@@ -22,7 +22,7 @@
   font-size: 20px;
   font-weight: 900;
   cursor: pointer;
-  background: linear-gradient(135deg, #4ECDC4, #A78BFA);
+  background: linear-gradient(135deg, #4ecdc4, #a78bfa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -44,21 +44,21 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .userName {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .signOutBtn {
   padding: 8px 16px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -67,8 +67,8 @@
 }
 
 .signOutBtn:hover {
-  background: rgba(255,82,82,0.15);
-  border-color: rgba(255,82,82,0.3);
+  background: rgba(255, 82, 82, 0.15);
+  border-color: rgba(255, 82, 82, 0.3);
   color: #ff5252;
 }
 
@@ -86,7 +86,7 @@
 }
 
 .subtitle {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 16px;
   margin-bottom: 48px;
 }
@@ -124,8 +124,8 @@
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  background: rgba(255,255,255,0.04);
-  border: 1.5px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -133,15 +133,15 @@
 }
 
 .childCard:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 
 .activeChild {
-  border-color: #4ECDC4 !important;
-  background: rgba(78,205,196,0.08) !important;
-  box-shadow: 0 0 0 3px rgba(78,205,196,0.15);
+  border-color: #4ecdc4 !important;
+  background: rgba(78, 205, 196, 0.08) !important;
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.15);
 }
 
 .childAvatar {
@@ -161,14 +161,14 @@
 
 .childAge {
   font-size: 13px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .activeBadge {
   font-size: 11px;
   font-weight: 700;
-  color: #4ECDC4;
-  background: rgba(78,205,196,0.12);
+  color: #4ecdc4;
+  background: rgba(78, 205, 196, 0.12);
   padding: 4px 10px;
   border-radius: 20px;
   margin-left: auto;
@@ -185,7 +185,7 @@
   justify-content: center;
   background: none;
   border: none;
-  color: rgba(255,255,255,0.2);
+  color: rgba(255, 255, 255, 0.2);
   font-size: 12px;
   cursor: pointer;
   border-radius: 50%;
@@ -193,7 +193,7 @@
 }
 
 .removeBtn:hover {
-  background: rgba(255,82,82,0.2);
+  background: rgba(255, 82, 82, 0.2);
   color: #ff5252;
 }
 
@@ -201,7 +201,7 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 48px 24px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .emptyIcon {
@@ -213,7 +213,7 @@
 /* Add Form */
 .addBtn {
   padding: 8px 18px;
-  background: linear-gradient(135deg, #4ECDC4, #44A08D);
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
   border: none;
   border-radius: 10px;
   color: white;
@@ -226,7 +226,7 @@
 
 .addBtn:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 16px rgba(78,205,196,0.3);
+  box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
 }
 
 .addForm {
@@ -236,10 +236,11 @@
   flex-wrap: wrap;
 }
 
-.input, .select {
+.input,
+.select {
   padding: 12px 16px;
-  background: rgba(255,255,255,0.06);
-  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   color: white;
   font-size: 15px;
@@ -248,8 +249,9 @@
   transition: border-color 0.2s;
 }
 
-.input:focus, .select:focus {
-  border-color: #4ECDC4;
+.input:focus,
+.select:focus {
+  border-color: #4ecdc4;
 }
 
 .input {
@@ -268,7 +270,7 @@
 
 .submitBtn {
   padding: 12px 24px;
-  background: linear-gradient(135deg, #4ECDC4, #44A08D);
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
   border: none;
   border-radius: 12px;
   color: white;
@@ -281,7 +283,7 @@
 
 .submitBtn:hover {
   transform: scale(1.03);
-  box-shadow: 0 4px 16px rgba(78,205,196,0.3);
+  box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
 }
 
 /* Subjects Grid */
@@ -293,18 +295,18 @@
 
 .subjectCard {
   padding: 24px;
-  background: rgba(255,255,255,0.04);
-  border: 1.5px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .subjectCard:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
   transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .subjectCard h3 {
@@ -314,7 +316,7 @@
 }
 
 .subjectCard p {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 14px;
   margin-bottom: 12px;
 }
@@ -326,8 +328,8 @@
 .subjectBadge {
   display: inline-block;
   padding: 4px 12px;
-  background: rgba(78,205,196,0.12);
-  color: #4ECDC4;
+  background: rgba(78, 205, 196, 0.12);
+  color: #4ecdc4;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 700;
@@ -340,14 +342,14 @@
 
 .comingSoon:hover {
   transform: none;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .comingSoonBadge {
   display: inline-block;
   padding: 4px 12px;
-  background: rgba(167,139,250,0.12);
-  color: #A78BFA;
+  background: rgba(167, 139, 250, 0.12);
+  color: #a78bfa;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 700;
@@ -365,8 +367,8 @@
   align-items: center;
   gap: 12px;
   padding: 20px 24px;
-  background: rgba(255,255,255,0.04);
-  border: 1.5px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   color: white;
   font-size: 16px;
@@ -377,8 +379,8 @@
 }
 
 .actionCard:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 

@@ -136,3 +136,62 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Child Profile Selector */
+.childSelector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 4px 8px 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.childSelector .childAvatar {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.childSelect {
+  background: transparent;
+  border: none;
+  color: white;
+  font-family: var(--font-family);
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  padding: 6px 4px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.childSelect option {
+  background: #2d2d3e;
+  color: white;
+}
+
+/* Login / Add Child Prompt */
+.loginPrompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-md);
+  padding: 10px 20px;
+  background: var(--gradient-ocean);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
+}
+
+.loginPrompt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(78, 205, 196, 0.4);
+}

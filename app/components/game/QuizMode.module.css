@@ -147,7 +147,7 @@
   position: relative;
   min-height: 140px;
   overflow: hidden;
-}	
+}
 
 /* Full-bleed image card */
 .hasImage {
@@ -209,7 +209,9 @@
 
 .selected {
   border-color: var(--primary) !important;
-  box-shadow: 0 0 0 4px rgba(78, 205, 196, 0.5), 0 8px 32px rgba(78, 205, 196, 0.3) !important;
+  box-shadow:
+    0 0 0 4px rgba(78, 205, 196, 0.5),
+    0 8px 32px rgba(78, 205, 196, 0.3) !important;
   transform: scale(1.03);
 }
 
@@ -224,23 +226,32 @@
 
 .previewed {
   border-color: var(--secondary) !important;
-  box-shadow: 0 0 0 4px rgba(255, 179, 71, 0.5), 0 0 24px rgba(255, 179, 71, 0.3) !important;
+  box-shadow:
+    0 0 0 4px rgba(255, 179, 71, 0.5),
+    0 0 24px rgba(255, 179, 71, 0.3) !important;
   animation: previewPulse 1.2s ease infinite !important;
   transform: scale(1.03);
 }
 
 @keyframes previewPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 4px rgba(255, 179, 71, 0.5), 0 0 24px rgba(255, 179, 71, 0.3);
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px rgba(255, 179, 71, 0.5),
+      0 0 24px rgba(255, 179, 71, 0.3);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(255, 179, 71, 0.3), 0 0 40px rgba(255, 179, 71, 0.2);
+    box-shadow:
+      0 0 0 8px rgba(255, 179, 71, 0.3),
+      0 0 40px rgba(255, 179, 71, 0.2);
   }
 }
 
 .correct {
   border: 4px solid #00e676 !important;
-  box-shadow: 0 0 0 6px rgba(0, 230, 118, 0.4), 0 0 40px rgba(0, 230, 118, 0.3) !important;
+  box-shadow:
+    0 0 0 6px rgba(0, 230, 118, 0.4),
+    0 0 40px rgba(0, 230, 118, 0.3) !important;
   transform: scale(1.05) !important;
   animation: correctGlow 0.8s ease !important;
 }
@@ -259,14 +270,29 @@
 }
 
 @keyframes correctGlow {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
-  50% { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(0, 230, 118, 0.4), 0 0 60px rgba(0, 230, 118, 0.3); }
-  100% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(0, 230, 118, 0.4), 0 0 40px rgba(0, 230, 118, 0.3); }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow:
+      0 0 0 10px rgba(0, 230, 118, 0.4),
+      0 0 60px rgba(0, 230, 118, 0.3);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 0 6px rgba(0, 230, 118, 0.4),
+      0 0 40px rgba(0, 230, 118, 0.3);
+  }
 }
 
 .wrong {
   border: 4px solid #ff5252 !important;
-  box-shadow: 0 0 0 4px rgba(255, 82, 82, 0.4), 0 0 24px rgba(255, 82, 82, 0.2) !important;
+  box-shadow:
+    0 0 0 4px rgba(255, 82, 82, 0.4),
+    0 0 24px rgba(255, 82, 82, 0.2) !important;
   animation: wrongShake 0.5s ease !important;
   opacity: 0.7;
 }
@@ -285,11 +311,22 @@
 }
 
 @keyframes wrongShake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-8px); }
-  40% { transform: translateX(8px); }
-  60% { transform: translateX(-5px); }
-  80% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(8px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
 }
 
 .optionLetter {
@@ -475,7 +512,147 @@
 
 .resultsActions {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* Confetti */
+.confettiContainer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.confettiPiece {
+  position: absolute;
+  top: -20px;
+  left: var(--x, 50vw);
+  width: 10px;
+  height: 10px;
+  background: var(--color, #ffd700);
+  border-radius: 2px;
+  animation: confettiFall var(--duration, 3s) var(--delay, 0s) ease-out forwards;
+  transform: rotate(var(--rotation, 0deg));
+}
+
+.confettiPiece:nth-child(odd) {
+  width: 6px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(720deg) scale(0.5);
+  }
+}
+
+/* Tier Badge */
+.tierBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid var(--tier-color, #6b7280);
+  border-radius: 100px;
+  margin-bottom: var(--space-lg);
+  box-shadow: 0 0 20px var(--tier-glow, transparent);
+  animation: tierPulse 2s ease infinite;
+}
+
+.tierIcon {
+  font-size: 24px;
+}
+
+.tierName {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--tier-color, #6b7280);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes tierPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--tier-glow, transparent);
+  }
+  50% {
+    box-shadow: 0 0 36px var(--tier-glow, transparent);
+  }
+}
+
+/* CTA Buttons */
+.ctaPrimary {
+  width: 100%;
+  max-width: 280px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.25s;
+  box-shadow: 0 6px 24px rgba(78, 205, 196, 0.3);
+}
+
+.ctaPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(78, 205, 196, 0.4);
+}
+
+.ctaSecondary {
+  width: 100%;
+  max-width: 280px;
+  padding: 12px 28px;
+  background: rgba(255, 215, 0, 0.08);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 14px;
+  color: #ffd700;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.25s;
+}
+
+.ctaSecondary:hover {
+  background: rgba(255, 215, 0, 0.14);
+  border-color: rgba(255, 215, 0, 0.35);
+  transform: translateY(-1px);
+}
+
+.ctaGhost {
+  width: 100%;
+  max-width: 280px;
+  padding: 10px 28px;
+  background: transparent;
+  border: none;
+  border-radius: 14px;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.5));
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all 0.2s;
+}
+
+.ctaGhost:hover {
+  color: var(--text-primary, white);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Animations */

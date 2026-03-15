@@ -1,7 +1,13 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from "react";
+import { supabase } from "../lib/supabase";
 
 const AuthContext = createContext({});
 
@@ -11,6 +17,27 @@ export function AuthProvider({ children: childrenProp }) {
   const [children, setChildren] = useState([]);
   const [activeChild, setActiveChild] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const fetchProfile = useCallback(async (userId) => {
+    const { data } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .single();
+    setProfile(data);
+  }, []);
+
+  const fetchChildren = useCallback(async (userId) => {
+    const { data } = await supabase
+      .from("children")
+      .select("*")
+      .eq("parent_id", userId)
+      .order("created_at", { ascending: true });
+    setChildren(data || []);
+    if (data?.length > 0) {
+      setActiveChild((prev) => prev || data[0]);
+    }
+  }, []);
 
   useEffect(() => {
     // Get initial session
@@ -24,53 +51,31 @@ export function AuthProvider({ children: childrenProp }) {
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          fetchProfile(session.user.id);
-          fetchChildren(session.user.id);
-        } else {
-          setProfile(null);
-          setChildren([]);
-          setActiveChild(null);
-        }
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchProfile(session.user.id);
+        fetchChildren(session.user.id);
+      } else {
+        setProfile(null);
+        setChildren([]);
+        setActiveChild(null);
       }
-    );
+    });
 
     return () => subscription.unsubscribe();
-  }, []);
-
-  async function fetchProfile(userId) {
-    const { data } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .single();
-    setProfile(data);
-  }
-
-  async function fetchChildren(userId) {
-    const { data } = await supabase
-      .from('children')
-      .select('*')
-      .eq('parent_id', userId)
-      .order('created_at', { ascending: true });
-    setChildren(data || []);
-    // Auto-select first child if none selected
-    if (data?.length > 0 && !activeChild) {
-      setActiveChild(data[0]);
-    }
-  }
+  }, [fetchProfile, fetchChildren]);
 
   async function signInWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
+      provider: "google",
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
-    if (error) console.error('Error signing in:', error);
+    if (error) console.error("Error signing in:", error);
   }
 
   async function signOut() {
@@ -83,7 +88,7 @@ export function AuthProvider({ children: childrenProp }) {
 
   async function addChild(name, birthYear) {
     const { data, error } = await supabase
-      .from('children')
+      .from("children")
       .insert({
         parent_id: user.id,
         name,
@@ -92,24 +97,29 @@ export function AuthProvider({ children: childrenProp }) {
       .select()
       .single();
     if (data) {
-      setChildren(prev => [...prev, data]);
+      setChildren((prev) => [...prev, data]);
       if (!activeChild) setActiveChild(data);
     }
     return { data, error };
   }
 
   async function removeChild(childId) {
-    await supabase.from('children').delete().eq('id', childId);
-    setChildren(prev => prev.filter(c => c.id !== childId));
+    await supabase.from("children").delete().eq("id", childId);
+    setChildren((prev) => prev.filter((c) => c.id !== childId));
     if (activeChild?.id === childId) {
-      setActiveChild(children.find(c => c.id !== childId) || null);
+      setActiveChild(children.find((c) => c.id !== childId) || null);
     }
   }
 
-  async function saveQuizAttempt(topicName, score, totalQuestions, timeSeconds) {
+  async function saveQuizAttempt(
+    topicName,
+    score,
+    totalQuestions,
+    timeSeconds,
+  ) {
     if (!activeChild) return;
     const { data, error } = await supabase
-      .from('quiz_attempts')
+      .from("quiz_attempts")
       .insert({
         child_id: activeChild.id,
         topic_name: topicName,
@@ -119,29 +129,34 @@ export function AuthProvider({ children: childrenProp }) {
       })
       .select()
       .single();
-    
+
     // Update weekly leaderboard
     if (data && !error) {
       const weekStart = getWeekStart();
-      await supabase.rpc('upsert_leaderboard', {
-        p_child_id: activeChild.id,
-        p_child_name: activeChild.name,
-        p_parent_id: user.id,
-        p_country: profile?.country || 'VN',
-        p_score: score,
-        p_week_start: weekStart,
-      }).catch(() => {
-        // Fallback: direct upsert
-        supabase.from('leaderboard_weekly').upsert({
-          child_id: activeChild.id,
-          child_name: activeChild.name,
-          parent_id: user.id,
-          country: profile?.country || 'VN',
-          total_score: score,
-          total_quizzes: 1,
-          week_start: weekStart,
-        }, { onConflict: 'child_id,week_start' });
-      });
+      await supabase
+        .rpc("upsert_leaderboard", {
+          p_child_id: activeChild.id,
+          p_child_name: activeChild.name,
+          p_parent_id: user.id,
+          p_country: profile?.country || "VN",
+          p_score: score,
+          p_week_start: weekStart,
+        })
+        .catch(() => {
+          // Fallback: direct upsert
+          supabase.from("leaderboard_weekly").upsert(
+            {
+              child_id: activeChild.id,
+              child_name: activeChild.name,
+              parent_id: user.id,
+              country: profile?.country || "VN",
+              total_score: score,
+              total_quizzes: 1,
+              week_start: weekStart,
+            },
+            { onConflict: "child_id,week_start" },
+          );
+        });
     }
     return { data, error };
   }
@@ -162,9 +177,7 @@ export function AuthProvider({ children: childrenProp }) {
   };
 
   return (
-    <AuthContext.Provider value={value}>
-      {childrenProp}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{childrenProp}</AuthContext.Provider>
   );
 }
 
@@ -177,5 +190,5 @@ function getWeekStart() {
   const day = now.getDay();
   const diff = now.getDate() - day + (day === 0 ? -6 : 1);
   const weekStart = new Date(now.setDate(diff));
-  return weekStart.toISOString().split('T')[0];
+  return weekStart.toISOString().split("T")[0];
 }

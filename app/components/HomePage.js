@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { useGame } from "@/app/context/GameContext";
+import { useAuth } from "@/app/context/AuthContext";
 import { getAllTopics, getGradeInfo } from "@/app/utils/topics";
 import topicsRegistry from "@/app/data/topics.json";
 import { useSound } from "@/app/hooks/useSpeech";
@@ -18,6 +20,8 @@ import styles from "./HomePage.module.css";
 
 export default function HomePage() {
   const game = useGame();
+  const { user, activeChild, children, setActiveChild } = useAuth();
+  const router = useRouter();
   const { play } = useSound();
   const [currentView, setCurrentView] = useState("home");
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -98,9 +102,31 @@ export default function HomePage() {
         <div className={styles.headerTop}>
           <div className={styles.logo}>
             <span className={styles.logoIcon}>🎓</span>
-            <h1 className={styles.logoText}>EnglishKids</h1>
+            <h1 className={styles.logoText}>EduKids</h1>
           </div>
           <div className={styles.headerActions}>
+            {/* Child Profile Selector */}
+            {user && activeChild && (
+              <div className={styles.childSelector}>
+                <span className={styles.childAvatar}>
+                  {activeChild.avatar || "🧒"}
+                </span>
+                <select
+                  className={styles.childSelect}
+                  value={activeChild.id}
+                  onChange={(e) => {
+                    const child = children.find((c) => c.id === e.target.value);
+                    if (child) setActiveChild(child);
+                  }}
+                >
+                  {children.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <button
               className={styles.badgeBtn}
               onClick={() => {
@@ -128,8 +154,24 @@ export default function HomePage() {
 
       {/* Welcome */}
       <section className={styles.welcome}>
-        <h2>Chào bé! 👋</h2>
+        <h2>Chào{activeChild ? ` ${activeChild.name}` : " bé"}! 👋</h2>
         <p>Hôm nay mình học gì nào?</p>
+        {!user && (
+          <button
+            className={styles.loginPrompt}
+            onClick={() => router.push("/login")}
+          >
+            🔑 Đăng nhập để lưu điểm lên bảng xếp hạng
+          </button>
+        )}
+        {user && !activeChild && children.length === 0 && (
+          <button
+            className={styles.loginPrompt}
+            onClick={() => router.push("/dashboard")}
+          >
+            👶 Thêm hồ sơ bé để lưu tiến độ học
+          </button>
+        )}
       </section>
 
       {/* Topic Grids — grouped by grade */}

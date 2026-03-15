@@ -1,10 +1,44 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { useGame } from "@/app/context/GameContext";
+import { useAuth } from "@/app/context/AuthContext";
 import { useSpeech, useSound } from "@/app/hooks/useSpeech";
 import { shuffle } from "@/app/utils/topics";
+import { getTier, getTierProgress } from "@/app/utils/rankTiers";
 import styles from "./QuizMode.module.css";
+
+// Pre-compute confetti data at module level (pure)
+const CONFETTI_PIECES = Array.from({ length: 30 }, (_, i) => ({
+  x: `${(i * 3.33) % 100}vw`,
+  delay: `${i * 0.067}s`,
+  duration: `${2 + i * 0.067}s`,
+  color: ["#FFD700", "#4ECDC4", "#FF6B6B", "#A78BFA", "#FFB347", "#00E676"][
+    i % 6
+  ],
+  rotation: `${i * 12}deg`,
+}));
+
+function ConfettiOverlay() {
+  return (
+    <div className={styles.confettiContainer} aria-hidden="true">
+      {CONFETTI_PIECES.map((p, i) => (
+        <div
+          key={i}
+          className={styles.confettiPiece}
+          style={{
+            "--x": p.x,
+            "--delay": p.delay,
+            "--duration": p.duration,
+            "--color": p.color,
+            "--rotation": p.rotation,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 // Generate questions outside component to avoid lint issues
 function generateQuestions(topic) {
@@ -28,8 +62,15 @@ export default function QuizMode({
   onToggleCamera,
 }) {
   const game = useGame();
+  const { activeChild, saveQuizAttempt } = useAuth();
+  const router = useRouter();
   const { speak } = useSpeech();
   const { play } = useSound();
+  const startTimeRef = useRef(null);
+
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+  }, []);
 
   const [questions] = useState(() => generateQuestions(topic));
   const totalQuestions = questions.length;
@@ -40,6 +81,7 @@ export default function QuizMode({
   const [score, setScore] = useState({ correct: 0, total: 0 });
   const [streak, setStreak] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [finishedDuration, setFinishedDuration] = useState(0);
 
   // Gesture preview: highlighted but not submitted yet
   const [gesturePreview, setGesturePreview] = useState(null);
@@ -146,9 +188,29 @@ export default function QuizMode({
       setWrongFeedback(false);
     } else {
       play("complete");
+      const durationMs = Date.now() - (startTimeRef.current || Date.now());
+      const timeSeconds = Math.round(durationMs / 1000);
+      setFinishedDuration(timeSeconds);
       setFinished(true);
+      // Save to Supabase
+      if (saveQuizAttempt) {
+        saveQuizAttempt(
+          topic.topic,
+          score.correct,
+          score.total,
+          timeSeconds,
+        ).catch(() => {});
+      }
     }
-  }, [currentQ, totalQuestions, play]);
+  }, [
+    currentQ,
+    totalQuestions,
+    play,
+    saveQuizAttempt,
+    score.correct,
+    score.total,
+    topic,
+  ]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -211,7 +273,12 @@ export default function QuizMode({
       }
 
       // Fist (0 fingers): confirm selection immediately
-      if (fingerCount === 0 && gesturePreview && !showResult && !wrongFeedback) {
+      if (
+        fingerCount === 0 &&
+        gesturePreview &&
+        !showResult &&
+        !wrongFeedback
+      ) {
         confirmGestureSelection();
       }
     };
@@ -236,10 +303,20 @@ export default function QuizMode({
       score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0;
     const stars =
       accuracy >= 90 ? 3 : accuracy >= 70 ? 2 : accuracy >= 50 ? 1 : 0;
+    const durationSec = finishedDuration;
+    const minutes = Math.floor(durationSec / 60);
+    const seconds = durationSec % 60;
+    const timeStr = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+    const tier = getTier(score.correct * 10); // rough preview
+    const showConfetti = accuracy >= 70;
 
     return (
       <div className={styles.resultsScreen}>
+        {/* Confetti */}
+        {showConfetti && <ConfettiOverlay />}
+
         <div className={styles.resultsContent}>
+          {/* Stars */}
           <div className={styles.starsRow}>
             {[1, 2, 3].map((i) => (
               <span
@@ -250,7 +327,19 @@ export default function QuizMode({
               </span>
             ))}
           </div>
+
           <h2>{accuracy >= 70 ? "Giỏi lắm! 🎉" : "Cố gắng lên nhé! 💪"}</h2>
+
+          {/* Tier Badge */}
+          <div
+            className={styles.tierBadge}
+            style={{ "--tier-color": tier.color, "--tier-glow": tier.glow }}
+          >
+            <span className={styles.tierIcon}>{tier.icon}</span>
+            <span className={styles.tierName}>{tier.name}</span>
+          </div>
+
+          {/* Stats Grid */}
           <div className={styles.scoreCard}>
             <div className={styles.scoreStat}>
               <span className={styles.scoreNum}>{score.correct}</span>
@@ -266,9 +355,28 @@ export default function QuizMode({
               <span className={styles.scoreNum}>{accuracy}%</span>
               <span className={styles.scoreLabel}>Chính xác</span>
             </div>
+            <div className={styles.scoreDivider} />
+            <div className={styles.scoreStat}>
+              <span className={styles.scoreNum}>{timeStr}</span>
+              <span className={styles.scoreLabel}>Thời gian</span>
+            </div>
           </div>
+
+          {/* CTA Buttons */}
           <div className={styles.resultsActions}>
-            <button className="btn btn-primary" onClick={onBack}>
+            <button className={styles.ctaPrimary} onClick={onBack}>
+              🔄 Làm quiz khác
+            </button>
+            <button
+              className={styles.ctaSecondary}
+              onClick={() => router.push("/leaderboard")}
+            >
+              🏆 Bảng xếp hạng
+            </button>
+            <button
+              className={styles.ctaGhost}
+              onClick={() => router.push("/")}
+            >
               🏠 Về trang chủ
             </button>
           </div>
@@ -353,7 +461,11 @@ export default function QuizMode({
               className={`${optionClass} ${option.image ? styles.hasImage : ""}`}
               onClick={() => handleClickSelect(option)}
               disabled={showResult || wrongFeedback}
-              style={option.image ? { backgroundImage: `url(${option.image})` } : undefined}
+              style={
+                option.image
+                  ? { backgroundImage: `url(${option.image})` }
+                  : undefined
+              }
             >
               <span className={styles.optionLetter}>{num}</span>
               {!option.image && (

@@ -1,0 +1,102 @@
+{
+  "topic": "dinosaurs",
+  "title": "Dinosaurs",
+  "titleVi": "Khủng long",
+  "icon": "🦕",
+  "color": "#059669",
+  "gradient": "linear-gradient(135deg, #059669 0%, #10B981 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "words": [
+    {
+      "id": "trex",
+      "word": "T-Rex",
+      "pronunciation": "/ˈtiːreks/",
+      "vietnamese": "Khủng long bạo chúa",
+      "emoji": "🦖",
+      "sentence": "T-Rex is very big!",
+      "sentenceVi": "Khủng long bạo chúa rất to!"
+    },
+    {
+      "id": "triceratops",
+      "word": "Triceratops",
+      "pronunciation": "/traɪˈserətɒps/",
+      "vietnamese": "Khủng long ba sừng",
+      "emoji": "🦕",
+      "sentence": "Triceratops has three horns.",
+      "sentenceVi": "Khủng long ba sừng có ba chiếc sừng."
+    },
+    {
+      "id": "pterodactyl",
+      "word": "Pterodactyl",
+      "pronunciation": "/ˌterəˈdæktɪl/",
+      "vietnamese": "Thằn lằn bay",
+      "emoji": "🦅",
+      "sentence": "Pterodactyl can fly.",
+      "sentenceVi": "Thằn lằn bay có thể bay."
+    },
+    {
+      "id": "stegosaurus",
+      "word": "Stegosaurus",
+      "pronunciation": "/ˌstegəˈsɔːrəs/",
+      "vietnamese": "Khủng long gai",
+      "emoji": "🦕",
+      "sentence": "Stegosaurus eats plants.",
+      "sentenceVi": "Khủng long gai ăn cây cỏ."
+    },
+    {
+      "id": "velociraptor",
+      "word": "Velociraptor",
+      "pronunciation": "/vɪˈlɒsɪræptər/",
+      "vietnamese": "Khủng long chạy nhanh",
+      "emoji": "🦖",
+      "sentence": "Velociraptor is very fast.",
+      "sentenceVi": "Khủng long chạy nhanh rất nhanh."
+    },
+    {
+      "id": "fossil",
+      "word": "Fossil",
+      "pronunciation": "/ˈfɒsəl/",
+      "vietnamese": "Hóa thạch",
+      "emoji": "🦴",
+      "sentence": "I found a fossil!",
+      "sentenceVi": "Tôi tìm thấy hóa thạch!"
+    },
+    {
+      "id": "egg_dino",
+      "word": "Dino Egg",
+      "pronunciation": "/ˈdaɪnoʊ eɡ/",
+      "vietnamese": "Trứng khủng long",
+      "emoji": "🥚",
+      "sentence": "The dino egg is big.",
+      "sentenceVi": "Trứng khủng long rất to."
+    },
+    {
+      "id": "volcano",
+      "word": "Volcano",
+      "pronunciation": "/vɒlˈkeɪnoʊ/",
+      "vietnamese": "Núi lửa",
+      "emoji": "🌋",
+      "sentence": "The volcano is hot!",
+      "sentenceVi": "Núi lửa rất nóng!"
+    },
+    {
+      "id": "herbivore",
+      "word": "Herbivore",
+      "pronunciation": "/ˈhɜːrbɪvɔːr/",
+      "vietnamese": "Ăn cỏ",
+      "emoji": "🌿",
+      "sentence": "A herbivore eats plants.",
+      "sentenceVi": "Động vật ăn cỏ ăn cây."
+    },
+    {
+      "id": "carnivore",
+      "word": "Carnivore",
+      "pronunciation": "/ˈkɑːrnɪvɔːr/",
+      "vietnamese": "Ăn thịt",
+      "emoji": "🍖",
+      "sentence": "T-Rex is a carnivore.",
+      "sentenceVi": "T-Rex là động vật ăn thịt."
+    }
+  ]
+}

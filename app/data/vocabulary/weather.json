@@ -14,6 +14,7 @@
       "pronunciation": "/ˈsʌni/",
       "vietnamese": "Nắng",
       "emoji": "☀️",
+      "image": "/images/weather/sun.png",
       "sentence": "Today is sunny.",
       "sentenceVi": "Hôm nay trời nắng."
     },
@@ -23,6 +24,7 @@
       "pronunciation": "/ˈreɪni/",
       "vietnamese": "Mưa",
       "emoji": "🌧️",
+      "image": "/images/weather/rain.png",
       "sentence": "It is rainy today.",
       "sentenceVi": "Hôm nay trời mưa."
     },
@@ -50,6 +52,7 @@
       "pronunciation": "/ˈsnoʊi/",
       "vietnamese": "Tuyết",
       "emoji": "❄️",
+      "image": "/images/weather/snow.png",
       "sentence": "It is snowy in winter.",
       "sentenceVi": "Trời có tuyết vào mùa đông."
     },
@@ -95,6 +98,7 @@
       "pronunciation": "/ˈreɪnboʊ/",
       "vietnamese": "Cầu vồng",
       "emoji": "🌈",
+      "image": "/images/weather/rainbow.png",
       "sentence": "I see a rainbow!",
       "sentenceVi": "Tôi thấy cầu vồng!"
     }

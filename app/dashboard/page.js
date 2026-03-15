@@ -1,21 +1,31 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import styles from './dashboard.module.css';
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import styles from "./dashboard.module.css";
 
 export default function DashboardPage() {
-  const { user, profile, children, activeChild, setActiveChild, loading, signOut, addChild, removeChild } = useAuth();
+  const {
+    user,
+    profile,
+    children,
+    activeChild,
+    setActiveChild,
+    loading,
+    signOut,
+    addChild,
+    removeChild,
+  } = useAuth();
   const router = useRouter();
   const [showAddChild, setShowAddChild] = useState(false);
-  const [childName, setChildName] = useState('');
+  const [childName, setChildName] = useState("");
   const [birthYear, setBirthYear] = useState(2020);
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [user, loading, router]);
 
@@ -25,7 +35,7 @@ export default function DashboardPage() {
     e.preventDefault();
     if (!childName.trim()) return;
     await addChild(childName.trim(), birthYear);
-    setChildName('');
+    setChildName("");
     setBirthYear(2020);
     setShowAddChild(false);
   };
@@ -41,7 +51,9 @@ export default function DashboardPage() {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
-          <span className={styles.logo} onClick={() => router.push('/')}>🎓 EduKids</span>
+          <span className={styles.logo} onClick={() => router.push("/")}>
+            🎓 EduKids
+          </span>
         </div>
         <div className={styles.headerRight}>
           <div className={styles.userInfo}>
@@ -49,25 +61,33 @@ export default function DashboardPage() {
               // eslint-disable-next-line @next/next/no-img-element
               <img src={profile.avatar_url} alt="" className={styles.avatar} />
             )}
-            <span className={styles.userName}>{profile?.display_name || user.email}</span>
+            <span className={styles.userName}>
+              {profile?.display_name || user.email}
+            </span>
           </div>
-          <button className={styles.signOutBtn} onClick={signOut}>Đăng xuất</button>
+          <button className={styles.signOutBtn} onClick={signOut}>
+            Đăng xuất
+          </button>
         </div>
       </header>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Xin chào, {profile?.display_name?.split(' ')[0]} 👋</h1>
-        <p className={styles.subtitle}>Quản lý hồ sơ con em và theo dõi tiến độ học tập</p>
+        <h1 className={styles.title}>
+          Xin chào, {profile?.display_name?.split(" ")[0]} 👋
+        </h1>
+        <p className={styles.subtitle}>
+          Quản lý hồ sơ con em và theo dõi tiến độ học tập
+        </p>
 
         {/* Children Section */}
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>👧 Hồ sơ con em</h2>
-            <button 
+            <button
               className={styles.addBtn}
               onClick={() => setShowAddChild(!showAddChild)}
             >
-              {showAddChild ? '✕ Hủy' : '+ Thêm con'}
+              {showAddChild ? "✕ Hủy" : "+ Thêm con"}
             </button>
           </div>
 
@@ -86,11 +106,15 @@ export default function DashboardPage() {
                 onChange={(e) => setBirthYear(Number(e.target.value))}
                 className={styles.select}
               >
-                {yearOptions.map(y => (
-                  <option key={y} value={y}>Năm sinh: {y} ({currentYear - y} tuổi)</option>
+                {yearOptions.map((y) => (
+                  <option key={y} value={y}>
+                    Năm sinh: {y} ({currentYear - y} tuổi)
+                  </option>
                 ))}
               </select>
-              <button type="submit" className={styles.submitBtn}>Thêm</button>
+              <button type="submit" className={styles.submitBtn}>
+                Thêm
+              </button>
             </form>
           )}
 
@@ -98,20 +122,25 @@ export default function DashboardPage() {
             {children.map((child) => (
               <div
                 key={child.id}
-                className={`${styles.childCard} ${activeChild?.id === child.id ? styles.activeChild : ''}`}
+                className={`${styles.childCard} ${activeChild?.id === child.id ? styles.activeChild : ""}`}
                 onClick={() => setActiveChild(child)}
               >
-                <div className={styles.childAvatar}>{child.avatar || '🧒'}</div>
+                <div className={styles.childAvatar}>{child.avatar || "🧒"}</div>
                 <div className={styles.childInfo}>
                   <span className={styles.childName}>{child.name}</span>
-                  <span className={styles.childAge}>{currentYear - child.birth_year} tuổi</span>
+                  <span className={styles.childAge}>
+                    {currentYear - child.birth_year} tuổi
+                  </span>
                 </div>
                 {activeChild?.id === child.id && (
                   <span className={styles.activeBadge}>Đang chọn</span>
                 )}
                 <button
                   className={styles.removeBtn}
-                  onClick={(e) => { e.stopPropagation(); removeChild(child.id); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    removeChild(child.id);
+                  }}
                 >
                   ✕
                 </button>
@@ -121,7 +150,10 @@ export default function DashboardPage() {
               <div className={styles.emptyState}>
                 <span className={styles.emptyIcon}>👶</span>
                 <p>Chưa có hồ sơ con em nào</p>
-                <button className={styles.addBtn} onClick={() => setShowAddChild(true)}>
+                <button
+                  className={styles.addBtn}
+                  onClick={() => setShowAddChild(true)}
+                >
                   + Thêm con ngay
                 </button>
               </div>
@@ -133,7 +165,10 @@ export default function DashboardPage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>📚 Giáo trình</h2>
           <div className={styles.subjectsGrid}>
-            <div className={styles.subjectCard} onClick={() => router.push('/')}>
+            <div
+              className={styles.subjectCard}
+              onClick={() => router.push("/learn/english")}
+            >
               <span className={styles.subjectIcon}>🇬🇧</span>
               <h3>Tiếng Anh</h3>
               <p>Từ vựng, flashcard, quiz tương tác</p>
@@ -159,11 +194,17 @@ export default function DashboardPage() {
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>⚡ Hành động nhanh</h2>
             <div className={styles.actionsGrid}>
-              <button className={styles.actionCard} onClick={() => router.push('/')}>
+              <button
+                className={styles.actionCard}
+                onClick={() => router.push("/learn/english")}
+              >
                 <span>🎯</span>
                 <span>Làm Quiz</span>
               </button>
-              <button className={styles.actionCard} onClick={() => router.push('/leaderboard')}>
+              <button
+                className={styles.actionCard}
+                onClick={() => router.push("/leaderboard")}
+              >
                 <span>🏆</span>
                 <span>Bảng xếp hạng</span>
               </button>
