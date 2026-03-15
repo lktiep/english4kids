@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preview": "opennextjs-cloudflare build && wrangler dev",
+    "deploy": "opennextjs-cloudflare build && wrangler pages deploy .open-next/assets --project-name=english4kids --branch=main --commit-dirty=true"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^0.10.32",

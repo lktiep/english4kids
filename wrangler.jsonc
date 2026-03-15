@@ -1,7 +1,19 @@
 {
   "name": "english4kids",
+  "main": ".open-next/worker.js",
   "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2024-09-23",
-  "pages_build_output_dir": ".open-next/assets",
-  "vars": {}
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    { "pattern": "english4kids.jackle.dev/*", "zone_name": "jackle.dev" }
+  ],
+  "vars": {
+    "NEXT_PUBLIC_SUPABASE_URL": "https://hgqigpgrzwgmlwzplpgu.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_PcMcsynfGDN0hq8DO2f3Pg_lfB5nn7G",
+    "NEXT_PUBLIC_ADMIN_EMAILS": "hkdjackshrimp@gmail.com"
+  }
 }
+
