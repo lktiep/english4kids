@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useI18n } from "../context/i18nContext";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { supabase } from "../lib/supabase";
+import { getTier, getTierProgress } from "../utils/rankTiers";
 import styles from "./dashboard.module.css";
 
 export default function DashboardPage() {
@@ -19,15 +21,154 @@ export default function DashboardPage() {
     removeChild,
   } = useAuth();
   const router = useRouter();
+  const { t, locale, setLocale, loadPage } = useI18n();
   const [showAddChild, setShowAddChild] = useState(false);
   const [childName, setChildName] = useState("");
   const [birthYear, setBirthYear] = useState(2020);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      await loadPage("dashboard");
+      if (cancelled) return;
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [loadPage]);
+
+  // Stats state
+  const [stats, setStats] = useState(null);
+  const [recentQuizzes, setRecentQuizzes] = useState([]);
+  const [weeklyData, setWeeklyData] = useState([]);
+  const [topicStats, setTopicStats] = useState([]);
+  const [statsLoading, setStatsLoading] = useState(false);
+
+  const fetchStats = useCallback(async (childId) => {
+    setStatsLoading(true);
+    try {
+      // Fetch all quiz attempts for this child
+      const { data: attempts } = await supabase
+        .from("quiz_attempts")
+        .select("*")
+        .eq("child_id", childId)
+        .order("created_at", { ascending: false });
+
+      if (!attempts || attempts.length === 0) {
+        setStats(null);
+        setRecentQuizzes([]);
+        setWeeklyData([]);
+        setTopicStats([]);
+        setStatsLoading(false);
+        return;
+      }
+
+      // Overview stats
+      const totalQuizzes = attempts.length;
+      const totalCorrect = attempts.reduce((s, a) => s + a.score, 0);
+      const totalQuestions = attempts.reduce(
+        (s, a) => s + a.total_questions,
+        0,
+      );
+      const avgAccuracy =
+        totalQuestions > 0
+          ? Math.round((totalCorrect / totalQuestions) * 100)
+          : 0;
+      const avgTime = Math.round(
+        attempts.reduce((s, a) => s + (a.time_seconds || 0), 0) / totalQuizzes,
+      );
+
+      // Streak: count consecutive days with quizzes
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      let streak = 0;
+      let checkDate = new Date(today);
+      const dateSet = new Set(
+        attempts.map((a) => new Date(a.created_at).toDateString()),
+      );
+      while (dateSet.has(checkDate.toDateString())) {
+        streak++;
+        checkDate.setDate(checkDate.getDate() - 1);
+      }
+
+      // Quizzes this week
+      const weekStart = new Date(today);
+      weekStart.setDate(today.getDate() - today.getDay() + 1);
+      const quizzesThisWeek = attempts.filter(
+        (a) => new Date(a.created_at) >= weekStart,
+      ).length;
+
+      // Total score for tier
+      const totalScore = totalCorrect;
+
+      setStats({
+        totalQuizzes,
+        avgAccuracy,
+        avgTime,
+        streak,
+        quizzesThisWeek,
+        totalScore,
+      });
+
+      // Recent quizzes (top 5)
+      setRecentQuizzes(attempts.slice(0, 5));
+
+      // 7-day chart data
+      const chartData = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const dayStr = d.toDateString();
+        const dayAttempts = attempts.filter(
+          (a) => new Date(a.created_at).toDateString() === dayStr,
+        );
+        chartData.push({
+          label: d.toLocaleDateString("vi-VN", { weekday: "short" }),
+          count: dayAttempts.length,
+          score: dayAttempts.reduce((s, a) => s + a.score, 0),
+        });
+      }
+      setWeeklyData(chartData);
+
+      // Topic mastery
+      const byTopic = {};
+      for (const a of attempts) {
+        const t = a.topic_name || "Unknown";
+        if (!byTopic[t]) byTopic[t] = { total: 0, correct: 0, count: 0 };
+        byTopic[t].total += a.total_questions;
+        byTopic[t].correct += a.score;
+        byTopic[t].count++;
+      }
+      const topicArr = Object.entries(byTopic).map(([name, d]) => ({
+        name,
+        accuracy: d.total > 0 ? Math.round((d.correct / d.total) * 100) : 0,
+        quizzes: d.count,
+      }));
+      topicArr.sort((a, b) => b.quizzes - a.quizzes);
+      setTopicStats(topicArr);
+    } catch (err) {
+      console.error("Error fetching stats:", err);
+    }
+    setStatsLoading(false);
+  }, []);
 
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
     }
   }, [user, loading, router]);
+
+  useEffect(() => {
+    if (activeChild?.id) {
+      let cancelled = false;
+      (async () => {
+        await fetchStats(activeChild.id);
+      })();
+      return () => {
+        cancelled = true;
+      };
+    }
+  }, [activeChild?.id, fetchStats]);
 
   if (loading || !user) return null;
 
@@ -45,6 +186,10 @@ export default function DashboardPage() {
   for (let y = currentYear - 2; y >= currentYear - 15; y--) {
     yearOptions.push(y);
   }
+
+  const tier = stats ? getTier(stats.totalScore) : null;
+  const tierProgress = stats ? getTierProgress(stats.totalScore) : null;
+  const maxChart = Math.max(...weeklyData.map((d) => d.count), 1);
 
   return (
     <div className={styles.container}>
@@ -66,28 +211,26 @@ export default function DashboardPage() {
             </span>
           </div>
           <button className={styles.signOutBtn} onClick={signOut}>
-            Đăng xuất
+            {t("btn_sign_out")}
           </button>
         </div>
       </header>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Xin chào, {profile?.display_name?.split(" ")[0]} 👋
+          {t("title_hello", { name: profile?.display_name?.split(" ")[0] })}
         </h1>
-        <p className={styles.subtitle}>
-          Quản lý hồ sơ con em và theo dõi tiến độ học tập
-        </p>
+        <p className={styles.subtitle}>{t("subtitle")}</p>
 
         {/* Children Section */}
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>👧 Hồ sơ con em</h2>
+            <h2 className={styles.sectionTitle}>{t("section_children")}</h2>
             <button
               className={styles.addBtn}
               onClick={() => setShowAddChild(!showAddChild)}
             >
-              {showAddChild ? "✕ Hủy" : "+ Thêm con"}
+              {showAddChild ? t("btn_cancel") : t("btn_add_child")}
             </button>
           </div>
 
@@ -133,7 +276,9 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 {activeChild?.id === child.id && (
-                  <span className={styles.activeBadge}>Đang chọn</span>
+                  <span className={styles.activeBadge}>
+                    {t("child_selected")}
+                  </span>
                 )}
                 <button
                   className={styles.removeBtn}
@@ -149,42 +294,255 @@ export default function DashboardPage() {
             {children.length === 0 && !showAddChild && (
               <div className={styles.emptyState}>
                 <span className={styles.emptyIcon}>👶</span>
-                <p>Chưa có hồ sơ con em nào</p>
+                <p>{t("child_empty")}</p>
                 <button
                   className={styles.addBtn}
                   onClick={() => setShowAddChild(true)}
                 >
-                  + Thêm con ngay
+                  {t("child_add_now")}
                 </button>
               </div>
             )}
           </div>
         </section>
 
+        {/* Progress Stats (for activeChild) */}
+        {activeChild && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>
+              {t("section_progress", { name: activeChild.name })}
+            </h2>
+
+            {statsLoading ? (
+              <div className={styles.statsLoading}>
+                <div className={styles.spinner} />
+                <span>{t("stats_loading")}</span>
+              </div>
+            ) : !stats ? (
+              <div className={styles.emptyStats}>
+                <span className={styles.emptyIcon}>📝</span>
+                <p>{t("no_quiz_data")}</p>
+                <button
+                  className={styles.addBtn}
+                  onClick={() => router.push("/learn/english")}
+                >
+                  {t("do_quiz_now")}
+                </button>
+              </div>
+            ) : (
+              <>
+                {/* Stats Overview Cards */}
+                <div className={styles.statsGrid}>
+                  <div className={styles.statCard}>
+                    <span className={styles.statIcon}>🎯</span>
+                    <span className={styles.statValue}>
+                      {stats.totalQuizzes}
+                    </span>
+                    <span className={styles.statLabel}>
+                      {t("stat_total_quizzes")}
+                    </span>
+                  </div>
+                  <div className={styles.statCard}>
+                    <span className={styles.statIcon}>✅</span>
+                    <span className={styles.statValue}>
+                      {stats.avgAccuracy}%
+                    </span>
+                    <span className={styles.statLabel}>
+                      {t("stat_accuracy")}
+                    </span>
+                  </div>
+                  <div className={styles.statCard}>
+                    <span className={styles.statIcon}>⏱️</span>
+                    <span className={styles.statValue}>{stats.avgTime}s</span>
+                    <span className={styles.statLabel}>
+                      {t("stat_avg_time")}
+                    </span>
+                  </div>
+                  <div className={styles.statCard}>
+                    <span className={styles.statIcon}>🔥</span>
+                    <span className={styles.statValue}>{stats.streak}</span>
+                    <span className={styles.statLabel}>{t("stat_streak")}</span>
+                  </div>
+                  <div className={styles.statCard}>
+                    <span className={styles.statIcon}>📅</span>
+                    <span className={styles.statValue}>
+                      {stats.quizzesThisWeek}
+                    </span>
+                    <span className={styles.statLabel}>
+                      {t("stat_week_quizzes")}
+                    </span>
+                  </div>
+                  <div className={`${styles.statCard} ${styles.tierCard}`}>
+                    <span className={styles.statIcon}>{tier?.icon}</span>
+                    <span className={styles.statValue}>{tier?.name}</span>
+                    <span className={styles.statLabel}>
+                      {t("stat_current_tier")}
+                    </span>
+                    {tierProgress && (
+                      <div className={styles.tierBar}>
+                        <div
+                          className={styles.tierBarFill}
+                          style={{
+                            width: `${tierProgress.percentage}%`,
+                            background: tier?.color,
+                          }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* 7-Day Progress Chart */}
+                <div className={styles.chartSection}>
+                  <h3 className={styles.chartTitle}>{t("chart_7days")}</h3>
+                  <div className={styles.chart}>
+                    {weeklyData.map((d, i) => (
+                      <div key={i} className={styles.chartCol}>
+                        <span className={styles.chartValue}>{d.count}</span>
+                        <div className={styles.chartBarWrap}>
+                          <div
+                            className={styles.chartBar}
+                            style={{
+                              height: `${(d.count / maxChart) * 100}%`,
+                            }}
+                          />
+                        </div>
+                        <span className={styles.chartLabel}>{d.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Topic Mastery */}
+                {topicStats.length > 0 && (
+                  <div className={styles.chartSection}>
+                    <h3 className={styles.chartTitle}>
+                      {t("chart_topic_mastery")}
+                    </h3>
+                    <div className={styles.topicGrid}>
+                      {topicStats.map((tp) => (
+                        <div key={tp.name} className={styles.topicCard}>
+                          <div className={styles.topicHeader}>
+                            <span className={styles.topicName}>{tp.name}</span>
+                            <span className={styles.topicBadge}>
+                              {tp.quizzes} quiz
+                            </span>
+                          </div>
+                          <div className={styles.topicBar}>
+                            <div
+                              className={styles.topicBarFill}
+                              style={{
+                                width: `${tp.accuracy}%`,
+                                background:
+                                  tp.accuracy >= 80
+                                    ? "#4ecdc4"
+                                    : tp.accuracy >= 60
+                                      ? "#FFB347"
+                                      : "#FF6B6B",
+                              }}
+                            />
+                          </div>
+                          <span className={styles.topicAccuracy}>
+                            {tp.accuracy}%{" "}
+                            {locale === "vi" ? "chính xác" : "accurate"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Recent Activity */}
+                {recentQuizzes.length > 0 && (
+                  <div className={styles.chartSection}>
+                    <h3 className={styles.chartTitle}>{t("chart_recent")}</h3>
+                    <div className={styles.activityList}>
+                      {recentQuizzes.map((q) => {
+                        const acc =
+                          q.total_questions > 0
+                            ? Math.round((q.score / q.total_questions) * 100)
+                            : 0;
+                        return (
+                          <div key={q.id} className={styles.activityItem}>
+                            <div className={styles.activityLeft}>
+                              <span className={styles.activityEmoji}>
+                                {acc >= 80 ? "🌟" : acc >= 50 ? "👍" : "💪"}
+                              </span>
+                              <div>
+                                <span className={styles.activityTopic}>
+                                  {q.topic_name}
+                                </span>
+                                <span className={styles.activityTime}>
+                                  {new Date(q.created_at).toLocaleDateString(
+                                    locale === "vi" ? "vi-VN" : "en-US",
+                                    {
+                                      day: "numeric",
+                                      month: "short",
+                                      hour: "2-digit",
+                                      minute: "2-digit",
+                                    },
+                                  )}
+                                </span>
+                              </div>
+                            </div>
+                            <div className={styles.activityRight}>
+                              <span
+                                className={styles.activityScore}
+                                data-level={
+                                  acc >= 80 ? "high" : acc >= 50 ? "mid" : "low"
+                                }
+                              >
+                                {q.score}/{q.total_questions}
+                              </span>
+                              {q.time_seconds && (
+                                <span className={styles.activityDuration}>
+                                  {q.time_seconds}s
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+          </section>
+        )}
+
         {/* Subjects Section */}
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>📚 Giáo trình</h2>
+          <h2 className={styles.sectionTitle}>{t("section_subjects")}</h2>
           <div className={styles.subjectsGrid}>
             <div
               className={styles.subjectCard}
               onClick={() => router.push("/learn/english")}
             >
               <span className={styles.subjectIcon}>🇬🇧</span>
-              <h3>Tiếng Anh</h3>
-              <p>Từ vựng, flashcard, quiz tương tác</p>
-              <span className={styles.subjectBadge}>16 chủ đề</span>
+              <h3>{t("subject_english")}</h3>
+              <p>{t("subject_english_desc")}</p>
+              <span className={styles.subjectBadge}>16 {t("stat_topics")}</span>
             </div>
             <div className={`${styles.subjectCard} ${styles.comingSoon}`}>
               <span className={styles.subjectIcon}>🔢</span>
-              <h3>Toán học</h3>
-              <p>Phép tính, hình học, logic</p>
-              <span className={styles.comingSoonBadge}>Sắp ra mắt</span>
+              <h3>{t("subject_math")}</h3>
+              <p>
+                {locale === "vi"
+                  ? "Phép tính, hình học, logic"
+                  : "Arithmetic, geometry, logic"}
+              </p>
+              <span className={styles.comingSoonBadge}>{t("coming_soon")}</span>
             </div>
             <div className={`${styles.subjectCard} ${styles.comingSoon}`}>
               <span className={styles.subjectIcon}>🔬</span>
-              <h3>Khoa học</h3>
-              <p>Thế giới tự nhiên, thí nghiệm</p>
-              <span className={styles.comingSoonBadge}>Sắp ra mắt</span>
+              <h3>{t("subject_science")}</h3>
+              <p>
+                {locale === "vi"
+                  ? "Thế giới tự nhiên, thí nghiệm"
+                  : "Nature, experiments"}
+              </p>
+              <span className={styles.comingSoonBadge}>{t("coming_soon")}</span>
             </div>
           </div>
         </section>
@@ -192,21 +550,21 @@ export default function DashboardPage() {
         {/* Quick Actions */}
         {activeChild && (
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>⚡ Hành động nhanh</h2>
+            <h2 className={styles.sectionTitle}>{t("section_quick")}</h2>
             <div className={styles.actionsGrid}>
               <button
                 className={styles.actionCard}
                 onClick={() => router.push("/learn/english")}
               >
                 <span>🎯</span>
-                <span>Làm Quiz</span>
+                <span>{t("btn_do_quiz")}</span>
               </button>
               <button
                 className={styles.actionCard}
                 onClick={() => router.push("/leaderboard")}
               >
                 <span>🏆</span>
-                <span>Bảng xếp hạng</span>
+                <span>{t("btn_leaderboard")}</span>
               </button>
             </div>
           </section>

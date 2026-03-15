@@ -1,0 +1,11 @@
+{
+  "welcome_child": "Chào {{name}}! 🌟 Hôm nay bé muốn học gì?",
+  "welcome_guest": "Chào bé! 🌟 Hôm nay bé muốn học gì?",
+  "prompt_login": "🔑 Đăng nhập để lưu điểm lên bảng xếp hạng",
+  "prompt_add_child": "👶 Thêm hồ sơ bé để lưu tiến độ học",
+  "select_topic": "Chọn chủ đề",
+  "search_placeholder": "Tìm chủ đề...",
+  "mode_flashcard": "Flashcard",
+  "mode_quiz": "Quiz",
+  "words_count": "{{n}} từ"
+}

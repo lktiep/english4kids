@@ -1,12 +1,26 @@
 "use client";
 
+import { useEffect } from "react";
 import { useAuth } from "./context/AuthContext";
+import { useI18n } from "./context/i18nContext";
 import { useRouter } from "next/navigation";
 import styles from "./landing.module.css";
 
 export default function LandingPage() {
   const { user, loading } = useAuth();
+  const { t, locale, setLocale, loadPage } = useI18n();
   const router = useRouter();
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      await loadPage("landing");
+      if (cancelled) return;
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [loadPage]);
 
   const handleCTA = () => {
     if (user) {
@@ -21,31 +35,45 @@ export default function LandingPage() {
       {/* Navigation */}
       <nav className={styles.nav}>
         <div className={styles.navInner}>
-          <span className={styles.logo}>🎓 EduKids</span>
+          <span className={styles.logo}>🎓 {t("app_name")}</span>
           <div className={styles.navLinks}>
             <a href="#features" className={styles.navLink}>
-              Tính năng
+              {t("nav_features")}
             </a>
             <a href="#subjects" className={styles.navLink}>
-              Giáo trình
+              {t("nav_subjects")}
             </a>
-            <a href="#leaderboard" className={styles.navLink}>
-              Xếp hạng
+            <a
+              className={styles.navLink}
+              onClick={() => router.push("/leaderboard")}
+              style={{ cursor: "pointer" }}
+            >
+              {t("nav_leaderboard")}
             </a>
+            {/* Language Switcher */}
+            <button
+              className={styles.langSwitch}
+              onClick={() => setLocale(locale === "vi" ? "en" : "vi")}
+              title={
+                locale === "vi" ? "Switch to English" : "Chuyển sang Tiếng Việt"
+              }
+            >
+              {locale === "vi" ? "🇬🇧 EN" : "🇻🇳 VI"}
+            </button>
             {!loading &&
               (user ? (
                 <button
                   className={styles.navBtn}
                   onClick={() => router.push("/dashboard")}
                 >
-                  Dashboard
+                  {t("nav_dashboard")}
                 </button>
               ) : (
                 <button
                   className={styles.navBtn}
                   onClick={() => router.push("/login")}
                 >
-                  Đăng nhập
+                  {t("nav_login")}
                 </button>
               ))}
           </div>
@@ -57,42 +85,48 @@ export default function LandingPage() {
         <div className={styles.heroGlow} />
         <div className={styles.heroContent}>
           <div className={styles.heroBadge}>
-            <span>🚀</span> Nền tảng giáo dục #1 cho trẻ em
+            <span>🚀</span>{" "}
+            {t("hero_badge", {}, "Nền tảng giáo dục #1 cho trẻ em")}
           </div>
           <h1 className={styles.heroTitle}>
-            Học mà chơi,
+            {t("hero_line1", {}, "Học mà chơi,")}
             <br />
-            <span className={styles.heroGradient}>chơi mà học</span>
+            <span className={styles.heroGradient}>
+              {t("hero_line2", {}, "chơi mà học")}
+            </span>
           </h1>
-          <p className={styles.heroDesc}>
-            Flashcard tương tác, quiz thông minh, nhận diện cử chỉ tay bằng AI,
-            và bảng xếp hạng toàn cầu — tất cả trong một nền tảng.
-          </p>
+          <p className={styles.heroDesc}>{t("hero_subtitle")}</p>
           <div className={styles.heroBtns}>
             <button className={styles.ctaPrimary} onClick={handleCTA}>
-              Bắt đầu miễn phí →
+              {t("btn_start_free")} →
             </button>
             <button
               className={styles.ctaSecondary}
               onClick={() => router.push("/learn/english")}
             >
-              Trải nghiệm ngay
+              {t("btn_start_learning")}
             </button>
           </div>
           <div className={styles.heroStats}>
             <div className={styles.stat}>
               <span className={styles.statNum}>174+</span>
-              <span className={styles.statLabel}>Từ vựng</span>
+              <span className={styles.statLabel}>
+                {t("stat_vocab", {}, "Từ vựng")}
+              </span>
             </div>
             <div className={styles.statDivider} />
             <div className={styles.stat}>
               <span className={styles.statNum}>16</span>
-              <span className={styles.statLabel}>Chủ đề</span>
+              <span className={styles.statLabel}>
+                {t("stat_topics", {}, "Chủ đề")}
+              </span>
             </div>
             <div className={styles.statDivider} />
             <div className={styles.stat}>
               <span className={styles.statNum}>AI</span>
-              <span className={styles.statLabel}>Cử chỉ tay</span>
+              <span className={styles.statLabel}>
+                {t("stat_gesture", {}, "Cử chỉ tay")}
+              </span>
             </div>
           </div>
         </div>
@@ -123,57 +157,78 @@ export default function LandingPage() {
       {/* Features Section */}
       <section className={styles.features} id="features">
         <h2 className={styles.sectionTitle}>
-          Tại sao chọn <span className={styles.heroGradient}>EduKids</span>?
+          {t("features_title", {}, "Tại sao chọn")}{" "}
+          <span className={styles.heroGradient}>{t("app_name")}</span>
+          {locale === "vi" ? "?" : "?"}
         </h2>
         <p className={styles.sectionSubtitle}>
-          Mọi thứ bé cần để học hiệu quả và vui vẻ
+          {t("features_sub", {}, "Mọi thứ bé cần để học hiệu quả và vui vẻ")}
         </p>
         <div className={styles.featuresGrid}>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>🖐️</div>
-            <h3>Cử chỉ tay AI</h3>
+            <h3>{t("feat_gesture_title", {}, "Cử chỉ tay AI")}</h3>
             <p>
-              Bật webcam và trả lời bằng cách giơ ngón tay. Nắm tay để xác nhận,
-              👍 để tiếp tục.
+              {t(
+                "feat_gesture_desc",
+                {},
+                "Bật webcam và trả lời bằng cách giơ ngón tay. Nắm tay để xác nhận, 👍 để tiếp tục.",
+              )}
             </p>
           </div>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>🎨</div>
-            <h3>Hình ảnh siêu thực</h3>
+            <h3>{t("feat_images_title", {}, "Hình ảnh siêu thực")}</h3>
             <p>
-              Hình ảnh 3D cinematic chất lượng Pixar cho mỗi từ vựng — giúp bé
-              ghi nhớ tốt hơn.
+              {t(
+                "feat_images_desc",
+                {},
+                "Hình ảnh 3D cinematic chất lượng Pixar cho mỗi từ vựng — giúp bé ghi nhớ tốt hơn.",
+              )}
             </p>
           </div>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>🏆</div>
-            <h3>Xếp hạng toàn cầu</h3>
+            <h3>{t("feat_leaderboard_title", {}, "Xếp hạng toàn cầu")}</h3>
             <p>
-              Thi đua cùng bạn bè khắp thế giới. Bảng xếp hạng reset mỗi tuần.
+              {t(
+                "feat_leaderboard_desc",
+                {},
+                "Thi đua cùng bạn bè khắp thế giới. Bảng xếp hạng reset mỗi tuần.",
+              )}
             </p>
           </div>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>📊</div>
-            <h3>Theo dõi tiến độ</h3>
+            <h3>{t("feat_progress_title", {}, "Theo dõi tiến độ")}</h3>
             <p>
-              Phụ huynh dễ dàng quản lý hồ sơ con em và xem báo cáo học tập chi
-              tiết.
+              {t(
+                "feat_progress_desc",
+                {},
+                "Phụ huynh dễ dàng quản lý hồ sơ con em và xem báo cáo học tập chi tiết.",
+              )}
             </p>
           </div>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>🔊</div>
-            <h3>Phát âm chuẩn</h3>
+            <h3>{t("feat_pronunciation_title", {}, "Phát âm chuẩn")}</h3>
             <p>
-              Nghe phát âm từ vựng bằng giọng đọc tự nhiên. Học nói đúng ngay từ
-              đầu.
+              {t(
+                "feat_pronunciation_desc",
+                {},
+                "Nghe phát âm từ vựng bằng giọng đọc tự nhiên. Học nói đúng ngay từ đầu.",
+              )}
             </p>
           </div>
           <div className={styles.featureCard}>
             <div className={styles.featureIcon}>🎵</div>
-            <h3>Âm thanh vui nhộn</h3>
+            <h3>{t("feat_sound_title", {}, "Âm thanh vui nhộn")}</h3>
             <p>
-              Hiệu ứng âm thanh chúc mừng khi trả lời đúng — fanfare, arpeggio,
-              và melody.
+              {t(
+                "feat_sound_desc",
+                {},
+                "Hiệu ứng âm thanh chúc mừng khi trả lời đúng — fanfare, arpeggio, và melody.",
+              )}
             </p>
           </div>
         </div>
@@ -182,10 +237,17 @@ export default function LandingPage() {
       {/* Subjects Section */}
       <section className={styles.subjects} id="subjects">
         <h2 className={styles.sectionTitle}>
-          Giáo trình <span className={styles.heroGradient}>đa dạng</span>
+          {t("subjects_title", {}, "Giáo trình")}{" "}
+          <span className={styles.heroGradient}>
+            {t("subjects_rich", {}, "đa dạng")}
+          </span>
         </h2>
         <p className={styles.sectionSubtitle}>
-          Nhiều môn học, nhiều chủ đề — phong phú mỗi ngày
+          {t(
+            "subjects_sub",
+            {},
+            "Nhiều môn học, nhiều chủ đề — phong phú mỗi ngày",
+          )}
         </p>
         <div className={styles.subjectsGrid}>
           <div
@@ -193,25 +255,29 @@ export default function LandingPage() {
             onClick={() => router.push("/learn/english")}
           >
             <span className={styles.subjectIconLarge}>🇬🇧</span>
-            <h3>Tiếng Anh</h3>
-            <p>16 chủ đề • 174+ từ vựng • 20 hình AI</p>
+            <h3>{t("subject_english")}</h3>
+            <p>
+              16 {t("stat_topics", {}, "chủ đề")} • 174+{" "}
+              {t("stat_vocab", {}, "từ vựng")} • 20{" "}
+              {t("stat_ai_images", {}, "hình AI")}
+            </p>
             <div className={styles.subjectTopics}>
-              <span>🐾 Động vật</span>
-              <span>🍎 Trái cây</span>
-              <span>🌸 Hoa</span>
-              <span>🚗 Xe cộ</span>
-              <span>+12 khác</span>
+              <span>🐾 {t("topic_animals", {}, "Động vật")}</span>
+              <span>🍎 {t("topic_fruits", {}, "Trái cây")}</span>
+              <span>🌸 {t("topic_flowers", {}, "Hoa")}</span>
+              <span>🚗 {t("topic_vehicles", {}, "Xe cộ")}</span>
+              <span>+12 {t("more", {}, "khác")}</span>
             </div>
           </div>
           <div className={`${styles.subjectCardSmall} ${styles.locked}`}>
             <span className={styles.subjectIconLarge}>🔢</span>
-            <h3>Toán học</h3>
-            <p>Sắp ra mắt</p>
+            <h3>{t("subject_math")}</h3>
+            <p>{t("coming_soon")}</p>
           </div>
           <div className={`${styles.subjectCardSmall} ${styles.locked}`}>
             <span className={styles.subjectIconLarge}>🔬</span>
-            <h3>Khoa học</h3>
-            <p>Sắp ra mắt</p>
+            <h3>{t("subject_science")}</h3>
+            <p>{t("coming_soon")}</p>
           </div>
         </div>
       </section>
@@ -219,23 +285,18 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className={styles.cta}>
         <div className={styles.ctaGlow} />
-        <h2 className={styles.ctaTitle}>Sẵn sàng bắt đầu?</h2>
-        <p className={styles.ctaDesc}>
-          Miễn phí, không cần thẻ tín dụng. Đăng nhập bằng Google và bắt đầu
-          ngay.
-        </p>
+        <h2 className={styles.ctaTitle}>{t("cta_title")}</h2>
+        <p className={styles.ctaDesc}>{t("cta_subtitle")}</p>
         <button className={styles.ctaPrimary} onClick={handleCTA}>
-          🎓 Đăng nhập miễn phí
+          🎓 {t("btn_start_free")}
         </button>
       </section>
 
       {/* Footer */}
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <span className={styles.footerLogo}>🎓 EduKids</span>
-          <span className={styles.footerText}>
-            © 2026 EduKids. Xây dựng với ❤️ cho trẻ em Việt Nam.
-          </span>
+          <span className={styles.footerLogo}>🎓 {t("app_name")}</span>
+          <span className={styles.footerText}>{t("footer_text")}</span>
         </div>
       </footer>
     </div>

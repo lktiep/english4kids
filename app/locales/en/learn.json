@@ -1,0 +1,11 @@
+{
+  "welcome_child": "Hi {{name}}! 🌟 What do you want to learn today?",
+  "welcome_guest": "Hello! 🌟 What do you want to learn today?",
+  "prompt_login": "🔑 Sign in to save your scores to the leaderboard",
+  "prompt_add_child": "👶 Add a child profile to track progress",
+  "select_topic": "Choose a topic",
+  "search_placeholder": "Search topics...",
+  "mode_flashcard": "Flashcard",
+  "mode_quiz": "Quiz",
+  "words_count": "{{n}} words"
+}
