@@ -257,6 +257,17 @@ export default function DashboardPage() {
               {profile?.display_name || user.email}
             </span>
           </div>
+          <button
+              className={styles.langSwitch}
+              onClick={() => setLocale(locale === "vi" ? "en" : "vi")}
+              title={
+                locale === "vi"
+                  ? "Switch to English"
+                  : "Chuyển sang Tiếng Việt"
+              }
+            >
+              {locale === "vi" ? "🇻🇳 VI" : "🇬🇧 EN"}
+            </button>
           <button className={styles.signOutBtn} onClick={signOut}>
             {t("btn_sign_out")}
           </button>

@@ -58,7 +58,7 @@ export default function LandingPage() {
                 locale === "vi" ? "Switch to English" : "Chuyển sang Tiếng Việt"
               }
             >
-              {locale === "vi" ? "🇬🇧 EN" : "🇻🇳 VI"}
+              {locale === "vi" ? "🇻🇳 VI" : "🇬🇧 EN"}
             </button>
             {!loading &&
               (user ? (
