@@ -1,24 +1,198 @@
-import {
-  createServerClient,
-  jsonOk,
-  jsonError,
-} from "@/app/lib/supabase-server";
+import { jsonOk } from "@/app/lib/supabase-server";
 
-// GET /api/content/topics — list all topics
+// Force dynamic rendering — bypass ISR cache
+export const dynamic = "force-dynamic";
+
+// GET /api/content/topics — list all topics enriched with metadata
 export async function GET() {
-  const db = createServerClient();
-
-  // Try DB-backed subjects first
-  const { data: subjects } = await db
-    .from("subjects")
-    .select("id, slug, name, name_vi, icon, description, subject_category")
-    .order("name");
-
-  if (subjects && subjects.length > 0) {
-    return jsonOk(subjects);
-  }
-
-  // Fallback: return from built-in topics data
-  const { default: topics } = await import("@/app/data/topics.json");
-  return jsonOk(topics);
+  return jsonOk({
+    grades: {
+      prek: {
+        id: "prek",
+        name: "Mẫu giáo",
+        nameEn: "Pre-K",
+        ageRange: "3-5",
+        icon: "👶",
+        color: "#FF6B9D",
+      },
+      grade1: {
+        id: "grade1",
+        name: "Lớp 1",
+        nameEn: "Grade 1",
+        ageRange: "6-7",
+        icon: "📗",
+        color: "#4ECDC4",
+      },
+      grade2: {
+        id: "grade2",
+        name: "Lớp 2",
+        nameEn: "Grade 2",
+        ageRange: "7-8",
+        icon: "📘",
+        color: "#3B82F6",
+      },
+    },
+    topics: [
+      {
+        slug: "flowers",
+        grade: "prek",
+        order: 1,
+        title_vi: "Hoa",
+        title_en: "Flowers",
+        icon: "🌸",
+        color: "#FF6B9D",
+        word_count: 8,
+      },
+      {
+        slug: "vehicles",
+        grade: "prek",
+        order: 2,
+        title_vi: "Phương tiện",
+        title_en: "Vehicles",
+        icon: "🚗",
+        color: "#3B82F6",
+        word_count: 8,
+      },
+      {
+        slug: "shapes",
+        grade: "prek",
+        order: 3,
+        title_vi: "Hình dạng",
+        title_en: "Shapes",
+        icon: "🔺",
+        color: "#8B5CF6",
+        word_count: 8,
+      },
+      {
+        slug: "fruits",
+        grade: "prek",
+        order: 4,
+        title_vi: "Trái cây",
+        title_en: "Fruits",
+        icon: "🍎",
+        color: "#F59E0B",
+        word_count: 8,
+      },
+      {
+        slug: "greetings",
+        grade: "grade1",
+        order: 1,
+        title_vi: "Chào hỏi",
+        title_en: "Greetings",
+        icon: "👋",
+        color: "#10B981",
+        word_count: 8,
+      },
+      {
+        slug: "numbers",
+        grade: "grade1",
+        order: 2,
+        title_vi: "Số đếm",
+        title_en: "Numbers",
+        icon: "🔢",
+        color: "#6366F1",
+        word_count: 10,
+      },
+      {
+        slug: "colors",
+        grade: "grade1",
+        order: 3,
+        title_vi: "Màu sắc",
+        title_en: "Colors",
+        icon: "🎨",
+        color: "#EC4899",
+        word_count: 8,
+      },
+      {
+        slug: "animals",
+        grade: "grade1",
+        order: 4,
+        title_vi: "Động vật",
+        title_en: "Animals",
+        icon: "🐾",
+        color: "#F97316",
+        word_count: 8,
+      },
+      {
+        slug: "family",
+        grade: "grade1",
+        order: 5,
+        title_vi: "Gia đình",
+        title_en: "Family",
+        icon: "👨‍👩‍👧‍👦",
+        color: "#14B8A6",
+        word_count: 8,
+      },
+      {
+        slug: "school",
+        grade: "grade1",
+        order: 6,
+        title_vi: "Trường học",
+        title_en: "School",
+        icon: "🏫",
+        color: "#0EA5E9",
+        word_count: 8,
+      },
+      {
+        slug: "body",
+        grade: "grade1",
+        order: 7,
+        title_vi: "Cơ thể",
+        title_en: "Body",
+        icon: "🦶",
+        color: "#A855F7",
+        word_count: 8,
+      },
+      {
+        slug: "food",
+        grade: "grade1",
+        order: 8,
+        title_vi: "Đồ ăn",
+        title_en: "Food",
+        icon: "🍕",
+        color: "#EF4444",
+        word_count: 8,
+      },
+      {
+        slug: "toys",
+        grade: "grade1",
+        order: 9,
+        title_vi: "Đồ chơi",
+        title_en: "Toys",
+        icon: "🧸",
+        color: "#F59E0B",
+        word_count: 8,
+      },
+      {
+        slug: "feelings",
+        grade: "grade1",
+        order: 10,
+        title_vi: "Cảm xúc",
+        title_en: "Feelings",
+        icon: "😊",
+        color: "#EC4899",
+        word_count: 8,
+      },
+      {
+        slug: "weather",
+        grade: "grade2",
+        order: 1,
+        title_vi: "Thời tiết",
+        title_en: "Weather",
+        icon: "🌤️",
+        color: "#0EA5E9",
+        word_count: 8,
+      },
+      {
+        slug: "clothes",
+        grade: "grade2",
+        order: 2,
+        title_vi: "Quần áo",
+        title_en: "Clothes",
+        icon: "👕",
+        color: "#8B5CF6",
+        word_count: 8,
+      },
+    ],
+  });
 }
