@@ -1,182 +1,193 @@
-# 00 — Defense Notes for AI Review Panel
+# 00 — Defense Notes for Arena Review Panel (Rebuttal v3)
 
-> Mục tiêu tài liệu này: chuẩn bị trước các điểm sẽ bị phản biện để team trả lời chắc, nhanh, và có số liệu kiểm chứng.
-
-## 1) Positioning cốt lõi (để mở đầu mọi buổi phản biện)
-
-- **Không theo hướng realtime-first** ở v1.
-- **Async-first + turn-based** là lựa chọn chiến lược để đạt:
-  1. Thời gian ra mắt nhanh,
-  2. Chi phí hạ tầng thấp,
-  3. Rủi ro kỹ thuật thấp,
-  4. Dễ đạt PMF + hòa vốn tháng đầu.
-- Chỉ nâng cấp realtime khi có **trigger định lượng** (CCU, retention, rematch pressure, payback).
+> Mục tiêu: trả lời phản biện nhanh, có mapping rõ đến 6 critical issues trong `05-critical-review.md`, và dùng được ngay cho buổi review với team nhỏ.
 
 ---
 
-## 2) Các phản biện chắc chắn sẽ gặp + cách trả lời
+## 1) Core Positioning (30-second opening)
 
-## A. "Không realtime thì mất kịch tính, khó viral"
-
-### Trả lời ngắn
-
-Kịch tính đến từ **outcome loop** (thắng/thua/rematch/chia sẻ), không bắt buộc từ socket realtime.
-
-### Trả lời sâu
-
-- V1 dùng async duel với:
-  - 24h response window,
-  - Tie-break theo time + accuracy,
-  - "Bạn vừa bị vượt điểm" push,
-  - One-tap rematch.
-- Cảm xúc vẫn mạnh nhờ nhịp cạnh tranh và social proof.
-- Realtime được đưa vào phase sau khi có dữ liệu đủ mạnh.
-
-### Metric để chứng minh
-
-- Rematch rate > 20%
-- Share-to-install conversion > 8%
-- Duel completion > 60%
+"Chúng ta chọn **web-first, async duel-only v1** để giảm rủi ro kỹ thuật và vận hành cho team 1-2 người. Month-1 tập trung validation loop (duel -> rematch -> invite), Month-3 mới nhắm break-even. Survival/Room/iOS Arena là phase sau, chỉ mở khi core metrics đạt ngưỡng."
 
 ---
 
-## B. "Mô hình doanh thu quá lạc quan"
+## 2) Explicit Response Mapping to 6 Critical Issues
 
-### Trả lời ngắn
+## Issue #1 — Revenue math quá lạc quan (Month-1 break-even không thực tế)
 
-Bản rework đã giảm kỳ vọng và dùng stack doanh thu rủi ro thấp.
+**Panel concern:** giả định conversion quá optimistic cho MAU thấp.
 
-### Trả lời sâu
+**Our response:**
+- Đồng ý. Đã đổi mục tiêu từ "break-even month-1" sang:
+  - **Month-1 = validation**
+  - **Month-3 = break-even target**
+- Dùng framing "unit economics positivity proof" ở cohort tốt thay vì ép toàn hệ thống hòa vốn ngay.
 
-- Month-1 target là **break-even**, không đặt lợi nhuận lớn.
-- Revenue mix phân tán:
-  - Cosmetics,
-  - Supporter pack,
-  - Rewarded ads,
-  - Parent insights optional.
-- Không phụ thuộc 1 nguồn thu duy nhất.
+**Operational change:**
+- Không dựa vào 1 nguồn thu.
+- Monetization nhẹ, ưu tiên retention/rematch trước.
 
-### Guardrails tài chính
-
-- CPI trần, CAC trần theo cohort.
-- Nếu D7 < ngưỡng => dừng paid UA, quay về organic loop.
-
----
-
-## C. "Không subscription thì khó scale doanh thu"
-
-### Trả lời ngắn
-
-Subscription có thể có, nhưng **không khóa gameplay**.
-
-### Trả lời sâu
-
-- Core game free để tối ưu viral and network effects.
-- Subscription chỉ áp cho value-add (parent analytics, advanced reporting).
-- Mở rộng doanh thu theo layer: cosmetics -> event ticket -> B2B school -> sponsorship.
+**Proof metrics:**
+- Cohort-level ARPDAU
+- payer conversion by cohort
+- retention-adjusted revenue (D7/D30 cohorts)
 
 ---
 
-## D. "Trẻ em + cạnh tranh sẽ tăng toxicity"
+## Issue #2 — Architecture plan không match stack thực tế (Supabase/Cloudflare)
 
-### Trả lời ngắn
+**Panel concern:** tài liệu cũ giả định custom infra + Redis từ đầu.
 
-Thiết kế đã có anti-frustration + safety guardrails từ đầu.
+**Our response:**
+- Đồng ý. V1 dùng **Supabase-native + Cloudflare Pages**.
+- Không thêm Redis/custom queue ở phase đầu.
 
-### Trả lời sâu
+**Operational change:**
+- Auth: Supabase Auth
+- Data: Supabase Postgres + RLS
+- Backend logic: API routes/Edge functions phù hợp stack hiện tại
+- Hosting: Cloudflare Pages
 
-- No public shaming,
-- Soft language templates,
-- Cooldown and nudge,
-- Protected beginner bracket,
-- Report/block flows,
-- Moderation queue cho content/user report.
-
-### KPI an toàn
-
-- Toxic report rate
-- Rage quit rate
-- Parent complaint rate
+**Proof metrics:**
+- infra cost/month
+- deploy frequency
+- mean time to recovery (MTTR)
 
 ---
 
-## E. "Sao không build full kiến trúc enterprise ngay?"
+## Issue #3 — Thiếu content pipeline cho game questions
 
-### Trả lời ngắn
+**Panel concern:** chưa rõ ai tạo question bank, format và sản lượng.
 
-Vì tối ưu kinh doanh giai đoạn sớm: **giảm burn, tăng learning velocity**.
+**Our response:**
+- V1 chỉ dùng **vocabulary MCQ auto-generated** từ word list hiện có.
+- Grammar/listening defer phase sau.
 
-### Trả lời sâu
+**Operational change:**
+- Template MCQ: 1 correct + 3 distractors cùng topic/difficulty
+- Seed pool mục tiêu đủ cho Duel v1 trước khi mở rộng mode khác
+- Grower review chất lượng hàng tuần, Builder đảm bảo toolchain generate/validate
 
-- Enterprise architecture phù hợp khi đã có PMF và load ổn định.
-- V1 ưu tiên:
-  - cycle experiment nhanh,
-  - hạ tầng gọn,
-  - feature/metric loop ngắn.
-
----
-
-## F. "Giả định KPI chưa có bằng chứng"
-
-### Trả lời ngắn
-
-Đúng — nên đã gắn explicit validation plan theo tuần.
-
-### Trả lời sâu
-
-- Tất cả KPI trong tài liệu là **working assumptions**.
-- Mỗi assumption có test:
-  - test metric,
-  - sample size,
-  - decision threshold,
-  - action nếu fail.
+**Proof metrics:**
+- question repetition rate
+- question error report rate
+- duel completion vs question set quality
 
 ---
 
-## 3) Assumptions cần validate sớm (trong 30 ngày)
+## Issue #4 — Growth org quá tham vọng so với team size
 
-1. Async duel đủ hấp dẫn để tạo rematch?
-2. Share card có kéo install thật không?
-3. Rewarded ads có làm giảm retention không?
-4. Parent insights có willingness to pay?
-5. Classroom activation có tạo DAU ổn định theo tuần?
+**Panel concern:** plan cũ giả định 6+ roles.
 
----
+**Our response:**
+- Đồng ý. Gộp còn 2 role:
+  - **Builder**: product + data + instrumentation
+  - **Grower**: content + community + partnerships
 
-## 4) Red flags (nếu gặp thì phải pivot nhanh)
+**Operational change:**
+- Cadence theo tuần (Mon lock, Wed pulse async, Fri review)
+- Mỗi tuần tối đa 3 ưu tiên lớn
 
-- D1 < 25% trong 2 tuần liên tục.
-- Duel completion < 45%.
-- Rematch rate < 10% dù đã tối ưu UX.
-- Viral K-factor < 0.2 sau nhiều vòng thử creative.
-- ARPDAU không tăng sau 3 iteration monetization nhẹ.
-
-Khi red flag xảy ra:
-
-1. dừng feature expansion,
-2. dồn lực fix loop core,
-3. giảm paid spend,
-4. chạy problem interview với phụ huynh/học sinh.
+**Proof metrics:**
+- sprint completion rate
+- unplanned work ratio
+- KPI delta/tuần theo từng loop
 
 ---
 
-## 5) Câu trả lời chuẩn 30 giây cho leadership
+## Issue #5 — Timeline 8-10 tuần cho full scope là phi thực tế
 
-"Chúng ta cố tình chọn async-first để giảm rủi ro kỹ thuật và tài chính ở giai đoạn chưa có PMF. V1 tập trung vào loop thắng-thua-rematch-share, mục tiêu tháng đầu hòa vốn, tháng hai tăng trưởng. Realtime không bị loại bỏ; nó là bước nâng cấp có trigger dữ liệu rõ ràng thay vì cảm tính."
+**Panel concern:** team 1-2 người không thể ship 3 modes + full polish nhanh như cũ.
+
+**Our response:**
+- Đồng ý. Timeline mới:
+  - **6-8 tuần:** web async duel v1
+  - **9-16 tuần:** cân nhắc v1.1 (Survival/Room) nếu duel loop ổn
+
+**Operational change:**
+- Scope lock Duel-only cho launch
+- Feature gate rõ trước khi mở rộng
+
+**Proof metrics:**
+- scope adherence
+- milestone hit rate
+- bug backlog burn-down
 
 ---
 
-## 6) Checklist trước buổi phản biện
+## Issue #6 — iOS vs Web priority chưa rõ
 
-- [ ] Mọi chỉ số trong docs có source/assumption note
-- [ ] Có phương án nếu KPI fail
-- [ ] Có danh sách deferred scope rõ ràng
-- [ ] Có bảng chi phí hạ tầng theo tier
-- [ ] Có owner cho từng đầu việc 30/60/90 ngày
-- [ ] Có plan compliance cho minors + App Store
+**Panel concern:** làm song song web + iOS gây double effort.
+
+**Our response:**
+- Đồng ý. **Web-first cho Arena v1**.
+- iOS giữ learn-only phase đầu; Arena iOS là phase sau PMF signal.
+
+**Operational change:**
+- Toàn bộ growth loop vận hành qua web release cycle
+- Tập trung deep link/share flow cho web trước
+
+**Proof metrics:**
+- release cycle time
+- time-to-experiment
+- invite-to-play conversion trên web
 
 ---
 
-## 7) Review prompt gợi ý cho team phản biện AI
+## 3) Weekly Operating Playbook (for review panel confidence)
 
-"Hãy phản biện theo 4 trục: (1) tính khả thi kỹ thuật 90 ngày, (2) unit economics tháng 1-2, (3) risk safety/compliance cho users nhỏ tuổi, (4) khả năng mở rộng sản phẩm nếu metrics tốt. Yêu cầu nêu rõ assumption nào sai sẽ phá plan và đề xuất plan B tương ứng."
+## Monday (Plan Lock)
+- Chốt 3 ưu tiên lớn nhất tuần
+- Define expected KPI movement
+- Assign owner Builder/Grower
+
+## Wednesday (Async Pulse)
+- Check funnel + cohort quick health
+- Unblock 1-2 vấn đề lớn nhất
+
+## Friday (Decision Review)
+- So sánh kết quả vs threshold
+- Quyết định: keep / iterate / cut
+- Cập nhật next-week lock
+
+---
+
+## 4) Validation Assumptions (first 30 days)
+
+1. Duel có đủ hấp dẫn để tạo rematch đều đặn?
+2. Invite flow có chuyển thành accepted duel không?
+3. Cohort-led ops (class/group) có kéo D7 tốt hơn solo?
+4. Monetization nhẹ có không làm hại retention?
+5. Content auto-generated có giữ được completion quality?
+
+---
+
+## 5) Red Flags & Mandatory Actions
+
+## Red flags
+- completion_24h < 50% (2 tuần liên tiếp)
+- rematch_rate < 15% sau 2 vòng tối ưu
+- cohort D7 không tốt hơn non-cohort
+- bug/latency làm hỏng core duel flow
+
+## Mandatory actions when hit
+1. Freeze scope expansion
+2. Builder sửa core drop-off points
+3. Grower chạy interview nhanh (5-10 users)
+4. Rebaseline KPI ở sprint kế tiếp
+
+---
+
+## 6) Review-Ready Checklist
+
+- [ ] Mọi KPI có assumption note + ngưỡng quyết định
+- [ ] Có mapping rõ tới 6 critical issues
+- [ ] Scope lock: web-first, duel-only được ghi rõ
+- [ ] Team model Builder/Grower + weekly cadence rõ ràng
+- [ ] Có red flags và action protocol
+- [ ] Có kế hoạch phase sau nhưng không trộn vào v1
+
+---
+
+## 7) Final Leadership Answer (30s)
+
+"Chúng ta đã sửa plan theo thực tế: team nhỏ, stack hiện tại, và tốc độ học nhanh. V1 chỉ web async duel để chứng minh loop và unit economics ở cohort tốt. Chỉ khi các ngưỡng completion/rematch/retention đạt, chúng ta mới mở rộng sang mode/platform tiếp theo."

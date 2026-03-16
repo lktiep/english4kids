@@ -1,513 +1,276 @@
-# 04) Growth & Marketing Masterplan — Async Turn-Based v1
+# 04) Growth & Marketing Masterplan — **Web-first, Duel-only v1**
 
-## 0) Scope Lock (Must Match Built Product)
-
-This growth plan is constrained to **async turn-based v1** and only uses in-app features already defined in the current masterplan docs.
-
-### In-scope product surfaces (used by marketing)
-
-- **Async Challenge (Ghost / Time-shifted)** with ~24h turn window
-- **1v1 duel results + rematch CTA**
-- **Friend list + safe preset interactions** (e.g., “GG”, “Let’s rematch”)
-- **Social share from session/result flow**
-- **Daily quests + streak system** (with streak protection)
-- **Teams / clubs / classroom identity mechanics**
-- **Seasonal and class/friends leaderboards**
-- **Profile progression** (XP, levels, badges/mastery signals)
-
-### Out-of-scope for v1 growth (do not depend on)
-
-- UGC video clip generator
-- Public creator portals/affiliate dashboards
-- Ambassador payout automation
-- Advanced deep-link campaign infrastructure not already shipped
-- New teacher admin products not already in v1
-
-If a tactic requires anything above, it is excluded from this plan.
+> Bản này đã được thu gọn để **thực thi bởi team 1-2 người** và align với critical review.
+>
+> - Team model: **Builder / Grower**
+> - Cadence: **weekly sprint**, không daily standup bắt buộc
+> - Product scope: **Web-first + Async Duel-only** (không phụ thuộc Survival/Room/iOS Arena)
+> - Mục tiêu: **Month-1 validation, Month-3 break-even**
 
 ---
 
-## 1) North Star and Metric Tree
+## 0) Scope Lock (Non-negotiable)
 
-### North Star
+## In-scope (v1 launch)
 
-- **WAL-3A** = Weekly Active Learners with **3+ completed async challenges**
+- Web app (Next.js + Supabase) cho Arena
+- **Async Duel** (turn-based, 24h response window)
+- Result screen + rematch CTA + share CTA
+- Daily quest + streak protection (mức cơ bản)
+- Friend challenge loop (safe preset interactions)
 
-Why: directly measures repeat learning behavior in async mode.
+## Out-of-scope (defer sang v1.1+)
 
-### Primary growth stack
-
-1. **Acquisition:** qualified new learners entering first async challenge
-2. **Activation:** first challenge sent + first challenge completed
-3. **Retention:** return to complete 3+ async challenges/week
-4. **Social growth:** challenge-send loops, friend acceptance, class participation
-
-### Core KPIs
-
-- Install/visit → signup
-- Signup → first async challenge created
-- Challenge created → challenge accepted
-- Challenge accepted → challenge completed within 24h
-- D1 / D7 retention (async cohort)
-- Invites sent per active user
-- Invite acceptance rate
-- % new users from friend/class invites
-- WAL-3A growth WoW
+- Survival Run
+- Room Challenge
+- iOS Arena client
+- UGC creator tools / ambassador portal / automation payout
+- Paid UA quy mô lớn trong 30 ngày đầu
 
 ---
 
-## 2) Positioning for Async Turn-Based v1
+## 1) Team Operating Model (Builder / Grower)
 
-### Parent-led (5–10)
+## Builder (Dev)
 
-“10–15 phút/ngày, con luyện nói tiếng Anh đều đặn qua thử thách ngắn và an toàn.”
+**Owner:** product shipping + instrumentation + data reliability
 
-### Self-driven kids (9–14)
+- Build/ship Duel flow trên web
+- Implement event tracking + dashboard primitives
+- Tối ưu conversion points trong app (challenge/rematch/share)
+- Fix bugs, performance, telemetry integrity
 
-“Thử thách bạn bè mọi lúc, không cần online cùng lúc, vẫn leo bảng xếp hạng.”
+## Grower (Founder)
 
-### Teacher/community organizer
+**Owner:** community + content + partnerships + cohort ops
 
-“Chạy mini speaking challenge theo lớp/nhóm, theo dõi mức độ tham gia hàng tuần.”
+- Vận hành cohort nhỏ (parent groups, lớp học, CLB)
+- Xuất bản content templates (parent/kid/teacher)
+- Chạy weekly challenge campaign
+- Thu feedback định tính + phỏng vấn nhanh
 
-### Messaging pillars
+## Weekly cadence (bắt buộc)
 
-1. **No schedule friction:** play anytime, reply within 24h
-2. **Safe social competition:** friend-first, preset interactions
-3. **Visible progress:** streak, badges, leaderboard movement
-4. **Short daily habit:** easy to repeat, easy to share
-
----
-
-## 3) Growth Loops (Feature-Coupled)
-
-## 3.1 Core Referral Loop (Friend Challenge Loop)
-
-**Trigger:** learner finishes async challenge.
-
-**In-app path:** Result screen → Rematch / Send new challenge → Friend accepts → completes → sends back.
-
-**Loop KPI:**
-
-- challenge_send_rate
-- challenge_accept_rate
-- completion_within_24h_rate
-- avg_challenges_per_active_user
-
-**Owner:** Product Growth + CRM/Community
+- **Mon (30-45’):** lock plan tuần (3 ưu tiên max)
+- **Wed (async check-in):** metric pulse + unblock
+- **Fri (45-60’):** review KPI + quyết định keep/kill/iterate
+- Daily updates qua Telegram async (nếu cần), không cần standup cố định
 
 ---
 
-## 3.2 Streak Loop (Daily Habit Loop)
+## 2) North Star & KPI Tree (v1)
 
-**Trigger:** daily quest reset + streak visibility.
+## North Star
 
-**In-app path:** Open app → see streak/day quest → complete 1 async challenge → maintain streak → return next day.
+- **WAL-3D** = Weekly Active Learners hoàn thành **>=3 duel/tuần**
 
-**Loop KPI:**
+## Funnel KPI cốt lõi
 
-- daily_quest_completion_rate
-- streak_day_2_to_day_7 conversion
-- streak_break_rate
+1. Visitor → signup
+2. Signup → first duel created
+3. Duel created → duel accepted
+4. Duel accepted → duel completed <=24h
+5. Duel completed → rematch/send-next
+6. D1 / D7 retention theo cohort
 
-**Owner:** Product Growth
+## Social KPI
 
----
+- invites_sent_per_active_user
+- invite_accept_rate
+- rematch_rate
+- % new activations from invite/community
 
-## 3.3 Class/Community Loop (Closed Group Competition)
+## Monetization KPI (light)
 
-**Trigger:** weekly class/community leaderboard check-in.
-
-**In-app path:** Learner joins class/team context → completes async challenges during week → appears on class/friends board → peers respond.
-
-**Loop KPI:**
-
-- class_activation_count
-- % active learners in class each week
-- weekly challenges per learner in class cohorts
-
-**Owner:** School Partnerships + Community Ops
+- Rewarded ad views / active user
+- Cosmetic attach rate
+- Parent insights trial/activation (nếu đã mở)
 
 ---
 
-## 3.4 Content-to-Play Loop (No New Tech Dependency)
+## 3) Growth Loops (Only Loops We Can Actually Run)
 
-**Trigger:** short-form post with clear “copy challenge code / search challenge name in app” CTA.
+## Loop A — Duel Rematch Loop (core)
 
-**In-app path:** User sees content → opens app manually → starts named challenge flow → sends to friend.
+**Trigger:** user hoàn thành duel
 
-**Loop KPI:**
+**Path:** Result -> Rematch -> Friend accepts -> Completes -> Rematch
 
-- content-coded installs/signups (campaign code)
-- first_challenge_from_campaign_code
-
-**Owner:** Content Lead + Growth Analyst
-
----
-
-## 4) 30-Day Launch Plan (Execution-Ready)
-
-## Week 1 (Day 1–7): Instrument + Message Fit
-
-### Actions
-
-1. Finalize async growth event tracking in dashboards:
-   - `async_challenge_created`
-   - `async_challenge_sent`
-   - `async_challenge_accepted`
-   - `async_challenge_completed`
-   - `friend_invite_sent`
-   - `friend_invite_accepted`
-   - `daily_quest_completed`
-   - `streak_continued`
-2. Ship/verify 3 in-app growth prompts only where already available:
-   - Post-result rematch/send challenge prompt
-   - Daily quest reminder surface
-   - Streak continuity nudge
-3. Run messaging test set A/B (parent vs kid framing) in owned channels.
-
-### Owners
-
-- Product Growth (tracking + in-app prompt QA)
-- Data (dashboard + baseline cohorts)
-- Content (message variants)
-
-### Cadence
-
-- Daily standup (15 min)
-- KPI check Mon/Wed/Fri
-- Weekly decision review (Friday)
-
-### Week 1 success thresholds
-
-- Tracking completeness >= 95%
-- Signup → first async challenge >= 45%
-- Async completion within 24h >= 55%
+**Mục tiêu tuần:**
+- rematch_rate >= 20%
+- completion_24h >= 60%
 
 ---
 
-## Week 2 (Day 8–14): Launch Referral and Friend Loops
+## Loop B — Daily Habit Loop
 
-### Actions
+**Trigger:** daily quest + streak status
 
-1. Push “Challenge a friend today” campaign in-app/community channels.
-2. Run 2 referral scripts per segment (parent-led / kid-led).
-3. Launch “3 challenges in 3 days” streak push.
-4. Activate safe preset social prompts in community instructions (GG/rematch etiquette).
+**Path:** Open app -> 1 duel -> giữ streak -> quay lại hôm sau
 
-### Owners
-
-- CRM/Community (execution)
-- Product Growth (in-app placement timing)
-- Data (invite funnel reporting)
-
-### Cadence
-
-- Daily reporting in shared growth channel
-- Mid-week creative refresh
-
-### Week 2 success thresholds
-
-- Invites per WAU >= 0.8
-- Invite acceptance >= 20%
-- Day-7 retention lift +3 pts vs Week 1 cohort
+**Mục tiêu tuần:**
+- daily_duel_completion_rate tăng tuần-over-tuần
+- streak_day2_to_day7 conversion cải thiện liên tục
 
 ---
 
-## Week 3 (Day 15–21): School/Community Activation Sprint
+## Loop C — Cohort Challenge Loop (manual ops)
 
-### Actions
+**Trigger:** Grower kickoff challenge cho nhóm/lớp
 
-1. Onboard first partner cohorts (teachers, clubs, parent groups) using existing class/team + leaderboard mechanics.
-2. Run “Weekly Class Async Ladder” pilot (no new tooling):
-   - Monday kickoff
-   - Wednesday reminder
-   - Friday leaderboard snapshot + recognition
-3. Distribute facilitator playbook and posting templates.
+**Path:** post challenge -> learners duel trong tuần -> Friday recognition
 
-### Owners
-
-- School Partnerships (teacher/community ops)
-- Community Manager (facilitator support)
-- Data (class cohort health)
-
-### Cadence
-
-- 2 check-ins/week per active cohort
-- Friday cohort summary
-
-### Week 3 success thresholds
-
-- > = 5 active cohorts
-- > = 60% learner participation within active cohorts
-- cohort D7 >= non-cohort D7 +5 pts
+**Mục tiêu tuần:**
+- active_cohorts >= 3 (ban đầu)
+- cohort participation >= 50%
+- cohort D7 > non-cohort D7
 
 ---
 
-## Week 4 (Day 22–30): Optimize + Standardize
+## 4) 30-Day Execution Plan (Operational)
 
-### Actions
+## Week 1 — Instrument + Baseline
 
-1. Identify top-performing loop by cohort (friend vs streak vs class).
-2. Standardize winner playbook for next 60 days:
-   - Best CTA copy
-   - Best reminder timing
-   - Best class cadence
-3. Cut low-performing content and focus on 2 highest-converting templates.
-4. Publish v1 growth ops SOP.
+**Builder**
+- Verify 8 events bắt buộc:
+  - `duel_created`
+  - `duel_sent`
+  - `duel_accepted`
+  - `duel_completed`
+  - `rematch_clicked`
+  - `invite_sent`
+  - `invite_accepted`
+  - `daily_quest_completed`
+- Set dashboard baseline (funnel + cohort)
 
-### Owners
+**Grower**
+- Publish 3 message variants (Parent/Kid/Teacher)
+- Recruit 1-2 pilot cohorts nhỏ
 
-- Growth Lead (prioritization)
-- Data Analyst (cohort diagnosis)
-- Content Lead (template consolidation)
-
-### Cadence
-
-- Daily KPI pulse
-- End-of-month growth retro
-
-### Day-30 target outcomes
-
-- WAL-3A baseline established and rising
-- Invite acceptance >= 25%
-- Async completion within 24h >= 65%
-- D7 retention >= 18% (async cohorts)
+**Exit criteria**
+- tracking completeness >= 95%
+- signup -> first duel >= 40%
 
 ---
 
-## 5) 60-Day Growth Plan (Day 31–90)
+## Week 2 — Activate Duel + Invite
 
-## Phase A (Day 31–60): Scale Repeatable Loops
+**Builder**
+- Tối ưu result screen CTA (rematch first, share second)
+- Giảm friction invite flow
 
-### Strategic goal
+**Grower**
+- Chạy campaign “3 duels / 3 days”
+- Manual reminder cho pilot cohorts (Mon/Wed/Fri)
 
-Scale proven loops without adding new product dependencies.
-
-### Actions
-
-1. **Referral scale:**
-   - Weekly friend challenge themes (e.g., Travel Week, Animal Week)
-   - Segment-specific invite copy by age/persona
-2. **Streak scale:**
-   - Habit campaigns around 3-day and 7-day streak milestones
-   - Recovery messaging for near-break cohorts
-3. **Class/community scale:**
-   - Expand to 15–20 active cohorts
-   - Fixed weekly cadence kit for facilitators
-4. **Leaderboard moments:**
-   - Weekly “rank jump” recognition posts using existing board outcomes
-5. **Content scale:**
-   - 3 short posts/week per core segment driving manual app challenge entry
-
-### Owners
-
-- Growth Lead: channel mix + weekly priorities
-- Partnerships Lead: cohort expansion
-- Content Lead: creative pipeline
-- Data Lead: weekly model + scorecards
-
-### Cadence
-
-- Weekly growth pod meeting (Mon)
-- Mid-week metric checkpoint (Wed)
-- Friday performance + next-week lock
-
-### Day-60 target outcomes
-
-- WAL-3A +30–40% from Day-30 baseline
-- % new users from invites/classes >= 35%
-- D7 retention >= 20%
-- 24h challenge completion >= 70%
+**Exit criteria**
+- invites_per_active_user >= 0.6
+- invite_accept_rate >= 18%
+- completion_24h >= 55%
 
 ---
 
-## Phase B (Day 61–90): Efficiency + Defensibility
+## Week 3 — Cohort Repeatability
 
-### Strategic goal
+**Builder**
+- Add lightweight cohort tagging cho phân tích
+- Fix top 3 bug gây drop-off
 
-Improve conversion efficiency and lock in community-led growth behavior.
+**Grower**
+- Mở rộng lên 3-5 cohorts
+- Dùng script facilitator chuẩn (kickoff/reminder/recap)
 
-### Actions
-
-1. Double down on highest LTV cohorts (class + high-streak households).
-2. Run win-back campaigns for inactive async challengers (7-day inactivity cohort).
-3. Create monthly inter-class/community async cup using existing leaderboard surfaces.
-4. Formalize facilitator certification-light program (content + cadence + reporting), no new portal required.
-5. Build geo/language message packs from top-performing templates.
-
-### Owners
-
-- Growth + Partnerships joint ownership
-- Data for cohort prioritization
-- Community Ops for facilitator enablement
-
-### Cadence
-
-- Bi-weekly cohort business review
-- Weekly campaign launch rhythm
-
-### Day-90 target outcomes
-
-- WAL-3A sustained growth >= 12% WoW
-- Invite acceptance >= 28%
-- Class cohort retention 1.3x non-class cohorts
-- CAC blended reduction via higher organic/invite share
+**Exit criteria**
+- >=3 active cohorts
+- cohort participation >= 50%
+- cohort D7 +3 điểm vs baseline
 
 ---
 
-## 6) Content Templates (Ready to Use)
+## Week 4 — Standardize What Works
 
-## 6.1 Parent Community Post Template
+**Builder**
+- Chốt dashboard template tuần
+- Lock tracking/spec cho phase kế tiếp
 
-**Hook:** “Con ngại nói tiếng Anh? Thử format 10 phút/ngày này.”
+**Grower**
+- Cắt 50% content yếu, giữ 2 template tốt nhất
+- Chốt playbook 60 ngày
 
-**Body:**
-
-- Mỗi ngày 1 async challenge (không cần online cùng lúc)
-- Có streak + nhiệm vụ ngày để giữ nhịp
-- Cuối tuần xem thứ hạng lớp/nhóm để tạo động lực
-
-**CTA:** “Mở app → vào thử thách [Tên Challenge] → gửi cho 1 bạn học.”
-
----
-
-## 6.2 Kid-Facing Post Template
-
-**Hook:** “Dám đấu 1 kèo speaking trong 24h không?”
-
-**Body:**
-
-- Mình vừa xong challenge [Tên]
-- Bạn reply trong 24h để giữ chuỗi thắng
-- Thắng là leo bảng bạn bè luôn
-
-**CTA:** “Vào app, tìm [Tên Challenge], chơi và rematch mình.”
+**Exit criteria (Day-30)**
+- WAL-3D baseline established
+- completion_24h >= 60%
+- rematch_rate >= 20%
+- Có quyết định rõ: continue / adjust / pivot
 
 ---
 
-## 6.3 Teacher/Facilitator Weekly Script
+## 5) Day 31-90 (Scale Carefully)
 
-- **Monday:** “Tuần này lớp mình chơi challenge [Tên], hạn 24h mỗi lượt.”
-- **Wednesday:** “Nhắc nhẹ: ai chưa làm lượt thì hoàn thành để giữ điểm lớp.”
-- **Friday:** “Cập nhật bảng xếp hạng lớp + khen nỗ lực/tiến bộ.”
+## Phase 2 (Day 31-60)
 
----
+- Scale cohort channels đã chứng minh hiệu quả
+- Tăng chất lượng invite scripts theo persona
+- Bắt đầu monetization nhẹ (rewarded ads/cosmetics) nếu retention ổn
 
-## 7) Referral Mechanics (Within Existing Features)
+## Phase 3 (Day 61-90)
 
-## 7.1 Loop design
-
-- End of challenge → prompt send/rematch to friend
-- Friend accepts within 24h → both continue chain
-- Chain depth target: 2–3 turns minimum/user/week
-
-## 7.2 Anti-spam guardrails
-
-- Cap outbound prompts/day per user
-- Prioritize accepted contacts over broadcast behavior
-- Keep all social prompts within preset safe interactions
-
-## 7.3 Metrics
-
-- invites_sent_per_user_per_week
-- unique_invited_friends
-- accepted_invites_ratio
-- referral_cohort_D7_vs_nonref_D7
+- Tối ưu economics theo cohort (không đốt paid UA sớm)
+- Chuẩn bị điều kiện để mở v1.1 (Survival/Room) nếu core duel loop ổn định
 
 ---
 
-## 8) School & Community Activation Playbook
+## 6) Content Templates (Ready-to-run)
 
-## 8.1 Target partners (v1-friendly)
+## Parent post
 
-- English after-school clubs
-- Small tutoring centers
-- Parent Zalo/Telegram groups
-- School class homeroom communities
+"Mỗi ngày 10 phút, con làm 1 kèo duel tiếng Anh, không cần online cùng lúc. Cuối tuần xem tiến bộ qua streak và bảng nhóm."
 
-## 8.2 Activation model
+CTA: "Mở app -> Duel challenge [Tên] -> gửi 1 bạn học"
 
-1. Recruit facilitator (teacher/admin/parent lead)
-2. Run 1-week async challenge cycle
-3. Publish Friday recognition using class leaderboard
-4. Repeat with new weekly challenge theme
+## Kid post
 
-## 8.3 Cohort operating cadence
+"Đấu 1 kèo trong 24h không? Mình vừa xong challenge [Tên], vào rematch nào!"
 
-- Kickoff pack Monday
-- Midweek reminder
-- Friday leaderboard + recognition
-- Monthly recap to facilitator
+## Facilitator script
 
-## 8.4 Success metrics
-
-- active_cohorts
-- learners_per_cohort
-- weekly_participation_rate
-- cohort_retention_4w
+- Monday: kickoff challenge
+- Wednesday: reminder ngắn
+- Friday: recap + recognition
 
 ---
 
-## 9) Tracking Framework (What Must Be Visible Weekly)
+## 7) Guardrails & Decision Rules
 
-## 9.1 Funnel dashboard (async-specific)
+## Không mở rộng scope nếu chưa đạt core thresholds
 
-- New users
-- First async challenge creation rate
-- First accepted challenge rate
-- 24h completion rate
-- WAL-3A
+- completion_24h < 50% (2 tuần liên tiếp)
+- rematch_rate < 15% (sau 2 vòng tối ưu)
+- D7 không cải thiện ở cohort đã hỗ trợ
 
-## 9.2 Cohort dashboard
-
-- Referred vs non-referred D1/D7
-- Class/community vs solo D1/D7
-- Streak users vs non-streak users retention delta
-
-## 9.3 Channel dashboard
-
-- Owned content campaigns (coded)
-- Community-led cohorts
-- Invite-led acquisition share
-
-## 9.4 Guardrails
-
-- Safety reports per 1k users
-- Complaint rate from school/community channels
-- Session crash/error trends during growth pushes
+Khi chạm red flag:
+1. Freeze feature expansion
+2. Builder fix core loop drop-offs
+3. Grower chạy 5-10 interview ngắn
+4. Rebaseline trong sprint kế tiếp
 
 ---
 
-## 10) Operating Rhythm & Ownership
+## 8) Definition of Success (Critique-ready)
 
-### Weekly Growth Pod
+Đến Day-90, coi là healthy nếu:
 
-- **Participants:** Growth, Product, Data, Content, Partnerships, Community
-- **Agenda:**
-  1. KPI delta vs targets
-  2. Loop-by-loop diagnosis
-  3. Next 3 actions (owner + due date)
-
-### Ownership matrix
-
-- **Growth Lead:** overall KPI, prioritization, execution quality
-- **Product Growth:** in-app prompt placement and loop optimization
-- **Data Lead:** dashboard reliability, cohort insights
-- **Content Lead:** templates and publishing cadence
-- **Partnerships Lead:** school/community expansion
-- **Community Ops:** facilitator support and weekly delivery
+- WAL-3D tăng ổn định (không cần hyper-growth)
+- completion_24h >= 65%
+- rematch_rate >= 25%
+- invite/community đóng góp >= 30% activated users
+- Unit economics có tín hiệu dương ở cohort tốt (không bắt buộc toàn hệ thống break-even ngay)
 
 ---
 
-## 11) Definition of Success for Async Turn-Based v1
+## 9) Why This Plan Is Realistic
 
-By Day 90, growth is considered healthy if:
-
-- WAL-3A is growing consistently (target >= 12% WoW sustained)
-- Invite/class channels contribute >= 35% of new activated users
-- Async 24h completion rate >= 70%
-- D7 retention >= 20% in priority cohorts
-- School/community cohorts are repeatable without new feature dependencies
-
-This plan intentionally avoids speculative features and ties every major tactic to already-defined in-app v1 surfaces.
+- Chỉ dựa trên **web + duel** đang có thể build ngay
+- Fit **team 1-2 người** với cadence theo tuần
+- Không giả định role/stack/feature không tồn tại
+- Tập trung vào loop có viral value cao nhất trước (duel -> rematch -> invite)
