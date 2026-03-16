@@ -1,431 +1,411 @@
-# 02 — Game Design & Gamification (Non‑Realtime First)
+# 02 — Game Design & Gamification (Duel-Only v1, Web-First)
 
 ## 0) Product Goal (v1)
 
-Build a **non-realtime competitive arena** for kids that creates:
+Ship a **duel-only competitive loop** for kids on **web first** that is:
 
-- **Short sessions** (2–6 minutes)
-- **Emotional competition** ("I almost won, rematch now!")
-- **Safe motivation** (no shame, no toxic pressure)
-- **Simple implementation** (low ops complexity, no live-sync dependency)
+- **Fast:** one duel session in 2–4 minutes
+- **Emotional:** close matches, comeback feeling, rematch tension
+- **Safe:** anti-frustration by design (no shame, no toxic pressure)
+- **Buildable:** realistic for team size and current stack/content
 
 Core promise:
 
-> “In a few minutes, I can challenge a friend, feel the thrill, learn English, and want one more round.”
+> “In a few minutes, I can challenge someone, feel the thrill, learn vocabulary, and tap rematch immediately.”
 
 ---
 
-## 1) v1 Design Principles (Hard Rules)
+## 1) Scope Doctrine (Hard Rules)
 
-1. **Async by default**
-   - No live websocket battle required for core loop.
-   - Every mode must work with delayed turns/results.
+### 1.1 What v1 includes (must ship)
 
-2. **Session length guardrail**
-   - One full play unit must finish in 2–6 minutes.
-   - If a mode risks >6 minutes, split into checkpoints.
+1. **Async Duel only** (friend challenge + auto-match)
+2. **Web-first implementation** (no iOS Arena in v1)
+3. **Vocabulary-only question content** (auto-generated MCQ from existing data)
+4. **Rematch loop + result inbox + share card**
+5. **Kid-safe anti-frustration system**
 
-3. **Rematch in 1 tap**
-   - Post-result screen always has one dominant CTA: **Rematch**.
-   - Rematch setup must reuse same rules/content band when possible.
+### 1.2 What v1 explicitly excludes (defer to v1.1)
 
-4. **Learning + emotion together**
-   - Speed matters, but correctness and improvement matter more.
-   - Every loss screen shows one positive metric + one next-step tip.
-
-5. **Kid-safe frustration control**
-   - No humiliating text, no public shaming, no hard punishments.
-   - Comeback and retry opportunities are built-in.
-
----
-
-## 2) v1 Mode Portfolio (Only 3 Modes)
-
-We intentionally ship only these:
-
-1. **Async Duels** (friend or matched rival)
-2. **Survival Run** (solo score run with async leaderboard slices)
-3. **Room Challenge** (private code room, asynchronous participation)
-
-No live PvP, no team battle, no tournaments in v1.
-
----
-
-## 3) Core Scoring System (Shared Across Modes)
-
-For each question:
-
-- Correct answer: **+100 base points**
-- Speed bonus: **+0 to +40** (linear by response time window)
-- Streak bonus: **+10 × streak**, cap at +50
-- Hint used: **-20** (but never negative total per question)
-- Wrong answer: **0** (no negative points in v1)
-
-Round summary metrics:
-
-- Total Score
-- Accuracy %
-- Avg response time
-- Strongest skill tag (e.g., Vocabulary)
-
-Why this works for kids:
-
-- Wrong answers are not punished harshly.
-- Fast and correct still feels exciting.
-- Streak creates emotional tension without severe penalty.
-
----
-
-## 4) Mode 1 — Async Duels
-
-## 4.1 Match Format
-
-- 1 duel = **8 questions** from same difficulty band.
-- Player A plays first; Player B receives same question set (order shuffled minimally only if anti-cheat needed).
-- Turn window: **24 hours** default.
-- Result finalizes when both complete, or when timer expires.
-
-## 4.2 Matchmaking (Simple v1)
-
-- Inputs: grade band + hidden skill rating bucket.
-- Target expected win chance band: **40–60%**.
-- If no match in threshold, widen bucket gradually every 30s of queue simulation.
-- Avoid same-opponent repetition >2 times/day unless both tap rematch.
-
-## 4.3 Rematch Loop
-
-Post-result options:
-
-1. **Rematch Same Rules** (1 tap, best converting)
-2. **Revenge with Easier Pack** (if lost by >20%)
-3. **New Rival**
-
-Rematch message to opponent is preset-safe only:
-
-- “GG! Rematch?”
-- “So close—again?”
-
-## 4.4 UX Flow
-
-1. Home → Tap **Async Duel**
-2. Choose Friend or Auto Match
-3. Play 8-question run (2–4 min)
-4. End screen: “Waiting for opponent” + optional share card
-5. Final result card when opponent finishes
-6. One-tap rematch CTA
-
-## 4.5 Anti-Frustration Rules
-
-- If opponent times out: active player gets **Win by Completion** reward (reduced glory, full learning credit).
-- If child loses 3 duels in a row:
-  - show softer rival suggestions,
-  - offer “Confidence Pack” (slightly easier content),
-  - suppress aggressive rivalry copy.
-- No rank-point loss in first 5 duels (onboarding protection).
-
-## 4.6 KPI Targets (90-day targets)
-
-- Duel completion rate: **≥75%**
-- Opponent timeout rate: **≤20%**
-- Rematch rate after completed duel: **≥35%**
-- Post-loss next-match rate (within 10 min): **≥45%**
-
----
-
-## 5) Mode 2 — Survival Run
-
-## 5.1 Format
-
-- Solo endless-style run with **3 hearts**.
-- Wrong answer costs 1 heart.
-- Correct streaks every 5 grant **+1 shield charge** (auto-block one heart loss), cap 2.
-- Session hard stop at **5 minutes** in v1 (even if hearts remain).
-
-## 5.2 Difficulty Curve
-
-- Start in player comfort band.
-- Every 3 correct answers: slight difficulty increase.
-- After wrong answer: temporary ease-down for next 2 questions.
-
-## 5.3 Emotional Competition Layer
-
-- Compare score against:
-  - Personal Best
-  - Friend Ghost (async snapshot)
-  - Daily Mini Leaderboard (small cohort, e.g., 20 players similar level)
-- Result labels focus on progress:
-  - “New personal best!”
-  - “You passed Minh by 120 points!”
-
-## 5.4 UX Flow
-
-1. Home → Tap **Survival Run**
-2. Instant start (no queue)
-3. Live progress UI: hearts, streak, score, “next target”
-4. Run ends by hearts=0 or 5-min cap
-5. Result: PB delta + beat/close gap + retry button
-
-## 5.5 Anti-Frustration Rules
-
-- First mistake in first 30 seconds triggers one-time “Warm-up Mercy” (no heart loss).
-- Near-miss feedback: “You were 2 questions from beating your best.”
-- Retry always starts within 1 tap, no extra dialogs.
-
-## 5.6 KPI Targets
-
-- Survival starts per DAU: **≥1.8**
-- 5-minute completion (or natural end) rate: **≥85%**
-- Immediate retry rate: **≥30%**
-- PB improvement rate weekly active users: **≥40%**
-
----
-
-## 6) Mode 3 — Room Challenge (Async Private Group)
-
-## 6.1 Format
-
-- A user creates a room with code (e.g., 6 chars).
-- Host sets:
-  - Question count: 8 or 12
-  - Topic focus (vocab/grammar/mixed)
-  - Deadline: 2h / 24h / 48h
-- Participants join and play asynchronously.
-- Final standings revealed at deadline or when all finish.
-
-## 6.2 Why This Mode Matters
-
-- High social virality without realtime coordination.
-- Works for classmates/friends/family in different schedules.
-- Simple backend: one challenge config + many submissions.
-
-## 6.3 UX Flow
-
-1. Home → **Room Challenge**
-2. Create Room or Join by Code
-3. Share code/link (Telegram/Zalo/Copy)
-4. Participants complete run
-5. Final board + celebration badges + “Run It Back”
-
-## 6.4 Ranking Rules (Simple)
-
-- Primary: total score
-- Tiebreak 1: higher accuracy
-- Tiebreak 2: faster avg time
-
-## 6.5 Anti-Frustration + Safety
-
-- Default room visibility: private only.
-- No text chat in room in v1 (preset reactions only).
-- Show “Most Improved” badge, not only winner badge.
-- For younger users, hide exact bottom rank; show “Keep going” tier grouping.
-
-## 6.6 KPI Targets
-
-- Room creation rate (DAU): **≥8%**
-- Avg participants per room: **≥3.0**
-- Room completion rate: **≥65%**
-- % rooms generating at least one rematch room: **≥25%**
-
----
-
-## 7) Viral Mechanics (Built for Kids + Parents + Friends)
-
-## 7.1 Shareable Moments (Auto-generated cards)
-
-Generate after each mode:
-
-- “Narrow win by 50 points”
-- “New personal best”
-- “Beat your rival 3-2 this week”
-
-Card structure:
-
-- friendly avatar + score headline + CTA: “Can you beat me?”
-- deep-link to duel/room
-
-## 7.2 Invite Loops
-
-- Duel result → “Invite for rematch”
-- Survival PB → “Challenge 3 friends”
-- Room finished → “Run same room again”
-
-## 7.3 Safety Constraints for Virality
-
-- No public global ranking in v1.
-- No language that shames lower performers.
-- Parent/teacher share mode available (progress-focused template).
-
-KPI Targets:
-
-- Share click-through rate: **≥12%**
-- Invite-to-start conversion: **≥20%**
-- K-factor from challenge flows: **0.15–0.25** early target
-
----
-
-## 8) Retention & Habit Loops
-
-## 8.1 Daily Structure (10–15 mins typical)
-
-- 1 Async Duel
-- 1 Survival Run
-- 1 Room/Invite action (optional)
-
-## 8.2 Daily Missions (simple and short)
-
-Examples:
-
-- Complete 1 duel
-- Reach streak 5 in survival
-- Join or create 1 room
-
-## 8.3 Streak Policy (Kid-safe)
-
-- Streak counts on any meaningful completion.
-- 1 weekly grace day auto-applied.
-- No dramatic reset animation on streak break.
-
-KPI Targets:
-
-- D1: **≥45%**
-- D7: **≥20%**
-- D30: **≥8%**
-- Avg sessions/DAU: **≥2.5**
-
----
-
-## 9) UX Standards (Exact Screen Requirements)
-
-## 9.1 Home Screen
-
-Must show only 3 primary buttons:
-
-- Async Duel
 - Survival Run
 - Room Challenge
+- Realtime synchronous PvP
+- Team modes, tournaments, public global leaderboard
+- Open text chat/voice chat
 
-Plus:
+### 1.3 v1.1 scope (after v1 validation)
 
-- mission progress strip
-- streak indicator
-- inbox for results
+- Survival Run (solo)
+- Room Challenge (private code)
 
-## 9.2 In-Game HUD
+---
 
-Must always show:
+## 2) Why Duel-Only v1
 
-- score
-- question index/progress
-- timer cue (soft, non-threatening)
-- hint button (if allowed)
+Duel has the strongest core loop for earliest validation:
 
-## 9.3 Result Screen
+1. **Challenge -> Play -> Result -> Rematch** is naturally viral
+2. Smaller scope than shipping 3 modes at once
+3. Easier to instrument and improve quickly
+4. Fits current content constraints (vocabulary-only bank)
 
-Order of elements:
+Product principle:
+
+> Validate one strong social-learning loop first, then expand mode portfolio.
+
+---
+
+## 3) v1 Core Loop (Exact)
+
+1. User receives/creates duel
+2. Plays **8-question async run**
+3. Sees pending state until opponent completes or timeout
+4. Receives result card (win/lose/draw + learning insights)
+5. One dominant CTA: **Rematch**
+
+Target session time:
+
+- Per run: **2–4 minutes**
+- Full emotional loop (including result/rematch tap): **<5 minutes**
+
+---
+
+## 4) Duel Format & Match Rules (Exact Mechanics)
+
+## 4.1 Match object
+
+- `duel_id`
+- `created_by`
+- `opponent_id` (or matched player)
+- `difficulty_band` (starter/core/challenger)
+- `question_set_id` (same for both players)
+- `status`: waiting_opponent | active | complete | expired
+- `expires_at` (default 24h)
+
+## 4.2 Turn structure
+
+- Each player completes **1 run of 8 questions**
+- Same question set for fairness
+- Minor choice-order shuffle per question allowed (anti-copying)
+- No pause abuse: per-question timer always runs once shown
+
+## 4.3 Scoring formula (v1 exact)
+
+Per question:
+
+- Correct: **+100**
+- Speed bonus: **+0 to +40**
+  - <=2s: +40
+  - >2s to <=4s: +30
+  - >4s to <=6s: +20
+  - >6s to <=8s: +10
+  - >8s: +0
+- Streak bonus: **+10 × current streak**, cap +50
+- Hint used: **-20** (floor per question = 0)
+- Wrong: **0** (no negative score)
+
+Duel total score:
+
+`sum(question_score_1..8)`
+
+Tiebreakers (in order):
+
+1. Higher accuracy
+2. Faster average response time
+3. Earlier completion timestamp
+
+## 4.4 Outcome states
+
+- Win
+- Loss
+- Draw
+- Win by completion (opponent timeout)
+
+---
+
+## 5) Matchmaking (Simple, Realistic v1)
+
+Inputs:
+
+- Grade band (or equivalent level bucket)
+- Hidden skill rating bucket
+- Recent opponent history
+
+Rules:
+
+1. Start with expected win probability band **40–60%**
+2. If no match, widen band every 30s simulation step
+3. Avoid repeating same opponent >2 times/day (unless both accept rematch)
+4. New users (first 5 duels): beginner-protection pool priority
+
+---
+
+## 6) Content Generation Constraints (Vocabulary-Only Reality)
+
+## 6.1 Current constraint baseline
+
+v1 content is limited to existing vocabulary dataset:
+
+- ~18 topics × ~8 words (~144 vocabulary items)
+- Available signal: word + meaning mapping
+- Not reliably available in v1: grammar/listening/pronunciation assets
+
+Therefore:
+
+- **Only vocabulary MCQ** in v1 duels
+- No grammar/listening/pronunciation duel packs in v1
+
+## 6.2 Question template policy (v1)
+
+Primary template types:
+
+1. **Word -> Meaning MCQ**
+2. **Meaning -> Word MCQ**
+
+MCQ generation rules:
+
+- 1 correct + 3 distractors
+- Distractors prioritized from same topic and similar difficulty
+- Avoid duplicate distractors within one duel
+- Avoid repeating same lemma more than once per duel
+
+## 6.3 Fairness & repetition control
+
+Because bank is limited, enforce:
+
+1. No immediate repeat of same question in consecutive duels for same player
+2. Daily cap per item exposure (to reduce memorization-only exploitation)
+3. Question-set rotation by topic clusters
+4. Optional lightweight seeded generation with stable `question_set_id`
+
+## 6.4 Difficulty banding under limited data
+
+Use operational bands (not deep pedagogy yet):
+
+- **Starter:** high-frequency familiar words
+- **Core:** mixed frequency/common school vocabulary
+- **Challenger:** lower-frequency or confusable words
+
+Band assignment can be heuristic in v1, refined by telemetry in v1.x.
+
+---
+
+## 7) Anti-Frustration System (Kid-Safe by Design)
+
+## 7.1 Non-negotiable safeguards
+
+1. No negative total scoring for wrong answers
+2. No humiliating copy, no public shaming
+3. Loss screen must include one positive signal + one next-step suggestion
+4. First 5 duels: no rank-point loss framing
+
+## 7.2 Dynamic frustration controls
+
+If user loses **3 duels in a row**:
+
+- Offer “Easier Rematch Pack”
+- Soften rivalry copy tone
+- Prefer matchmaking vs similarly struggling peers
+
+If user exits early after losses (rage-risk):
+
+- Trigger low-pressure nudge: “Try a shorter confidence duel?”
+- Offer one-tap retry with easier difficulty band
+
+If opponent timeout occurs:
+
+- Award **Win by Completion**
+- Give reduced glory messaging, full learning credit
+
+## 7.3 UX language constraints
+
+Allowed tone examples:
+
+- “So close — you improved speed by 12%.”
+- “Nice effort. Want a confidence rematch?”
+
+Disallowed tone examples:
+
+- “You got crushed.”
+- “Lowest rank.”
+
+---
+
+## 8) UX Requirements (Web v1)
+
+## 8.1 Home entry points
+
+Primary CTA:
+
+- **Start Duel**
+
+Secondary:
+
+- Inbox (results/pending)
+- Missions strip (duel-focused)
+
+## 8.2 In-duel HUD (must show)
+
+- Score
+- Question progress (e.g., 3/8)
+- Soft timer cue
+- Hint button (if enabled)
+
+## 8.3 Result screen order
 
 1. Emotional headline (positive/neutral)
-2. Score + accuracy + one growth insight
-3. Rival/friend comparison
-4. **Primary CTA: Rematch / Retry**
-5. Secondary CTA: Share
+2. Score + accuracy + avg response time
+3. One growth insight (e.g., strongest topic)
+4. Rival comparison
+5. **Primary CTA: Rematch**
+6. Secondary CTA: Share
+
+## 8.4 Rematch UX requirement
+
+- One-tap rematch with same rules/content band whenever possible
+- No multi-step setup unless user explicitly changes settings
 
 ---
 
-## 10) Anti-Frustration Framework for Children
-
-1. **No hard negative scoring** in v1.
-2. **Beginner protection** for first 5 competitive matches.
-3. **Adaptive easing** after repeated mistakes.
-4. **Positive language templates only**.
-5. **Session break nudges** after 4 consecutive matches.
-6. **Comeback framing** (“You improved speed by 12%”).
-
-Monitor risk signals:
-
-- rapid exits after loss
-- repeated 0-heart early failures
-- long inactivity after defeat
-
-If risk detected: auto-offer easier pack + low-pressure mode suggestion.
-
----
-
-## 11) Telemetry & KPI Dashboard (v1 Minimum)
+## 9) Telemetry & KPI (v1 Minimum)
 
 Track events:
 
-- mode_start, mode_complete
-- question_answered (correct/time/hint)
+- duel_created
+- duel_started
+- question_answered (correct/time/hint/template_type)
+- duel_completed
+- duel_expired
 - result_viewed
-- rematch_tap
-- share_tap, invite_sent, invite_accepted
-- timeout_win/loss
+- rematch_tapped
+- share_tapped / invite_sent / invite_accepted
+- frustration_intervention_triggered
 
-Core dashboard sections:
+KPI targets (first 90 days post launch):
 
-1. Engagement: sessions/DAU, mode mix
-2. Competition health: close-match rate, rematch loops
-3. Learning: accuracy trend by skill tag
-4. Frustration: post-loss exits, failure streaks
-5. Virality: invite funnel conversion
-
----
-
-## 12) v1 Scope Control — Explicitly Avoid
-
-Do **NOT** build these in v1:
-
-1. Realtime synchronous PvP (live lockstep gameplay)
-2. Team modes (2v2/3v3)
-3. Large global leaderboards
-4. Open text chat / voice chat
-5. Complex economy (multiple currencies, gacha-like systems)
-6. Tournament brackets with live rounds
-7. Heavy cosmetic inventory systems
-8. Advanced anti-cheat ML stack (start with rule-based checks)
-
-Reason: these add ops/load/moderation complexity and slow learning loop validation.
+1. Duel completion rate: **>=75%**
+2. Opponent timeout rate: **<=20%**
+3. Rematch rate after completed duel: **>=35%**
+4. Post-loss next-duel rate (within 10 min): **>=45%**
+5. 3-loss-streak recovery rate (plays again within same day): **>=50%**
 
 ---
 
-## 13) Simple Implementation Plan (8–10 weeks)
+## 10) Daily Habit Layer (Duel-Only v1)
 
-## Phase A (Weeks 1–3): Foundations
+Simple mission set:
 
-- shared scoring service
-- question pack service
-- async match object + result inbox
-- basic telemetry
+- Complete 1 duel
+- Play 2 duels
+- Send 1 challenge
 
-## Phase B (Weeks 4–6): Three Modes Playable
+Streak policy:
 
-- Async Duel complete loop
-- Survival Run complete loop
-- Room Challenge with code + deadline
+- Any completed duel counts toward daily streak
+- 1 weekly grace day auto-applied
+- No dramatic streak-break punishment visuals
 
-## Phase C (Weeks 7–10): Polish + Growth Hooks
+---
 
-- rematch optimization
-- share cards + deep links
-- anti-frustration interventions
-- KPI tuning experiments
+## 11) Implementation Timeline (Realistic 14–16 Weeks)
 
-Launch gate:
+Assumption: team size 1–2, existing Supabase + web stack.
 
-- Match/Run completion **≥80%** overall
-- Rematch or retry action rate **≥30%**
-- Post-loss abandonment reduced week-over-week
+## Phase 0 (Week 1): Product/Tech Spec Lock
+
+- Finalize duel rules, scoring, event schema
+- Freeze v1 scope (duel-only)
+- Define content-generation constraints from current vocabulary data
+
+Deliverable: signed-off spec + event contract
+
+## Phase 1 (Weeks 2–4): Foundation
+
+- DB schema for duel, question_set, attempt, result inbox
+- Async duel lifecycle APIs
+- Basic matchmaking service (bucket-based)
+
+Deliverable: end-to-end duel lifecycle works in dev
+
+## Phase 2 (Weeks 5–7): Content Pipeline + Scoring
+
+- MCQ auto-generation from vocabulary dataset
+- Distractor selection logic + repetition guards
+- Scoring engine + tie-break implementation
+
+Deliverable: stable 8-question duel packs from real data
+
+## Phase 3 (Weeks 8–10): Web Gameplay UX
+
+- Duel play screen (HUD, timer cue, hints)
+- Result screen (insights + rematch-first)
+- Inbox/pending states + timeout resolution UX
+
+Deliverable: playable closed alpha on web
+
+## Phase 4 (Weeks 11–12): Anti-Frustration + Share Loop
+
+- Loss-streak interventions
+- Confidence rematch path
+- Share card + challenge deep-link flow
+
+Deliverable: emotional loop + safety loop complete
+
+## Phase 5 (Weeks 13–14): Telemetry, Tuning, Internal Beta
+
+- Full event tracking dashboard
+- KPI instrumentation verification
+- Matchmaking and copy tuning via small cohort
+
+Deliverable: launch candidate if gates pass
+
+## Buffer / Hardening (Weeks 15–16, if needed)
+
+- Bug fixing + performance hardening
+- Final UX polish
+- Rollout controls and fallback plans
+
+Deliverable: production-ready v1 with lower launch risk
+
+---
+
+## 12) Launch Gates (Go/No-Go)
+
+Before public v1 launch, require:
+
+1. Duel technical completion >=80% in beta
+2. Critical bug rate below agreed threshold
+3. Rematch tap rate >=25% in controlled cohort
+4. No severe kid-safety copy violations in review set
+5. Timeout and result-inbox flows stable under load test
+
+If gates fail:
+
+- Do not expand scope
+- Fix core duel loop first
+
+---
+
+## 13) v1.1 Expansion Plan (Deferred Modes)
+
+Only after duel loop is validated:
+
+1. Add **Survival Run** (solo progression loop)
+2. Add **Room Challenge** (private async group)
+
+Entry criteria for v1.1:
+
+- Duel completion and rematch KPIs stable for 4+ weeks
+- Content pipeline proven sustainable
+- Team capacity available without degrading duel quality
 
 ---
 
 ## 14) Final Doctrine
 
-For this product stage, winning means:
+For this stage, success is not “many modes.”
+Success is one reliable, exciting, safe loop:
 
-- kids can play quickly,
-- feel competitive emotion safely,
-- re-enter instantly for “one more game,”
-- and invite friends naturally.
+**Challenge -> Duel -> Result -> Rematch**
 
-**Keep v1 small, fast, and sticky.**
-Complexity can come later; habit and emotional loop must come first.
+Ship duel-only v1 on web, validate behavior, then scale to Survival/Room in v1.1.
