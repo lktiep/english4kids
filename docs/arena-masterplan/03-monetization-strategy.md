@@ -1,290 +1,251 @@
-# 03 — Monetization Strategy (Month-1 Break-Even, Month-2 Growth)
+# 03 — Monetization Strategy (Month-1 Validation, Month-3 Break-Even)
 
 ## 0) Executive Objective
 
-**Primary financial objective**
+**Financial milestones (revised)**
 
-- **Month 1:** Reach **break-even** against core operating costs:
-  - cloud/realtime infra
-  - observability/tooling
-  - payment fees
-  - **iOS Developer Program license allocation**
-- **Month 2:** Move from break-even to **repeatable growth** with a safer monetization mix.
+- **Month 1 (Validation):** prove early willingness-to-pay and ad viability on a small base; target **$30–$60 monthly revenue** with clean retention/fairness signals.
+- **Month 2 (Optimization):** improve conversion and ARPPU while keeping monetization light; target **$90–$140 monthly revenue**.
+- **Month 3 (Break-even):** reach **$170+ monthly revenue** to cover lean platform costs.
 
-**Product rule (non-negotiable):**
+**Product rule (non-negotiable)**
 
-- No hard subscription wall for gameplay.
-- No paywall on core lessons, ranked access, or fair progression.
-- Monetization must come from **cosmetics, convenience outside ranked, parent value, and lightweight partnerships**.
+- No hard paywall for core duel gameplay.
+- No pay-to-win in ranked/fair matches.
+- Monetization only from cosmetics, optional parent value, and low-pressure rewarded ads.
 
 ---
 
-## 1) Cost Baseline for Break-Even (Lean v1)
+## 1) Cost Baseline (Web-first, Duel-only v1)
 
-To avoid vague targets, break-even is tied to an explicit monthly cost envelope.
+Break-even is tied to explicit monthly operating cost for v1.
 
-### 1.1 Fixed + quasi-fixed monthly costs (v1)
+| Cost Item | Assumption | Monthly Cost (USD) |
+|---|---:|---:|
+| Web app hosting + realtime/game backend + DB + CDN | Lean autoscaling, single region | 80 |
+| Monitoring/logging/error tooling | Low-tier paid stack | 20 |
+| Email/notifications/utilities | Transactional, low volume | 10 |
+| Payment fees reserve | Blended fee + failed payment buffer | 10 |
+| Contingency | Usage spikes + misc | 15 |
+| **Total Break-even Target** |  | **135** |
 
-| Cost Item                                          |                Assumption | Monthly Cost (USD) |
-| -------------------------------------------------- | ------------------------: | -----------------: |
-| Realtime/game backend + DB + cache + storage + CDN | Lean autoscaled footprint |                 55 |
-| Monitoring/logging/error tracking                  |       Low-tier paid tools |                 15 |
-| Email/push/utility APIs                            |       Transactional usage |                  8 |
-| Payment processing overhead buffer                 |      blended fees reserve |                  7 |
-| **iOS Developer Program allocation**               |             $99/year ÷ 12 |           **8.25** |
-| Contingency buffer                                 |     ~10% for usage spikes |                 12 |
-| **Total Month-1 Break-Even Target**                |                           |         **105.25** |
+**Execution threshold:** aim for **$170/month** by Month 3 (includes safety margin vs. variance/refunds).
 
-**Round target for execution:** **$110 MRR-equivalent** in Month 1.
-
-> Note: Team salary is intentionally excluded from this phase target; this is a strict **platform self-sustainability checkpoint**.
+> Note: salaries are excluded in this phase. This checkpoint is strict platform self-sustainability.
 
 ---
 
-## 2) v1 Low-Risk Monetization Stack (No Hard Paywall)
+## 2) Realistic Early-Stage Assumptions (Low brand trust)
 
-Prioritize only mechanisms with fast implementation, low legal complexity, and low trust risk.
+For a new education game with low brand recognition, initial conversion is usually weak. Model assumptions should reflect that.
 
-### Stack A — Cosmetic Store (Primary)
+### 2.1 Traffic assumptions
 
-**Why first:** Fast to ship, non-pay-to-win, emotionally rewarding for kids.
+- **Month 1 MAU:** 350
+- **Month 2 MAU:** 700
+- **Month 3 MAU:** 1,100
+- Parent-linked ratio: ~35–40% of MAU
 
-**Price ladder (localized equivalents):**
+### 2.2 Conversion assumptions (conservative)
 
-- Starter cosmetic: **$0.99**
-- Themed bundle: **$2.49**
-- Premium skin pack: **$4.99**
+- Cosmetic payer conversion starts at **1.5%** (not 3–5% in Month 1)
+- Parent plan conversion starts at **1.0% of parent-linked accounts**
+- Rewarded ads usage starts at **3–4 rewarded views/user/month** among active cohort
+- Founding support is one-time and decays after launch window
 
-**Guardrails:**
-
-- Zero gameplay stat advantage.
-- No manipulative countdowns.
-- Parent-visible receipts and purchase history.
-
----
-
-### Stack B — Parent Insights Plus (Optional, not gameplay-gating)
-
-**Why second:** Monetizes parent value, not child progression lock.
-
-**Pricing:**
-
-- **$3.99/month**
-- **$29/year** (effective $2.42/month)
-
-**Included value:**
-
-- Weekly skill report
-- Pronunciation/accuracy trend
-- Home practice recommendations
-
-**Not included:** Any ranked or lesson power advantage.
+These are intentionally strict to avoid false confidence.
 
 ---
 
-### Stack C — Rewarded Ads (Conservative)
+## 3) v1 Monetization Stack (Low-risk, Duel-only Web-first)
 
-**Why third:** Monetize free cohort without disrupting learning.
+Prioritize mechanisms with low implementation risk, low legal complexity, and low trust damage.
 
-**Policy:**
+### A) Cosmetics (Primary)
 
-- Optional rewarded ads only (no forced ad in active learning loop)
-- Max **1–2 reward opportunities/day**
-- Rewards limited to cosmetic tokens / non-ranked utility
+- Starter: **$0.99**
+- Bundle: **$1.99**
+- Premium cosmetic pack: **$3.99**
 
----
+Rules:
+- Visual-only, no gameplay advantage.
+- No manipulative countdown pressure.
+- Clear purchase history for parents.
 
-### Stack D — Founding Supporter Pack (Early goodwill)
+### B) Rewarded Ads (Secondary)
 
-**Pricing:**
+- Optional only; never forced during active duels.
+- Max **1 reward slot/day** in Month 1, can increase to 2 if retention unaffected.
+- Rewards limited to cosmetic currency and non-ranked quality-of-life items.
 
-- One-time **$4.99** badge + thank-you cosmetic frame
+### C) Parent Insights Lite (Small optional add-on)
 
-**Use case:**
+- Price: **$2.99/month** (no annual plan in first 90 days)
+- Includes: weekly progress summary + suggested practice routine
+- Excludes: any ranked power/advantage
 
-- Helps close Month-1 break-even gap without risky mechanics.
+### D) Founding Badge Pack (Launch-only bridge)
 
----
-
-## 3) Month-1 Revenue Math (Break-Even Scenario)
-
-### 3.1 Traffic and conversion assumptions (conservative)
-
-- MAU: **300**
-- Parent-linked accounts: **120**
-- Average DAU: **70**
-
-### 3.2 Revenue components
-
-1. **Cosmetic Store**
-
-- Buyer conversion: **3% of MAU**
-- ARPPU: **$3.50**
-- Revenue = `300 × 0.03 × 3.50 = $31.50`
-
-2. **Parent Insights Plus**
-
-- Conversion: **4% of parent accounts**
-- Price: **$3.99/month**
-- Revenue = `120 × 0.04 × 3.99 = $19.15`
-
-3. **Rewarded Ads**
-
-- Monthly rewarded impressions: **2,000**
-- eCPM: **$6**
-- Revenue = `(2,000 / 1,000) × 6 = $12.00`
-
-4. **Founding Supporter Pack**
-
-- Buyers: **10**
-- Price: **$4.99**
-- Revenue = `10 × 4.99 = $49.90`
-
-### 3.3 Month-1 total and break-even check
-
-- Total revenue = `31.50 + 19.15 + 12.00 + 49.90 = $112.55`
-- Break-even target = **$105.25** (execution target $110)
-
-✅ **Result:** Month-1 reaches break-even with a modest safety margin.
+- One-time **$3.99**
+- Includes supporter badge + cosmetic frame
+- Explicitly time-boxed, not treated as recurring core revenue
 
 ---
 
-## 4) Month-2 Growth Scenarios
+## 4) Revenue Math by Month (Revised)
 
-Goal: increase from “survive” to “grow” while keeping risk low.
+## 4.1 Month 1 — Validation (not break-even)
 
-### 4.1 Assumptions for Month 2
+Assumptions:
+- MAU: 350
+- Parent-linked accounts: 130
 
-- MAU: **1,000** (via growth plan + retention)
-- Parent-linked accounts: **400**
-- DAU: **220**
-- Slight infra scale-up cost: **$150 total monthly burn** (includes iOS allocation)
+Revenue:
+1. Cosmetics: `350 × 1.5% × $2.20 ARPPU = $11.55`
+2. Parent Insights Lite: `130 × 1.0% × $2.99 = $3.89`
+3. Rewarded ads: `1,900 impressions ÷ 1000 × $5.5 eCPM = $10.45`
+4. Founding badge: `8 buyers × $3.99 = $31.92`
 
-### 4.2 Base growth scenario (recommended target)
+**Month 1 total = $57.81**
 
-1. Cosmetics: `1000 × 0.04 × 4.00 = $160`
-2. Parent Insights Plus: `400 × 0.06 × 3.99 = $95.76`
-3. Rewarded Ads: `9,000 impressions / 1000 × $6.5 = $58.50`
-4. Founding Supporter/limited drops: `30 × 4.99 = $149.70`
-5. Optional weekend event ticket (non-ranked):
-   - participants: `1000 × 0.08 = 80`
-   - paid uptake: `25%` → 20 users
-   - ticket: `$1.49`
-   - revenue: `20 × 1.49 = $29.80`
+Interpretation:
+- ✅ Good validation signal if D30 retention is stable and complaint rate is low
+- ❌ Not intended to cover costs yet
 
-**Month-2 base total = $493.76**
+## 4.2 Month 2 — Optimization
 
-### 4.3 Stretch scenario (with one B2B micro-pilot)
+Assumptions:
+- MAU: 700
+- Parent-linked: 260
+- Slight conversion improvements from UX/pricing iterations
 
-- Base scenario: **$493.76**
-- - 1 classroom pilot license: **$99/month**
-- - 1 sponsor micro-event: **$150**
+Revenue:
+1. Cosmetics: `700 × 2.2% × $2.40 = $36.96`
+2. Parent Insights Lite: `260 × 1.8% × $2.99 = $13.99`
+3. Rewarded ads: `6,000 ÷ 1000 × $6.0 = $36.00`
+4. Founding badge tail: `10 × $3.99 = $39.90`
 
-**Month-2 stretch total = $742.76**
+**Month 2 total = $126.85**
 
-### 4.4 Growth interpretation
+Interpretation:
+- Near-operating-cost range in optimistic weeks
+- Still not reliable break-even because one-time badge contributes meaningfully
 
-- From Month-1 break-even (~$110) to Month-2 base (~$494): **~4.5x**
-- With stretch deals (~$743): **~6.7x**
+## 4.3 Month 3 — Break-even target
 
-This is aggressive but still lower risk than launching complex economies too early.
+Assumptions:
+- MAU: 1,100
+- Parent-linked: 420
+- Better store merchandising and onboarding
+
+Revenue:
+1. Cosmetics: `1100 × 3.0% × $2.70 = $89.10`
+2. Parent Insights Lite: `420 × 2.2% × $2.99 = $27.63`
+3. Rewarded ads: `10,000 ÷ 1000 × $6.0 = $60.00`
+4. Founding badge tail: `5 × $3.99 = $19.95`
+
+**Month 3 total = $196.68**
+
+Break-even check:
+- Cost baseline: **$135**
+- Safety break-even threshold: **$170**
+- Result: **$196.68 → pass with limited margin**
 
 ---
 
-## 5) Pricing & Conversion Benchmarks to Track Weekly
+## 5) Scenario Table (Decision-ready)
 
-### 5.1 Core KPIs
+| Scenario | M3 MAU | Cosmetics Conv. | Parent Conv. | Ad Revenue | M3 Revenue |
+|---|---:|---:|---:|---:|---:|
+| Bear | 850 | 2.0% | 1.5% | $40 | ~$112 |
+| Base | 1,100 | 3.0% | 2.2% | $60 | ~$197 |
+| Bull | 1,400 | 3.8% | 3.0% | $80 | ~$286 |
 
-- MAU, DAU, DAU/MAU
-- Payer conversion (overall + by stream)
-- ARPPU (cosmetics, parent plan)
-- Ad ARPDAU
-- Parent plan churn
+Use **Base** for planning, **Bear** for risk control, **Bull** as upside only.
+
+---
+
+## 6) Weekly KPI Gates (Strict)
+
+Track weekly and compare against gates:
+
+- D7 retention (overall and payer cohort)
+- Cosmetic conversion
+- Parent plan activation and churn
+- Rewarded ad opt-in rate
 - Refund rate
-- Fairness complaints in ranked
+- Fairness complaints (pay-to-win perception)
+- Ad-related sentiment score
 
-### 5.2 Trigger-based actions
+### Gate thresholds
 
-- If cosmetic conversion < 2% for 2 consecutive weeks → improve storefront bundles + post-match preview UX.
-- If parent plan churn > 10% monthly → improve report quality before price changes.
-- If ad-driven retention drop > 3% D7 → reduce ad opportunities immediately.
-
----
-
-## 6) Anti-Pay-to-Win and Child-Safety Constraints
-
-1. Ranked outcomes depend on skill only.
-2. Paid items cannot alter:
-   - question difficulty,
-   - answer timing windows,
-   - MMR/ELO gain-loss,
-   - validation tolerance.
-3. Booster effects (if any) are practice-only and visibly labeled.
-4. Parent controls required: PIN, spending cap, purchase history.
-5. Child privacy compliance: age gating, consent logging, data deletion/export flows.
+- Cosmetic conversion **<1.2% for 2 consecutive weeks** → rework store UX before adding new SKUs.
+- Parent churn **>12% monthly equivalent** → improve report quality, no price increase.
+- D7 retention drop **>4pp after ad rollout** → reduce ad opportunities immediately.
+- Refund rate **>8%** → freeze new offers and fix expectation mismatch.
+- Pay-to-win complaints **>2% of active feedback volume** → immediate monetization review.
 
 ---
 
-## 7) Red Flags — Monetization Ideas to Avoid Early
+## 7) Hard Red Flags (Do NOT ship in v1/v1.5)
 
-Avoid these in v1/v1.5 to reduce trust, legal, and product risk:
+1. Loot boxes / gacha with opaque odds
+2. Energy systems that block duels unless paid
+3. Any ranked advantage from paid items
+4. Forced interstitial ads between duel sessions
+5. Complex marketplace/UGC economy before moderation maturity
+6. Real-money prize mechanics with legal ambiguity for minors
+7. Price experiments that hide true cost from parents
 
-1. **Loot boxes / gacha with opaque odds**
-   - High backlash risk with minors.
-
-2. **Energy systems that block learning unless paid**
-   - Directly conflicts with learning mission and retention.
-
-3. **Hard gameplay subscription gates**
-   - Violates “free core learning + fair ranked” principle.
-
-4. **Pay-for-power boosters in ranked**
-   - Destroys competitive integrity and social trust.
-
-5. **Aggressive interstitial ad frequency**
-   - Short-term revenue, long-term retention damage.
-
-6. **Complex creator marketplace at launch**
-   - Heavy moderation and fraud risk before core loop stabilizes.
-
-7. **Real-money prize mechanics with legal ambiguity**
-   - High compliance exposure across jurisdictions for minors.
+If any red-flag design is required to hit revenue, strategy is likely broken and should pivot.
 
 ---
 
-## 8) 60-Day Execution Plan
+## 8) Pivot Conditions (Strict)
 
-### Weeks 1–2
+Trigger pivot discussion if **any** of the following occurs by end of Month 2:
 
-- Ship cosmetic store MVP (15–25 SKUs)
-- Add conservative rewarded ads
-- Launch Founding Supporter pack
-- Instrument monetization events + fairness telemetry
+1. Revenue **< $90** despite MAU growth and two pricing/store iterations.
+2. D30 retention **< 12%** and monetization changes worsen retention.
+3. Parent plan conversion remains **<1.0%** after product/report improvements.
+4. Ad monetization causes sustained negative sentiment or >4pp retention impact.
+5. Compliance/parent trust concerns consume roadmap capacity.
 
-### Weeks 3–4
+### Approved pivot directions
 
-- Launch Parent Insights Plus
-- Add parent controls (PIN/cap/history)
-- Run pricing A/B: $0.99 starter vs $1.49 starter bundle
-
-### Weeks 5–6
-
-- Add optional weekend paid event (non-ranked)
-- Improve cosmetic merchandising from cohort data
-
-### Weeks 7–8
-
-- Pilot one classroom plan
-- Test one sponsor micro-event
-- Decide Month-3 scale based on retention + trust + conversion
+- Pivot A: reduce monetization surface, focus on retention loop first (content/duel quality).
+- Pivot B: add lightweight B2B classroom pilot earlier (teacher dashboard, school bundle).
+- Pivot C: broaden web distribution channels before deeper monetization complexity.
 
 ---
 
-## 9) Final Recommendation
+## 9) 90-Day Rollout (Low-risk sequence)
 
-For this arena plan, the safest path is:
+### Month 1
+- Ship cosmetics MVP (10–15 SKUs)
+- Enable optional rewarded ads (1 slot/day)
+- Launch founding badge pack
+- Instrument full monetization + fairness analytics
 
-- **Month 1:** break-even via cosmetics + parent insights + rewarded ads + supporter pack (target: **$110+**).
-- **Month 2:** growth via conversion optimization and one or two lightweight B2B/sponsor wins (target: **$500–$750**, with upside).
+### Month 2
+- Improve store UX, bundle clarity, and price points
+- Launch Parent Insights Lite
+- Add parent controls (history + spending lock)
+- Run two controlled experiments only (avoid over-testing noise)
 
-This preserves mission alignment: **free core gameplay, fair competition, child-safe monetization**.
+### Month 3
+- Scale winning offers only
+- Keep ad pressure capped unless retention unaffected
+- Decide: continue B2C scaling vs. add B2B classroom pilot
+
+---
+
+## 10) Final Recommendation
+
+For duel-only web-first v1, use a **trust-first, low-risk** monetization model:
+
+- **Month 1:** validate demand signals, not break-even.
+- **Month 2:** optimize conversion with strict safety/fairness gates.
+- **Month 3:** hit break-even (~$170+ target) through cosmetics + light parent value + conservative rewarded ads.
+
+This path is slower than aggressive monetization, but far safer for a low-brand early-stage kids product where trust and retention determine long-term survival.
