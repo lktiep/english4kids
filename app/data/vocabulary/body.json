@@ -15,7 +15,8 @@
       "vietnamese": "Đầu",
       "emoji": "🗣️",
       "sentence": "Touch your head.",
-      "sentenceVi": "Sờ đầu nào."
+      "sentenceVi": "Sờ đầu nào.",
+      "image": "/images/body/head.png"
     },
     {
       "id": "eyes",
@@ -24,7 +25,8 @@
       "vietnamese": "Mắt",
       "emoji": "👀",
       "sentence": "I have two eyes.",
-      "sentenceVi": "Tôi có hai mắt."
+      "sentenceVi": "Tôi có hai mắt.",
+      "image": "/images/body/eyes.png"
     },
     {
       "id": "ears",
@@ -33,7 +35,8 @@
       "vietnamese": "Tai",
       "emoji": "👂",
       "sentence": "I hear with my ears.",
-      "sentenceVi": "Tôi nghe bằng tai."
+      "sentenceVi": "Tôi nghe bằng tai.",
+      "image": "/images/body/ears.png"
     },
     {
       "id": "nose",
@@ -42,7 +45,8 @@
       "vietnamese": "Mũi",
       "emoji": "👃",
       "sentence": "Touch your nose.",
-      "sentenceVi": "Sờ mũi nào."
+      "sentenceVi": "Sờ mũi nào.",
+      "image": "/images/body/nose.png"
     },
     {
       "id": "mouth",
@@ -51,7 +55,8 @@
       "vietnamese": "Miệng",
       "emoji": "👄",
       "sentence": "Open your mouth.",
-      "sentenceVi": "Há miệng ra."
+      "sentenceVi": "Há miệng ra.",
+      "image": "/images/body/mouth.png"
     },
     {
       "id": "hands",
@@ -60,7 +65,8 @@
       "vietnamese": "Tay",
       "emoji": "🤲",
       "sentence": "Clap your hands!",
-      "sentenceVi": "Vỗ tay nào!"
+      "sentenceVi": "Vỗ tay nào!",
+      "image": "/images/body/hands.png"
     },
     {
       "id": "feet",
@@ -69,7 +75,8 @@
       "vietnamese": "Bàn chân",
       "emoji": "🦶",
       "sentence": "I walk with my feet.",
-      "sentenceVi": "Tôi đi bằng chân."
+      "sentenceVi": "Tôi đi bằng chân.",
+      "image": "/images/body/feet.png"
     },
     {
       "id": "fingers",
@@ -78,7 +85,8 @@
       "vietnamese": "Ngón tay",
       "emoji": "🖐️",
       "sentence": "I have ten fingers.",
-      "sentenceVi": "Tôi có mười ngón tay."
+      "sentenceVi": "Tôi có mười ngón tay.",
+      "image": "/images/body/fingers.png"
     },
     {
       "id": "hair",
@@ -87,7 +95,8 @@
       "vietnamese": "Tóc",
       "emoji": "💇",
       "sentence": "My hair is black.",
-      "sentenceVi": "Tóc tôi màu đen."
+      "sentenceVi": "Tóc tôi màu đen.",
+      "image": "/images/body/hair.png"
     },
     {
       "id": "teeth",
@@ -96,7 +105,8 @@
       "vietnamese": "Răng",
       "emoji": "🦷",
       "sentence": "Brush your teeth!",
-      "sentenceVi": "Đánh răng nào!"
+      "sentenceVi": "Đánh răng nào!",
+      "image": "/images/body/teeth.png"
     }
   ]
 }

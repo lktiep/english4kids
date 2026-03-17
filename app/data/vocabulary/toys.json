@@ -15,7 +15,8 @@
       "vietnamese": "Quả bóng",
       "emoji": "⚽",
       "sentence": "Kick the ball!",
-      "sentenceVi": "Đá bóng nào!"
+      "sentenceVi": "Đá bóng nào!",
+      "image": "/images/toys/ball.svg"
     },
     {
       "id": "doll",
@@ -24,7 +25,8 @@
       "vietnamese": "Búp bê",
       "emoji": "🪆",
       "sentence": "The doll is pretty.",
-      "sentenceVi": "Búp bê đẹp."
+      "sentenceVi": "Búp bê đẹp.",
+      "image": "/images/toys/doll.svg"
     },
     {
       "id": "bike",
@@ -33,7 +35,8 @@
       "vietnamese": "Xe đạp",
       "emoji": "🚲",
       "sentence": "I ride my bike.",
-      "sentenceVi": "Tôi đi xe đạp."
+      "sentenceVi": "Tôi đi xe đạp.",
+      "image": "/images/toys/bike.svg"
     },
     {
       "id": "teddy_bear",
@@ -42,7 +45,8 @@
       "vietnamese": "Gấu bông",
       "emoji": "🧸",
       "sentence": "I love my teddy bear.",
-      "sentenceVi": "Tôi yêu gấu bông."
+      "sentenceVi": "Tôi yêu gấu bông.",
+      "image": "/images/toys/teddy_bear.svg"
     },
     {
       "id": "run",
@@ -51,7 +55,8 @@
       "vietnamese": "Chạy",
       "emoji": "🏃",
       "sentence": "I can run fast!",
-      "sentenceVi": "Tôi chạy nhanh!"
+      "sentenceVi": "Tôi chạy nhanh!",
+      "image": "/images/toys/run.svg"
     },
     {
       "id": "jump",
@@ -60,7 +65,8 @@
       "vietnamese": "Nhảy",
       "emoji": "🤸",
       "sentence": "Jump high!",
-      "sentenceVi": "Nhảy cao nào!"
+      "sentenceVi": "Nhảy cao nào!",
+      "image": "/images/toys/jump.svg"
     },
     {
       "id": "sing",
@@ -69,7 +75,8 @@
       "vietnamese": "Hát",
       "emoji": "🎤",
       "sentence": "I like to sing.",
-      "sentenceVi": "Tôi thích hát."
+      "sentenceVi": "Tôi thích hát.",
+      "image": "/images/toys/sing.svg"
     },
     {
       "id": "draw",
@@ -78,7 +85,8 @@
       "vietnamese": "Vẽ",
       "emoji": "🎨",
       "sentence": "I draw a flower.",
-      "sentenceVi": "Tôi vẽ bông hoa."
+      "sentenceVi": "Tôi vẽ bông hoa.",
+      "image": "/images/toys/draw.svg"
     },
     {
       "id": "play",
@@ -87,7 +95,8 @@
       "vietnamese": "Chơi",
       "emoji": "🎮",
       "sentence": "Let's play together!",
-      "sentenceVi": "Cùng chơi nào!"
+      "sentenceVi": "Cùng chơi nào!",
+      "image": "/images/toys/play.svg"
     },
     {
       "id": "dance",
@@ -96,7 +105,8 @@
       "vietnamese": "Nhảy múa",
       "emoji": "💃",
       "sentence": "I love to dance!",
-      "sentenceVi": "Tôi thích nhảy múa!"
+      "sentenceVi": "Tôi thích nhảy múa!",
+      "image": "/images/toys/dance.svg"
     },
     {
       "id": "swim",
@@ -105,7 +115,8 @@
       "vietnamese": "Bơi",
       "emoji": "🏊",
       "sentence": "I can swim.",
-      "sentenceVi": "Tôi biết bơi."
+      "sentenceVi": "Tôi biết bơi.",
+      "image": "/images/toys/swim.svg"
     }
   ]
 }

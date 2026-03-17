@@ -45,7 +45,8 @@
       "vietnamese": "Nước ép",
       "emoji": "🧃",
       "sentence": "Orange juice is good.",
-      "sentenceVi": "Nước cam ngon."
+      "sentenceVi": "Nước cam ngon.",
+      "image": "/images/food/juice.png"
     },
     {
       "id": "apple",
@@ -54,7 +55,8 @@
       "vietnamese": "Quả táo",
       "emoji": "🍎",
       "sentence": "The apple is red.",
-      "sentenceVi": "Quả táo màu đỏ."
+      "sentenceVi": "Quả táo màu đỏ.",
+      "image": "/images/food/apple.png"
     },
     {
       "id": "banana",
@@ -63,7 +65,8 @@
       "vietnamese": "Quả chuối",
       "emoji": "🍌",
       "sentence": "The banana is yellow.",
-      "sentenceVi": "Quả chuối màu vàng."
+      "sentenceVi": "Quả chuối màu vàng.",
+      "image": "/images/food/banana.png"
     },
     {
       "id": "water",
@@ -72,7 +75,8 @@
       "vietnamese": "Nước",
       "emoji": "💧",
       "sentence": "I drink water.",
-      "sentenceVi": "Tôi uống nước."
+      "sentenceVi": "Tôi uống nước.",
+      "image": "/images/food/water.png"
     },
     {
       "id": "cake",
@@ -91,7 +95,8 @@
       "vietnamese": "Trứng",
       "emoji": "🥚",
       "sentence": "I eat an egg.",
-      "sentenceVi": "Tôi ăn trứng."
+      "sentenceVi": "Tôi ăn trứng.",
+      "image": "/images/food/egg.png"
     },
     {
       "id": "candy",
@@ -100,7 +105,8 @@
       "vietnamese": "Kẹo",
       "emoji": "🍬",
       "sentence": "Candy is sweet.",
-      "sentenceVi": "Kẹo ngọt."
+      "sentenceVi": "Kẹo ngọt.",
+      "image": "/images/food/candy.png"
     },
     {
       "id": "chicken_food",
@@ -109,7 +115,8 @@
       "vietnamese": "Thịt gà",
       "emoji": "🍗",
       "sentence": "I eat chicken.",
-      "sentenceVi": "Tôi ăn thịt gà."
+      "sentenceVi": "Tôi ăn thịt gà.",
+      "image": "/images/food/chicken.png"
     }
   ]
 }

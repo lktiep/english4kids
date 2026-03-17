@@ -15,7 +15,8 @@
       "vietnamese": "Khủng long bạo chúa",
       "emoji": "🦖",
       "sentence": "T-Rex is very big!",
-      "sentenceVi": "Khủng long bạo chúa rất to!"
+      "sentenceVi": "Khủng long bạo chúa rất to!",
+      "image": "/images/dinosaurs/t-rex.svg"
     },
     {
       "id": "triceratops",
@@ -24,7 +25,8 @@
       "vietnamese": "Khủng long ba sừng",
       "emoji": "🦕",
       "sentence": "Triceratops has three horns.",
-      "sentenceVi": "Khủng long ba sừng có ba chiếc sừng."
+      "sentenceVi": "Khủng long ba sừng có ba chiếc sừng.",
+      "image": "/images/dinosaurs/triceratops.svg"
     },
     {
       "id": "pterodactyl",
@@ -33,7 +35,8 @@
       "vietnamese": "Thằn lằn bay",
       "emoji": "🦅",
       "sentence": "Pterodactyl can fly.",
-      "sentenceVi": "Thằn lằn bay có thể bay."
+      "sentenceVi": "Thằn lằn bay có thể bay.",
+      "image": "/images/dinosaurs/pterodactyl.svg"
     },
     {
       "id": "stegosaurus",
@@ -42,7 +45,8 @@
       "vietnamese": "Khủng long gai",
       "emoji": "🦕",
       "sentence": "Stegosaurus eats plants.",
-      "sentenceVi": "Khủng long gai ăn cây cỏ."
+      "sentenceVi": "Khủng long gai ăn cây cỏ.",
+      "image": "/images/dinosaurs/stegosaurus.svg"
     },
     {
       "id": "velociraptor",
@@ -51,7 +55,8 @@
       "vietnamese": "Khủng long chạy nhanh",
       "emoji": "🦖",
       "sentence": "Velociraptor is very fast.",
-      "sentenceVi": "Khủng long chạy nhanh rất nhanh."
+      "sentenceVi": "Khủng long chạy nhanh rất nhanh.",
+      "image": "/images/dinosaurs/velociraptor.svg"
     },
     {
       "id": "fossil",
@@ -60,7 +65,8 @@
       "vietnamese": "Hóa thạch",
       "emoji": "🦴",
       "sentence": "I found a fossil!",
-      "sentenceVi": "Tôi tìm thấy hóa thạch!"
+      "sentenceVi": "Tôi tìm thấy hóa thạch!",
+      "image": "/images/dinosaurs/fossil.svg"
     },
     {
       "id": "egg_dino",
@@ -69,7 +75,8 @@
       "vietnamese": "Trứng khủng long",
       "emoji": "🥚",
       "sentence": "The dino egg is big.",
-      "sentenceVi": "Trứng khủng long rất to."
+      "sentenceVi": "Trứng khủng long rất to.",
+      "image": "/images/dinosaurs/dino_egg.svg"
     },
     {
       "id": "volcano",
@@ -78,7 +85,8 @@
       "vietnamese": "Núi lửa",
       "emoji": "🌋",
       "sentence": "The volcano is hot!",
-      "sentenceVi": "Núi lửa rất nóng!"
+      "sentenceVi": "Núi lửa rất nóng!",
+      "image": "/images/dinosaurs/volcano.svg"
     },
     {
       "id": "herbivore",
@@ -87,7 +95,8 @@
       "vietnamese": "Ăn cỏ",
       "emoji": "🌿",
       "sentence": "A herbivore eats plants.",
-      "sentenceVi": "Động vật ăn cỏ ăn cây."
+      "sentenceVi": "Động vật ăn cỏ ăn cây.",
+      "image": "/images/dinosaurs/herbivore.svg"
     },
     {
       "id": "carnivore",
@@ -96,7 +105,8 @@
       "vietnamese": "Ăn thịt",
       "emoji": "🍖",
       "sentence": "T-Rex is a carnivore.",
-      "sentenceVi": "T-Rex là động vật ăn thịt."
+      "sentenceVi": "T-Rex là động vật ăn thịt.",
+      "image": "/images/dinosaurs/carnivore.svg"
     }
   ]
 }

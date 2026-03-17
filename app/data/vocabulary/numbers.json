@@ -15,7 +15,8 @@
       "vietnamese": "Một",
       "emoji": "1️⃣",
       "sentence": "I have one cat.",
-      "sentenceVi": "Tôi có một con mèo."
+      "sentenceVi": "Tôi có một con mèo.",
+      "image": "/images/numbers/one.svg"
     },
     {
       "id": "two",
@@ -24,7 +25,8 @@
       "vietnamese": "Hai",
       "emoji": "2️⃣",
       "sentence": "Two eyes.",
-      "sentenceVi": "Hai con mắt."
+      "sentenceVi": "Hai con mắt.",
+      "image": "/images/numbers/two.svg"
     },
     {
       "id": "three",
@@ -33,7 +35,8 @@
       "vietnamese": "Ba",
       "emoji": "3️⃣",
       "sentence": "Three books.",
-      "sentenceVi": "Ba quyển sách."
+      "sentenceVi": "Ba quyển sách.",
+      "image": "/images/numbers/three.svg"
     },
     {
       "id": "four",
@@ -42,7 +45,8 @@
       "vietnamese": "Bốn",
       "emoji": "4️⃣",
       "sentence": "Four chairs.",
-      "sentenceVi": "Bốn cái ghế."
+      "sentenceVi": "Bốn cái ghế.",
+      "image": "/images/numbers/four.svg"
     },
     {
       "id": "five",
@@ -51,7 +55,8 @@
       "vietnamese": "Năm",
       "emoji": "5️⃣",
       "sentence": "Five fingers.",
-      "sentenceVi": "Năm ngón tay."
+      "sentenceVi": "Năm ngón tay.",
+      "image": "/images/numbers/five.svg"
     },
     {
       "id": "six",
@@ -60,7 +65,8 @@
       "vietnamese": "Sáu",
       "emoji": "6️⃣",
       "sentence": "Six apples.",
-      "sentenceVi": "Sáu quả táo."
+      "sentenceVi": "Sáu quả táo.",
+      "image": "/images/numbers/six.svg"
     },
     {
       "id": "seven",
@@ -69,7 +75,8 @@
       "vietnamese": "Bảy",
       "emoji": "7️⃣",
       "sentence": "Seven days.",
-      "sentenceVi": "Bảy ngày."
+      "sentenceVi": "Bảy ngày.",
+      "image": "/images/numbers/seven.svg"
     },
     {
       "id": "eight",
@@ -78,7 +85,8 @@
       "vietnamese": "Tám",
       "emoji": "8️⃣",
       "sentence": "Eight stars.",
-      "sentenceVi": "Tám ngôi sao."
+      "sentenceVi": "Tám ngôi sao.",
+      "image": "/images/numbers/eight.svg"
     },
     {
       "id": "nine",
@@ -87,7 +95,8 @@
       "vietnamese": "Chín",
       "emoji": "9️⃣",
       "sentence": "Nine fish.",
-      "sentenceVi": "Chín con cá."
+      "sentenceVi": "Chín con cá.",
+      "image": "/images/numbers/nine.svg"
     },
     {
       "id": "ten",
@@ -96,7 +105,8 @@
       "vietnamese": "Mười",
       "emoji": "🔟",
       "sentence": "Ten toes.",
-      "sentenceVi": "Mười ngón chân."
+      "sentenceVi": "Mười ngón chân.",
+      "image": "/images/numbers/ten.svg"
     },
     {
       "id": "eleven",
@@ -105,7 +115,8 @@
       "vietnamese": "Mười một",
       "emoji": "1️⃣1️⃣",
       "sentence": "Eleven birds.",
-      "sentenceVi": "Mười một con chim."
+      "sentenceVi": "Mười một con chim.",
+      "image": "/images/numbers/eleven.svg"
     },
     {
       "id": "twelve",
@@ -114,7 +125,8 @@
       "vietnamese": "Mười hai",
       "emoji": "1️⃣2️⃣",
       "sentence": "Twelve months.",
-      "sentenceVi": "Mười hai tháng."
+      "sentenceVi": "Mười hai tháng.",
+      "image": "/images/numbers/twelve.svg"
     },
     {
       "id": "how_many",
@@ -123,7 +135,8 @@
       "vietnamese": "Bao nhiêu?",
       "emoji": "❓",
       "sentence": "How many dogs?",
-      "sentenceVi": "Bao nhiêu con chó?"
+      "sentenceVi": "Bao nhiêu con chó?",
+      "image": "/images/numbers/how_many.svg"
     }
   ]
 }

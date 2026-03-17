@@ -35,7 +35,8 @@
       "vietnamese": "Nhiều mây",
       "emoji": "☁️",
       "sentence": "The sky is cloudy.",
-      "sentenceVi": "Bầu trời nhiều mây."
+      "sentenceVi": "Bầu trời nhiều mây.",
+      "image": "/images/weather/cloudy.svg"
     },
     {
       "id": "windy",
@@ -44,7 +45,8 @@
       "vietnamese": "Gió",
       "emoji": "💨",
       "sentence": "It is very windy.",
-      "sentenceVi": "Trời rất nhiều gió."
+      "sentenceVi": "Trời rất nhiều gió.",
+      "image": "/images/weather/windy.svg"
     },
     {
       "id": "snowy",
@@ -63,7 +65,8 @@
       "vietnamese": "Nóng",
       "emoji": "🥵",
       "sentence": "Summer is very hot.",
-      "sentenceVi": "Mùa hè rất nóng."
+      "sentenceVi": "Mùa hè rất nóng.",
+      "image": "/images/weather/hot.svg"
     },
     {
       "id": "cold",
@@ -72,7 +75,8 @@
       "vietnamese": "Lạnh",
       "emoji": "🥶",
       "sentence": "Winter is cold.",
-      "sentenceVi": "Mùa đông rất lạnh."
+      "sentenceVi": "Mùa đông rất lạnh.",
+      "image": "/images/weather/cold.svg"
     },
     {
       "id": "spring",
@@ -81,7 +85,8 @@
       "vietnamese": "Mùa xuân",
       "emoji": "🌸",
       "sentence": "I love spring.",
-      "sentenceVi": "Tôi yêu mùa xuân."
+      "sentenceVi": "Tôi yêu mùa xuân.",
+      "image": "/images/weather/spring.svg"
     },
     {
       "id": "summer",
@@ -90,7 +95,8 @@
       "vietnamese": "Mùa hè",
       "emoji": "🏖️",
       "sentence": "I play in summer.",
-      "sentenceVi": "Tôi chơi vào mùa hè."
+      "sentenceVi": "Tôi chơi vào mùa hè.",
+      "image": "/images/weather/summer.svg"
     },
     {
       "id": "rainbow",

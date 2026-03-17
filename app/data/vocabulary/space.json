@@ -15,7 +15,8 @@
       "vietnamese": "Mặt trăng",
       "emoji": "🌙",
       "sentence": "The moon is bright.",
-      "sentenceVi": "Mặt trăng rất sáng."
+      "sentenceVi": "Mặt trăng rất sáng.",
+      "image": "/images/space/moon.png"
     },
     {
       "id": "star",
@@ -24,7 +25,8 @@
       "vietnamese": "Ngôi sao",
       "emoji": "⭐",
       "sentence": "I see many stars.",
-      "sentenceVi": "Tôi thấy nhiều ngôi sao."
+      "sentenceVi": "Tôi thấy nhiều ngôi sao.",
+      "image": "/images/space/star.png"
     },
     {
       "id": "sun_space",
@@ -33,7 +35,8 @@
       "vietnamese": "Mặt trời",
       "emoji": "☀️",
       "sentence": "The sun is very big.",
-      "sentenceVi": "Mặt trời rất to."
+      "sentenceVi": "Mặt trời rất to.",
+      "image": "/images/space/sun.png"
     },
     {
       "id": "rocket",
@@ -42,7 +45,8 @@
       "vietnamese": "Tên lửa",
       "emoji": "🚀",
       "sentence": "The rocket goes up!",
-      "sentenceVi": "Tên lửa bay lên!"
+      "sentenceVi": "Tên lửa bay lên!",
+      "image": "/images/space/rocket.png"
     },
     {
       "id": "planet",
@@ -51,7 +55,8 @@
       "vietnamese": "Hành tinh",
       "emoji": "🪐",
       "sentence": "Earth is our planet.",
-      "sentenceVi": "Trái đất là hành tinh của chúng ta."
+      "sentenceVi": "Trái đất là hành tinh của chúng ta.",
+      "image": "/images/space/planet.png"
     },
     {
       "id": "astronaut",
@@ -60,7 +65,8 @@
       "vietnamese": "Phi hành gia",
       "emoji": "👨‍🚀",
       "sentence": "I want to be an astronaut.",
-      "sentenceVi": "Tôi muốn trở thành phi hành gia."
+      "sentenceVi": "Tôi muốn trở thành phi hành gia.",
+      "image": "/images/space/astronaut.png"
     },
     {
       "id": "earth",
@@ -69,7 +75,8 @@
       "vietnamese": "Trái đất",
       "emoji": "🌍",
       "sentence": "We live on Earth.",
-      "sentenceVi": "Chúng ta sống trên Trái đất."
+      "sentenceVi": "Chúng ta sống trên Trái đất.",
+      "image": "/images/space/earth.png"
     },
     {
       "id": "alien",
@@ -78,7 +85,8 @@
       "vietnamese": "Người ngoài hành tinh",
       "emoji": "👽",
       "sentence": "Is there an alien?",
-      "sentenceVi": "Có người ngoài hành tinh không?"
+      "sentenceVi": "Có người ngoài hành tinh không?",
+      "image": "/images/space/alien.png"
     },
     {
       "id": "comet",
@@ -87,7 +95,8 @@
       "vietnamese": "Sao chổi",
       "emoji": "☄️",
       "sentence": "The comet is fast.",
-      "sentenceVi": "Sao chổi rất nhanh."
+      "sentenceVi": "Sao chổi rất nhanh.",
+      "image": "/images/space/comet.png"
     },
     {
       "id": "telescope",
@@ -96,7 +105,8 @@
       "vietnamese": "Kính viễn vọng",
       "emoji": "🔭",
       "sentence": "I look through the telescope.",
-      "sentenceVi": "Tôi nhìn qua kính viễn vọng."
+      "sentenceVi": "Tôi nhìn qua kính viễn vọng.",
+      "image": "/images/space/telescope.png"
     }
   ]
 }

@@ -15,7 +15,8 @@
       "vietnamese": "Xe hơi",
       "emoji": "🚗",
       "sentence": "The car is fast.",
-      "sentenceVi": "Xe hơi chạy nhanh."
+      "sentenceVi": "Xe hơi chạy nhanh.",
+      "image": "/images/vehicles/car.png"
     },
     {
       "id": "bus",
@@ -24,7 +25,8 @@
       "vietnamese": "Xe buýt",
       "emoji": "🚌",
       "sentence": "I go to school by bus.",
-      "sentenceVi": "Tôi đi học bằng xe buýt."
+      "sentenceVi": "Tôi đi học bằng xe buýt.",
+      "image": "/images/vehicles/bus.png"
     },
     {
       "id": "train",
@@ -33,7 +35,8 @@
       "vietnamese": "Tàu hỏa",
       "emoji": "🚆",
       "sentence": "The train is long.",
-      "sentenceVi": "Tàu hỏa rất dài."
+      "sentenceVi": "Tàu hỏa rất dài.",
+      "image": "/images/vehicles/train.png"
     },
     {
       "id": "airplane",
@@ -42,7 +45,8 @@
       "vietnamese": "Máy bay",
       "emoji": "✈️",
       "sentence": "The airplane flies high.",
-      "sentenceVi": "Máy bay bay cao."
+      "sentenceVi": "Máy bay bay cao.",
+      "image": "/images/vehicles/airplane.png"
     },
     {
       "id": "boat",
@@ -51,7 +55,8 @@
       "vietnamese": "Thuyền",
       "emoji": "⛵",
       "sentence": "The boat is on the water.",
-      "sentenceVi": "Thuyền ở trên nước."
+      "sentenceVi": "Thuyền ở trên nước.",
+      "image": "/images/vehicles/boat.png"
     },
     {
       "id": "bicycle",
@@ -60,7 +65,8 @@
       "vietnamese": "Xe đạp",
       "emoji": "🚲",
       "sentence": "I ride my bicycle.",
-      "sentenceVi": "Tôi đi xe đạp."
+      "sentenceVi": "Tôi đi xe đạp.",
+      "image": "/images/vehicles/bicycle.png"
     },
     {
       "id": "motorcycle",
@@ -69,7 +75,8 @@
       "vietnamese": "Xe máy",
       "emoji": "🏍️",
       "sentence": "Dad rides a motorcycle.",
-      "sentenceVi": "Ba đi xe máy."
+      "sentenceVi": "Ba đi xe máy.",
+      "image": "/images/vehicles/motorcycle.png"
     },
     {
       "id": "helicopter",
@@ -78,7 +85,8 @@
       "vietnamese": "Trực thăng",
       "emoji": "🚁",
       "sentence": "The helicopter can hover.",
-      "sentenceVi": "Trực thăng bay lơ lửng."
+      "sentenceVi": "Trực thăng bay lơ lửng.",
+      "image": "/images/vehicles/helicopter.png"
     },
     {
       "id": "truck",
@@ -87,7 +95,8 @@
       "vietnamese": "Xe tải",
       "emoji": "🚚",
       "sentence": "The truck carries things.",
-      "sentenceVi": "Xe tải chở đồ."
+      "sentenceVi": "Xe tải chở đồ.",
+      "image": "/images/vehicles/truck.png"
     },
     {
       "id": "ambulance",
@@ -96,7 +105,8 @@
       "vietnamese": "Xe cứu thương",
       "emoji": "🚑",
       "sentence": "The ambulance helps people.",
-      "sentenceVi": "Xe cứu thương giúp người."
+      "sentenceVi": "Xe cứu thương giúp người.",
+      "image": "/images/vehicles/ambulance.png"
     }
   ]
 }

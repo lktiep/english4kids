@@ -15,7 +15,8 @@
       "vietnamese": "Vui vẻ",
       "emoji": "😊",
       "sentence": "I am happy!",
-      "sentenceVi": "Tôi vui lắm!"
+      "sentenceVi": "Tôi vui lắm!",
+      "image": "/images/feelings/happy.png"
     },
     {
       "id": "sad",
@@ -24,7 +25,8 @@
       "vietnamese": "Buồn",
       "emoji": "😢",
       "sentence": "Don't be sad.",
-      "sentenceVi": "Đừng buồn nhé."
+      "sentenceVi": "Đừng buồn nhé.",
+      "image": "/images/feelings/sad.png"
     },
     {
       "id": "hungry",
@@ -33,7 +35,8 @@
       "vietnamese": "Đói",
       "emoji": "😋",
       "sentence": "I am hungry.",
-      "sentenceVi": "Tôi đói."
+      "sentenceVi": "Tôi đói.",
+      "image": "/images/feelings/hungry.png"
     },
     {
       "id": "tired",
@@ -42,7 +45,8 @@
       "vietnamese": "Mệt",
       "emoji": "😴",
       "sentence": "I am tired.",
-      "sentenceVi": "Tôi mệt."
+      "sentenceVi": "Tôi mệt.",
+      "image": "/images/feelings/tired.png"
     },
     {
       "id": "scared",
@@ -51,7 +55,8 @@
       "vietnamese": "Sợ",
       "emoji": "😨",
       "sentence": "I am scared.",
-      "sentenceVi": "Tôi sợ."
+      "sentenceVi": "Tôi sợ.",
+      "image": "/images/feelings/scared.png"
     },
     {
       "id": "angry",
@@ -60,7 +65,8 @@
       "vietnamese": "Tức giận",
       "emoji": "😠",
       "sentence": "Don't be angry.",
-      "sentenceVi": "Đừng giận nhé."
+      "sentenceVi": "Đừng giận nhé.",
+      "image": "/images/feelings/angry.png"
     },
     {
       "id": "wake_up",
@@ -69,7 +75,8 @@
       "vietnamese": "Thức dậy",
       "emoji": "⏰",
       "sentence": "Wake up! It's morning.",
-      "sentenceVi": "Dậy đi! Sáng rồi."
+      "sentenceVi": "Dậy đi! Sáng rồi.",
+      "image": "/images/feelings/wake_up.png"
     },
     {
       "id": "go_to_school",
@@ -78,7 +85,8 @@
       "vietnamese": "Đi học",
       "emoji": "🚶",
       "sentence": "It's time to go to school.",
-      "sentenceVi": "Đến giờ đi học rồi."
+      "sentenceVi": "Đến giờ đi học rồi.",
+      "image": "/images/feelings/go_to_school.png"
     },
     {
       "id": "sleep",
@@ -87,7 +95,8 @@
       "vietnamese": "Ngủ",
       "emoji": "😴",
       "sentence": "Time to sleep.",
-      "sentenceVi": "Đến giờ ngủ rồi."
+      "sentenceVi": "Đến giờ ngủ rồi.",
+      "image": "/images/feelings/sleep.png"
     },
     {
       "id": "eat",
@@ -96,7 +105,8 @@
       "vietnamese": "Ăn",
       "emoji": "🍽️",
       "sentence": "Let's eat!",
-      "sentenceVi": "Ăn thôi!"
+      "sentenceVi": "Ăn thôi!",
+      "image": "/images/feelings/eat.png"
     },
     {
       "id": "love",
@@ -105,7 +115,8 @@
       "vietnamese": "Yêu thương",
       "emoji": "❤️",
       "sentence": "I love you!",
-      "sentenceVi": "Con yêu bạn!"
+      "sentenceVi": "Con yêu bạn!",
+      "image": "/images/feelings/love.png"
     }
   ]
 }

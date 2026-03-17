@@ -15,7 +15,8 @@
       "vietnamese": "Sách",
       "emoji": "📚",
       "sentence": "Open your book.",
-      "sentenceVi": "Mở sách ra."
+      "sentenceVi": "Mở sách ra.",
+      "image": "/images/school/book.svg"
     },
     {
       "id": "pen",
@@ -24,7 +25,8 @@
       "vietnamese": "Bút",
       "emoji": "🖊️",
       "sentence": "This is my pen.",
-      "sentenceVi": "Đây là bút của tôi."
+      "sentenceVi": "Đây là bút của tôi.",
+      "image": "/images/school/pen.svg"
     },
     {
       "id": "pencil",
@@ -33,7 +35,8 @@
       "vietnamese": "Bút chì",
       "emoji": "✏️",
       "sentence": "I write with a pencil.",
-      "sentenceVi": "Tôi viết bằng bút chì."
+      "sentenceVi": "Tôi viết bằng bút chì.",
+      "image": "/images/school/pencil.svg"
     },
     {
       "id": "ruler",
@@ -42,7 +45,8 @@
       "vietnamese": "Thước kẻ",
       "emoji": "📏",
       "sentence": "The ruler is long.",
-      "sentenceVi": "Cây thước dài."
+      "sentenceVi": "Cây thước dài.",
+      "image": "/images/school/ruler.svg"
     },
     {
       "id": "bag",
@@ -51,7 +55,8 @@
       "vietnamese": "Cặp sách",
       "emoji": "🎒",
       "sentence": "My bag is blue.",
-      "sentenceVi": "Cặp sách của tôi màu xanh."
+      "sentenceVi": "Cặp sách của tôi màu xanh.",
+      "image": "/images/school/bag.svg"
     },
     {
       "id": "desk",
@@ -60,7 +65,8 @@
       "vietnamese": "Bàn học",
       "emoji": "🪑",
       "sentence": "Sit at your desk.",
-      "sentenceVi": "Ngồi vào bàn."
+      "sentenceVi": "Ngồi vào bàn.",
+      "image": "/images/school/desk.svg"
     },
     {
       "id": "teacher",
@@ -69,7 +75,8 @@
       "vietnamese": "Cô giáo / Thầy giáo",
       "emoji": "👩‍🏫",
       "sentence": "The teacher is kind.",
-      "sentenceVi": "Cô giáo tốt bụng."
+      "sentenceVi": "Cô giáo tốt bụng.",
+      "image": "/images/school/teacher.svg"
     },
     {
       "id": "board",
@@ -78,7 +85,8 @@
       "vietnamese": "Bảng",
       "emoji": "📋",
       "sentence": "Look at the board.",
-      "sentenceVi": "Nhìn lên bảng."
+      "sentenceVi": "Nhìn lên bảng.",
+      "image": "/images/school/board.svg"
     },
     {
       "id": "eraser",
@@ -87,7 +95,8 @@
       "vietnamese": "Cục tẩy",
       "emoji": "🧹",
       "sentence": "I need an eraser.",
-      "sentenceVi": "Tôi cần cục tẩy."
+      "sentenceVi": "Tôi cần cục tẩy.",
+      "image": "/images/school/eraser.svg"
     },
     {
       "id": "school",
@@ -96,7 +105,8 @@
       "vietnamese": "Trường học",
       "emoji": "🏫",
       "sentence": "I go to school.",
-      "sentenceVi": "Tôi đi học."
+      "sentenceVi": "Tôi đi học.",
+      "image": "/images/school/school.svg"
     },
     {
       "id": "classroom",
@@ -105,7 +115,8 @@
       "vietnamese": "Lớp học",
       "emoji": "🪑",
       "sentence": "This is my classroom.",
-      "sentenceVi": "Đây là lớp học của tôi."
+      "sentenceVi": "Đây là lớp học của tôi.",
+      "image": "/images/school/classroom.svg"
     }
   ]
 }

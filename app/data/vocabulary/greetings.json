@@ -15,7 +15,8 @@
       "vietnamese": "Xin chào",
       "emoji": "👋",
       "sentence": "Hello! How are you?",
-      "sentenceVi": "Xin chào! Bạn khỏe không?"
+      "sentenceVi": "Xin chào! Bạn khỏe không?",
+      "image": "/images/greetings/hello.png"
     },
     {
       "id": "hi",
@@ -24,7 +25,8 @@
       "vietnamese": "Chào",
       "emoji": "🙋",
       "sentence": "Hi! I'm happy.",
-      "sentenceVi": "Chào! Mình vui lắm."
+      "sentenceVi": "Chào! Mình vui lắm.",
+      "image": "/images/greetings/hi.png"
     },
     {
       "id": "bye",
@@ -33,7 +35,8 @@
       "vietnamese": "Tạm biệt",
       "emoji": "👋",
       "sentence": "Bye! See you tomorrow.",
-      "sentenceVi": "Tạm biệt! Hẹn gặp lại ngày mai."
+      "sentenceVi": "Tạm biệt! Hẹn gặp lại ngày mai.",
+      "image": "/images/greetings/bye.png"
     },
     {
       "id": "good_morning",
@@ -42,7 +45,8 @@
       "vietnamese": "Chào buổi sáng",
       "emoji": "🌅",
       "sentence": "Good morning, teacher!",
-      "sentenceVi": "Chào buổi sáng, cô giáo!"
+      "sentenceVi": "Chào buổi sáng, cô giáo!",
+      "image": "/images/greetings/good_morning.png"
     },
     {
       "id": "good_night",
@@ -51,7 +55,8 @@
       "vietnamese": "Chúc ngủ ngon",
       "emoji": "🌙",
       "sentence": "Good night, Mom.",
-      "sentenceVi": "Chúc mẹ ngủ ngon."
+      "sentenceVi": "Chúc mẹ ngủ ngon.",
+      "image": "/images/greetings/good_night.svg"
     },
     {
       "id": "thank_you",
@@ -60,7 +65,8 @@
       "vietnamese": "Cảm ơn",
       "emoji": "🙏",
       "sentence": "Thank you very much!",
-      "sentenceVi": "Cảm ơn rất nhiều!"
+      "sentenceVi": "Cảm ơn rất nhiều!",
+      "image": "/images/greetings/thank_you.svg"
     },
     {
       "id": "please",
@@ -69,7 +75,8 @@
       "vietnamese": "Làm ơn",
       "emoji": "🤲",
       "sentence": "Please help me.",
-      "sentenceVi": "Làm ơn giúp mình."
+      "sentenceVi": "Làm ơn giúp mình.",
+      "image": "/images/greetings/please.svg"
     },
     {
       "id": "sorry",
@@ -78,7 +85,8 @@
       "vietnamese": "Xin lỗi",
       "emoji": "😔",
       "sentence": "Sorry, I'm late.",
-      "sentenceVi": "Xin lỗi, mình trễ."
+      "sentenceVi": "Xin lỗi, mình trễ.",
+      "image": "/images/greetings/sorry.svg"
     },
     {
       "id": "yes",
@@ -87,7 +95,8 @@
       "vietnamese": "Có / Vâng",
       "emoji": "✅",
       "sentence": "Yes, I can do it!",
-      "sentenceVi": "Vâng, mình làm được!"
+      "sentenceVi": "Vâng, mình làm được!",
+      "image": "/images/greetings/yes.svg"
     },
     {
       "id": "no",
@@ -96,7 +105,8 @@
       "vietnamese": "Không",
       "emoji": "❌",
       "sentence": "No, thank you.",
-      "sentenceVi": "Không, cảm ơn."
+      "sentenceVi": "Không, cảm ơn.",
+      "image": "/images/greetings/no.svg"
     },
     {
       "id": "my_name",
@@ -105,7 +115,8 @@
       "vietnamese": "Tên tôi là...",
       "emoji": "📛",
       "sentence": "My name is An.",
-      "sentenceVi": "Tên tôi là An."
+      "sentenceVi": "Tên tôi là An.",
+      "image": "/images/greetings/my_name_is.svg"
     },
     {
       "id": "how_are_you",
@@ -114,7 +125,8 @@
       "vietnamese": "Bạn khỏe không?",
       "emoji": "💬",
       "sentence": "How are you today?",
-      "sentenceVi": "Hôm nay bạn khỏe không?"
+      "sentenceVi": "Hôm nay bạn khỏe không?",
+      "image": "/images/greetings/how_are_you.svg"
     }
   ]
 }

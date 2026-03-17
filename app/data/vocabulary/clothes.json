@@ -15,7 +15,8 @@
       "vietnamese": "Áo sơ mi",
       "emoji": "👔",
       "sentence": "I wear a shirt.",
-      "sentenceVi": "Tôi mặc áo sơ mi."
+      "sentenceVi": "Tôi mặc áo sơ mi.",
+      "image": "/images/clothes/shirt.png"
     },
     {
       "id": "pants",
@@ -24,7 +25,8 @@
       "vietnamese": "Quần dài",
       "emoji": "👖",
       "sentence": "My pants are blue.",
-      "sentenceVi": "Quần tôi màu xanh."
+      "sentenceVi": "Quần tôi màu xanh.",
+      "image": "/images/clothes/pants.png"
     },
     {
       "id": "dress",
@@ -33,7 +35,8 @@
       "vietnamese": "Váy đầm",
       "emoji": "👗",
       "sentence": "The dress is pretty.",
-      "sentenceVi": "Váy đầm rất đẹp."
+      "sentenceVi": "Váy đầm rất đẹp.",
+      "image": "/images/clothes/dress.png"
     },
     {
       "id": "shoes",
@@ -42,7 +45,8 @@
       "vietnamese": "Giày",
       "emoji": "👟",
       "sentence": "I put on my shoes.",
-      "sentenceVi": "Tôi mang giày."
+      "sentenceVi": "Tôi mang giày.",
+      "image": "/images/clothes/shoes.png"
     },
     {
       "id": "hat",
@@ -51,7 +55,8 @@
       "vietnamese": "Mũ",
       "emoji": "🧢",
       "sentence": "I wear a hat.",
-      "sentenceVi": "Tôi đội mũ."
+      "sentenceVi": "Tôi đội mũ.",
+      "image": "/images/clothes/hat.png"
     },
     {
       "id": "socks",
@@ -60,7 +65,8 @@
       "vietnamese": "Tất",
       "emoji": "🧦",
       "sentence": "My socks are white.",
-      "sentenceVi": "Tất tôi màu trắng."
+      "sentenceVi": "Tất tôi màu trắng.",
+      "image": "/images/clothes/socks.png"
     },
     {
       "id": "jacket",
@@ -69,7 +75,8 @@
       "vietnamese": "Áo khoác",
       "emoji": "🧥",
       "sentence": "I wear a jacket when it is cold.",
-      "sentenceVi": "Tôi mặc áo khoác khi trời lạnh."
+      "sentenceVi": "Tôi mặc áo khoác khi trời lạnh.",
+      "image": "/images/clothes/jacket.png"
     },
     {
       "id": "skirt",
@@ -78,7 +85,8 @@
       "vietnamese": "Chân váy",
       "emoji": "👗",
       "sentence": "She wears a skirt.",
-      "sentenceVi": "Cô ấy mặc chân váy."
+      "sentenceVi": "Cô ấy mặc chân váy.",
+      "image": "/images/clothes/skirt.png"
     }
   ]
 }

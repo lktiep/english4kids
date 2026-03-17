@@ -15,7 +15,8 @@
       "vietnamese": "Mẹ",
       "emoji": "👩",
       "sentence": "I love my mother.",
-      "sentenceVi": "Con yêu mẹ."
+      "sentenceVi": "Con yêu mẹ.",
+      "image": "/images/family/mother.png"
     },
     {
       "id": "father",
@@ -24,7 +25,8 @@
       "vietnamese": "Bố",
       "emoji": "👨",
       "sentence": "My father is tall.",
-      "sentenceVi": "Bố con cao."
+      "sentenceVi": "Bố con cao.",
+      "image": "/images/family/father.png"
     },
     {
       "id": "sister",
@@ -33,7 +35,8 @@
       "vietnamese": "Chị/Em gái",
       "emoji": "👧",
       "sentence": "My sister is kind.",
-      "sentenceVi": "Chị gái con tốt bụng."
+      "sentenceVi": "Chị gái con tốt bụng.",
+      "image": "/images/family/sister.png"
     },
     {
       "id": "brother",
@@ -42,7 +45,8 @@
       "vietnamese": "Anh/Em trai",
       "emoji": "👦",
       "sentence": "My brother plays football.",
-      "sentenceVi": "Anh trai con chơi bóng đá."
+      "sentenceVi": "Anh trai con chơi bóng đá.",
+      "image": "/images/family/brother.png"
     },
     {
       "id": "grandma",
@@ -51,7 +55,8 @@
       "vietnamese": "Bà",
       "emoji": "👵",
       "sentence": "Grandma tells stories.",
-      "sentenceVi": "Bà kể chuyện."
+      "sentenceVi": "Bà kể chuyện.",
+      "image": "/images/family/grandma.png"
     },
     {
       "id": "grandpa",
@@ -60,7 +65,8 @@
       "vietnamese": "Ông",
       "emoji": "👴",
       "sentence": "Grandpa is reading.",
-      "sentenceVi": "Ông đang đọc sách."
+      "sentenceVi": "Ông đang đọc sách.",
+      "image": "/images/family/grandpa.png"
     },
     {
       "id": "baby",
@@ -69,7 +75,8 @@
       "vietnamese": "Em bé",
       "emoji": "👶",
       "sentence": "The baby is sleeping.",
-      "sentenceVi": "Em bé đang ngủ."
+      "sentenceVi": "Em bé đang ngủ.",
+      "image": "/images/family/baby.png"
     },
     {
       "id": "family",
@@ -78,7 +85,8 @@
       "vietnamese": "Gia đình",
       "emoji": "👨‍👩‍👧‍👦",
       "sentence": "I love my family.",
-      "sentenceVi": "Con yêu gia đình."
+      "sentenceVi": "Con yêu gia đình.",
+      "image": "/images/family/family.png"
     },
     {
       "id": "mom",
@@ -87,7 +95,8 @@
       "vietnamese": "Má",
       "emoji": "🤱",
       "sentence": "Mom, I'm home!",
-      "sentenceVi": "Mẹ ơi, con về rồi!"
+      "sentenceVi": "Mẹ ơi, con về rồi!",
+      "image": "/images/family/mom.png"
     },
     {
       "id": "dad",
@@ -96,7 +105,8 @@
       "vietnamese": "Ba",
       "emoji": "👨‍👦",
       "sentence": "Dad, play with me!",
-      "sentenceVi": "Ba ơi, chơi với con!"
+      "sentenceVi": "Ba ơi, chơi với con!",
+      "image": "/images/family/dad.png"
     }
   ]
 }

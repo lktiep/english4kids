@@ -15,7 +15,8 @@
       "vietnamese": "Màu đỏ",
       "emoji": "🔴",
       "sentence": "The apple is red.",
-      "sentenceVi": "Quả táo màu đỏ."
+      "sentenceVi": "Quả táo màu đỏ.",
+      "image": "/images/colors/red.png"
     },
     {
       "id": "blue",
@@ -24,7 +25,8 @@
       "vietnamese": "Màu xanh dương",
       "emoji": "🔵",
       "sentence": "The sky is blue.",
-      "sentenceVi": "Bầu trời màu xanh."
+      "sentenceVi": "Bầu trời màu xanh.",
+      "image": "/images/colors/blue.png"
     },
     {
       "id": "green",
@@ -33,7 +35,8 @@
       "vietnamese": "Màu xanh lá",
       "emoji": "🟢",
       "sentence": "The tree is green.",
-      "sentenceVi": "Cái cây màu xanh lá."
+      "sentenceVi": "Cái cây màu xanh lá.",
+      "image": "/images/colors/green.png"
     },
     {
       "id": "yellow",
@@ -42,7 +45,8 @@
       "vietnamese": "Màu vàng",
       "emoji": "🟡",
       "sentence": "The sun is yellow.",
-      "sentenceVi": "Mặt trời màu vàng."
+      "sentenceVi": "Mặt trời màu vàng.",
+      "image": "/images/colors/yellow.png"
     },
     {
       "id": "orange",
@@ -51,7 +55,8 @@
       "vietnamese": "Màu cam",
       "emoji": "🟠",
       "sentence": "The orange is orange.",
-      "sentenceVi": "Quả cam màu cam."
+      "sentenceVi": "Quả cam màu cam.",
+      "image": "/images/colors/orange.png"
     },
     {
       "id": "pink",
@@ -60,7 +65,8 @@
       "vietnamese": "Màu hồng",
       "emoji": "🩷",
       "sentence": "The flower is pink.",
-      "sentenceVi": "Bông hoa màu hồng."
+      "sentenceVi": "Bông hoa màu hồng.",
+      "image": "/images/colors/pink.png"
     },
     {
       "id": "purple",
@@ -69,7 +75,8 @@
       "vietnamese": "Màu tím",
       "emoji": "🟣",
       "sentence": "The grape is purple.",
-      "sentenceVi": "Quả nho màu tím."
+      "sentenceVi": "Quả nho màu tím.",
+      "image": "/images/colors/purple.png"
     },
     {
       "id": "white",
@@ -78,7 +85,8 @@
       "vietnamese": "Màu trắng",
       "emoji": "⚪",
       "sentence": "The cloud is white.",
-      "sentenceVi": "Đám mây màu trắng."
+      "sentenceVi": "Đám mây màu trắng.",
+      "image": "/images/colors/white.png"
     },
     {
       "id": "black",
@@ -87,7 +95,8 @@
       "vietnamese": "Màu đen",
       "emoji": "⚫",
       "sentence": "The cat is black.",
-      "sentenceVi": "Con mèo màu đen."
+      "sentenceVi": "Con mèo màu đen.",
+      "image": "/images/colors/black.png"
     },
     {
       "id": "brown",
@@ -96,7 +105,8 @@
       "vietnamese": "Màu nâu",
       "emoji": "🟤",
       "sentence": "The dog is brown.",
-      "sentenceVi": "Con chó màu nâu."
+      "sentenceVi": "Con chó màu nâu.",
+      "image": "/images/colors/brown.png"
     }
   ]
 }

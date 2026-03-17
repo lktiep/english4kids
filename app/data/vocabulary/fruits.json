@@ -95,7 +95,8 @@
       "vietnamese": "Dừa",
       "emoji": "🥥",
       "sentence": "Coconut water is cool.",
-      "sentenceVi": "Nước dừa mát."
+      "sentenceVi": "Nước dừa mát.",
+      "image": "/images/fruits/coconut.png"
     },
     {
       "id": "peach",
@@ -104,7 +105,8 @@
       "vietnamese": "Quả đào",
       "emoji": "🍑",
       "sentence": "The peach is soft.",
-      "sentenceVi": "Quả đào rất mềm."
+      "sentenceVi": "Quả đào rất mềm.",
+      "image": "/images/fruits/peach.png"
     }
   ]
 }

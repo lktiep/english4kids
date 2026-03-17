@@ -15,7 +15,8 @@
       "vietnamese": "Hình tròn",
       "emoji": "⭕",
       "sentence": "The ball is a circle.",
-      "sentenceVi": "Quả bóng hình tròn."
+      "sentenceVi": "Quả bóng hình tròn.",
+      "image": "/images/shapes/circle.png"
     },
     {
       "id": "square",
@@ -24,7 +25,8 @@
       "vietnamese": "Hình vuông",
       "emoji": "🟥",
       "sentence": "The box is a square.",
-      "sentenceVi": "Cái hộp hình vuông."
+      "sentenceVi": "Cái hộp hình vuông.",
+      "image": "/images/shapes/square.png"
     },
     {
       "id": "triangle",
@@ -33,7 +35,8 @@
       "vietnamese": "Hình tam giác",
       "emoji": "🔺",
       "sentence": "The roof is a triangle.",
-      "sentenceVi": "Mái nhà hình tam giác."
+      "sentenceVi": "Mái nhà hình tam giác.",
+      "image": "/images/shapes/triangle.png"
     },
     {
       "id": "star",
@@ -42,7 +45,8 @@
       "vietnamese": "Ngôi sao",
       "emoji": "⭐",
       "sentence": "I see a star.",
-      "sentenceVi": "Tôi thấy ngôi sao."
+      "sentenceVi": "Tôi thấy ngôi sao.",
+      "image": "/images/shapes/star.png"
     },
     {
       "id": "heart",
@@ -51,7 +55,8 @@
       "vietnamese": "Hình trái tim",
       "emoji": "❤️",
       "sentence": "I love the heart shape.",
-      "sentenceVi": "Tôi thích hình trái tim."
+      "sentenceVi": "Tôi thích hình trái tim.",
+      "image": "/images/shapes/heart.png"
     },
     {
       "id": "rectangle",
@@ -60,7 +65,8 @@
       "vietnamese": "Hình chữ nhật",
       "emoji": "🟦",
       "sentence": "The door is a rectangle.",
-      "sentenceVi": "Cái cửa hình chữ nhật."
+      "sentenceVi": "Cái cửa hình chữ nhật.",
+      "image": "/images/shapes/rectangle.png"
     },
     {
       "id": "diamond",
@@ -69,7 +75,8 @@
       "vietnamese": "Hình thoi",
       "emoji": "💎",
       "sentence": "The diamond shines.",
-      "sentenceVi": "Viên kim cương lấp lánh."
+      "sentenceVi": "Viên kim cương lấp lánh.",
+      "image": "/images/shapes/diamond.png"
     },
     {
       "id": "oval",
@@ -78,7 +85,8 @@
       "vietnamese": "Hình bầu dục",
       "emoji": "🥚",
       "sentence": "The egg is oval.",
-      "sentenceVi": "Quả trứng hình bầu dục."
+      "sentenceVi": "Quả trứng hình bầu dục.",
+      "image": "/images/shapes/oval.png"
     }
   ]
 }
