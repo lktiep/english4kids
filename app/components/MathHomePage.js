@@ -8,6 +8,7 @@ import { useSound } from "@/app/hooks/useSpeech";
 import mathTopicsRegistry from "@/app/data/math/topics.json";
 import MathQuizMode from "@/app/components/game/MathQuizMode";
 import XPBar from "./ui/XPBar";
+import CameraOverlay from "./ui/CameraOverlay";
 import BadgesPage from "./BadgesPage";
 import LevelUpModal from "./ui/LevelUpModal";
 import XPPopup from "./ui/XPPopup";
@@ -21,6 +22,13 @@ export default function MathHomePage() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [topicData, setTopicData] = useState(null);
   const [currentView, setCurrentView] = useState("home");
+  const [cameraEnabled, setCameraEnabled] = useState(false);
+
+  const handleGesture = useCallback((fingerCount) => {
+    window.dispatchEvent(
+      new CustomEvent("gesture-select", { detail: { answer: fingerCount } }),
+    );
+  }, []);
 
   const handleTopicClick = async (topicSlug) => {
     play("click");
@@ -39,12 +47,19 @@ export default function MathHomePage() {
     setCurrentView("home");
     setSelectedTopic(null);
     setTopicData(null);
+    setCameraEnabled(false);
   };
 
   if (currentView === "quiz" && selectedTopic && topicData) {
     return (
       <>
-        <MathQuizMode topic={topicData} onBack={handleBack} />
+        <MathQuizMode
+          topic={topicData}
+          onBack={handleBack}
+          cameraEnabled={cameraEnabled}
+          onToggleCamera={() => setCameraEnabled((v) => !v)}
+        />
+        <CameraOverlay enabled={cameraEnabled} onGesture={handleGesture} />
         {game.xpPopup && <XPPopup {...game.xpPopup} />}
         {game.levelUpData && <LevelUpModal data={game.levelUpData} />}
       </>
