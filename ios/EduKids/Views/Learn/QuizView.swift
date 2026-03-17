@@ -98,16 +98,20 @@ struct QuizView: View {
                 .padding(.top, 4)
             }
             .offset(x: shakeOffset)
-            .onChange(of: currentIndex) { _ in
-                // Auto-speak word on each new question
+            .onChange(of: currentIndex) { newIndex in
+                // Auto-speak the NEW word after index changes
+                guard newIndex < questions.count else { return }
+                let newWord = questions[newIndex].word.en
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    SpeechService.shared.speak(q.word.en)
+                    SpeechService.shared.speak(newWord)
                 }
             }
             .onAppear {
                 // Speak first word
+                guard !questions.isEmpty else { return }
+                let firstWord = questions[0].word.en
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    SpeechService.shared.speak(q.word.en)
+                    SpeechService.shared.speak(firstWord)
                 }
             }
 
