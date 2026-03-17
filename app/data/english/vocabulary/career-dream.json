@@ -1,0 +1,22 @@
+{
+  "topic": "career-dream",
+  "title": "Career Dreams",
+  "titleVi": "Ước mơ nghề nghiệp",
+  "icon": "💼",
+  "color": "#10B981",
+  "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "words": [
+    { "id": "dream", "word": "Dream", "pronunciation": "/driːm/", "vietnamese": "Ước mơ", "emoji": "💭", "sentence": "Follow your dreams.", "sentenceVi": "Hãy theo đuổi ước mơ." },
+    { "id": "goal", "word": "Goal", "pronunciation": "/ɡoʊl/", "vietnamese": "Mục tiêu", "emoji": "🎯", "sentence": "Set a goal and achieve it.", "sentenceVi": "Đặt mục tiêu và đạt được." },
+    { "id": "engineer", "word": "Engineer", "pronunciation": "/ˌendʒɪˈnɪr/", "vietnamese": "Kỹ sư", "emoji": "👷", "sentence": "I want to be an engineer.", "sentenceVi": "Tôi muốn làm kỹ sư." },
+    { "id": "programmer", "word": "Programmer", "pronunciation": "/ˈproʊɡræmər/", "vietnamese": "Lập trình viên", "emoji": "👩‍💻", "sentence": "Programmers create apps.", "sentenceVi": "Lập trình viên tạo ứng dụng." },
+    { "id": "dentist", "word": "Dentist", "pronunciation": "/ˈdentɪst/", "vietnamese": "Nha sĩ", "emoji": "🦷", "sentence": "See the dentist regularly.", "sentenceVi": "Khám nha sĩ thường xuyên." },
+    { "id": "architect", "word": "Architect", "pronunciation": "/ˈɑːrkɪtekt/", "vietnamese": "Kiến trúc sư", "emoji": "🏗️", "sentence": "The architect designs buildings.", "sentenceVi": "Kiến trúc sư thiết kế tòa nhà." },
+    { "id": "vet", "word": "Veterinarian", "pronunciation": "/ˌvetərɪˈneriən/", "vietnamese": "Bác sĩ thú y", "emoji": "🐕", "sentence": "The vet helps animals.", "sentenceVi": "Bác sĩ thú y giúp động vật." },
+    { "id": "entrepreneur", "word": "Entrepreneur", "pronunciation": "/ˌɑːntrəprəˈnɜːr/", "vietnamese": "Doanh nhân", "emoji": "🚀", "sentence": "Be a young entrepreneur.", "sentenceVi": "Trở thành doanh nhân trẻ." },
+    { "id": "passion", "word": "Passion", "pronunciation": "/ˈpæʃn/", "vietnamese": "Đam mê", "emoji": "🔥", "sentence": "Find your passion.", "sentenceVi": "Tìm đam mê của bạn." },
+    { "id": "success", "word": "Success", "pronunciation": "/səkˈses/", "vietnamese": "Thành công", "emoji": "🏆", "sentence": "Hard work leads to success.", "sentenceVi": "Chăm chỉ dẫn đến thành công." }
+  ]
+}

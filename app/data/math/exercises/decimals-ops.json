@@ -1,0 +1,21 @@
+{
+  "topic": "decimals-ops",
+  "title": "Decimal Operations",
+  "titleVi": "Phép tính thập phân",
+  "icon": "🔣",
+  "color": "#14B8A6",
+  "gradient": "linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "type": "math",
+  "exercises": [
+    { "id": "do-1", "question": "3.5 + 2.8 = ?", "questionVi": "3,5 + 2,8 = ?", "answer": 6.3, "options": [5.3, 6.0, 6.3, 6.8], "hint": "5+8=13 → carry" },
+    { "id": "do-2", "question": "7.2 - 3.9 = ?", "questionVi": "7,2 - 3,9 = ?", "answer": 3.3, "options": [3.3, 3.7, 4.3, 4.7], "hint": "Borrow from ones" },
+    { "id": "do-3", "question": "0.6 × 5 = ?", "questionVi": "0,6 × 5 = ?", "answer": 3.0, "options": [0.3, 3.0, 30, 0.65], "hint": "6×5=30, move decimal" },
+    { "id": "do-4", "question": "4.8 ÷ 2 = ?", "questionVi": "4,8 ÷ 2 = ?", "answer": 2.4, "options": [2.0, 2.4, 2.8, 9.6], "hint": "Divide each part by 2" },
+    { "id": "do-5", "question": "1.25 × 4 = ?", "questionVi": "1,25 × 4 = ?", "answer": 5.0, "options": [4.0, 4.5, 5.0, 5.25], "hint": "125×4=500 → move decimal" },
+    { "id": "do-6", "question": "10.5 - 6.75 = ?", "questionVi": "10,5 - 6,75 = ?", "answer": 3.75, "options": [3.25, 3.50, 3.75, 4.25], "hint": "Line up decimals" },
+    { "id": "do-7", "question": "0.2 × 0.3 = ?", "questionVi": "0,2 × 0,3 = ?", "answer": 0.06, "options": [0.6, 0.06, 0.006, 6], "hint": "2×3=6, two decimal places" },
+    { "id": "do-8", "question": "9.0 ÷ 0.5 = ?", "questionVi": "9,0 ÷ 0,5 = ?", "answer": 18, "options": [4.5, 9, 18, 45], "hint": "How many 0.5 in 9?" }
+  ]
+}

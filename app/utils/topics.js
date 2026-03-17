@@ -1,25 +1,25 @@
 // Load all vocabulary topics dynamically
-import topicsRegistry from "@/app/data/topics.json";
+import topicsRegistry from "@/app/data/english/topics.json";
 
-// Import all vocabulary files
-import greetings from "@/app/data/vocabulary/greetings.json";
-import numbers from "@/app/data/vocabulary/numbers.json";
-import colors from "@/app/data/vocabulary/colors.json";
-import animals from "@/app/data/vocabulary/animals.json";
-import family from "@/app/data/vocabulary/family.json";
-import school from "@/app/data/vocabulary/school.json";
-import body from "@/app/data/vocabulary/body.json";
-import food from "@/app/data/vocabulary/food.json";
-import toys from "@/app/data/vocabulary/toys.json";
-import feelings from "@/app/data/vocabulary/feelings.json";
+// Import all vocabulary files (English)
+import greetings from "@/app/data/english/vocabulary/greetings.json";
+import numbers from "@/app/data/english/vocabulary/numbers.json";
+import colors from "@/app/data/english/vocabulary/colors.json";
+import animals from "@/app/data/english/vocabulary/animals.json";
+import family from "@/app/data/english/vocabulary/family.json";
+import school from "@/app/data/english/vocabulary/school.json";
+import body from "@/app/data/english/vocabulary/body.json";
+import food from "@/app/data/english/vocabulary/food.json";
+import toys from "@/app/data/english/vocabulary/toys.json";
+import feelings from "@/app/data/english/vocabulary/feelings.json";
 // Pre-K
-import flowers from "@/app/data/vocabulary/flowers.json";
-import vehicles from "@/app/data/vocabulary/vehicles.json";
-import shapes from "@/app/data/vocabulary/shapes.json";
-import fruits from "@/app/data/vocabulary/fruits.json";
+import flowers from "@/app/data/english/vocabulary/flowers.json";
+import vehicles from "@/app/data/english/vocabulary/vehicles.json";
+import shapes from "@/app/data/english/vocabulary/shapes.json";
+import fruits from "@/app/data/english/vocabulary/fruits.json";
 // Grade 2
-import weather from "@/app/data/vocabulary/weather.json";
-import clothes from "@/app/data/vocabulary/clothes.json";
+import weather from "@/app/data/english/vocabulary/weather.json";
+import clothes from "@/app/data/english/vocabulary/clothes.json";
 
 const vocabularyMap = {
   greetings,

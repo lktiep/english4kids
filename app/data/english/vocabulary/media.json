@@ -1,0 +1,22 @@
+{
+  "topic": "media",
+  "title": "Media",
+  "titleVi": "Truyền thông",
+  "icon": "📱",
+  "color": "#6366F1",
+  "gradient": "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "words": [
+    { "id": "news", "word": "News", "pronunciation": "/njuːz/", "vietnamese": "Tin tức", "emoji": "📰", "sentence": "Watch the news.", "sentenceVi": "Xem tin tức." },
+    { "id": "journalist", "word": "Journalist", "pronunciation": "/ˈdʒɜːrnəlɪst/", "vietnamese": "Nhà báo", "emoji": "🎙️", "sentence": "The journalist reports the news.", "sentenceVi": "Nhà báo đưa tin." },
+    { "id": "camera", "word": "Camera", "pronunciation": "/ˈkæmərə/", "vietnamese": "Máy ảnh", "emoji": "📷", "sentence": "Take a photo with the camera.", "sentenceVi": "Chụp ảnh bằng máy ảnh." },
+    { "id": "social-media", "word": "Social Media", "pronunciation": "/ˈsoʊʃl ˈmiːdiə/", "vietnamese": "Mạng xã hội", "emoji": "📲", "sentence": "Social media connects people.", "sentenceVi": "Mạng xã hội kết nối mọi người." },
+    { "id": "video", "word": "Video", "pronunciation": "/ˈvɪdioʊ/", "vietnamese": "Video", "emoji": "🎬", "sentence": "Watch a fun video.", "sentenceVi": "Xem video vui." },
+    { "id": "podcast", "word": "Podcast", "pronunciation": "/ˈpɑːdkæst/", "vietnamese": "Podcast", "emoji": "🎧", "sentence": "Listen to a podcast.", "sentenceVi": "Nghe podcast." },
+    { "id": "blog", "word": "Blog", "pronunciation": "/blɑːɡ/", "vietnamese": "Blog", "emoji": "📝", "sentence": "Write a blog.", "sentenceVi": "Viết blog." },
+    { "id": "advertisement", "word": "Advertisement", "pronunciation": "/ˌædvərˈtaɪzmənt/", "vietnamese": "Quảng cáo", "emoji": "📢", "sentence": "I see an advertisement.", "sentenceVi": "Tôi thấy quảng cáo." },
+    { "id": "streaming", "word": "Streaming", "pronunciation": "/ˈstriːmɪŋ/", "vietnamese": "Xem trực tuyến", "emoji": "📡", "sentence": "Streaming movies online.", "sentenceVi": "Xem phim trực tuyến." },
+    { "id": "digital", "word": "Digital", "pronunciation": "/ˈdɪdʒɪtl/", "vietnamese": "Kỹ thuật số", "emoji": "💻", "sentence": "We live in a digital world.", "sentenceVi": "Chúng ta sống trong thế giới số." }
+  ]
+}

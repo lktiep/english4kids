@@ -1,0 +1,22 @@
+{
+  "topic": "music",
+  "title": "Music",
+  "titleVi": "Âm nhạc",
+  "icon": "🎵",
+  "color": "#EC4899",
+  "gradient": "linear-gradient(135deg, #EC4899 0%, #DB2777 100%)",
+  "grade": "grade4",
+  "difficulty": "medium",
+  "words": [
+    { "id": "sing", "word": "Sing", "pronunciation": "/sɪŋ/", "vietnamese": "Hát", "emoji": "🎤", "sentence": "I love to sing.", "sentenceVi": "Tôi thích hát." },
+    { "id": "guitar", "word": "Guitar", "pronunciation": "/ɡɪˈtɑːr/", "vietnamese": "Đàn ghi-ta", "emoji": "🎸", "sentence": "He plays the guitar.", "sentenceVi": "Anh ấy chơi ghi-ta." },
+    { "id": "piano", "word": "Piano", "pronunciation": "/piˈænoʊ/", "vietnamese": "Đàn piano", "emoji": "🎹", "sentence": "She plays the piano.", "sentenceVi": "Cô ấy chơi piano." },
+    { "id": "drum", "word": "Drum", "pronunciation": "/drʌm/", "vietnamese": "Trống", "emoji": "🥁", "sentence": "Beat the drum.", "sentenceVi": "Đánh trống." },
+    { "id": "violin", "word": "Violin", "pronunciation": "/ˌvaɪəˈlɪn/", "vietnamese": "Vĩ cầm", "emoji": "🎻", "sentence": "The violin sounds beautiful.", "sentenceVi": "Vĩ cầm có âm thanh đẹp." },
+    { "id": "concert", "word": "Concert", "pronunciation": "/ˈkɑːnsərt/", "vietnamese": "Buổi hoà nhạc", "emoji": "🎪", "sentence": "Let's go to the concert.", "sentenceVi": "Chúng ta đến buổi hoà nhạc." },
+    { "id": "dance", "word": "Dance", "pronunciation": "/dæns/", "vietnamese": "Nhảy múa", "emoji": "💃", "sentence": "I dance to music.", "sentenceVi": "Tôi nhảy theo nhạc." },
+    { "id": "rhythm", "word": "Rhythm", "pronunciation": "/ˈrɪðəm/", "vietnamese": "Nhịp điệu", "emoji": "🎶", "sentence": "Feel the rhythm.", "sentenceVi": "Cảm nhận nhịp điệu." },
+    { "id": "melody", "word": "Melody", "pronunciation": "/ˈmelədi/", "vietnamese": "Giai điệu", "emoji": "🎵", "sentence": "A beautiful melody.", "sentenceVi": "Một giai điệu đẹp." },
+    { "id": "flute", "word": "Flute", "pronunciation": "/fluːt/", "vietnamese": "Sáo", "emoji": "🪈", "sentence": "Play the flute.", "sentenceVi": "Thổi sáo." }
+  ]
+}

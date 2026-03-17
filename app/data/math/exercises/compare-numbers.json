@@ -1,0 +1,21 @@
+{
+  "topic": "compare-numbers",
+  "title": "Compare Numbers",
+  "titleVi": "So sánh số",
+  "icon": "⚖️",
+  "color": "#6366F1",
+  "gradient": "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "type": "math",
+  "exercises": [
+    { "id": "cmp-1", "question": "3 __ 5 (>, <, or =)?", "questionVi": "3 __ 5?", "answer": "<", "options": [">", "<", "="], "hint": "3 is less than 5" },
+    { "id": "cmp-2", "question": "7 __ 2 (>, <, or =)?", "questionVi": "7 __ 2?", "answer": ">", "options": [">", "<", "="], "hint": "7 is greater than 2" },
+    { "id": "cmp-3", "question": "4 __ 4 (>, <, or =)?", "questionVi": "4 __ 4?", "answer": "=", "options": [">", "<", "="], "hint": "Same number!" },
+    { "id": "cmp-4", "question": "9 __ 6 (>, <, or =)?", "questionVi": "9 __ 6?", "answer": ">", "options": [">", "<", "="], "hint": "9 is bigger" },
+    { "id": "cmp-5", "question": "1 __ 8 (>, <, or =)?", "questionVi": "1 __ 8?", "answer": "<", "options": [">", "<", "="], "hint": "1 is smaller" },
+    { "id": "cmp-6", "question": "Which is the biggest? 3, 7, 5", "questionVi": "Số nào lớn nhất?", "answer": 7, "options": [3, 5, 7], "hint": "Count the highest" },
+    { "id": "cmp-7", "question": "Which is the smallest? 9, 4, 6", "questionVi": "Số nào nhỏ nhất?", "answer": 4, "options": [4, 6, 9], "hint": "Count the lowest" },
+    { "id": "cmp-8", "question": "Put in order: 8, 3, 5", "questionVi": "Sắp xếp từ nhỏ đến lớn", "answer": "3, 5, 8", "options": ["3, 5, 8", "8, 5, 3", "5, 3, 8", "3, 8, 5"], "hint": "Smallest first" }
+  ]
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -91,9 +91,13 @@ export default function LeaderboardPage() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [timeLeft, setTimeLeft] = useState("");
-  const [flashId, setFlashId] = useState(null);
+  const [flashIds, setFlashIds] = useState(new Set());
+  const [isLive, setIsLive] = useState(false);
+  const [rankChanges, setRankChanges] = useState({});
+  const prevEntriesRef = useRef([]);
+  const rowRefs = useRef({});
 
-  const loadLeaderboard = useCallback(async () => {
+  const loadLeaderboard = useCallback(async (isRealtimeUpdate = false) => {
     try {
       const { data } = await supabase
         .from("leaderboard_weekly")
@@ -101,11 +105,49 @@ export default function LeaderboardPage() {
         .order("total_score", { ascending: false })
         .limit(50);
 
-      if (data && data.length > 0) {
-        setEntries(data);
-      } else {
-        setEntries(DEMO_DATA);
+      const newEntries = data && data.length > 0 ? data : DEMO_DATA;
+
+      if (isRealtimeUpdate && prevEntriesRef.current.length > 0) {
+        // Detect changed rows
+        const changedNames = new Set();
+        const changes = {};
+        const oldRankMap = {};
+        prevEntriesRef.current.forEach((e, i) => {
+          oldRankMap[e.child_name] = i;
+        });
+
+        newEntries.forEach((entry, newIdx) => {
+          const oldEntry = prevEntriesRef.current.find(
+            (e) => e.child_name === entry.child_name,
+          );
+          if (!oldEntry || oldEntry.total_score !== entry.total_score) {
+            changedNames.add(entry.child_name);
+          }
+          const oldIdx = oldRankMap[entry.child_name];
+          if (oldIdx !== undefined && oldIdx !== newIdx) {
+            changes[entry.child_name] = oldIdx - newIdx; // positive = moved up
+          }
+        });
+
+        if (changedNames.size > 0) {
+          setFlashIds(changedNames);
+          setRankChanges(changes);
+          setTimeout(() => setFlashIds(new Set()), 3000);
+          setTimeout(() => setRankChanges({}), 5000);
+
+          // Auto-scroll to first changed row
+          const firstName = [...changedNames][0];
+          if (rowRefs.current[firstName]) {
+            rowRefs.current[firstName].scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          }
+        }
       }
+
+      prevEntriesRef.current = newEntries;
+      setEntries(newEntries);
     } catch {
       setEntries(DEMO_DATA);
     }
@@ -148,7 +190,7 @@ export default function LeaderboardPage() {
     };
   }, [updateCountdown]);
 
-  // Realtime subscription
+  // Realtime subscription with connection status
   useEffect(() => {
     const channel = supabase
       .channel("leaderboard-realtime")
@@ -160,10 +202,12 @@ export default function LeaderboardPage() {
           table: "leaderboard_weekly",
         },
         () => {
-          loadLeaderboard();
+          loadLeaderboard(true);
         },
       )
-      .subscribe();
+      .subscribe((status) => {
+        setIsLive(status === "SUBSCRIBED");
+      });
 
     return () => supabase.removeChannel(channel);
   }, [loadLeaderboard]);
@@ -210,9 +254,17 @@ export default function LeaderboardPage() {
           <p className={styles.subtitle}>
             Top quiz hàng tuần — thi đua cùng bạn bè khắp thế giới
           </p>
-          <div className={styles.countdown}>
-            <span className={styles.countdownLabel}>Reset trong</span>
-            <span className={styles.countdownTimer}>{timeLeft}</span>
+          <div className={styles.headerMeta}>
+            <div className={styles.countdown}>
+              <span className={styles.countdownLabel}>Reset trong</span>
+              <span className={styles.countdownTimer}>{timeLeft}</span>
+            </div>
+            <div
+              className={`${styles.liveBadge} ${isLive ? styles.liveBadgeActive : ""}`}
+            >
+              <span className={styles.liveDot} />
+              {isLive ? "LIVE" : "CONNECTING..."}
+            </div>
           </div>
         </div>
 
@@ -330,14 +382,25 @@ export default function LeaderboardPage() {
             entries.map((entry, i) => {
               const isMe = activeChild && entry.child_name === activeChild.name;
               const tier = getTier(entry.total_score);
-              const isFlashing = flashId === entry.child_name;
+              const isFlashing = flashIds.has(entry.child_name);
+              const rankDelta = rankChanges[entry.child_name];
               return (
                 <div
-                  key={i}
+                  key={entry.child_name || i}
+                  ref={(el) => {
+                    rowRefs.current[entry.child_name] = el;
+                  }}
                   className={`${styles.row} ${i < 3 ? styles.topRow : ""} ${isMe ? styles.myRow : ""} ${isFlashing ? styles.flashRow : ""}`}
                 >
                   <span className={styles.rank}>
                     {i < 3 ? RANK_STYLES[i].emoji : i + 1}
+                    {rankDelta ? (
+                      <span
+                        className={`${styles.rankDelta} ${rankDelta > 0 ? styles.rankUp : styles.rankDown}`}
+                      >
+                        {rankDelta > 0 ? `▲${rankDelta}` : `▼${Math.abs(rankDelta)}`}
+                      </span>
+                    ) : null}
                   </span>
                   <span className={styles.name}>
                     <span className={styles.flag}>
@@ -352,7 +415,9 @@ export default function LeaderboardPage() {
                   >
                     {tier.icon}
                   </span>
-                  <span className={styles.score}>
+                  <span
+                    className={`${styles.score} ${isFlashing ? styles.scorePulse : ""}`}
+                  >
                     {entry.total_score.toLocaleString()}
                   </span>
                   <span className={styles.quizzes}>{entry.total_quizzes}</span>

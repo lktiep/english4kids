@@ -1,0 +1,21 @@
+{
+  "topic": "addition-100",
+  "title": "Addition to 100",
+  "titleVi": "Cộng đến 100",
+  "icon": "➕",
+  "color": "#10B981",
+  "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "type": "math",
+  "exercises": [
+    { "id": "a100-1", "question": "12 + 5 = ?", "questionVi": "12 + 5 = ?", "answer": 17, "options": [15, 16, 17, 18], "hint": "12 plus 5" },
+    { "id": "a100-2", "question": "23 + 14 = ?", "questionVi": "23 + 14 = ?", "answer": 37, "options": [35, 36, 37, 39], "hint": "Add ones first: 3+4=7" },
+    { "id": "a100-3", "question": "45 + 30 = ?", "questionVi": "45 + 30 = ?", "answer": 75, "options": [55, 65, 75, 85], "hint": "45 plus 30" },
+    { "id": "a100-4", "question": "38 + 42 = ?", "questionVi": "38 + 42 = ?", "answer": 80, "options": [70, 76, 80, 82], "hint": "30+40=70, 8+2=10" },
+    { "id": "a100-5", "question": "56 + 27 = ?", "questionVi": "56 + 27 = ?", "answer": 83, "options": [73, 79, 83, 85], "hint": "6+7=13, carry the 1" },
+    { "id": "a100-6", "question": "19 + 19 = ?", "questionVi": "19 + 19 = ?", "answer": 38, "options": [28, 36, 38, 40], "hint": "Almost 20+20" },
+    { "id": "a100-7", "question": "64 + 36 = ?", "questionVi": "64 + 36 = ?", "answer": 100, "options": [90, 96, 100, 106], "hint": "Do they add to 100?" },
+    { "id": "a100-8", "question": "50 + 50 = ?", "questionVi": "50 + 50 = ?", "answer": 100, "options": [50, 90, 100, 150], "hint": "Half plus half" }
+  ]
+}

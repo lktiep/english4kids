@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useGame } from "@/app/context/GameContext";
 import { useAuth } from "@/app/context/AuthContext";
 import { getAllTopics, getGradeInfo } from "@/app/utils/topics";
-import topicsRegistry from "@/app/data/topics.json";
+import topicsRegistry from "@/app/data/english/topics.json";
 import { useSound } from "@/app/hooks/useSpeech";
 import TopicCard from "./ui/TopicCard";
 import XPBar from "./ui/XPBar";

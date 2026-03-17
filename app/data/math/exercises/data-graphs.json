@@ -1,0 +1,21 @@
+{
+  "topic": "data-graphs",
+  "title": "Data & Graphs",
+  "titleVi": "Biểu đồ & Dữ liệu",
+  "icon": "📊",
+  "color": "#3B82F6",
+  "gradient": "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "type": "math",
+  "exercises": [
+    { "id": "dg-1", "question": "In a bar chart: Soccer=15, Basketball=10, Tennis=5. Most popular?", "questionVi": "Biểu đồ: Bóng đá=15, Bóng rổ=10, Tennis=5. Phổ biến nhất?", "answer": "Soccer", "options": ["Soccer", "Basketball", "Tennis"], "hint": "Highest bar" },
+    { "id": "dg-2", "question": "Mean of 4, 6, 8, 10, 12 = ?", "questionVi": "Trung bình cộng của 4, 6, 8, 10, 12 = ?", "answer": 8, "options": [6, 7, 8, 10], "hint": "Sum ÷ count = 40 ÷ 5" },
+    { "id": "dg-3", "question": "What type of graph uses slices of a circle?", "questionVi": "Loại biểu đồ nào dùng hình quạt tròn?", "answer": "Pie chart", "options": ["Bar chart", "Line graph", "Pie chart", "Histogram"], "hint": "Like a pizza!" },
+    { "id": "dg-4", "question": "Scores: 7, 8, 9, 7, 9. What is the mode?", "questionVi": "Điểm: 7, 8, 9, 7, 9. Mode = ?", "answer": "7 and 9", "options": ["7", "8", "9", "7 and 9"], "hint": "Most frequent values" },
+    { "id": "dg-5", "question": "Median of 3, 5, 7, 9, 11 = ?", "questionVi": "Trung vị của 3, 5, 7, 9, 11 = ?", "answer": 7, "options": [5, 7, 9, 11], "hint": "Middle value when sorted" },
+    { "id": "dg-6", "question": "Range of 12, 5, 8, 15, 3 = ?", "questionVi": "Khoảng biến thiên = ?", "answer": 12, "options": [8, 10, 12, 15], "hint": "Max - Min = 15 - 3" },
+    { "id": "dg-7", "question": "A line graph shows temperature going up. This is called a ___.", "questionVi": "Biểu đồ đường đi lên gọi là ___.", "answer": "Trend / Xu hướng tăng", "options": ["Trend / Xu hướng tăng", "Pattern", "Range", "Mode"], "hint": "Upward direction" },
+    { "id": "dg-8", "question": "Total of: Mon=5, Tue=8, Wed=3, Thu=6, Fri=8", "questionVi": "Tổng: T2=5, T3=8, T4=3, T5=6, T6=8 = ?", "answer": 30, "options": [25, 28, 30, 32], "hint": "Add all values" }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "topic": "multi-digit-ops",
+  "title": "Multi-Digit Operations",
+  "titleVi": "Tính với số lớn",
+  "icon": "🔢",
+  "color": "#6366F1",
+  "gradient": "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+  "grade": "grade4",
+  "difficulty": "hard",
+  "type": "math",
+  "exercises": [
+    { "id": "mdo-1", "question": "234 + 567 = ?", "questionVi": "234 + 567 = ?", "answer": 801, "options": [791, 801, 811, 821], "hint": "Add ones, tens, hundreds" },
+    { "id": "mdo-2", "question": "1000 - 456 = ?", "questionVi": "1000 - 456 = ?", "answer": 544, "options": [444, 534, 544, 554], "hint": "1000 minus 456" },
+    { "id": "mdo-3", "question": "125 × 4 = ?", "questionVi": "125 × 4 = ?", "answer": 500, "options": [400, 450, 500, 525], "hint": "125 times 4" },
+    { "id": "mdo-4", "question": "648 ÷ 8 = ?", "questionVi": "648 ÷ 8 = ?", "answer": 81, "options": [71, 76, 81, 86], "hint": "How many 8s in 648?" },
+    { "id": "mdo-5", "question": "2345 + 1678 = ?", "questionVi": "2345 + 1678 = ?", "answer": 4023, "options": [3923, 4013, 4023, 4123], "hint": "Add column by column" },
+    { "id": "mdo-6", "question": "5000 - 2468 = ?", "questionVi": "5000 - 2468 = ?", "answer": 2532, "options": [2432, 2532, 2632, 3532], "hint": "Borrow from thousands" },
+    { "id": "mdo-7", "question": "36 × 12 = ?", "questionVi": "36 × 12 = ?", "answer": 432, "options": [362, 412, 432, 462], "hint": "36×10 + 36×2" },
+    { "id": "mdo-8", "question": "840 ÷ 12 = ?", "questionVi": "840 ÷ 12 = ?", "answer": 70, "options": [60, 65, 70, 80], "hint": "Divide by 12" }
+  ]
+}

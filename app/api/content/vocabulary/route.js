@@ -4,27 +4,27 @@ import {
   jsonError,
 } from "@/app/lib/supabase-server";
 
-// Static imports for vocabulary JSON files (works on Cloudflare Pages)
-import animals from "@/app/data/vocabulary/animals.json";
-import body from "@/app/data/vocabulary/body.json";
-import clothes from "@/app/data/vocabulary/clothes.json";
-import colors from "@/app/data/vocabulary/colors.json";
-import dinosaurs from "@/app/data/vocabulary/dinosaurs.json";
-import family from "@/app/data/vocabulary/family.json";
-import feelings from "@/app/data/vocabulary/feelings.json";
-import flowers from "@/app/data/vocabulary/flowers.json";
-import food from "@/app/data/vocabulary/food.json";
-import fruits from "@/app/data/vocabulary/fruits.json";
-import greetings from "@/app/data/vocabulary/greetings.json";
-import numbers from "@/app/data/vocabulary/numbers.json";
-import school from "@/app/data/vocabulary/school.json";
-import shapes from "@/app/data/vocabulary/shapes.json";
-import space from "@/app/data/vocabulary/space.json";
-import toys from "@/app/data/vocabulary/toys.json";
-import vehicles from "@/app/data/vocabulary/vehicles.json";
-import weather from "@/app/data/vocabulary/weather.json";
+// English vocabulary static imports
+import animals from "@/app/data/english/vocabulary/animals.json";
+import body from "@/app/data/english/vocabulary/body.json";
+import clothes from "@/app/data/english/vocabulary/clothes.json";
+import colors from "@/app/data/english/vocabulary/colors.json";
+import dinosaurs from "@/app/data/english/vocabulary/dinosaurs.json";
+import family from "@/app/data/english/vocabulary/family.json";
+import feelings from "@/app/data/english/vocabulary/feelings.json";
+import flowers from "@/app/data/english/vocabulary/flowers.json";
+import food from "@/app/data/english/vocabulary/food.json";
+import fruits from "@/app/data/english/vocabulary/fruits.json";
+import greetings from "@/app/data/english/vocabulary/greetings.json";
+import numbers from "@/app/data/english/vocabulary/numbers.json";
+import school from "@/app/data/english/vocabulary/school.json";
+import shapes from "@/app/data/english/vocabulary/shapes.json";
+import space from "@/app/data/english/vocabulary/space.json";
+import toys from "@/app/data/english/vocabulary/toys.json";
+import vehicles from "@/app/data/english/vocabulary/vehicles.json";
+import weather from "@/app/data/english/vocabulary/weather.json";
 
-const vocabMap = {
+const englishVocabMap = {
   animals,
   body,
   clothes,
@@ -48,10 +48,11 @@ const vocabMap = {
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
 
-// GET /api/content/vocabulary?topic=animals
+// GET /api/content/vocabulary?topic=animals&subject=english
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const topic = searchParams.get("topic");
+  const subject = searchParams.get("subject") || "english";
 
   if (!topic) return jsonError("topic slug required");
 
@@ -68,11 +69,13 @@ export async function GET(request) {
     return jsonOk(vocab);
   }
 
-  // Fallback: load from static imports
-  const data = vocabMap[topic];
-  if (data) {
-    return jsonOk(data);
+  // Fallback: load from static imports by subject
+  if (subject === "english") {
+    const data = englishVocabMap[topic];
+    if (data) return jsonOk(data);
   }
+
+  // Math exercises will be loaded dynamically when content is created
 
   return jsonError("Topic not found", 404);
 }

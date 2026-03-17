@@ -1,0 +1,22 @@
+{
+  "topic": "cultures",
+  "title": "Cultures",
+  "titleVi": "Văn hóa",
+  "icon": "🌏",
+  "color": "#14B8A6",
+  "gradient": "linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "words": [
+    { "id": "festival", "word": "Festival", "pronunciation": "/ˈfestɪvl/", "vietnamese": "Lễ hội", "emoji": "🎊", "sentence": "The festival was colorful.", "sentenceVi": "Lễ hội rất sắc màu." },
+    { "id": "language", "word": "Language", "pronunciation": "/ˈlæŋɡwɪdʒ/", "vietnamese": "Ngôn ngữ", "emoji": "🗣️", "sentence": "I learn a new language.", "sentenceVi": "Tôi học ngôn ngữ mới." },
+    { "id": "costume", "word": "Costume", "pronunciation": "/ˈkɑːstuːm/", "vietnamese": "Trang phục", "emoji": "👘", "sentence": "Wear a traditional costume.", "sentenceVi": "Mặc trang phục truyền thống." },
+    { "id": "custom", "word": "Custom", "pronunciation": "/ˈkʌstəm/", "vietnamese": "Phong tục", "emoji": "🎋", "sentence": "Every country has customs.", "sentenceVi": "Mỗi nước có phong tục riêng." },
+    { "id": "ao-dai", "word": "Ao Dai", "pronunciation": "/aʊ zaɪ/", "vietnamese": "Áo dài", "emoji": "👗", "sentence": "Ao Dai is the Vietnamese national dress.", "sentenceVi": "Áo dài là trang phục dân tộc Việt Nam." },
+    { "id": "diversity", "word": "Diversity", "pronunciation": "/daɪˈvɜːrsɪti/", "vietnamese": "Đa dạng", "emoji": "🤝", "sentence": "Celebrate diversity.", "sentenceVi": "Tôn vinh sự đa dạng." },
+    { "id": "cuisine", "word": "Cuisine", "pronunciation": "/kwɪˈziːn/", "vietnamese": "Ẩm thực", "emoji": "🍜", "sentence": "Vietnamese cuisine is delicious.", "sentenceVi": "Ẩm thực Việt Nam rất ngon." },
+    { "id": "folktale", "word": "Folktale", "pronunciation": "/ˈfoʊkteɪl/", "vietnamese": "Truyện cổ tích", "emoji": "📖", "sentence": "Read a folktale.", "sentenceVi": "Đọc truyện cổ tích." },
+    { "id": "pagoda", "word": "Pagoda", "pronunciation": "/pəˈɡoʊdə/", "vietnamese": "Chùa", "emoji": "🏯", "sentence": "Visit the One Pillar Pagoda.", "sentenceVi": "Thăm chùa Một Cột." },
+    { "id": "respect", "word": "Respect", "pronunciation": "/rɪˈspekt/", "vietnamese": "Tôn trọng", "emoji": "🙏", "sentence": "Respect other cultures.", "sentenceVi": "Tôn trọng các nền văn hóa khác." }
+  ]
+}

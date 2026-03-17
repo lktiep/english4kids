@@ -1,0 +1,21 @@
+{
+  "topic": "subtraction-100",
+  "title": "Subtraction to 100",
+  "titleVi": "Trừ đến 100",
+  "icon": "➖",
+  "color": "#EF4444",
+  "gradient": "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "type": "math",
+  "exercises": [
+    { "id": "s100-1", "question": "15 - 3 = ?", "questionVi": "15 - 3 = ?", "answer": 12, "options": [10, 11, 12, 13], "hint": "15 minus 3" },
+    { "id": "s100-2", "question": "28 - 14 = ?", "questionVi": "28 - 14 = ?", "answer": 14, "options": [12, 13, 14, 16], "hint": "28 minus 14" },
+    { "id": "s100-3", "question": "50 - 25 = ?", "questionVi": "50 - 25 = ?", "answer": 25, "options": [15, 20, 25, 30], "hint": "Half of 50" },
+    { "id": "s100-4", "question": "73 - 41 = ?", "questionVi": "73 - 41 = ?", "answer": 32, "options": [28, 30, 32, 34], "hint": "70-40=30, 3-1=2" },
+    { "id": "s100-5", "question": "100 - 37 = ?", "questionVi": "100 - 37 = ?", "answer": 63, "options": [53, 57, 63, 67], "hint": "100 minus 37" },
+    { "id": "s100-6", "question": "86 - 29 = ?", "questionVi": "86 - 29 = ?", "answer": 57, "options": [53, 55, 57, 59], "hint": "86-30=56, then add 1" },
+    { "id": "s100-7", "question": "44 - 44 = ?", "questionVi": "44 - 44 = ?", "answer": 0, "options": [0, 4, 8, 44], "hint": "Same number minus itself" },
+    { "id": "s100-8", "question": "91 - 56 = ?", "questionVi": "91 - 56 = ?", "answer": 35, "options": [25, 31, 35, 45], "hint": "90-56=34, plus 1" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "topic": "jobs",
+  "title": "Jobs",
+  "titleVi": "Nghề nghiệp",
+  "icon": "👩‍⚕️",
+  "color": "#F97316",
+  "gradient": "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "words": [
+    { "id": "teacher", "word": "Teacher", "pronunciation": "/ˈtiːtʃər/", "vietnamese": "Giáo viên", "emoji": "👩‍🏫", "sentence": "My teacher is kind.", "sentenceVi": "Cô giáo tôi rất tốt bụng." },
+    { "id": "doctor", "word": "Doctor", "pronunciation": "/ˈdɑːktər/", "vietnamese": "Bác sĩ", "emoji": "👨‍⚕️", "sentence": "The doctor helps sick people.", "sentenceVi": "Bác sĩ giúp người bệnh." },
+    { "id": "firefighter", "word": "Firefighter", "pronunciation": "/ˈfaɪərfaɪtər/", "vietnamese": "Lính cứu hỏa", "emoji": "👨‍🚒", "sentence": "Firefighters are brave.", "sentenceVi": "Lính cứu hỏa rất dũng cảm." },
+    { "id": "police", "word": "Police Officer", "pronunciation": "/pəˈliːs/", "vietnamese": "Cảnh sát", "emoji": "👮", "sentence": "The police officer helps people.", "sentenceVi": "Cảnh sát giúp đỡ mọi người." },
+    { "id": "chef", "word": "Chef", "pronunciation": "/ʃef/", "vietnamese": "Đầu bếp", "emoji": "👨‍🍳", "sentence": "The chef makes delicious food.", "sentenceVi": "Đầu bếp nấu món ăn ngon." },
+    { "id": "farmer", "word": "Farmer", "pronunciation": "/ˈfɑːrmər/", "vietnamese": "Nông dân", "emoji": "👨‍🌾", "sentence": "The farmer grows rice.", "sentenceVi": "Nông dân trồng lúa." },
+    { "id": "pilot", "word": "Pilot", "pronunciation": "/ˈpaɪlət/", "vietnamese": "Phi công", "emoji": "👩‍✈️", "sentence": "The pilot flies the plane.", "sentenceVi": "Phi công lái máy bay." },
+    { "id": "artist", "word": "Artist", "pronunciation": "/ˈɑːrtɪst/", "vietnamese": "Họa sĩ", "emoji": "👩‍🎨", "sentence": "The artist paints pictures.", "sentenceVi": "Họa sĩ vẽ tranh." },
+    { "id": "scientist", "word": "Scientist", "pronunciation": "/ˈsaɪəntɪst/", "vietnamese": "Nhà khoa học", "emoji": "👩‍🔬", "sentence": "Scientists do experiments.", "sentenceVi": "Nhà khoa học làm thí nghiệm." },
+    { "id": "astronaut", "word": "Astronaut", "pronunciation": "/ˈæstrənɔːt/", "vietnamese": "Phi hành gia", "emoji": "👩‍🚀", "sentence": "The astronaut goes to space.", "sentenceVi": "Phi hành gia bay vào vũ trụ." }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "topic": "sports",
+  "title": "Sports",
+  "titleVi": "Thể thao",
+  "icon": "⚽",
+  "color": "#3B82F6",
+  "gradient": "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "words": [
+    { "id": "soccer", "word": "Soccer", "pronunciation": "/ˈsɑːkər/", "vietnamese": "Bóng đá", "emoji": "⚽", "sentence": "I play soccer with friends.", "sentenceVi": "Tôi chơi bóng đá với bạn." },
+    { "id": "basketball", "word": "Basketball", "pronunciation": "/ˈbæskɪtbɔːl/", "vietnamese": "Bóng rổ", "emoji": "🏀", "sentence": "He shoots the basketball.", "sentenceVi": "Anh ấy ném bóng rổ." },
+    { "id": "swimming", "word": "Swimming", "pronunciation": "/ˈswɪmɪŋ/", "vietnamese": "Bơi lội", "emoji": "🏊", "sentence": "Swimming is fun.", "sentenceVi": "Bơi lội rất vui." },
+    { "id": "running", "word": "Running", "pronunciation": "/ˈrʌnɪŋ/", "vietnamese": "Chạy bộ", "emoji": "🏃", "sentence": "I like running fast.", "sentenceVi": "Tôi thích chạy nhanh." },
+    { "id": "tennis", "word": "Tennis", "pronunciation": "/ˈtenɪs/", "vietnamese": "Quần vợt", "emoji": "🎾", "sentence": "She plays tennis well.", "sentenceVi": "Cô ấy chơi tennis giỏi." },
+    { "id": "badminton", "word": "Badminton", "pronunciation": "/ˈbædmɪntən/", "vietnamese": "Cầu lông", "emoji": "🏸", "sentence": "Badminton is popular in Vietnam.", "sentenceVi": "Cầu lông phổ biến ở Việt Nam." },
+    { "id": "cycling", "word": "Cycling", "pronunciation": "/ˈsaɪklɪŋ/", "vietnamese": "Đạp xe", "emoji": "🚴", "sentence": "I go cycling in the park.", "sentenceVi": "Tôi đạp xe trong công viên." },
+    { "id": "volleyball", "word": "Volleyball", "pronunciation": "/ˈvɑːlibɔːl/", "vietnamese": "Bóng chuyền", "emoji": "🏐", "sentence": "We play volleyball on the beach.", "sentenceVi": "Chúng tôi chơi bóng chuyền trên bãi biển." },
+    { "id": "skating", "word": "Skating", "pronunciation": "/ˈskeɪtɪŋ/", "vietnamese": "Trượt patin", "emoji": "⛸️", "sentence": "Skating is exciting!", "sentenceVi": "Trượt patin thật thú vị!" },
+    { "id": "martial-arts", "word": "Martial Arts", "pronunciation": "/ˈmɑːrʃl ɑːrts/", "vietnamese": "Võ thuật", "emoji": "🥋", "sentence": "I learn martial arts.", "sentenceVi": "Tôi học võ thuật." }
+  ]
+}

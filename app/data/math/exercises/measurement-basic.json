@@ -1,0 +1,21 @@
+{
+  "topic": "measurement-basic",
+  "title": "Basic Measurement",
+  "titleVi": "Đo lường cơ bản",
+  "icon": "📐",
+  "color": "#F97316",
+  "gradient": "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "type": "math",
+  "exercises": [
+    { "id": "meas-1", "question": "Which is longer? 📏📏📏 or 📏", "questionVi": "Cái nào dài hơn?", "answer": "📏📏📏", "options": ["📏📏📏", "📏"], "hint": "More rulers = longer" },
+    { "id": "meas-2", "question": "Which is heavier? 🐘 or 🐁", "questionVi": "Con nào nặng hơn?", "answer": "🐘", "options": ["🐘", "🐁"], "hint": "Elephants are heavy!" },
+    { "id": "meas-3", "question": "How many cm is 1 ruler? (1 ruler = 30cm)", "questionVi": "1 thước kẻ dài bao nhiêu cm?", "answer": 30, "options": [10, 20, 30, 50], "hint": "A standard ruler" },
+    { "id": "meas-4", "question": "Which holds more water? 🪣 or 🥤", "questionVi": "Cái nào chứa nhiều nước hơn?", "answer": "🪣", "options": ["🪣", "🥤"], "hint": "Bucket vs cup" },
+    { "id": "meas-5", "question": "Which is taller? A giraffe or a dog?", "questionVi": "Con nào cao hơn?", "answer": "Giraffe", "options": ["Giraffe", "Dog"], "hint": "Think about their necks" },
+    { "id": "meas-6", "question": "1 meter = ___ centimeters", "questionVi": "1 mét = ___ xăng-ti-mét", "answer": 100, "options": [10, 50, 100, 1000], "hint": "Centi = hundredth" },
+    { "id": "meas-7", "question": "Which is lighter? 📖 or 🏋️", "questionVi": "Cái nào nhẹ hơn?", "answer": "📖", "options": ["📖", "🏋️"], "hint": "Book vs weight" },
+    { "id": "meas-8", "question": "Which takes longer? Eating lunch or sleeping?", "questionVi": "Việc nào mất nhiều thời gian hơn?", "answer": "Sleeping", "options": ["Eating lunch", "Sleeping"], "hint": "We sleep for many hours" }
+  ]
+}

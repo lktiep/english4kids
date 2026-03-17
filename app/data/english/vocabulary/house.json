@@ -1,0 +1,22 @@
+{
+  "topic": "house",
+  "title": "House & Rooms",
+  "titleVi": "Ngôi nhà",
+  "icon": "🏠",
+  "color": "#F97316",
+  "gradient": "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
+  "grade": "grade2",
+  "difficulty": "easy",
+  "words": [
+    { "id": "house", "word": "House", "pronunciation": "/haʊs/", "vietnamese": "Ngôi nhà", "emoji": "🏠", "sentence": "This is my house.", "sentenceVi": "Đây là nhà tôi." },
+    { "id": "bedroom", "word": "Bedroom", "pronunciation": "/ˈbedruːm/", "vietnamese": "Phòng ngủ", "emoji": "🛏️", "sentence": "I sleep in my bedroom.", "sentenceVi": "Tôi ngủ trong phòng ngủ." },
+    { "id": "kitchen", "word": "Kitchen", "pronunciation": "/ˈkɪtʃɪn/", "vietnamese": "Nhà bếp", "emoji": "🍳", "sentence": "Mom cooks in the kitchen.", "sentenceVi": "Mẹ nấu ăn trong bếp." },
+    { "id": "bathroom", "word": "Bathroom", "pronunciation": "/ˈbæθruːm/", "vietnamese": "Phòng tắm", "emoji": "🚿", "sentence": "I wash my hands in the bathroom.", "sentenceVi": "Tôi rửa tay trong phòng tắm." },
+    { "id": "living-room", "word": "Living Room", "pronunciation": "/ˈlɪvɪŋ ruːm/", "vietnamese": "Phòng khách", "emoji": "🛋️", "sentence": "We watch TV in the living room.", "sentenceVi": "Chúng tôi xem TV trong phòng khách." },
+    { "id": "garden", "word": "Garden", "pronunciation": "/ˈɡɑːrdn/", "vietnamese": "Vườn", "emoji": "🌻", "sentence": "There are flowers in the garden.", "sentenceVi": "Có hoa trong vườn." },
+    { "id": "door", "word": "Door", "pronunciation": "/dɔːr/", "vietnamese": "Cửa", "emoji": "🚪", "sentence": "Please open the door.", "sentenceVi": "Xin hãy mở cửa." },
+    { "id": "window", "word": "Window", "pronunciation": "/ˈwɪndoʊ/", "vietnamese": "Cửa sổ", "emoji": "🪟", "sentence": "I look out the window.", "sentenceVi": "Tôi nhìn qua cửa sổ." },
+    { "id": "roof", "word": "Roof", "pronunciation": "/ruːf/", "vietnamese": "Mái nhà", "emoji": "🏘️", "sentence": "The roof is red.", "sentenceVi": "Mái nhà màu đỏ." },
+    { "id": "stairs", "word": "Stairs", "pronunciation": "/steərz/", "vietnamese": "Cầu thang", "emoji": "🪜", "sentence": "Go up the stairs.", "sentenceVi": "Đi lên cầu thang." }
+  ]
+}

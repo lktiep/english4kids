@@ -1,0 +1,21 @@
+{
+  "topic": "bigger-smaller",
+  "title": "Bigger & Smaller",
+  "titleVi": "So sánh lớn nhỏ",
+  "icon": "📏",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+  "grade": "prek",
+  "difficulty": "easy",
+  "type": "math",
+  "exercises": [
+    { "id": "bs-1", "question": "Which is bigger? 🐘 or 🐁", "questionVi": "Con nào lớn hơn?", "answer": "🐘", "options": ["🐘", "🐁"], "hint": "Think about real size" },
+    { "id": "bs-2", "question": "Which is smaller? 🏠 or 🏰", "questionVi": "Cái nào nhỏ hơn?", "answer": "🏠", "options": ["🏠", "🏰"], "hint": "Houses are smaller than castles" },
+    { "id": "bs-3", "question": "Which number is bigger? 5 or 3", "questionVi": "Số nào lớn hơn? 5 hay 3", "answer": 5, "options": [3, 5], "hint": "Count higher" },
+    { "id": "bs-4", "question": "Which number is smaller? 7 or 2", "questionVi": "Số nào nhỏ hơn? 7 hay 2", "answer": 2, "options": [2, 7], "hint": "Count lower" },
+    { "id": "bs-5", "question": "Put in order: 1, 3, 2", "questionVi": "Sắp xếp: 1, 3, 2", "answer": "1, 2, 3", "options": ["1, 2, 3", "3, 2, 1", "2, 1, 3", "1, 3, 2"], "hint": "Smallest to biggest" },
+    { "id": "bs-6", "question": "Which group has MORE? 🍎🍎🍎 or 🍎🍎🍎🍎🍎", "questionVi": "Nhóm nào NHIỀU hơn?", "answer": 5, "options": [3, 5], "hint": "Count each group" },
+    { "id": "bs-7", "question": "Which is taller? 🌳 or 🌱", "questionVi": "Cái nào cao hơn?", "answer": "🌳", "options": ["🌳", "🌱"], "hint": "Tree vs seedling" },
+    { "id": "bs-8", "question": "Which number is biggest? 4, 8, 6", "questionVi": "Số nào lớn nhất?", "answer": 8, "options": [4, 6, 8], "hint": "Which can you count to last?" }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "topic": "percentages",
+  "title": "Percentages",
+  "titleVi": "Phần trăm",
+  "icon": "💯",
+  "color": "#F97316",
+  "gradient": "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "type": "math",
+  "exercises": [
+    { "id": "pct-1", "question": "50% of 100 = ?", "questionVi": "50% của 100 = ?", "answer": 50, "options": [25, 50, 75, 100], "hint": "Half of 100" },
+    { "id": "pct-2", "question": "25% of 200 = ?", "questionVi": "25% của 200 = ?", "answer": 50, "options": [25, 50, 75, 100], "hint": "Quarter of 200" },
+    { "id": "pct-3", "question": "10% of 500 = ?", "questionVi": "10% của 500 = ?", "answer": 50, "options": [5, 50, 100, 500], "hint": "Move decimal left" },
+    { "id": "pct-4", "question": "What percent is 3 out of 10?", "questionVi": "3 trên 10 là bao nhiêu %?", "answer": "30%", "options": ["3%", "10%", "30%", "33%"], "hint": "3/10 = 0.3 = 30%" },
+    { "id": "pct-5", "question": "75% = what fraction?", "questionVi": "75% = phân số nào?", "answer": "3/4", "options": ["1/2", "2/3", "3/4", "4/5"], "hint": "75 ÷ 25 = 3" },
+    { "id": "pct-6", "question": "A shirt costs 400.000đ with 20% off. Sale price?", "questionVi": "Áo giá 400.000đ giảm 20%. Giá bán?", "answer": "320.000đ", "options": ["280.000đ", "300.000đ", "320.000đ", "360.000đ"], "hint": "20% of 400 = 80" },
+    { "id": "pct-7", "question": "If 40 out of 50 students passed, what %?", "questionVi": "40/50 học sinh đậu = bao nhiêu %?", "answer": "80%", "options": ["40%", "60%", "80%", "90%"], "hint": "40/50 = 80/100" },
+    { "id": "pct-8", "question": "100% - 35% = ?", "questionVi": "100% - 35% = ?", "answer": "65%", "options": ["45%", "55%", "65%", "75%"], "hint": "Simple subtraction" }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "topic": "addition-10",
+  "title": "Addition to 10",
+  "titleVi": "Cộng đến 10",
+  "icon": "➕",
+  "color": "#10B981",
+  "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+  "grade": "grade1",
+  "difficulty": "easy",
+  "type": "math",
+  "exercises": [
+    { "id": "add-1", "question": "1 + 1 = ?", "questionVi": "1 + 1 = ?", "answer": 2, "options": [1, 2, 3, 4], "hint": "🍎 + 🍎 = ?" },
+    { "id": "add-2", "question": "2 + 3 = ?", "questionVi": "2 + 3 = ?", "answer": 5, "options": [4, 5, 6, 7], "hint": "🍎🍎 + 🍎🍎🍎 = ?" },
+    { "id": "add-3", "question": "4 + 2 = ?", "questionVi": "4 + 2 = ?", "answer": 6, "options": [5, 6, 7, 8], "hint": "Count 4 then add 2 more" },
+    { "id": "add-4", "question": "3 + 3 = ?", "questionVi": "3 + 3 = ?", "answer": 6, "options": [4, 5, 6, 7], "hint": "Three plus three" },
+    { "id": "add-5", "question": "5 + 2 = ?", "questionVi": "5 + 2 = ?", "answer": 7, "options": [6, 7, 8, 9], "hint": "Start at 5, count 2 more" },
+    { "id": "add-6", "question": "1 + 7 = ?", "questionVi": "1 + 7 = ?", "answer": 8, "options": [6, 7, 8, 9], "hint": "One plus seven" },
+    { "id": "add-7", "question": "4 + 5 = ?", "questionVi": "4 + 5 = ?", "answer": 9, "options": [7, 8, 9, 10], "hint": "Four plus five" },
+    { "id": "add-8", "question": "6 + 4 = ?", "questionVi": "6 + 4 = ?", "answer": 10, "options": [8, 9, 10, 11], "hint": "Six plus four" },
+    { "id": "add-9", "question": "3 + 4 = ?", "questionVi": "3 + 4 = ?", "answer": 7, "options": [5, 6, 7, 8], "hint": "Three plus four" },
+    { "id": "add-10", "question": "5 + 5 = ?", "questionVi": "5 + 5 = ?", "answer": 10, "options": [8, 9, 10, 11], "hint": "Five plus five equals ten!" }
+  ]
+}

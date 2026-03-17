@@ -1,0 +1,23 @@
+{
+  "topic": "multiplication",
+  "title": "Multiplication",
+  "titleVi": "Phép nhân",
+  "icon": "✖️",
+  "color": "#8B5CF6",
+  "gradient": "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "type": "math",
+  "exercises": [
+    { "id": "mul-1", "question": "2 × 3 = ?", "questionVi": "2 × 3 = ?", "answer": 6, "options": [4, 5, 6, 8], "hint": "2 groups of 3" },
+    { "id": "mul-2", "question": "4 × 2 = ?", "questionVi": "4 × 2 = ?", "answer": 8, "options": [6, 7, 8, 10], "hint": "4 groups of 2" },
+    { "id": "mul-3", "question": "3 × 3 = ?", "questionVi": "3 × 3 = ?", "answer": 9, "options": [6, 8, 9, 12], "hint": "3 groups of 3" },
+    { "id": "mul-4", "question": "5 × 2 = ?", "questionVi": "5 × 2 = ?", "answer": 10, "options": [7, 8, 10, 12], "hint": "5 groups of 2" },
+    { "id": "mul-5", "question": "6 × 3 = ?", "questionVi": "6 × 3 = ?", "answer": 18, "options": [12, 15, 18, 21], "hint": "6 groups of 3" },
+    { "id": "mul-6", "question": "7 × 4 = ?", "questionVi": "7 × 4 = ?", "answer": 28, "options": [24, 26, 28, 32], "hint": "7 groups of 4" },
+    { "id": "mul-7", "question": "8 × 5 = ?", "questionVi": "8 × 5 = ?", "answer": 40, "options": [35, 38, 40, 45], "hint": "8 groups of 5" },
+    { "id": "mul-8", "question": "9 × 6 = ?", "questionVi": "9 × 6 = ?", "answer": 54, "options": [48, 52, 54, 56], "hint": "9 groups of 6" },
+    { "id": "mul-9", "question": "7 × 7 = ?", "questionVi": "7 × 7 = ?", "answer": 49, "options": [42, 47, 49, 56], "hint": "7 times 7" },
+    { "id": "mul-10", "question": "9 × 9 = ?", "questionVi": "9 × 9 = ?", "answer": 81, "options": [72, 79, 81, 90], "hint": "9 times 9" }
+  ]
+}

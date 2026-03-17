@@ -1,0 +1,22 @@
+{
+  "topic": "history",
+  "title": "History",
+  "titleVi": "Lịch sử",
+  "icon": "📜",
+  "color": "#F97316",
+  "gradient": "linear-gradient(135deg, #F97316 0%, #EA580C 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "words": [
+    { "id": "ancient", "word": "Ancient", "pronunciation": "/ˈeɪnʃənt/", "vietnamese": "Cổ đại", "emoji": "🏛️", "sentence": "Ancient Egypt built pyramids.", "sentenceVi": "Ai Cập cổ đại xây kim tự tháp." },
+    { "id": "king", "word": "King", "pronunciation": "/kɪŋ/", "vietnamese": "Vua", "emoji": "👑", "sentence": "The king ruled the country.", "sentenceVi": "Nhà vua cai trị đất nước." },
+    { "id": "dynasty", "word": "Dynasty", "pronunciation": "/ˈdaɪnəsti/", "vietnamese": "Triều đại", "emoji": "🏰", "sentence": "The Nguyen Dynasty was the last.", "sentenceVi": "Triều Nguyễn là triều đại cuối cùng." },
+    { "id": "independence", "word": "Independence", "pronunciation": "/ˌɪndɪˈpendəns/", "vietnamese": "Độc lập", "emoji": "🗽", "sentence": "Independence Day is September 2nd.", "sentenceVi": "Ngày Quốc khánh là mùng 2 tháng 9." },
+    { "id": "hero", "word": "Hero", "pronunciation": "/ˈhɪroʊ/", "vietnamese": "Anh hùng", "emoji": "🦸", "sentence": "My hero is Uncle Ho.", "sentenceVi": "Anh hùng của tôi là Bác Hồ." },
+    { "id": "invention", "word": "Invention", "pronunciation": "/ɪnˈvenʃn/", "vietnamese": "Phát minh", "emoji": "💡", "sentence": "The wheel was a great invention.", "sentenceVi": "Bánh xe là phát minh vĩ đại." },
+    { "id": "civilization", "word": "Civilization", "pronunciation": "/ˌsɪvɪlaɪˈzeɪʃn/", "vietnamese": "Nền văn minh", "emoji": "🌆", "sentence": "Ancient civilizations were amazing.", "sentenceVi": "Các nền văn minh cổ đại rất tuyệt." },
+    { "id": "war", "word": "War", "pronunciation": "/wɔːr/", "vietnamese": "Chiến tranh", "emoji": "⚔️", "sentence": "We want peace, not war.", "sentenceVi": "Chúng ta muốn hòa bình, không phải chiến tranh." },
+    { "id": "monument", "word": "Monument", "pronunciation": "/ˈmɑːnjumənt/", "vietnamese": "Đài tưởng niệm", "emoji": "🗿", "sentence": "Visit the monument.", "sentenceVi": "Thăm đài tưởng niệm." },
+    { "id": "tradition", "word": "Tradition", "pronunciation": "/trəˈdɪʃn/", "vietnamese": "Truyền thống", "emoji": "🎎", "sentence": "Keep our traditions alive.", "sentenceVi": "Giữ gìn truyền thống." }
+  ]
+}

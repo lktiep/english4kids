@@ -1,0 +1,22 @@
+{
+  "topic": "health",
+  "title": "Health",
+  "titleVi": "Sức khỏe",
+  "icon": "❤️",
+  "color": "#EF4444",
+  "gradient": "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+  "grade": "grade4",
+  "difficulty": "medium",
+  "words": [
+    { "id": "healthy", "word": "Healthy", "pronunciation": "/ˈhelθi/", "vietnamese": "Khỏe mạnh", "emoji": "💪", "sentence": "Eat healthy food.", "sentenceVi": "Ăn thực phẩm lành mạnh." },
+    { "id": "exercise", "word": "Exercise", "pronunciation": "/ˈeksərsaɪz/", "vietnamese": "Tập thể dục", "emoji": "🏋️", "sentence": "Exercise every day.", "sentenceVi": "Tập thể dục mỗi ngày." },
+    { "id": "vitamins", "word": "Vitamins", "pronunciation": "/ˈvaɪtəmɪnz/", "vietnamese": "Vitamin", "emoji": "💊", "sentence": "Fruits have vitamins.", "sentenceVi": "Trái cây có vitamin." },
+    { "id": "sleep", "word": "Sleep", "pronunciation": "/sliːp/", "vietnamese": "Ngủ", "emoji": "😴", "sentence": "Get enough sleep.", "sentenceVi": "Ngủ đủ giấc." },
+    { "id": "wash-hands", "word": "Wash hands", "pronunciation": "/wɒʃ hændz/", "vietnamese": "Rửa tay", "emoji": "🧼", "sentence": "Wash your hands often.", "sentenceVi": "Rửa tay thường xuyên." },
+    { "id": "hospital", "word": "Hospital", "pronunciation": "/ˈhɑːspɪtl/", "vietnamese": "Bệnh viện", "emoji": "🏥", "sentence": "Go to the hospital.", "sentenceVi": "Đi đến bệnh viện." },
+    { "id": "medicine", "word": "Medicine", "pronunciation": "/ˈmedɪsn/", "vietnamese": "Thuốc", "emoji": "💊", "sentence": "Take your medicine.", "sentenceVi": "Uống thuốc." },
+    { "id": "toothbrush", "word": "Toothbrush", "pronunciation": "/ˈtuːθbrʌʃ/", "vietnamese": "Bàn chải đánh răng", "emoji": "🪥", "sentence": "Use your toothbrush.", "sentenceVi": "Dùng bàn chải đánh răng." },
+    { "id": "vaccine", "word": "Vaccine", "pronunciation": "/vækˈsiːn/", "vietnamese": "Vắc xin", "emoji": "💉", "sentence": "Vaccines keep us safe.", "sentenceVi": "Vắc xin giữ chúng ta an toàn." },
+    { "id": "nutrition", "word": "Nutrition", "pronunciation": "/nuˈtrɪʃn/", "vietnamese": "Dinh dưỡng", "emoji": "🥗", "sentence": "Good nutrition is important.", "sentenceVi": "Dinh dưỡng tốt rất quan trọng." }
+  ]
+}

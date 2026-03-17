@@ -1,0 +1,22 @@
+{
+  "topic": "arts",
+  "title": "Arts & Crafts",
+  "titleVi": "Mỹ thuật",
+  "icon": "🎨",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+  "grade": "grade4",
+  "difficulty": "medium",
+  "words": [
+    { "id": "paint", "word": "Paint", "pronunciation": "/peɪnt/", "vietnamese": "Vẽ màu", "emoji": "🖌️", "sentence": "I paint a picture.", "sentenceVi": "Tôi vẽ tô một bức tranh." },
+    { "id": "draw", "word": "Draw", "pronunciation": "/drɔː/", "vietnamese": "Vẽ", "emoji": "✏️", "sentence": "Draw a flower.", "sentenceVi": "Vẽ một bông hoa." },
+    { "id": "sculpture", "word": "Sculpture", "pronunciation": "/ˈskʌlptʃər/", "vietnamese": "Điêu khắc", "emoji": "🗿", "sentence": "The sculpture is amazing.", "sentenceVi": "Tác phẩm điêu khắc rất tuyệt." },
+    { "id": "origami", "word": "Origami", "pronunciation": "/ˌɔːrɪˈɡɑːmi/", "vietnamese": "Nghệ thuật gấp giấy", "emoji": "🦢", "sentence": "I make origami cranes.", "sentenceVi": "Tôi gấp hạc giấy." },
+    { "id": "crayon", "word": "Crayon", "pronunciation": "/ˈkreɪɑːn/", "vietnamese": "Bút sáp màu", "emoji": "🖍️", "sentence": "Color with crayons.", "sentenceVi": "Tô màu bằng bút sáp." },
+    { "id": "canvas", "word": "Canvas", "pronunciation": "/ˈkænvəs/", "vietnamese": "Bức vải/Tấm bát", "emoji": "🖼️", "sentence": "Paint on the canvas.", "sentenceVi": "Vẽ trên vải." },
+    { "id": "pottery", "word": "Pottery", "pronunciation": "/ˈpɑːtəri/", "vietnamese": "Đồ gốm", "emoji": "🏺", "sentence": "Make pottery from clay.", "sentenceVi": "Làm đồ gốm từ đất sét." },
+    { "id": "gallery", "word": "Gallery", "pronunciation": "/ˈɡæləri/", "vietnamese": "Phòng trưng bày", "emoji": "🏛️", "sentence": "Visit the art gallery.", "sentenceVi": "Tham quan phòng trưng bày." },
+    { "id": "pattern", "word": "Pattern", "pronunciation": "/ˈpætərn/", "vietnamese": "Hoa văn", "emoji": "🔲", "sentence": "Draw a beautiful pattern.", "sentenceVi": "Vẽ một hoa văn đẹp." },
+    { "id": "creative", "word": "Creative", "pronunciation": "/kriˈeɪtɪv/", "vietnamese": "Sáng tạo", "emoji": "💡", "sentence": "Be creative!", "sentenceVi": "Hãy sáng tạo!" }
+  ]
+}

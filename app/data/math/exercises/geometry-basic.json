@@ -1,0 +1,21 @@
+{
+  "topic": "geometry-basic",
+  "title": "Basic Geometry",
+  "titleVi": "Hình học cơ bản",
+  "icon": "📐",
+  "color": "#3B82F6",
+  "gradient": "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "type": "math",
+  "exercises": [
+    { "id": "geo-1", "question": "How many sides does a hexagon have?", "questionVi": "Hình lục giác có bao nhiêu cạnh?", "answer": 6, "options": [4, 5, 6, 8], "hint": "Hex = six" },
+    { "id": "geo-2", "question": "What is the name of a 3D shape like a ball?", "questionVi": "Hình 3D giống quả bóng tên gì?", "answer": "Sphere", "options": ["Circle", "Sphere", "Cube", "Cylinder"], "hint": "3D circle" },
+    { "id": "geo-3", "question": "A cube has ___ faces.", "questionVi": "Hình lập phương có ___ mặt.", "answer": 6, "options": [4, 5, 6, 8], "hint": "Like a dice" },
+    { "id": "geo-4", "question": "A right angle = ___ degrees", "questionVi": "Góc vuông = ___ độ", "answer": 90, "options": [45, 60, 90, 180], "hint": "Corner of a book" },
+    { "id": "geo-5", "question": "What shape has no corners and no sides?", "questionVi": "Hình nào không có góc và cạnh?", "answer": "Circle", "options": ["Square", "Circle", "Triangle", "Rectangle"], "hint": "Perfectly round" },
+    { "id": "geo-6", "question": "How many edges does a cube have?", "questionVi": "Hình lập phương có bao nhiêu cạnh?", "answer": 12, "options": [6, 8, 10, 12], "hint": "Count the edges of a dice" },
+    { "id": "geo-7", "question": "A triangle has ___ angles.", "questionVi": "Tam giác có ___ góc.", "answer": 3, "options": [2, 3, 4, 5], "hint": "Tri = three" },
+    { "id": "geo-8", "question": "A cylinder has ___ flat faces.", "questionVi": "Hình trụ có ___ mặt phẳng.", "answer": 2, "options": [0, 1, 2, 3], "hint": "Top and bottom" }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "topic": "time-clock",
+  "title": "Telling Time",
+  "titleVi": "Xem đồng hồ",
+  "icon": "🕐",
+  "color": "#0EA5E9",
+  "gradient": "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "type": "math",
+  "exercises": [
+    { "id": "time-1", "question": "🕐 What time is it?", "questionVi": "Mấy giờ rồi?", "answer": "1:00", "options": ["1:00", "12:00", "2:00", "11:00"], "hint": "Hour hand on 1" },
+    { "id": "time-2", "question": "🕕 What time is it?", "questionVi": "Mấy giờ rồi?", "answer": "6:00", "options": ["3:00", "6:00", "9:00", "12:00"], "hint": "Hour hand on 6" },
+    { "id": "time-3", "question": "🕒 What time is it?", "questionVi": "Mấy giờ rồi?", "answer": "3:00", "options": ["1:00", "3:00", "6:00", "9:00"], "hint": "Hour hand on 3" },
+    { "id": "time-4", "question": "1 hour = ___ minutes", "questionVi": "1 giờ = ___ phút", "answer": 60, "options": [30, 45, 60, 100], "hint": "60 minutes in an hour" },
+    { "id": "time-5", "question": "Half past 2 = ?", "questionVi": "2 giờ rưỡi = ?", "answer": "2:30", "options": ["2:00", "2:15", "2:30", "2:45"], "hint": "Half = 30 minutes" },
+    { "id": "time-6", "question": "How many hours in a day?", "questionVi": "Một ngày có bao nhiêu giờ?", "answer": 24, "options": [12, 20, 24, 48], "hint": "Day and night" },
+    { "id": "time-7", "question": "Quarter past 5 = ?", "questionVi": "5 giờ 15 = ?", "answer": "5:15", "options": ["5:00", "5:15", "5:30", "5:45"], "hint": "Quarter = 15 minutes" },
+    { "id": "time-8", "question": "If it's 3:00, what time is it in 2 hours?", "questionVi": "Nếu bây giờ 3 giờ, 2 tiếng nữa là mấy giờ?", "answer": "5:00", "options": ["4:00", "5:00", "6:00", "1:00"], "hint": "3 + 2 = 5" }
+  ]
+}

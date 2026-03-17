@@ -1,0 +1,22 @@
+{
+  "topic": "holidays",
+  "title": "Holidays",
+  "titleVi": "Ngày lễ",
+  "icon": "🎄",
+  "color": "#EF4444",
+  "gradient": "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "words": [
+    { "id": "christmas", "word": "Christmas", "pronunciation": "/ˈkrɪsməs/", "vietnamese": "Giáng sinh", "emoji": "🎄", "sentence": "Merry Christmas!", "sentenceVi": "Chúc mừng Giáng sinh!" },
+    { "id": "new-year", "word": "New Year", "pronunciation": "/njuː jɪr/", "vietnamese": "Năm mới", "emoji": "🎆", "sentence": "Happy New Year!", "sentenceVi": "Chúc mừng năm mới!" },
+    { "id": "tet", "word": "Tet", "pronunciation": "/tet/", "vietnamese": "Tết Nguyên Đán", "emoji": "🧧", "sentence": "Tet is the biggest holiday in Vietnam.", "sentenceVi": "Tết là ngày lễ lớn nhất Việt Nam." },
+    { "id": "birthday", "word": "Birthday", "pronunciation": "/ˈbɜːrθdeɪ/", "vietnamese": "Sinh nhật", "emoji": "🎂", "sentence": "Happy birthday to you!", "sentenceVi": "Chúc mừng sinh nhật!" },
+    { "id": "halloween", "word": "Halloween", "pronunciation": "/ˌhæloʊˈiːn/", "vietnamese": "Lễ hội ma", "emoji": "🎃", "sentence": "I wear a costume on Halloween.", "sentenceVi": "Tôi mặc trang phục vào lễ Halloween." },
+    { "id": "easter", "word": "Easter", "pronunciation": "/ˈiːstər/", "vietnamese": "Lễ Phục Sinh", "emoji": "🐣", "sentence": "We find Easter eggs.", "sentenceVi": "Chúng tôi tìm trứng Phục Sinh." },
+    { "id": "mid-autumn", "word": "Mid-Autumn Festival", "pronunciation": "/mɪd ˈɔːtəm/", "vietnamese": "Tết Trung Thu", "emoji": "🏮", "sentence": "Children love Mid-Autumn Festival.", "sentenceVi": "Trẻ em yêu thích Tết Trung Thu." },
+    { "id": "teachers-day", "word": "Teachers' Day", "pronunciation": "/ˈtiːtʃərz deɪ/", "vietnamese": "Ngày Nhà giáo", "emoji": "💐", "sentence": "We give flowers on Teachers' Day.", "sentenceVi": "Chúng tôi tặng hoa ngày Nhà giáo." },
+    { "id": "childrens-day", "word": "Children's Day", "pronunciation": "/ˈtʃɪldrənz deɪ/", "vietnamese": "Ngày Quốc tế Thiếu nhi", "emoji": "🎈", "sentence": "Children's Day is June 1st.", "sentenceVi": "Ngày Thiếu nhi là mùng 1 tháng 6." },
+    { "id": "valentine", "word": "Valentine's Day", "pronunciation": "/ˈvæləntaɪnz/", "vietnamese": "Ngày Tình nhân", "emoji": "💝", "sentence": "I give a card on Valentine's Day.", "sentenceVi": "Tôi tặng thiệp ngày Valentine." }
+  ]
+}

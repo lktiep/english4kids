@@ -1,0 +1,21 @@
+{
+  "topic": "shapes-2d",
+  "title": "2D Shapes",
+  "titleVi": "Hình 2D",
+  "icon": "🔷",
+  "color": "#3B82F6",
+  "gradient": "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+  "grade": "prek",
+  "difficulty": "easy",
+  "type": "math",
+  "exercises": [
+    { "id": "shape-1", "question": "What shape is this? 🔴", "questionVi": "Đây là hình gì?", "answer": "Circle", "options": ["Circle", "Square", "Triangle", "Star"], "hint": "It's round!" },
+    { "id": "shape-2", "question": "What shape is this? 🟥", "questionVi": "Đây là hình gì?", "answer": "Square", "options": ["Circle", "Square", "Triangle", "Rectangle"], "hint": "All 4 sides are equal" },
+    { "id": "shape-3", "question": "What shape is this? 🔺", "questionVi": "Đây là hình gì?", "answer": "Triangle", "options": ["Circle", "Square", "Triangle", "Diamond"], "hint": "It has 3 sides" },
+    { "id": "shape-4", "question": "How many sides does a triangle have?", "questionVi": "Tam giác có bao nhiêu cạnh?", "answer": 3, "options": [2, 3, 4, 5], "hint": "Tri = three" },
+    { "id": "shape-5", "question": "How many sides does a square have?", "questionVi": "Hình vuông có bao nhiêu cạnh?", "answer": 4, "options": [3, 4, 5, 6], "hint": "All sides are equal" },
+    { "id": "shape-6", "question": "What shape is this? ⬟", "questionVi": "Đây là hình gì?", "answer": "Pentagon", "options": ["Square", "Pentagon", "Hexagon", "Circle"], "hint": "It has 5 sides" },
+    { "id": "shape-7", "question": "A circle has ___ corners.", "questionVi": "Hình tròn có ___ góc.", "answer": 0, "options": [0, 1, 2, 4], "hint": "It's perfectly round" },
+    { "id": "shape-8", "question": "What shape has 4 sides but is NOT a square?", "questionVi": "Hình nào có 4 cạnh nhưng KHÔNG phải hình vuông?", "answer": "Rectangle", "options": ["Circle", "Triangle", "Rectangle", "Pentagon"], "hint": "Long sides and short sides" }
+  ]
+}

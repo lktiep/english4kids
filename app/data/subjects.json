@@ -1,0 +1,37 @@
+{
+  "subjects": [
+    {
+      "id": "english",
+      "name": "Tiếng Anh",
+      "nameEn": "English",
+      "icon": "🇬🇧",
+      "color": "#3B82F6",
+      "gradient": "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+      "status": "active",
+      "description": "Học từ vựng tiếng Anh qua flashcard và quiz",
+      "descriptionEn": "Learn English vocabulary through flashcards and quizzes"
+    },
+    {
+      "id": "math",
+      "name": "Toán học",
+      "nameEn": "Mathematics",
+      "icon": "🔢",
+      "color": "#10B981",
+      "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+      "status": "active",
+      "description": "Luyện toán từ đếm số đến phân số và phần trăm",
+      "descriptionEn": "Practice math from counting to fractions and percentages"
+    },
+    {
+      "id": "science",
+      "name": "Khoa học",
+      "nameEn": "Science",
+      "icon": "🔬",
+      "color": "#8B5CF6",
+      "gradient": "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
+      "status": "coming_soon",
+      "description": "Khám phá thế giới khoa học tự nhiên",
+      "descriptionEn": "Explore the world of natural science"
+    }
+  ]
+}

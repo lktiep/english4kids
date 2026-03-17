@@ -1,0 +1,22 @@
+{
+  "topic": "geography",
+  "title": "Geography",
+  "titleVi": "Địa lý",
+  "icon": "🗺️",
+  "color": "#0EA5E9",
+  "gradient": "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+  "grade": "grade4",
+  "difficulty": "medium",
+  "words": [
+    { "id": "continent", "word": "Continent", "pronunciation": "/ˈkɑːntɪnənt/", "vietnamese": "Châu lục", "emoji": "🌍", "sentence": "There are 7 continents.", "sentenceVi": "Có 7 châu lục." },
+    { "id": "country", "word": "Country", "pronunciation": "/ˈkʌntri/", "vietnamese": "Quốc gia", "emoji": "🏳️", "sentence": "Vietnam is my country.", "sentenceVi": "Việt Nam là đất nước tôi." },
+    { "id": "capital", "word": "Capital", "pronunciation": "/ˈkæpɪtl/", "vietnamese": "Thủ đô", "emoji": "🏛️", "sentence": "Hanoi is the capital of Vietnam.", "sentenceVi": "Hà Nội là thủ đô Việt Nam." },
+    { "id": "equator", "word": "Equator", "pronunciation": "/ɪˈkweɪtər/", "vietnamese": "Đường xích đạo", "emoji": "🌐", "sentence": "The equator is very hot.", "sentenceVi": "Đường xích đạo rất nóng." },
+    { "id": "north", "word": "North", "pronunciation": "/nɔːrθ/", "vietnamese": "Phía Bắc", "emoji": "⬆️", "sentence": "Go to the north.", "sentenceVi": "Đi về phía Bắc." },
+    { "id": "south", "word": "South", "pronunciation": "/saʊθ/", "vietnamese": "Phía Nam", "emoji": "⬇️", "sentence": "Ho Chi Minh City is in the south.", "sentenceVi": "TP Hồ Chí Minh ở phía Nam." },
+    { "id": "population", "word": "Population", "pronunciation": "/ˌpɑːpjuˈleɪʃn/", "vietnamese": "Dân số", "emoji": "👥", "sentence": "The population is growing.", "sentenceVi": "Dân số đang tăng." },
+    { "id": "border", "word": "Border", "pronunciation": "/ˈbɔːrdər/", "vietnamese": "Biên giới", "emoji": "🗺️", "sentence": "Cross the border.", "sentenceVi": "Đi qua biên giới." },
+    { "id": "globe", "word": "Globe", "pronunciation": "/ɡloʊb/", "vietnamese": "Quả địa cầu", "emoji": "🌏", "sentence": "Spin the globe.", "sentenceVi": "Xoay quả địa cầu." },
+    { "id": "compass", "word": "Compass", "pronunciation": "/ˈkʌmpəs/", "vietnamese": "La bàn", "emoji": "🧭", "sentence": "Use a compass to find north.", "sentenceVi": "Dùng la bàn tìm hướng bắc." }
+  ]
+}

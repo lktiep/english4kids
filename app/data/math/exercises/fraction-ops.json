@@ -1,0 +1,21 @@
+{
+  "topic": "fraction-ops",
+  "title": "Fraction Operations",
+  "titleVi": "Phép tính phân số",
+  "icon": "🥧",
+  "color": "#8B5CF6",
+  "gradient": "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "type": "math",
+  "exercises": [
+    { "id": "fo-1", "question": "1/3 + 1/3 = ?", "questionVi": "1/3 + 1/3 = ?", "answer": "2/3", "options": ["1/3", "2/3", "2/6", "1"], "hint": "Same denominators: add tops" },
+    { "id": "fo-2", "question": "1/2 + 1/3 = ?", "questionVi": "1/2 + 1/3 = ?", "answer": "5/6", "options": ["2/5", "3/5", "5/6", "2/6"], "hint": "LCD = 6: 3/6 + 2/6" },
+    { "id": "fo-3", "question": "3/4 - 1/4 = ?", "questionVi": "3/4 - 1/4 = ?", "answer": "1/2", "options": ["1/4", "2/4", "1/2", "3/4"], "hint": "3-1=2 → 2/4 = 1/2" },
+    { "id": "fo-4", "question": "2/3 × 3/4 = ?", "questionVi": "2/3 × 3/4 = ?", "answer": "1/2", "options": ["1/2", "5/7", "6/12", "2/4"], "hint": "Multiply: 6/12 = 1/2" },
+    { "id": "fo-5", "question": "1/2 ÷ 1/4 = ?", "questionVi": "1/2 ÷ 1/4 = ?", "answer": 2, "options": [1, 2, 4, 8], "hint": "Flip and multiply: 1/2 × 4/1" },
+    { "id": "fo-6", "question": "5/6 - 1/3 = ?", "questionVi": "5/6 - 1/3 = ?", "answer": "1/2", "options": ["1/3", "1/2", "2/3", "4/6"], "hint": "1/3 = 2/6 → 5/6 - 2/6 = 3/6" },
+    { "id": "fo-7", "question": "3 × 2/5 = ?", "questionVi": "3 × 2/5 = ?", "answer": "6/5", "options": ["5/6", "6/5", "6/15", "2/15"], "hint": "3 × 2 = 6, keep denominator" },
+    { "id": "fo-8", "question": "7/8 - 3/8 = ?", "questionVi": "7/8 - 3/8 = ?", "answer": "1/2", "options": ["1/4", "4/8", "1/2", "3/4"], "hint": "7-3=4 → 4/8 = 1/2" }
+  ]
+}

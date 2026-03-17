@@ -1,0 +1,22 @@
+{
+  "topic": "daily-routines",
+  "title": "Daily Routines",
+  "titleVi": "Sinh hoạt hàng ngày",
+  "icon": "🌅",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+  "grade": "grade2",
+  "difficulty": "easy",
+  "words": [
+    { "id": "wake-up", "word": "Wake up", "pronunciation": "/weɪk ʌp/", "vietnamese": "Thức dậy", "emoji": "⏰", "sentence": "I wake up at 6.", "sentenceVi": "Tôi thức dậy lúc 6 giờ." },
+    { "id": "brush-teeth", "word": "Brush teeth", "pronunciation": "/brʌʃ tiːθ/", "vietnamese": "Đánh răng", "emoji": "🪥", "sentence": "I brush my teeth.", "sentenceVi": "Tôi đánh răng." },
+    { "id": "eat-breakfast", "word": "Eat breakfast", "pronunciation": "/iːt ˈbrekfəst/", "vietnamese": "Ăn sáng", "emoji": "🥣", "sentence": "I eat breakfast at 7.", "sentenceVi": "Tôi ăn sáng lúc 7 giờ." },
+    { "id": "go-to-school", "word": "Go to school", "pronunciation": "/ɡoʊ tuː skuːl/", "vietnamese": "Đi học", "emoji": "🏫", "sentence": "I go to school by bus.", "sentenceVi": "Tôi đi học bằng xe buýt." },
+    { "id": "study", "word": "Study", "pronunciation": "/ˈstʌdi/", "vietnamese": "Học bài", "emoji": "📖", "sentence": "I study hard.", "sentenceVi": "Tôi học chăm chỉ." },
+    { "id": "eat-lunch", "word": "Eat lunch", "pronunciation": "/iːt lʌntʃ/", "vietnamese": "Ăn trưa", "emoji": "🍱", "sentence": "I eat lunch at noon.", "sentenceVi": "Tôi ăn trưa lúc trưa." },
+    { "id": "play", "word": "Play", "pronunciation": "/pleɪ/", "vietnamese": "Chơi", "emoji": "🎮", "sentence": "I play with friends.", "sentenceVi": "Tôi chơi với bạn bè." },
+    { "id": "do-homework", "word": "Do homework", "pronunciation": "/duː ˈhoʊmwɜːrk/", "vietnamese": "Làm bài tập", "emoji": "✏️", "sentence": "I do my homework.", "sentenceVi": "Tôi làm bài tập." },
+    { "id": "take-a-bath", "word": "Take a bath", "pronunciation": "/teɪk ə bæθ/", "vietnamese": "Tắm", "emoji": "🛁", "sentence": "I take a bath every day.", "sentenceVi": "Tôi tắm mỗi ngày." },
+    { "id": "go-to-bed", "word": "Go to bed", "pronunciation": "/ɡoʊ tuː bed/", "vietnamese": "Đi ngủ", "emoji": "🛏️", "sentence": "I go to bed at 9.", "sentenceVi": "Tôi đi ngủ lúc 9 giờ." }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "topic": "money-vn",
+  "title": "Vietnamese Money",
+  "titleVi": "Tiền Việt Nam",
+  "icon": "💰",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+  "grade": "grade2",
+  "difficulty": "medium",
+  "type": "math",
+  "exercises": [
+    { "id": "mon-1", "question": "1.000đ + 2.000đ = ?", "questionVi": "1.000đ + 2.000đ = ?", "answer": "3.000đ", "options": ["2.000đ", "3.000đ", "4.000đ", "5.000đ"], "hint": "1 plus 2" },
+    { "id": "mon-2", "question": "5.000đ + 5.000đ = ?", "questionVi": "5.000đ + 5.000đ = ?", "answer": "10.000đ", "options": ["5.000đ", "10.000đ", "15.000đ", "50.000đ"], "hint": "5 plus 5 = 10" },
+    { "id": "mon-3", "question": "Bạn có 10.000đ, mua kẹo 3.000đ. Còn lại?", "questionVi": "You have 10.000đ, buy candy for 3.000đ. Change?", "answer": "7.000đ", "options": ["5.000đ", "6.000đ", "7.000đ", "8.000đ"], "hint": "10 - 3 = ?" },
+    { "id": "mon-4", "question": "2 cái bút × 5.000đ/cái = ?", "questionVi": "2 pens × 5.000đ each = ?", "answer": "10.000đ", "options": ["5.000đ", "7.000đ", "10.000đ", "15.000đ"], "hint": "2 times 5" },
+    { "id": "mon-5", "question": "Which coin/note has the HIGHEST value?", "questionVi": "Tờ tiền nào có giá trị LỚN nhất?", "answer": "500.000đ", "options": ["10.000đ", "50.000đ", "200.000đ", "500.000đ"], "hint": "The biggest number" },
+    { "id": "mon-6", "question": "20.000đ - 8.000đ = ?", "questionVi": "20.000đ - 8.000đ = ?", "answer": "12.000đ", "options": ["10.000đ", "12.000đ", "14.000đ", "18.000đ"], "hint": "20 - 8 = 12" },
+    { "id": "mon-7", "question": "Bánh mì 15.000đ, nước 10.000đ. Tổng = ?", "questionVi": "Bread 15.000đ, water 10.000đ. Total = ?", "answer": "25.000đ", "options": ["20.000đ", "25.000đ", "30.000đ", "35.000đ"], "hint": "15 + 10" },
+    { "id": "mon-8", "question": "Bạn trả 50.000đ cho món 35.000đ. Tiền thối?", "questionVi": "You pay 50.000đ for 35.000đ item. Change?", "answer": "15.000đ", "options": ["10.000đ", "15.000đ", "20.000đ", "25.000đ"], "hint": "50 - 35 = ?" }
+  ]
+}

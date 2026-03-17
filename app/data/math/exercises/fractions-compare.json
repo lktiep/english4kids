@@ -1,0 +1,21 @@
+{
+  "topic": "fractions-compare",
+  "title": "Comparing Fractions",
+  "titleVi": "So sánh phân số",
+  "icon": "⚖️",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+  "grade": "grade4",
+  "difficulty": "hard",
+  "type": "math",
+  "exercises": [
+    { "id": "fc-1", "question": "Which is bigger: 1/2 or 1/3?", "questionVi": "Phân số nào lớn hơn?", "answer": "1/2", "options": ["1/2", "1/3"], "hint": "Bigger denominator = smaller piece" },
+    { "id": "fc-2", "question": "Which is bigger: 2/3 or 3/4?", "questionVi": "Phân số nào lớn hơn?", "answer": "3/4", "options": ["2/3", "3/4"], "hint": "Compare: 8/12 vs 9/12" },
+    { "id": "fc-3", "question": "1/2 + 1/4 = ?", "questionVi": "1/2 + 1/4 = ?", "answer": "3/4", "options": ["1/2", "2/4", "3/4", "1"], "hint": "1/2 = 2/4, so 2/4 + 1/4" },
+    { "id": "fc-4", "question": "3/5 __ 2/5 (>, <, or =)?", "questionVi": "3/5 __ 2/5?", "answer": ">", "options": [">", "<", "="], "hint": "Same denominator, compare top" },
+    { "id": "fc-5", "question": "Which equals 1/2?", "questionVi": "Phân số nào bằng 1/2?", "answer": "3/6", "options": ["2/3", "3/6", "2/5", "4/6"], "hint": "Simplify each option" },
+    { "id": "fc-6", "question": "Order these: 1/4, 1/2, 3/4", "questionVi": "Sắp xếp từ nhỏ đến lớn", "answer": "1/4, 1/2, 3/4", "options": ["1/4, 1/2, 3/4", "3/4, 1/2, 1/4", "1/2, 1/4, 3/4"], "hint": "Quarter, half, three-quarter" },
+    { "id": "fc-7", "question": "2/6 simplified = ?", "questionVi": "Rút gọn 2/6 = ?", "answer": "1/3", "options": ["1/2", "1/3", "2/3", "1/6"], "hint": "Divide both by 2" },
+    { "id": "fc-8", "question": "5/8 __ 5/10 (>, <, or =)?", "questionVi": "5/8 __ 5/10?", "answer": ">", "options": [">", "<", "="], "hint": "Same numerator — smaller denominator = bigger fraction" }
+  ]
+}

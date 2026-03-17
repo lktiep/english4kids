@@ -1,0 +1,22 @@
+{
+  "topic": "technology",
+  "title": "Technology",
+  "titleVi": "Công nghệ",
+  "icon": "💻",
+  "color": "#6366F1",
+  "gradient": "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+  "grade": "grade4",
+  "difficulty": "medium",
+  "words": [
+    { "id": "computer", "word": "Computer", "pronunciation": "/kəmˈpjuːtər/", "vietnamese": "Máy tính", "emoji": "💻", "sentence": "I use a computer.", "sentenceVi": "Tôi sử dụng máy tính." },
+    { "id": "internet", "word": "Internet", "pronunciation": "/ˈɪntərnet/", "vietnamese": "Internet", "emoji": "🌐", "sentence": "The internet connects the world.", "sentenceVi": "Internet kết nối thế giới." },
+    { "id": "robot", "word": "Robot", "pronunciation": "/ˈroʊbɑːt/", "vietnamese": "Rô-bốt", "emoji": "🤖", "sentence": "Robots can help people.", "sentenceVi": "Rô-bốt có thể giúp con người." },
+    { "id": "phone", "word": "Smartphone", "pronunciation": "/ˈsmɑːrtfoʊn/", "vietnamese": "Điện thoại thông minh", "emoji": "📱", "sentence": "Everyone has a smartphone.", "sentenceVi": "Ai cũng có điện thoại thông minh." },
+    { "id": "keyboard", "word": "Keyboard", "pronunciation": "/ˈkiːbɔːrd/", "vietnamese": "Bàn phím", "emoji": "⌨️", "sentence": "Type on the keyboard.", "sentenceVi": "Gõ trên bàn phím." },
+    { "id": "mouse", "word": "Mouse", "pronunciation": "/maʊs/", "vietnamese": "Chuột máy tính", "emoji": "🖱️", "sentence": "Click the mouse.", "sentenceVi": "Nhấn chuột." },
+    { "id": "printer", "word": "Printer", "pronunciation": "/ˈprɪntər/", "vietnamese": "Máy in", "emoji": "🖨️", "sentence": "Print the document.", "sentenceVi": "In tài liệu." },
+    { "id": "wifi", "word": "WiFi", "pronunciation": "/ˈwaɪfaɪ/", "vietnamese": "WiFi", "emoji": "📶", "sentence": "Connect to WiFi.", "sentenceVi": "Kết nối WiFi." },
+    { "id": "coding", "word": "Coding", "pronunciation": "/ˈkoʊdɪŋ/", "vietnamese": "Lập trình", "emoji": "👨‍💻", "sentence": "I learn coding.", "sentenceVi": "Tôi học lập trình." },
+    { "id": "app", "word": "App", "pronunciation": "/æp/", "vietnamese": "Ứng dụng", "emoji": "📲", "sentence": "Download the learning app.", "sentenceVi": "Tải ứng dụng học tập." }
+  ]
+}

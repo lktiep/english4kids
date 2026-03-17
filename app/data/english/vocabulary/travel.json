@@ -1,0 +1,22 @@
+{
+  "topic": "travel",
+  "title": "Travel",
+  "titleVi": "Du lịch",
+  "icon": "✈️",
+  "color": "#0EA5E9",
+  "gradient": "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "words": [
+    { "id": "airport", "word": "Airport", "pronunciation": "/ˈeərpɔːrt/", "vietnamese": "Sân bay", "emoji": "✈️", "sentence": "We go to the airport.", "sentenceVi": "Chúng tôi đến sân bay." },
+    { "id": "hotel", "word": "Hotel", "pronunciation": "/hoʊˈtel/", "vietnamese": "Khách sạn", "emoji": "🏨", "sentence": "We stay at a hotel.", "sentenceVi": "Chúng tôi ở khách sạn." },
+    { "id": "beach", "word": "Beach", "pronunciation": "/biːtʃ/", "vietnamese": "Bãi biển", "emoji": "🏖️", "sentence": "I love the beach.", "sentenceVi": "Tôi yêu bãi biển." },
+    { "id": "map", "word": "Map", "pronunciation": "/mæp/", "vietnamese": "Bản đồ", "emoji": "🗺️", "sentence": "Look at the map.", "sentenceVi": "Nhìn bản đồ." },
+    { "id": "ticket", "word": "Ticket", "pronunciation": "/ˈtɪkɪt/", "vietnamese": "Vé", "emoji": "🎫", "sentence": "I have a plane ticket.", "sentenceVi": "Tôi có vé máy bay." },
+    { "id": "passport", "word": "Passport", "pronunciation": "/ˈpæspɔːrt/", "vietnamese": "Hộ chiếu", "emoji": "🛂", "sentence": "Show your passport.", "sentenceVi": "Xuất trình hộ chiếu." },
+    { "id": "suitcase", "word": "Suitcase", "pronunciation": "/ˈsuːtkeɪs/", "vietnamese": "Va li", "emoji": "🧳", "sentence": "Pack your suitcase.", "sentenceVi": "Xếp va li." },
+    { "id": "souvenir", "word": "Souvenir", "pronunciation": "/ˌsuːvəˈnɪr/", "vietnamese": "Quà lưu niệm", "emoji": "🎁", "sentence": "I buy a souvenir.", "sentenceVi": "Tôi mua quà lưu niệm." },
+    { "id": "museum", "word": "Museum", "pronunciation": "/mjuˈziːəm/", "vietnamese": "Bảo tàng", "emoji": "🏛️", "sentence": "Let's visit the museum.", "sentenceVi": "Hãy đến thăm bảo tàng." },
+    { "id": "adventure", "word": "Adventure", "pronunciation": "/ədˈventʃər/", "vietnamese": "Phiêu lưu", "emoji": "🗻", "sentence": "Every trip is an adventure.", "sentenceVi": "Mỗi chuyến đi là một cuộc phiêu lưu." }
+  ]
+}

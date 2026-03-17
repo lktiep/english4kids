@@ -1,0 +1,22 @@
+{
+  "topic": "nature",
+  "title": "Nature",
+  "titleVi": "Thiên nhiên",
+  "icon": "🌿",
+  "color": "#10B981",
+  "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "words": [
+    { "id": "mountain", "word": "Mountain", "pronunciation": "/ˈmaʊntən/", "vietnamese": "Núi", "emoji": "🏔️", "sentence": "The mountain is very high.", "sentenceVi": "Ngọn núi rất cao." },
+    { "id": "river", "word": "River", "pronunciation": "/ˈrɪvər/", "vietnamese": "Sông", "emoji": "🏞️", "sentence": "The river flows to the sea.", "sentenceVi": "Sông chảy ra biển." },
+    { "id": "forest", "word": "Forest", "pronunciation": "/ˈfɔːrɪst/", "vietnamese": "Rừng", "emoji": "🌲", "sentence": "Animals live in the forest.", "sentenceVi": "Động vật sống trong rừng." },
+    { "id": "ocean", "word": "Ocean", "pronunciation": "/ˈoʊʃn/", "vietnamese": "Đại dương", "emoji": "🌊", "sentence": "The ocean is deep and blue.", "sentenceVi": "Đại dương sâu và xanh." },
+    { "id": "lake", "word": "Lake", "pronunciation": "/leɪk/", "vietnamese": "Hồ", "emoji": "🏞️", "sentence": "We swim in the lake.", "sentenceVi": "Chúng tôi bơi ở hồ." },
+    { "id": "desert", "word": "Desert", "pronunciation": "/ˈdezərt/", "vietnamese": "Sa mạc", "emoji": "🏜️", "sentence": "The desert is very hot.", "sentenceVi": "Sa mạc rất nóng." },
+    { "id": "island", "word": "Island", "pronunciation": "/ˈaɪlənd/", "vietnamese": "Đảo", "emoji": "🏝️", "sentence": "There is a small island.", "sentenceVi": "Có một hòn đảo nhỏ." },
+    { "id": "waterfall", "word": "Waterfall", "pronunciation": "/ˈwɔːtərfɔːl/", "vietnamese": "Thác nước", "emoji": "💧", "sentence": "The waterfall is beautiful.", "sentenceVi": "Thác nước rất đẹp." },
+    { "id": "rainbow", "word": "Rainbow", "pronunciation": "/ˈreɪnboʊ/", "vietnamese": "Cầu vồng", "emoji": "🌈", "sentence": "I see a rainbow!", "sentenceVi": "Tôi thấy cầu vồng!" },
+    { "id": "volcano", "word": "Volcano", "pronunciation": "/vɑːlˈkeɪnoʊ/", "vietnamese": "Núi lửa", "emoji": "🌋", "sentence": "The volcano erupted.", "sentenceVi": "Núi lửa phun trào." }
+  ]
+}

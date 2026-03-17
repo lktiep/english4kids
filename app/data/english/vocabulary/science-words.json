@@ -1,0 +1,22 @@
+{
+  "topic": "science-words",
+  "title": "Science Words",
+  "titleVi": "Khoa học",
+  "icon": "🔬",
+  "color": "#8B5CF6",
+  "gradient": "linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)",
+  "grade": "grade5",
+  "difficulty": "hard",
+  "words": [
+    { "id": "experiment", "word": "Experiment", "pronunciation": "/ɪkˈsperɪmənt/", "vietnamese": "Thí nghiệm", "emoji": "🧪", "sentence": "Do a science experiment.", "sentenceVi": "Làm thí nghiệm khoa học." },
+    { "id": "hypothesis", "word": "Hypothesis", "pronunciation": "/haɪˈpɑːθəsɪs/", "vietnamese": "Giả thuyết", "emoji": "💭", "sentence": "Test the hypothesis.", "sentenceVi": "Kiểm tra giả thuyết." },
+    { "id": "molecule", "word": "Molecule", "pronunciation": "/ˈmɑːlɪkjuːl/", "vietnamese": "Phân tử", "emoji": "⚛️", "sentence": "Water is a molecule.", "sentenceVi": "Nước là một phân tử." },
+    { "id": "gravity", "word": "Gravity", "pronunciation": "/ˈɡrævɪti/", "vietnamese": "Trọng lực", "emoji": "🍎", "sentence": "Gravity pulls things down.", "sentenceVi": "Trọng lực kéo vật xuống." },
+    { "id": "electricity", "word": "Electricity", "pronunciation": "/ɪˌlekˈtrɪsɪti/", "vietnamese": "Điện", "emoji": "⚡", "sentence": "Electricity powers our homes.", "sentenceVi": "Điện cung cấp năng lượng cho nhà." },
+    { "id": "photosynthesis", "word": "Photosynthesis", "pronunciation": "/ˌfoʊtoʊˈsɪnθəsɪs/", "vietnamese": "Quang hợp", "emoji": "🌱", "sentence": "Plants use photosynthesis.", "sentenceVi": "Cây dùng quang hợp." },
+    { "id": "microscope", "word": "Microscope", "pronunciation": "/ˈmaɪkrəskoʊp/", "vietnamese": "Kính hiển vi", "emoji": "🔬", "sentence": "Look through the microscope.", "sentenceVi": "Nhìn qua kính hiển vi." },
+    { "id": "ecosystem", "word": "Ecosystem", "pronunciation": "/ˈiːkoʊsɪstəm/", "vietnamese": "Hệ sinh thái", "emoji": "🌳", "sentence": "Protect the ecosystem.", "sentenceVi": "Bảo vệ hệ sinh thái." },
+    { "id": "evolution", "word": "Evolution", "pronunciation": "/ˌevəˈluːʃn/", "vietnamese": "Tiến hóa", "emoji": "🧬", "sentence": "Evolution takes millions of years.", "sentenceVi": "Tiến hóa mất hàng triệu năm." },
+    { "id": "telescope", "word": "Telescope", "pronunciation": "/ˈtelɪskoʊp/", "vietnamese": "Kính viễn vọng", "emoji": "🔭", "sentence": "Use a telescope to see stars.", "sentenceVi": "Dùng kính viễn vọng xem sao." }
+  ]
+}

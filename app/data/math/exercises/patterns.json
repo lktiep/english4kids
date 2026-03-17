@@ -1,0 +1,21 @@
+{
+  "topic": "patterns",
+  "title": "Patterns",
+  "titleVi": "Quy luật",
+  "icon": "🔄",
+  "color": "#EC4899",
+  "gradient": "linear-gradient(135deg, #EC4899 0%, #DB2777 100%)",
+  "grade": "prek",
+  "difficulty": "easy",
+  "type": "math",
+  "exercises": [
+    { "id": "pat-1", "question": "🔴🔵🔴🔵🔴 — What comes next?", "questionVi": "Tiếp theo là gì?", "answer": "🔵", "options": ["🔴", "🔵", "🟢", "🟡"], "hint": "Red, blue, red, blue..." },
+    { "id": "pat-2", "question": "⭐🌙⭐🌙⭐ — What comes next?", "questionVi": "Tiếp theo là gì?", "answer": "🌙", "options": ["⭐", "🌙", "☀️", "🌈"], "hint": "Star, moon, star, moon..." },
+    { "id": "pat-3", "question": "🍎🍎🍌🍎🍎 — What comes next?", "questionVi": "Tiếp theo là gì?", "answer": "🍌", "options": ["🍎", "🍌", "🍊", "🍇"], "hint": "Apple, apple, banana..." },
+    { "id": "pat-4", "question": "1, 2, 3, 4, — What comes next?", "questionVi": "Số tiếp theo là?", "answer": 5, "options": [4, 5, 6, 7], "hint": "Count up by one" },
+    { "id": "pat-5", "question": "2, 4, 6, 8, — What comes next?", "questionVi": "Số tiếp theo là?", "answer": 10, "options": [9, 10, 11, 12], "hint": "Count by twos" },
+    { "id": "pat-6", "question": "🟢🟡🔴🟢🟡 — What comes next?", "questionVi": "Tiếp theo là gì?", "answer": "🔴", "options": ["🟢", "🟡", "🔴", "🔵"], "hint": "Green, yellow, red, green, yellow..." },
+    { "id": "pat-7", "question": "▲●▲●▲ — What comes next?", "questionVi": "Tiếp theo là gì?", "answer": "●", "options": ["▲", "●", "■", "◆"], "hint": "Triangle, circle, triangle, circle..." },
+    { "id": "pat-8", "question": "5, 10, 15, 20, — What comes next?", "questionVi": "Số tiếp theo là?", "answer": 25, "options": [22, 24, 25, 30], "hint": "Count by fives" }
+  ]
+}

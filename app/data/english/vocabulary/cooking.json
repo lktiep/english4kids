@@ -1,0 +1,22 @@
+{
+  "topic": "cooking",
+  "title": "Cooking",
+  "titleVi": "Nấu ăn",
+  "icon": "👨‍🍳",
+  "color": "#F59E0B",
+  "gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+  "grade": "grade3",
+  "difficulty": "medium",
+  "words": [
+    { "id": "cook", "word": "Cook", "pronunciation": "/kʊk/", "vietnamese": "Nấu ăn", "emoji": "👩‍🍳", "sentence": "I cook with my mom.", "sentenceVi": "Tôi nấu ăn với mẹ." },
+    { "id": "boil", "word": "Boil", "pronunciation": "/bɔɪl/", "vietnamese": "Đun sôi", "emoji": "♨️", "sentence": "Boil the water first.", "sentenceVi": "Đun sôi nước trước." },
+    { "id": "fry", "word": "Fry", "pronunciation": "/fraɪ/", "vietnamese": "Chiên/Rán", "emoji": "🍳", "sentence": "Fry the egg in the pan.", "sentenceVi": "Chiên trứng trên chảo." },
+    { "id": "mix", "word": "Mix", "pronunciation": "/mɪks/", "vietnamese": "Trộn", "emoji": "🥄", "sentence": "Mix the flour and eggs.", "sentenceVi": "Trộn bột và trứng." },
+    { "id": "cut", "word": "Cut", "pronunciation": "/kʌt/", "vietnamese": "Cắt", "emoji": "🔪", "sentence": "Cut the vegetables.", "sentenceVi": "Cắt rau củ." },
+    { "id": "bake", "word": "Bake", "pronunciation": "/beɪk/", "vietnamese": "Nướng (lò)", "emoji": "🧁", "sentence": "Let's bake a cake.", "sentenceVi": "Chúng ta nướng bánh nhé." },
+    { "id": "taste", "word": "Taste", "pronunciation": "/teɪst/", "vietnamese": "Nếm", "emoji": "👅", "sentence": "Taste the soup.", "sentenceVi": "Nếm thử canh." },
+    { "id": "recipe", "word": "Recipe", "pronunciation": "/ˈresɪpi/", "vietnamese": "Công thức", "emoji": "📋", "sentence": "Follow the recipe.", "sentenceVi": "Làm theo công thức." },
+    { "id": "ingredient", "word": "Ingredient", "pronunciation": "/ɪnˈɡriːdiənt/", "vietnamese": "Nguyên liệu", "emoji": "🧈", "sentence": "We need fresh ingredients.", "sentenceVi": "Chúng ta cần nguyên liệu tươi." },
+    { "id": "delicious", "word": "Delicious", "pronunciation": "/dɪˈlɪʃəs/", "vietnamese": "Ngon", "emoji": "😋", "sentence": "The food is delicious!", "sentenceVi": "Đồ ăn rất ngon!" }
+  ]
+}

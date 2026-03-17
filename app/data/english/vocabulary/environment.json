@@ -1,0 +1,22 @@
+{
+  "topic": "environment",
+  "title": "Environment",
+  "titleVi": "Môi trường",
+  "icon": "🌍",
+  "color": "#10B981",
+  "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+  "grade": "grade4",
+  "difficulty": "medium",
+  "words": [
+    { "id": "recycle", "word": "Recycle", "pronunciation": "/riːˈsaɪkl/", "vietnamese": "Tái chế", "emoji": "♻️", "sentence": "We should recycle paper.", "sentenceVi": "Chúng ta nên tái chế giấy." },
+    { "id": "pollution", "word": "Pollution", "pronunciation": "/pəˈluːʃn/", "vietnamese": "Ô nhiễm", "emoji": "🏭", "sentence": "Pollution is bad for health.", "sentenceVi": "Ô nhiễm xấu cho sức khỏe." },
+    { "id": "energy", "word": "Energy", "pronunciation": "/ˈenərdʒi/", "vietnamese": "Năng lượng", "emoji": "⚡", "sentence": "Save energy at home.", "sentenceVi": "Tiết kiệm năng lượng ở nhà." },
+    { "id": "solar", "word": "Solar", "pronunciation": "/ˈsoʊlər/", "vietnamese": "Năng lượng mặt trời", "emoji": "☀️", "sentence": "Solar energy is clean.", "sentenceVi": "Năng lượng mặt trời rất sạch." },
+    { "id": "plant-tree", "word": "Plant a tree", "pronunciation": "/plænt ə triː/", "vietnamese": "Trồng cây", "emoji": "🌳", "sentence": "Let's plant a tree.", "sentenceVi": "Chúng ta trồng cây nào." },
+    { "id": "endangered", "word": "Endangered", "pronunciation": "/ɪnˈdeɪndʒərd/", "vietnamese": "Có nguy cơ tuyệt chủng", "emoji": "🐼", "sentence": "Pandas are endangered animals.", "sentenceVi": "Gấu trúc là động vật có nguy cơ tuyệt chủng." },
+    { "id": "climate", "word": "Climate", "pronunciation": "/ˈklaɪmət/", "vietnamese": "Khí hậu", "emoji": "🌡️", "sentence": "The climate is changing.", "sentenceVi": "Khí hậu đang thay đổi." },
+    { "id": "ocean-plastic", "word": "Plastic", "pronunciation": "/ˈplæstɪk/", "vietnamese": "Nhựa", "emoji": "🥤", "sentence": "Reduce plastic waste.", "sentenceVi": "Giảm rác nhựa." },
+    { "id": "nature-reserve", "word": "Nature Reserve", "pronunciation": "/ˈneɪtʃər rɪˈzɜːrv/", "vietnamese": "Khu bảo tồn", "emoji": "🦁", "sentence": "Visit the nature reserve.", "sentenceVi": "Tham quan khu bảo tồn." },
+    { "id": "global-warming", "word": "Global Warming", "pronunciation": "/ˈɡloʊbl ˈwɔːrmɪŋ/", "vietnamese": "Nóng lên toàn cầu", "emoji": "🌡️", "sentence": "Global warming is a big problem.", "sentenceVi": "Nóng lên toàn cầu là vấn đề lớn." }
+  ]
+}

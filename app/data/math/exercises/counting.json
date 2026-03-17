@@ -1,0 +1,23 @@
+{
+  "topic": "counting",
+  "title": "Counting",
+  "titleVi": "Đếm số",
+  "icon": "🔢",
+  "color": "#10B981",
+  "gradient": "linear-gradient(135deg, #10B981 0%, #059669 100%)",
+  "grade": "prek",
+  "difficulty": "easy",
+  "type": "math",
+  "exercises": [
+    { "id": "count-1", "question": "How many apples? 🍎🍎🍎", "questionVi": "Có bao nhiêu quả táo?", "answer": 3, "options": [1, 2, 3, 4], "hint": "Count each apple one by one" },
+    { "id": "count-2", "question": "How many stars? ⭐⭐⭐⭐⭐", "questionVi": "Có bao nhiêu ngôi sao?", "answer": 5, "options": [3, 4, 5, 6], "hint": "Count each star" },
+    { "id": "count-3", "question": "How many flowers? 🌸🌸", "questionVi": "Có bao nhiêu bông hoa?", "answer": 2, "options": [1, 2, 3, 4], "hint": "Count the flowers" },
+    { "id": "count-4", "question": "How many cats? 🐱🐱🐱🐱", "questionVi": "Có bao nhiêu con mèo?", "answer": 4, "options": [2, 3, 4, 5], "hint": "Count the cats" },
+    { "id": "count-5", "question": "How many bananas? 🍌", "questionVi": "Có bao nhiêu quả chuối?", "answer": 1, "options": [0, 1, 2, 3], "hint": "Count the bananas" },
+    { "id": "count-6", "question": "How many fish? 🐟🐟🐟🐟🐟🐟", "questionVi": "Có bao nhiêu con cá?", "answer": 6, "options": [4, 5, 6, 7], "hint": "Count each fish" },
+    { "id": "count-7", "question": "How many hearts? ❤️❤️❤️❤️❤️❤️❤️", "questionVi": "Có bao nhiêu trái tim?", "answer": 7, "options": [5, 6, 7, 8], "hint": "Count each heart" },
+    { "id": "count-8", "question": "How many butterflies? 🦋🦋🦋🦋🦋🦋🦋🦋", "questionVi": "Có bao nhiêu con bướm?", "answer": 8, "options": [6, 7, 8, 9], "hint": "Count the butterflies" },
+    { "id": "count-9", "question": "How many birds? 🐦🐦🐦🐦🐦🐦🐦🐦🐦", "questionVi": "Có bao nhiêu con chim?", "answer": 9, "options": [7, 8, 9, 10], "hint": "Count the birds" },
+    { "id": "count-10", "question": "How many 🌟? 🌟🌟🌟🌟🌟🌟🌟🌟🌟🌟", "questionVi": "Có bao nhiêu ngôi sao?", "answer": 10, "options": [8, 9, 10, 11], "hint": "Count to ten" }
+  ]
+}

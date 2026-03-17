@@ -1,0 +1,21 @@
+{
+  "topic": "area-perimeter",
+  "title": "Area & Perimeter",
+  "titleVi": "Diện tích & Chu vi",
+  "icon": "📏",
+  "color": "#EF4444",
+  "gradient": "linear-gradient(135deg, #EF4444 0%, #DC2626 100%)",
+  "grade": "grade4",
+  "difficulty": "hard",
+  "type": "math",
+  "exercises": [
+    { "id": "ap-1", "question": "Perimeter of a square with side 5cm?", "questionVi": "Chu vi hình vuông cạnh 5cm?", "answer": "20cm", "options": ["10cm", "15cm", "20cm", "25cm"], "hint": "4 × 5" },
+    { "id": "ap-2", "question": "Area of a square with side 4cm?", "questionVi": "Diện tích hình vuông cạnh 4cm?", "answer": "16cm²", "options": ["8cm²", "12cm²", "16cm²", "20cm²"], "hint": "4 × 4" },
+    { "id": "ap-3", "question": "Perimeter of rectangle 6cm × 3cm?", "questionVi": "Chu vi HCN 6cm × 3cm?", "answer": "18cm", "options": [" 9cm", "12cm", "18cm", "24cm"], "hint": "2 × (6+3)" },
+    { "id": "ap-4", "question": "Area of rectangle 8cm × 5cm?", "questionVi": "Diện tích HCN 8cm × 5cm?", "answer": "40cm²", "options": ["26cm²", "35cm²", "40cm²", "45cm²"], "hint": "8 × 5" },
+    { "id": "ap-5", "question": "A triangle has base 6cm and height 4cm. Area = ?", "questionVi": "Tam giác đáy 6cm, cao 4cm. S = ?", "answer": "12cm²", "options": ["10cm²", "12cm²", "20cm²", "24cm²"], "hint": "(base × height) ÷ 2" },
+    { "id": "ap-6", "question": "Perimeter of a triangle: 3cm, 4cm, 5cm?", "questionVi": "Chu vi tam giác: 3, 4, 5cm?", "answer": "12cm", "options": ["9cm", "10cm", "12cm", "15cm"], "hint": "Add all sides" },
+    { "id": "ap-7", "question": "A room is 5m × 4m. How many m² of carpet?", "questionVi": "Phòng 5m × 4m. Cần bao nhiêu m² thảm?", "answer": "20m²", "options": ["9m²", "18m²", "20m²", "25m²"], "hint": "Length × width" },
+    { "id": "ap-8", "question": "Which has more area: 3×8 or 5×5?", "questionVi": "Hình nào có diện tích lớn hơn?", "answer": "5×5", "options": ["3×8", "5×5"], "hint": "24 vs 25" }
+  ]
+}

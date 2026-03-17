@@ -1,0 +1,22 @@
+{
+  "topic": "time",
+  "title": "Time & Days",
+  "titleVi": "Thời gian",
+  "icon": "🕐",
+  "color": "#6366F1",
+  "gradient": "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+  "grade": "grade2",
+  "difficulty": "easy",
+  "words": [
+    { "id": "morning", "word": "Morning", "pronunciation": "/ˈmɔːrnɪŋ/", "vietnamese": "Buổi sáng", "emoji": "🌅", "sentence": "Good morning!", "sentenceVi": "Chào buổi sáng!" },
+    { "id": "afternoon", "word": "Afternoon", "pronunciation": "/ˌæftərˈnuːn/", "vietnamese": "Buổi chiều", "emoji": "☀️", "sentence": "I play in the afternoon.", "sentenceVi": "Tôi chơi vào buổi chiều." },
+    { "id": "evening", "word": "Evening", "pronunciation": "/ˈiːvnɪŋ/", "vietnamese": "Buổi tối", "emoji": "🌆", "sentence": "Good evening!", "sentenceVi": "Chào buổi tối!" },
+    { "id": "night", "word": "Night", "pronunciation": "/naɪt/", "vietnamese": "Ban đêm", "emoji": "🌙", "sentence": "Good night!", "sentenceVi": "Chúc ngủ ngon!" },
+    { "id": "monday", "word": "Monday", "pronunciation": "/ˈmʌndeɪ/", "vietnamese": "Thứ Hai", "emoji": "📅", "sentence": "Today is Monday.", "sentenceVi": "Hôm nay là thứ Hai." },
+    { "id": "friday", "word": "Friday", "pronunciation": "/ˈfraɪdeɪ/", "vietnamese": "Thứ Sáu", "emoji": "🎉", "sentence": "Friday is fun!", "sentenceVi": "Thứ Sáu vui lắm!" },
+    { "id": "weekend", "word": "Weekend", "pronunciation": "/ˈwiːkend/", "vietnamese": "Cuối tuần", "emoji": "🎊", "sentence": "I rest on the weekend.", "sentenceVi": "Tôi nghỉ ngơi cuối tuần." },
+    { "id": "today", "word": "Today", "pronunciation": "/təˈdeɪ/", "vietnamese": "Hôm nay", "emoji": "📆", "sentence": "Today is a good day.", "sentenceVi": "Hôm nay là một ngày tốt lành." },
+    { "id": "tomorrow", "word": "Tomorrow", "pronunciation": "/təˈmɒroʊ/", "vietnamese": "Ngày mai", "emoji": "➡️", "sentence": "See you tomorrow!", "sentenceVi": "Hẹn gặp lại ngày mai!" },
+    { "id": "yesterday", "word": "Yesterday", "pronunciation": "/ˈjestərdeɪ/", "vietnamese": "Hôm qua", "emoji": "⬅️", "sentence": "I was happy yesterday.", "sentenceVi": "Hôm qua tôi vui lắm." }
+  ]
+}
