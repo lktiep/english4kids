@@ -2,6 +2,7 @@ import SwiftUI
 
 // MARK: - Gesture Quiz View
 /// Quiz with camera-based hand gesture selection
+/// Shows English word (big text + TTS) → pick correct image with gestures
 /// 1-4 fingers = preview option, fist = confirm, 5 fingers = next question
 struct GestureQuizView: View {
     let topic: TopicDetail
@@ -60,93 +61,138 @@ struct GestureQuizView: View {
     // MARK: - Quiz Content
     private var quizContent: some View {
         let q = questions[currentIndex]
-        return VStack(spacing: 0) {
-            // Camera preview
-            CameraGestureOverlay(gestureService: gestureService, compact: true)
-                .padding(.horizontal, 16)
-                .padding(.top, 8)
-
-            // Question
-            VStack(spacing: 12) {
-                WordImageView(word: q.word, size: 80)
-
-                Text("Đâu là \"\(q.word.word)\"?")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(Theme.textSecondary)
-
-                if streak > 0 {
-                    Text("🔥 Streak \(streak)")
-                        .font(.system(size: 13, weight: .bold, design: .rounded))
-                        .foregroundColor(.orange)
-                }
-            }
-            .padding(.top, 12)
-
-            Spacer()
-
-            // Wrong feedback
-            if wrongFeedback {
-                Text("❌ Sai rồi! Thử lại (\(maxAttempts - attempts) lần)")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(Theme.danger)
-                    .padding(.vertical, 6)
-            }
-
-            // Options (2x2 grid)
-            LazyVGrid(columns: [
-                GridItem(.flexible(), spacing: 10),
-                GridItem(.flexible(), spacing: 10)
-            ], spacing: 10) {
-                ForEach(Array(q.options.enumerated()), id: \.element.id) { index, option in
-                    GestureOptionButton(
-                        word: option,
-                        number: index + 1,
-                        isPreviewed: previewedAnswer == option.id,
-                        isSelected: selectedAnswer == option.id,
-                        isCorrectAnswer: option.id == q.word.id,
-                        isRevealed: selectedAnswer != nil,
-                        isCorrectSelection: isCorrect
-                    ) {
-                        handleTapSelect(option)
-                    }
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 8)
-
-            // Result feedback / Next button
-            if selectedAnswer != nil {
-                VStack(spacing: 10) {
-                    if isCorrect == true {
-                        Text("✅ Đúng rồi! +10 XP")
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(Theme.success)
-                    } else {
-                        Text("❌ Đáp án: \(q.word.word) = \(q.word.vietnamese)")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(Theme.danger)
-                    }
-
-                    Button(action: goNext) {
-                        HStack {
-                            Text(currentIndex < questions.count - 1 ? "Câu tiếp ▶️" : "Xem kết quả 📊")
-                            Text("(👍)")
-                                .foregroundColor(Theme.textMuted)
-                        }
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 44)
-                        .background(Theme.accentGradient)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
+        return ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                // Camera preview — BIGGER, takes more vertical space
+                CameraGestureOverlay(gestureService: gestureService, compact: false)
+                    .frame(height: 200)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
                     .padding(.horizontal, 16)
-                }
-                .padding(.bottom, 16)
-                .transition(.move(edge: .bottom).combined(with: .opacity))
-            }
+                    .padding(.top, 8)
 
-            Spacer(minLength: 0)
+                // English word — BIG text + TTS (same pattern as regular quiz)
+                VStack(spacing: 8) {
+                    Text(q.word.en)
+                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+
+                    Text(q.word.vi)
+                        .font(.system(size: 14))
+                        .foregroundColor(.white.opacity(0.4))
+
+                    HStack(spacing: 16) {
+                        Text("Chọn hình đúng 👇")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(Theme.accent)
+
+                        // Listen again button
+                        Button {
+                            speakCurrentWord()
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "speaker.wave.2.fill")
+                                Text("Nghe")
+                            }
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(Theme.accent)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule().fill(Theme.accent.opacity(0.15))
+                            )
+                        }
+                    }
+
+                    if streak > 0 {
+                        Text("🔥 Streak \(streak)")
+                            .font(.system(size: 13, weight: .bold, design: .rounded))
+                            .foregroundColor(.orange)
+                    }
+                }
+                .padding(.top, 12)
+
+                // Wrong feedback
+                if wrongFeedback {
+                    Text("❌ Sai rồi! Thử lại (\(maxAttempts - attempts) lần)")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(Theme.danger)
+                        .padding(.vertical, 6)
+                } else {
+                    Spacer().frame(height: 12)
+                }
+
+                // Options: 2×2 IMAGE grid (no word text — kid picks by image)
+                LazyVGrid(columns: [
+                    GridItem(.flexible(), spacing: 10),
+                    GridItem(.flexible(), spacing: 10)
+                ], spacing: 10) {
+                    ForEach(Array(q.options.enumerated()), id: \.element.id) { index, option in
+                        GestureImageOptionButton(
+                            word: option,
+                            number: index + 1,
+                            isPreviewed: previewedAnswer == option.id,
+                            isSelected: selectedAnswer == option.id,
+                            isCorrectAnswer: option.id == q.word.id,
+                            isRevealed: selectedAnswer != nil
+                        ) {
+                            handleTapSelect(option)
+                        }
+                    }
+                }
+                .padding(.horizontal, 16)
+
+                // Result feedback / Next button
+                if selectedAnswer != nil {
+                    VStack(spacing: 10) {
+                        if isCorrect == true {
+                            Text("✅ Đúng rồi! +10 XP")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(Theme.success)
+                        } else {
+                            Text("❌ Đáp án: \(q.word.en) = \(q.word.vi)")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(Theme.danger)
+                        }
+
+                        Button(action: goNext) {
+                            HStack {
+                                Text(currentIndex < questions.count - 1 ? "Câu tiếp ▶️" : "Xem kết quả 📊")
+                                Text("(👍)")
+                                    .foregroundColor(Theme.textMuted)
+                            }
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 44)
+                            .background(Theme.accentGradient)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        .padding(.horizontal, 16)
+                    }
+                    .padding(.top, 10)
+                    .padding(.bottom, 16)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                }
+
+                Spacer(minLength: 16)
+            }
+        }
+        .onChange(of: currentIndex) { newIndex in
+            // Auto-speak the NEW word
+            guard newIndex < questions.count else { return }
+            let newWord = questions[newIndex].word.en
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                SpeechService.shared.speak(newWord)
+            }
+        }
+        .onAppear {
+            // Speak first word
+            guard !questions.isEmpty else { return }
+            let firstWord = questions[0].word.en
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                SpeechService.shared.speak(firstWord)
+            }
         }
     }
 
@@ -162,7 +208,6 @@ struct GestureQuizView: View {
                     .font(.system(size: 32, weight: .bold, design: .rounded))
                     .foregroundColor(Theme.textPrimary)
 
-                // Score Ring
                 ZStack {
                     Circle().stroke(Theme.bgGlass, lineWidth: 8)
                     Circle()
@@ -201,6 +246,12 @@ struct GestureQuizView: View {
         }
     }
 
+    // MARK: - Helpers
+    private func speakCurrentWord() {
+        guard currentIndex < questions.count else { return }
+        SpeechService.shared.speak(questions[currentIndex].word.en)
+    }
+
     // MARK: - Gesture Handling
     private func handleGesture(_ fingerCount: Int) {
         guard !questions.isEmpty, !completed else { return }
@@ -234,7 +285,6 @@ struct GestureQuizView: View {
 
     private func handleTapSelect(_ option: Word) {
         guard selectedAnswer == nil, !wrongFeedback else { return }
-        // In gesture mode, tap previews (fist confirms)
         withAnimation(.spring(response: 0.2)) {
             previewedAnswer = option.id
         }
@@ -254,6 +304,10 @@ struct GestureQuizView: View {
             streak += 1
             score += 1
             UINotificationFeedbackGenerator().notificationOccurred(.success)
+            // Voice feedback
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                SpeechService.shared.speak("Correct! \(q.word.en)", rate: 0.5)
+            }
         } else {
             let newAttempts = attempts + 1
             attempts = newAttempts
@@ -263,7 +317,6 @@ struct GestureQuizView: View {
                 isCorrect = false
                 streak = 0
             } else {
-                // Allow retry
                 wrongFeedback = true
                 selectedAnswer = nil
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -301,22 +354,21 @@ struct GestureQuizView: View {
     }
 }
 
-// MARK: - Gesture Option Button
-struct GestureOptionButton: View {
+// MARK: - Gesture Image Option Button (image-focused, no word text)
+struct GestureImageOptionButton: View {
     let word: Word
     let number: Int
     let isPreviewed: Bool
     let isSelected: Bool
     let isCorrectAnswer: Bool
     let isRevealed: Bool
-    let isCorrectSelection: Bool?
     let action: () -> Void
 
     private var bgColor: Color {
         if !isRevealed && !isPreviewed { return Theme.bgCard }
         if isPreviewed { return Theme.accent.opacity(0.15) }
-        if isCorrectAnswer { return Color(hex: "00E676").opacity(0.15) }
-        if isSelected { return Theme.danger.opacity(0.15) }
+        if isCorrectAnswer { return Color(hex: "00E676").opacity(0.2) }
+        if isSelected { return Theme.danger.opacity(0.2) }
         return Theme.bgCard
     }
 
@@ -333,40 +385,45 @@ struct GestureOptionButton: View {
             VStack(spacing: 6) {
                 // Number badge
                 Text("\(number)")
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
                     .foregroundColor(isPreviewed ? .white : Theme.textMuted)
-                    .frame(width: 24, height: 24)
+                    .frame(width: 22, height: 22)
                     .background(isPreviewed ? Theme.accent : Theme.bgGlass)
                     .clipShape(Circle())
 
-                // Word image
-                WordImageView(word: word, size: 40)
+                // Image — LARGE, the main thing kid sees
+                WordImageView(word: word, size: 70)
 
-                // Word text
-                Text(word.vietnamese)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(Theme.textPrimary)
-                    .lineLimit(1)
+                // Show English word ONLY after reveal (to learn)
+                if isRevealed {
+                    Text(word.en)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(isCorrectAnswer ? Theme.success : .white.opacity(0.5))
+                        .lineLimit(1)
+                        .transition(.opacity)
+                }
 
                 // Result indicator
                 if isRevealed {
                     if isCorrectAnswer {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(Theme.success)
+                            .font(.system(size: 18))
                     } else if isSelected {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(Theme.danger)
+                            .font(.system(size: 18))
                     }
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
+            .padding(.vertical, 10)
             .background(
                 RoundedRectangle(cornerRadius: 14)
                     .fill(bgColor)
                     .overlay(
                         RoundedRectangle(cornerRadius: 14)
-                            .stroke(borderColor, lineWidth: isPreviewed ? 2 : 1)
+                            .stroke(borderColor, lineWidth: isPreviewed ? 2.5 : 1)
                     )
             )
             .scaleEffect(isPreviewed ? 1.05 : 1.0)
