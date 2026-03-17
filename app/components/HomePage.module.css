@@ -210,3 +210,84 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(78, 205, 196, 0.4);
 }
+
+/* Math Topic Cards — consistent with TopicCard */
+.mathCard {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.4s ease both;
+}
+
+.mathCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.mathCardHeader {
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: white;
+  min-height: 72px;
+}
+
+.mathCardIcon {
+  font-size: 36px;
+  flex-shrink: 0;
+}
+
+.mathCardHeaderInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.mathCardTitle {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.mathCardSubtitle {
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.mathCardCount {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mathCardBody {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.mathCardBtn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: linear-gradient(135deg, #F59E0B, #EF4444);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.mathCardBtn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
