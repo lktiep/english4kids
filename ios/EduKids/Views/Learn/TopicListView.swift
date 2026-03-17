@@ -19,11 +19,17 @@ struct TopicListView: View {
                 .padding(.bottom, 100)
             }
             .refreshable {
-                await vm.fetchTopics(force: true)
+                async let eng: () = vm.fetchTopics(force: true)
+                async let math: () = vm.fetchMathTopics(force: true)
+                _ = await (eng, math)
             }
             .background(Theme.bg)
         }
-        .task { await vm.fetchTopics() }
+        .task {
+            async let eng: () = vm.fetchTopics()
+            async let math: () = vm.fetchMathTopics()
+            _ = await (eng, math)
+        }
     }
 
     // MARK: - Step 1: Subject Selection
@@ -112,8 +118,14 @@ struct TopicListView: View {
                     .tint(Theme.accent)
                     .frame(maxWidth: .infinity, minHeight: 200)
             } else if selectedSubject == "math" {
-                // Math topics — loaded from local exercises for now
-                mathTopicsView
+                // Math topics — native grade sections from API
+                ForEach(vm.sortedGrades, id: \.key) { entry in
+                    MathGradeSectionView(
+                        grade: entry.value,
+                        topics: vm.mathTopicsForGrade(entry.key),
+                        vm: vm
+                    )
+                }
             } else if vm.sortedGrades.isEmpty {
                 // Fallback flat grid
                 topicsGrid(vm.topics)
@@ -128,44 +140,6 @@ struct TopicListView: View {
                 }
             }
         }
-    }
-
-    // MARK: - Math Topics (placeholder until API supports math)
-    private var mathTopicsView: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("🔢 Toán học hiện chưa có trên ứng dụng iOS.")
-                .font(.system(size: 15))
-                .foregroundColor(.white.opacity(0.7))
-                .padding(.horizontal, 20)
-
-            Text("Hãy truy cập trang web để làm bài Toán:")
-                .font(.system(size: 14))
-                .foregroundColor(.white.opacity(0.5))
-                .padding(.horizontal, 20)
-
-            Link(destination: URL(string: "https://english4kids.jackle.dev/learn/math")!) {
-                HStack {
-                    Image(systemName: "safari.fill")
-                    Text("Mở Toán trên Web")
-                }
-                .font(.system(size: 16, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 14)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(
-                            LinearGradient(
-                                colors: [Color(hex: "#F59E0B"), Color(hex: "#EF4444")],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                )
-            }
-            .padding(.horizontal, 20)
-        }
-        .padding(.vertical, 20)
     }
 
     @ViewBuilder
@@ -497,6 +471,187 @@ struct TopicDetailView: View {
         }
         .task {
             detail = await vm.fetchVocabulary(slug: topic.slug)
+            isLoading = false
+        }
+    }
+}
+
+// MARK: - Math Grade Section (expandable — same as English)
+struct MathGradeSectionView: View {
+    let grade: Grade
+    let topics: [Topic]
+    @ObservedObject var vm: LearnViewModel
+    @State private var isExpanded = true
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Button {
+                withAnimation(.spring(response: 0.3)) {
+                    isExpanded.toggle()
+                }
+            } label: {
+                HStack(spacing: 10) {
+                    Text(grade.displayIcon)
+                        .font(.system(size: 24))
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(grade.name)
+                            .font(.system(size: 18, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        if let ageRange = grade.ageRange {
+                            Text("\(ageRange) tuổi • \(topics.count) chủ đề")
+                                .font(.system(size: 12))
+                                .foregroundColor(.white.opacity(0.5))
+                        }
+                    }
+
+                    Spacer()
+
+                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.white.opacity(0.4))
+                }
+                .padding(14)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color(hex: grade.displayColor).opacity(0.12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Color(hex: grade.displayColor).opacity(0.25), lineWidth: 1)
+                        )
+                )
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 16)
+
+            if isExpanded {
+                LazyVGrid(columns: [
+                    GridItem(.flexible(), spacing: 12),
+                    GridItem(.flexible(), spacing: 12)
+                ], spacing: 12) {
+                    ForEach(topics) { topic in
+                        NavigationLink(destination: MathTopicDetailView(topic: topic, vm: vm)) {
+                            TopicCardView(topic: topic)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 16)
+                .transition(.opacity.combined(with: .move(edge: .top)))
+            }
+        }
+    }
+}
+
+// MARK: - Math Topic Detail View
+struct MathTopicDetailView: View {
+    let topic: Topic
+    @ObservedObject var vm: LearnViewModel
+    @State private var detail: MathTopicDetail?
+    @State private var isLoading = true
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                if isLoading {
+                    ProgressView()
+                        .tint(Theme.accent)
+                        .frame(maxWidth: .infinity, minHeight: 300)
+                } else if let detail {
+                    VStack(spacing: 12) {
+                        Text(topic.displayIcon)
+                            .font(.system(size: 56))
+                        Text(detail.titleVi)
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                        Text("\(detail.exercises.count) bài tập")
+                            .font(.system(size: 14))
+                            .foregroundColor(.white.opacity(0.6))
+                    }
+                    .padding(.top, 20)
+
+                    // Quiz button
+                    NavigationLink(destination: MathQuizView(topic: detail)) {
+                        HStack {
+                            Image(systemName: "play.fill")
+                            Text("Bắt đầu làm bài")
+                        }
+                        .font(.system(size: 17, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill(Color(hex: topic.displayColor))
+                        )
+                    }
+                    .padding(.horizontal, 20)
+
+                    // Exercise preview list
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Danh sách bài tập")
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .foregroundColor(.white.opacity(0.7))
+                            .padding(.horizontal, 20)
+
+                        ForEach(Array(detail.exercises.prefix(5).enumerated()), id: \.offset) { idx, ex in
+                            HStack {
+                                Text("\(idx + 1)")
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(Color(hex: topic.displayColor))
+                                    .frame(width: 28, height: 28)
+                                    .background(Color(hex: topic.displayColor).opacity(0.15))
+                                    .clipShape(Circle())
+
+                                Text(ex.question)
+                                    .font(.system(size: 15))
+                                    .foregroundColor(.white)
+                                    .lineLimit(1)
+
+                                Spacer()
+                            }
+                            .padding(12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(.white.opacity(0.06))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(.white.opacity(0.08), lineWidth: 1)
+                                    )
+                            )
+                        }
+
+                        if detail.exercises.count > 5 {
+                            Text("... và \(detail.exercises.count - 5) bài nữa")
+                                .font(.system(size: 13))
+                                .foregroundColor(.white.opacity(0.4))
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                } else {
+                    VStack(spacing: 12) {
+                        Image(systemName: "exclamationmark.triangle")
+                            .font(.system(size: 40))
+                            .foregroundColor(.orange)
+                        Text("Không tải được chủ đề")
+                            .foregroundColor(.white.opacity(0.6))
+                    }
+                }
+            }
+            .padding(.bottom, 40)
+        }
+        .background(Theme.bg)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(topic.displayTitle)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.white)
+            }
+        }
+        .task {
+            detail = await vm.fetchMathExercises(slug: topic.slug)
             isLoading = false
         }
     }

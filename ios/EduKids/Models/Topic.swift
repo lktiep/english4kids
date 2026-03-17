@@ -24,6 +24,7 @@ struct Topic: Codable, Identifiable {
     /// SF Symbol icon mapped from topic slug — works reliably on Simulator & device
     var sfSymbolIcon: String {
         switch slug.lowercased() {
+        // English
         case "animals": return "pawprint.fill"
         case "fruits": return "leaf.fill"
         case "colors": return "paintpalette.fill"
@@ -42,6 +43,44 @@ struct Topic: Codable, Identifiable {
         case "music": return "music.note"
         case "house": return "house.fill"
         case "toys": return "gamecontroller.fill"
+        case "feelings": return "face.smiling.fill"
+        case "time", "daily-routines": return "clock.fill"
+        case "nature": return "leaf.fill"
+        case "jobs": return "briefcase.fill"
+        case "holidays": return "gift.fill"
+        case "cooking": return "frying.pan.fill"
+        case "travel": return "airplane"
+        case "environment": return "globe.americas.fill"
+        case "technology": return "desktopcomputer"
+        case "arts": return "paintbrush.fill"
+        case "health": return "heart.fill"
+        case "geography": return "map.fill"
+        case "science-words": return "atom"
+        case "history": return "scroll.fill"
+        case "cultures": return "globe.asia.australia.fill"
+        case "media": return "newspaper.fill"
+        case "space": return "sparkles"
+        case "career-dream": return "star.fill"
+        // Math
+        case "counting": return "number"
+        case "shapes-2d": return "diamond.fill"
+        case "bigger-smaller": return "arrow.up.arrow.down"
+        case "patterns": return "circle.grid.3x3.fill"
+        case "addition-10", "addition-100": return "plus"
+        case "subtraction-10", "subtraction-100": return "minus"
+        case "compare-numbers": return "equal"
+        case "measurement-basic": return "ruler.fill"
+        case "time-clock": return "clock.fill"
+        case "money-vn": return "banknote.fill"
+        case "multiplication": return "multiply"
+        case "division-basic": return "divide"
+        case "fractions-intro", "fractions-compare", "fraction-ops": return "chart.pie.fill"
+        case "geometry-basic": return "triangle.fill"
+        case "multi-digit-ops": return "number.square.fill"
+        case "decimals-intro", "decimals-ops": return "textformat.123"
+        case "area-perimeter": return "square.dashed"
+        case "percentages": return "percent"
+        case "data-graphs": return "chart.bar.fill"
         default: return "book.fill"
         }
     }
@@ -74,6 +113,55 @@ struct TopicDetail: Codable {
     let icon: String
     let color: String
     let words: [Word]
+}
+
+// MARK: - Math Topic Detail (exercises for a math topic)
+struct MathTopicDetail: Codable {
+    let topic: String
+    let title: String
+    let titleVi: String
+    let icon: String
+    let color: String
+    let exercises: [MathExercise]
+}
+
+struct MathExercise: Codable, Identifiable {
+    let id: String
+    let question: String
+    let questionVi: String?
+    let answer: AnyCodableValue
+    let options: [AnyCodableValue]
+    let hint: String?
+}
+
+/// Handles JSON values that can be Int or String (math answers can be either)
+struct AnyCodableValue: Codable, Equatable, CustomStringConvertible {
+    let stringValue: String
+
+    var description: String { stringValue }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let intVal = try? container.decode(Int.self) {
+            stringValue = String(intVal)
+        } else if let doubleVal = try? container.decode(Double.self) {
+            // Format nicely — no trailing .0 for whole numbers
+            if doubleVal == Double(Int(doubleVal)) {
+                stringValue = String(Int(doubleVal))
+            } else {
+                stringValue = String(doubleVal)
+            }
+        } else if let strVal = try? container.decode(String.self) {
+            stringValue = strVal
+        } else {
+            stringValue = ""
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(stringValue)
+    }
 }
 
 struct Word: Codable, Identifiable {
