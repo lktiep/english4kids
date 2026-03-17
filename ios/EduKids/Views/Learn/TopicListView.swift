@@ -18,6 +18,9 @@ struct TopicListView: View {
                 }
                 .padding(.bottom, 100)
             }
+            .refreshable {
+                await vm.fetchTopics(force: true)
+            }
             .background(Theme.bg)
         }
         .task { await vm.fetchTopics() }
@@ -43,7 +46,7 @@ struct TopicListView: View {
                     imageName: "SubjectEnglish",
                     title: "Tiếng Anh",
                     subtitle: "English for Kids",
-                    description: "16 chủ đề • 3 cấp độ",
+                    description: "37 chủ đề • 6 cấp độ",
                     color: "#4ECDC4"
                 ) {
                     withAnimation(.spring(response: 0.35)) {
@@ -55,17 +58,20 @@ struct TopicListView: View {
                     imageName: "SubjectMath",
                     title: "Toán",
                     subtitle: "Math for Kids",
-                    description: "Sắp ra mắt",
-                    color: "#6366F1",
-                    isLocked: true
-                ) { }
+                    description: "24 chủ đề • 6 cấp độ",
+                    color: "#F59E0B"
+                ) {
+                    withAnimation(.spring(response: 0.35)) {
+                        selectedSubject = "math"
+                    }
+                }
 
                 SubjectCard(
                     imageName: "SubjectScience",
                     title: "Khoa học",
                     subtitle: "Science",
                     description: "Sắp ra mắt",
-                    color: "#F59E0B",
+                    color: "#8B5CF6",
                     isLocked: true
                 ) { }
             }
@@ -89,7 +95,7 @@ struct TopicListView: View {
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Tiếng Anh")
+                    Text(selectedSubject == "math" ? "Toán học" : "Tiếng Anh")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                     Text("Chọn cấp độ và chủ đề")
@@ -105,6 +111,9 @@ struct TopicListView: View {
                 ProgressView()
                     .tint(Theme.accent)
                     .frame(maxWidth: .infinity, minHeight: 200)
+            } else if selectedSubject == "math" {
+                // Math topics — loaded from local exercises for now
+                mathTopicsView
             } else if vm.sortedGrades.isEmpty {
                 // Fallback flat grid
                 topicsGrid(vm.topics)
@@ -119,6 +128,44 @@ struct TopicListView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Math Topics (placeholder until API supports math)
+    private var mathTopicsView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("🔢 Toán học hiện chưa có trên ứng dụng iOS.")
+                .font(.system(size: 15))
+                .foregroundColor(.white.opacity(0.7))
+                .padding(.horizontal, 20)
+
+            Text("Hãy truy cập trang web để làm bài Toán:")
+                .font(.system(size: 14))
+                .foregroundColor(.white.opacity(0.5))
+                .padding(.horizontal, 20)
+
+            Link(destination: URL(string: "https://english4kids.jackle.dev/learn/math")!) {
+                HStack {
+                    Image(systemName: "safari.fill")
+                    Text("Mở Toán trên Web")
+                }
+                .font(.system(size: 16, weight: .bold, design: .rounded))
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(
+                            LinearGradient(
+                                colors: [Color(hex: "#F59E0B"), Color(hex: "#EF4444")],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                )
+            }
+            .padding(.horizontal, 20)
+        }
+        .padding(.vertical, 20)
     }
 
     @ViewBuilder
