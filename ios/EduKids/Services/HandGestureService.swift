@@ -13,8 +13,6 @@ class HandGestureService: NSObject, ObservableObject {
     @Published var error: String?
 
     private(set) var captureSession: AVCaptureSession?
-    private let handPoseRequest = VNDetectHumanHandPoseRequest()
-    private var lastProcessTime = Date.distantPast
     private let processingInterval: TimeInterval = 0.15 // ~7 fps for gestures
     private var stableCount = 0
     private var lastStableValue: Int = -1
@@ -22,9 +20,12 @@ class HandGestureService: NSObject, ObservableObject {
     // Debounce: require N consecutive identical readings
     private let debounceThreshold = 3
 
+    // These are accessed from the capture queue — keep them nonisolated
+    // by storing in a separate helper that lives outside the MainActor.
+    private let processor = GestureProcessor()
+
     override init() {
         super.init()
-        handPoseRequest.maximumHandCount = 1
     }
 
     var previewLayer: AVCaptureVideoPreviewLayer? {
@@ -53,7 +54,7 @@ class HandGestureService: NSObject, ObservableObject {
         session.addInput(input)
 
         let output = AVCaptureVideoDataOutput()
-        output.setSampleBufferDelegate(self, queue: DispatchQueue(label: "gesture.processing"))
+        output.setSampleBufferDelegate(processor, queue: DispatchQueue(label: "gesture.processing"))
         output.alwaysDiscardsLateVideoFrames = true
 
         guard session.canAddOutput(output) else {
@@ -62,12 +63,19 @@ class HandGestureService: NSObject, ObservableObject {
         }
         session.addOutput(output)
 
+        // Wire processor → self
+        processor.onFingerCount = { [weak self] count in
+            Task { @MainActor [weak self] in
+                self?.updateFingerCount(count)
+            }
+        }
+
         captureSession = session
 
         DispatchQueue.global(qos: .userInitiated).async {
             session.startRunning()
-            DispatchQueue.main.async {
-                self.isActive = true
+            Task { @MainActor [weak self] in
+                self?.isActive = true
             }
         }
     }
@@ -79,9 +87,64 @@ class HandGestureService: NSObject, ObservableObject {
         fingerCount = -1
     }
 
-    // MARK: - Finger Counting Logic (nonisolated — pure data processing)
-    nonisolated private func countFingers(from observation: VNHumanHandPoseObservation) throws -> Int {
-        // Get all finger tip and PIP (proximal interphalangeal) joint positions
+    private func updateFingerCount(_ newValue: Int) {
+        if newValue == lastStableValue {
+            stableCount += 1
+        } else {
+            lastStableValue = newValue
+            stableCount = 1
+        }
+
+        // Only update published value after debounce threshold
+        if stableCount >= debounceThreshold && fingerCount != newValue {
+            fingerCount = newValue
+        }
+    }
+}
+
+// MARK: - Gesture Processor (nonisolated — runs on capture queue)
+/// Separate class to handle AVCaptureVideoDataOutputSampleBufferDelegate
+/// without touching @MainActor state directly. Fully nonisolated.
+private class GestureProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+    private let handPoseRequest = VNDetectHumanHandPoseRequest()
+    private var lastProcessTime = Date.distantPast
+    private let processingInterval: TimeInterval = 0.15
+
+    /// Callback with finger count — will be dispatched to @MainActor by caller.
+    var onFingerCount: ((Int) -> Void)?
+
+    override init() {
+        super.init()
+        handPoseRequest.maximumHandCount = 1
+    }
+
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        // Throttle processing
+        let now = Date()
+        guard now.timeIntervalSince(lastProcessTime) >= processingInterval else { return }
+        lastProcessTime = now
+
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+
+        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up, options: [:])
+
+        do {
+            try handler.perform([handPoseRequest])
+
+            guard let observation = handPoseRequest.results?.first else {
+                onFingerCount?(-1)
+                return
+            }
+
+            let count = try countFingers(from: observation)
+            onFingerCount?(count)
+        } catch {
+            onFingerCount?(-1)
+        }
+    }
+
+    // MARK: - Finger Counting Logic
+    private func countFingers(from observation: VNHumanHandPoseObservation) throws -> Int {
         let fingerTips: [VNHumanHandPoseObservation.JointName] = [
             .thumbTip, .indexTip, .middleTip, .ringTip, .littleTip
         ]
@@ -96,7 +159,6 @@ class HandGestureService: NSObject, ObservableObject {
         let thumbIP = try observation.recognizedPoint(.thumbIP)
         let wrist = try observation.recognizedPoint(.wrist)
 
-        // Thumb is raised if tip is further from wrist than IP joint (in x-axis)
         if thumbTip.confidence > 0.3 && thumbIP.confidence > 0.3 && wrist.confidence > 0.3 {
             let thumbTipDist = abs(thumbTip.location.x - wrist.location.x)
             let thumbIPDist = abs(thumbIP.location.x - wrist.location.x)
@@ -105,7 +167,7 @@ class HandGestureService: NSObject, ObservableObject {
             }
         }
 
-        // Other fingers: tip above PIP = raised (in Vision coordinates, y increases upward)
+        // Other fingers: tip above PIP = raised
         for i in 1..<5 {
             let tip = try observation.recognizedPoint(fingerTips[i])
             let pip = try observation.recognizedPoint(fingerPIPs[i])
@@ -118,54 +180,5 @@ class HandGestureService: NSObject, ObservableObject {
         }
 
         return raisedFingers
-    }
-}
-
-// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
-extension HandGestureService: AVCaptureVideoDataOutputSampleBufferDelegate {
-    nonisolated func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // Throttle processing
-        let now = Date()
-        guard now.timeIntervalSince(MainActor.assumeIsolated { lastProcessTime }) >= processingInterval else { return }
-        Task { @MainActor in lastProcessTime = now }
-
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-
-        let handler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .up, options: [:])
-
-        do {
-            try handler.perform([handPoseRequest])
-
-            guard let observation = handPoseRequest.results?.first else {
-                Task { @MainActor in
-                    self.updateFingerCount(-1)
-                }
-                return
-            }
-
-            let count = try countFingers(from: observation)
-            Task { @MainActor in
-                self.updateFingerCount(count)
-            }
-        } catch {
-            Task { @MainActor in
-                self.updateFingerCount(-1)
-            }
-        }
-    }
-
-    @MainActor
-    private func updateFingerCount(_ newValue: Int) {
-        if newValue == lastStableValue {
-            stableCount += 1
-        } else {
-            lastStableValue = newValue
-            stableCount = 1
-        }
-
-        // Only update published value after debounce threshold
-        if stableCount >= debounceThreshold && fingerCount != newValue {
-            fingerCount = newValue
-        }
     }
 }

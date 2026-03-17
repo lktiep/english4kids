@@ -197,11 +197,11 @@ struct SubjectCard: View {
     var body: some View {
         Button(action: isLocked ? {} : onTap) {
             ZStack(alignment: .bottomLeading) {
-                // Background image
+                // Background image — constrained to frame to prevent tap area overflow
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(height: 120)
+                    .frame(maxWidth: .infinity, maxHeight: 120)
                     .clipped()
 
                 // Gradient overlay for text readability
@@ -248,6 +248,7 @@ struct SubjectCard: View {
             }
             .frame(height: 120)
             .clipShape(RoundedRectangle(cornerRadius: 20))
+            .contentShape(RoundedRectangle(cornerRadius: 20))
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
                     .stroke(Color(hex: color).opacity(isLocked ? 0.1 : 0.3), lineWidth: 1.5)
