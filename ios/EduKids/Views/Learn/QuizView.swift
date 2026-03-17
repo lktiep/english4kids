@@ -1,6 +1,7 @@
 import SwiftUI
 
-// MARK: - Quiz View (4-option MCQ)
+// MARK: - Quiz View (Word → Pick Image)
+/// Shows English word (text + TTS) → pick correct image from 4 options.
 struct QuizView: View {
     let topic: TopicDetail
     @EnvironmentObject var authVM: AuthViewModel
@@ -41,7 +42,7 @@ struct QuizView: View {
         .onDisappear { timer?.invalidate() }
     }
 
-    // MARK: - Quiz Content
+    // MARK: - Quiz Content (Word → Pick Image)
     private var quizContent: some View {
         let q = questions[currentIndex]
         return VStack(spacing: 0) {
@@ -58,24 +59,67 @@ struct QuizView: View {
 
             Spacer()
 
-            // Question
-            VStack(spacing: 16) {
-                WordImageView(word: q.word, size: 180)
-                    .scaleEffect(selectedAnswer == nil ? 1 : 0.95)
-                    .animation(.spring(response: 0.2), value: selectedAnswer)
+            // Question: show the WORD in English (big, bold) + speak it
+            VStack(spacing: 12) {
+                // English word — big and prominent
+                Text(q.word.en)
+                    .font(.system(size: 42, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
 
-                Text("Từ này là gì?")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(Theme.textSecondary)
+                // Vietnamese hint
+                Text(q.word.vi)
+                    .font(.system(size: 16))
+                    .foregroundColor(.white.opacity(0.4))
+
+                // "Chọn hình đúng" prompt
+                Text("Chọn hình đúng 👇")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundColor(Theme.accent)
+                    .padding(.top, 4)
+
+                // Listen again button
+                Button {
+                    SpeechService.shared.speak(q.word.en)
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "speaker.wave.2.fill")
+                        Text("Nghe lại")
+                    }
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(Theme.accent)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(
+                        Capsule()
+                            .fill(Theme.accent.opacity(0.15))
+                    )
+                }
+                .padding(.top, 4)
             }
             .offset(x: shakeOffset)
+            .onChange(of: currentIndex) { _ in
+                // Auto-speak word on each new question
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    SpeechService.shared.speak(q.word.en)
+                }
+            }
+            .onAppear {
+                // Speak first word
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    SpeechService.shared.speak(q.word.en)
+                }
+            }
 
             Spacer()
 
-            // Options
-            VStack(spacing: 12) {
+            // Options: 2×2 image grid
+            LazyVGrid(columns: [
+                GridItem(.flexible(), spacing: 12),
+                GridItem(.flexible(), spacing: 12)
+            ], spacing: 12) {
                 ForEach(q.options, id: \.id) { option in
-                    OptionButton(
+                    ImageOptionButton(
                         word: option,
                         isSelected: selectedAnswer == option.id,
                         isCorrect: selectedAnswer != nil ? option.id == q.word.id : nil,
@@ -181,6 +225,10 @@ struct QuizView: View {
         if correct {
             score += 1
             UINotificationFeedbackGenerator().notificationOccurred(.success)
+            // Speak "Correct!" feedback
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                SpeechService.shared.speak("Correct! \(question.word.en)", rate: 0.5)
+            }
         } else {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
             withAnimation(.spring(response: 0.1).repeatCount(4, autoreverses: true)) {
@@ -191,7 +239,7 @@ struct QuizView: View {
 
         timer?.invalidate()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             if currentIndex < questions.count - 1 {
                 withAnimation(.spring(response: 0.3)) {
                     currentIndex += 1
@@ -238,8 +286,9 @@ struct QuizQuestion: Identifiable {
     let options: [Word]
 }
 
-// MARK: - Option Button
-struct OptionButton: View {
+// MARK: - Image Option Button (2×2 grid)
+/// Shows image/emoji in a card — kid taps the correct image for the word.
+struct ImageOptionButton: View {
     let word: Word
     let isSelected: Bool
     let isCorrect: Bool?
@@ -251,56 +300,62 @@ struct OptionButton: View {
     private var bgColor: Color {
         if !revealed { return Theme.bgCard }
         if word.id == "" { return Theme.bgCard }
-        if isCorrect == true && isSelected { return Color(hex: "00E676").opacity(0.15) }
-        if isCorrect == true && !isSelected { return Color(hex: "00E676").opacity(0.08) }
-        if isSelected && isCorrect == false { return Theme.danger.opacity(0.15) }
+        if isCorrect == true && isSelected { return Color(hex: "00E676").opacity(0.2) }
+        if isCorrect == true && !isSelected { return Color(hex: "00E676").opacity(0.1) }
+        if isSelected && isCorrect == false { return Theme.danger.opacity(0.2) }
         return Theme.bgCard
     }
 
     private var borderColor: Color {
         if !revealed { return isSelected ? Theme.accent : Theme.border }
-        if isCorrect == true { return Theme.success.opacity(0.5) }
-        if isSelected && isCorrect == false { return Theme.danger.opacity(0.5) }
+        if isCorrect == true { return Theme.success.opacity(0.6) }
+        if isSelected && isCorrect == false { return Theme.danger.opacity(0.6) }
         return Theme.border
     }
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 14) {
-                WordImageView(word: word, size: 56)
+            VStack(spacing: 8) {
+                // Image — large, centered
+                WordImageView(word: word, size: 90)
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(word.word)
-                        .font(.system(size: 17, weight: .semibold))
-                        .foregroundColor(Theme.textPrimary)
-                    Text(word.vietnamese)
-                        .font(.system(size: 13))
-                        .foregroundColor(Theme.textSecondary)
+                // English word label (small, below image for confirmation after reveal)
+                if revealed {
+                    Text(word.en)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(isCorrect == true ? Theme.success : .white.opacity(0.6))
+                        .lineLimit(1)
+                        .transition(.opacity)
                 }
-
-                Spacer()
-
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
+            .padding(.horizontal, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(bgColor)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(borderColor, lineWidth: 2)
+                    )
+            )
+            .overlay(alignment: .topTrailing) {
                 if revealed {
                     if isCorrect == true {
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(Theme.success)
+                            .font(.system(size: 20))
+                            .offset(x: 6, y: -6)
                             .transition(.scale)
                     } else if isSelected {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(Theme.danger)
+                            .font(.system(size: 20))
+                            .offset(x: 6, y: -6)
                             .transition(.scale)
                     }
                 }
             }
-            .padding(16)
-            .background(
-                RoundedRectangle(cornerRadius: 14)
-                    .fill(bgColor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 14)
-                            .stroke(borderColor, lineWidth: 1.5)
-                    )
-            )
         }
         .disabled(revealed)
         .scaleEffect(appear ? 1 : 0.9)
@@ -308,5 +363,18 @@ struct OptionButton: View {
         .onAppear {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) { appear = true }
         }
+    }
+}
+
+// MARK: - Old OptionButton kept for backward compat if needed
+struct OptionButton: View {
+    let word: Word
+    let isSelected: Bool
+    let isCorrect: Bool?
+    let revealed: Bool
+    let action: () -> Void
+
+    var body: some View {
+        ImageOptionButton(word: word, isSelected: isSelected, isCorrect: isCorrect, revealed: revealed, action: action)
     }
 }
