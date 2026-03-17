@@ -376,7 +376,7 @@ export default function DashboardPage() {
                         </span>
                       </div>
                       <div className={styles.metricItem}>
-                        <span className={styles.metricBig}>{cs.topics}/16</span>
+                        <span className={styles.metricBig}>{cs.topics}/61</span>
                         <span className={styles.metricLabel}>
                           {locale === "vi" ? "Chủ đề" : "Topics"}
                         </span>
@@ -563,6 +563,10 @@ export default function DashboardPage() {
                           q.total_questions > 0
                             ? Math.round((q.score / q.total_questions) * 100)
                             : 0;
+                        const subjectIcon = q.subject === "math" ? "🔢" : "🇬🇧";
+                        const subjectLabel = q.subject === "math"
+                          ? (locale === "vi" ? "Toán" : "Math")
+                          : (locale === "vi" ? "Tiếng Anh" : "English");
                         return (
                           <div key={q.id} className={styles.activityItem}>
                             <div className={styles.activityLeft}>
@@ -570,11 +574,16 @@ export default function DashboardPage() {
                                 {acc >= 80 ? "🌟" : acc >= 50 ? "👍" : "💪"}
                               </span>
                               <div>
-                                <span className={styles.activityTopic}>
-                                  {q.topic_name}
-                                </span>
-                                <span className={styles.activityTime}>
-                                  {new Date(q.created_at).toLocaleDateString(
+                                <div className={styles.activityTopRow}>
+                                  <span className={styles.activityTopic}>
+                                    {q.topic_name}
+                                  </span>
+                                  <span className={styles.activitySubject}>
+                                    {subjectIcon} {subjectLabel}
+                                  </span>
+                                </div>
+                                <span className={styles.activityMeta}>
+                                  👤 {activeChild?.name || "—"} • {new Date(q.created_at).toLocaleDateString(
                                     locale === "vi" ? "vi-VN" : "en-US",
                                     {
                                       day: "numeric",
@@ -630,31 +639,37 @@ export default function DashboardPage() {
                     <div
                       className={styles.progressBarFill}
                       style={{
-                        width: `${Math.round((topicStats.length / 16) * 100)}%`,
+                        width: `${Math.round((topicStats.length / 37) * 100)}%`,
                       }}
                     />
                   </div>
                   <span className={styles.progressText}>
-                    {topicStats.length}/16{" "}
+                    {topicStats.length}/37{" "}
                     {locale === "vi" ? "chủ đề đã học" : "topics completed"}
                   </span>
                 </div>
               ) : (
                 <span className={styles.subjectBadge}>
-                  16 {t("stat_topics")}
+                  37 {t("stat_topics")}
                 </span>
               )}
             </a>
-            <div className={`${styles.subjectCard} ${styles.comingSoon}`}>
+            <a
+              href="/learn/math"
+              className={styles.subjectCard}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <span className={styles.subjectIcon}>🔢</span>
               <h3>{t("subject_math")}</h3>
               <p>
                 {locale === "vi"
-                  ? "Phép tính, hình học, logic"
-                  : "Arithmetic, geometry, logic"}
+                  ? "24 chủ đề • 192 bài tập • PreK→G5"
+                  : "24 topics • 192 exercises • PreK→G5"}
               </p>
-              <span className={styles.comingSoonBadge}>{t("coming_soon")}</span>
-            </div>
+              <span className={styles.subjectBadge}>
+                24 {t("stat_topics")}
+              </span>
+            </a>
             <div className={`${styles.subjectCard} ${styles.comingSoon}`}>
               <span className={styles.subjectIcon}>🔬</span>
               <h3>{t("subject_science")}</h3>
@@ -675,7 +690,7 @@ export default function DashboardPage() {
             <div className={styles.actionsGrid}>
               <button
                 className={styles.actionCard}
-                onClick={() => router.push("/learn/english")}
+                onClick={() => router.push("/learn")}
               >
                 <span>🎯</span>
                 <span>{t("btn_do_quiz")}</span>
