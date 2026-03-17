@@ -12,6 +12,7 @@
 .stars {
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background-image:
     radial-gradient(
       2px 2px at 20px 30px,
