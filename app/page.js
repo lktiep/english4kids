@@ -102,21 +102,21 @@ export default function LandingPage() {
             </button>
             <button
               className={styles.ctaSecondary}
-              onClick={() => router.push("/learn/english")}
+              onClick={() => router.push("/learn")}
             >
               {t("btn_start_learning")}
             </button>
           </div>
           <div className={styles.heroStats}>
             <div className={styles.stat}>
-              <span className={styles.statNum}>174+</span>
+              <span className={styles.statNum}>385+</span>
               <span className={styles.statLabel}>
                 {t("stat_vocab", {}, "Từ vựng")}
               </span>
             </div>
             <div className={styles.statDivider} />
             <div className={styles.stat}>
-              <span className={styles.statNum}>16</span>
+              <span className={styles.statNum}>61</span>
               <span className={styles.statLabel}>
                 {t("stat_topics", {}, "Chủ đề")}
               </span>
@@ -257,22 +257,31 @@ export default function LandingPage() {
             <span className={styles.subjectIconLarge}>🇬🇧</span>
             <h3>{t("subject_english")}</h3>
             <p>
-              16 {t("stat_topics", {}, "chủ đề")} • 174+{" "}
-              {t("stat_vocab", {}, "từ vựng")} • 20{" "}
-              {t("stat_ai_images", {}, "hình AI")}
+              37 {t("stat_topics", {}, "chủ đề")} • 385+{" "}
+              {t("stat_vocab", {}, "từ vựng")} • PreK→G5
             </p>
             <div className={styles.subjectTopics}>
               <span>🐾 {t("topic_animals", {}, "Động vật")}</span>
               <span>🍎 {t("topic_fruits", {}, "Trái cây")}</span>
               <span>🌸 {t("topic_flowers", {}, "Hoa")}</span>
               <span>🚗 {t("topic_vehicles", {}, "Xe cộ")}</span>
-              <span>+12 {t("more", {}, "khác")}</span>
+              <span>+33 {t("more", {}, "khác")}</span>
             </div>
           </div>
-          <div className={`${styles.subjectCardSmall} ${styles.locked}`}>
+          <div
+            className={styles.subjectCardSmall}
+            onClick={() => router.push("/learn/math")}
+            style={{ cursor: "pointer" }}
+          >
             <span className={styles.subjectIconLarge}>🔢</span>
             <h3>{t("subject_math")}</h3>
-            <p>{t("coming_soon")}</p>
+            <p>24 {t("stat_topics", {}, "chủ đề")} • 192 bài tập • PreK→G5</p>
+            <div className={styles.subjectTopics}>
+              <span>➕ Cộng trừ</span>
+              <span>✖️ Nhân chia</span>
+              <span>📐 Hình học</span>
+              <span>💯 Phần trăm</span>
+            </div>
           </div>
           <div className={`${styles.subjectCardSmall} ${styles.locked}`}>
             <span className={styles.subjectIconLarge}>🔬</span>
