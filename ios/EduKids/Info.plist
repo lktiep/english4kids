@@ -35,8 +35,6 @@
 	<string>EduKids sử dụng Bluetooth để hỗ trợ đăng nhập</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>EduKids cần micro để luyện phát âm tiếng Anh</string>
-	<key>NSCameraUsageDescription</key>
-	<string>EduKids cần camera để nhận diện cử chỉ tay trong Quiz</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>EduKids cần nhận dạng giọng nói để chấm điểm phát âm</string>
 	<key>UILaunchScreen</key>
