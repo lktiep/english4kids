@@ -298,14 +298,27 @@ export default function MathQuizMode({
         </div>
       </div>
 
-      {/* Question */}
-      <div className={styles.questionArea} style={{ marginBottom: 24 }}>
-        <h2 className={styles.question}>{q.question}</h2>
-        {q.questionVi && <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, marginTop: 4 }}>{q.questionVi}</p>}
-        <button className={styles.listenBtn} onClick={() => speak(q.question)}>
-          🔊 Nghe lại
-        </button>
-      </div>
+      {/* Question — split text from emoji onto separate lines */}
+      {(() => {
+        const emojiRegex = /([\p{Emoji_Presentation}\p{Extended_Pictographic}]+(?:\s*[\p{Emoji_Presentation}\p{Extended_Pictographic}]+)*)\s*$/u;
+        const match = q.question.match(emojiRegex);
+        const textPart = match ? q.question.slice(0, match.index).trim() : q.question;
+        const emojiPart = match ? match[1] : null;
+        return (
+          <div className={styles.questionArea} style={{ marginBottom: 24 }}>
+            <h2 className={styles.question}>{textPart}</h2>
+            {emojiPart && (
+              <div style={{ fontSize: 48, marginTop: 12, letterSpacing: 8, lineHeight: 1.4 }}>
+                {emojiPart}
+              </div>
+            )}
+            {q.questionVi && <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, marginTop: 8 }}>{q.questionVi}</p>}
+            <button className={styles.listenBtn} onClick={() => speak(q.question)}>
+              🔊 Nghe lại
+            </button>
+          </div>
+        );
+      })()}
 
       {/* Wrong feedback */}
       {wrongFeedback && (
