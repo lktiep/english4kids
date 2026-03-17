@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useGame } from "@/app/context/GameContext";
 import { useAuth } from "@/app/context/AuthContext";
-import { useSound } from "@/app/hooks/useSpeech";
+import { useSpeech, useSound } from "@/app/hooks/useSpeech";
 import { getTier } from "@/app/utils/rankTiers";
 import styles from "./QuizMode.module.css";
 
@@ -48,6 +48,7 @@ export default function MathQuizMode({
   const game = useGame();
   const { saveQuizAttempt } = useAuth();
   const router = useRouter();
+  const { speak } = useSpeech();
   const { play } = useSound();
   const startTimeRef = useRef(null);
 
@@ -70,6 +71,14 @@ export default function MathQuizMode({
 
   const q = questions[currentQ];
   const options = q?.options || [];
+
+  // Auto-speak question
+  useEffect(() => {
+    if (q && !showResult && !wrongFeedback) {
+      const timer = setTimeout(() => speak(q.question), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [currentQ, q, showResult, wrongFeedback, speak]);
 
   // Submit answer
   const submitAnswer = useCallback(
@@ -290,9 +299,12 @@ export default function MathQuizMode({
       </div>
 
       {/* Question */}
-      <div className={styles.questionArea}>
+      <div className={styles.questionArea} style={{ marginBottom: 24 }}>
         <h2 className={styles.question}>{q.question}</h2>
         {q.questionVi && <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, marginTop: 4 }}>{q.questionVi}</p>}
+        <button className={styles.listenBtn} onClick={() => speak(q.question)}>
+          🔊 Nghe lại
+        </button>
       </div>
 
       {/* Wrong feedback */}
